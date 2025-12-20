@@ -1,4 +1,4 @@
 # Tipza legal
 
-- [Privacy policy](./privacy)
-- [Terms and conditions](./terms)
+- [Privacy policy](./privacy/)
+- [Terms and conditions](./terms/)
