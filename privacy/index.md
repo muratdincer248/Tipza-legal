@@ -7,7 +7,7 @@ Last updated: 19.12.2025
 The controller responsible for data processing under GDPR is:
 
 Tipza  
-Contact email: [your support email]
+Contact email: support@tipza.app
 
 ## 2. Data we collect
 
