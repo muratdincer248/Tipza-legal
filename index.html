@@ -2,14 +2,875 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <title>Tipza legal</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Tipza helps teams split tips fairly and transparently. Add the bill and tip, choose a split method (equal, hours, points, or custom weights), and share the final breakdown."
+    />
+    <meta name="theme-color" content="#7205ff" />
+
+    <title>Tipza — Fair Tip Splits Made Simple</title>
+
+    <!-- Social previews -->
+    <meta property="og:title" content="Tipza — Fair Tip Splits Made Simple" />
+    <meta
+      property="og:description"
+      content="Tipza helps teams split tips fairly and transparently. Choose equal, hours, points, or custom weights and share the breakdown."
+    />
+    <meta property="og:type" content="website" />
+
+    <!-- Fonts (Tipza: Space Grotesk + Figtree) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      :root {
+        /* Tipza tokens (from app design tokens) */
+        --brand-50: #7205ff;
+        --brand-30: #8f38ff;
+        --brand-10: #c599ff;
+        --green-20: #02925c;
+        --green-10: #06bc78;
+
+        --neutral-00: #ffffff;
+        --neutral-01: #f3ede8;
+        --neutral-05: #eee5dd;
+        --neutral-10: #ebe0d6;
+        --neutral-30: #ddcabb;
+        --neutral-70: #8f6647;
+        --neutral-90: #332519;
+        --neutral-95: #221811;
+        --neutral-99: #0a0705;
+
+        --text: var(--neutral-99);
+        --muted: rgba(10, 7, 5, 0.72);
+
+        --card: rgba(255, 255, 255, 0.74);
+        --stroke: rgba(10, 7, 5, 0.10);
+        --shadow: 0 18px 40px rgba(10, 7, 5, 0.14);
+
+        --radius: 18px;
+        --radius-lg: 26px;
+
+        --container: 1120px;
+
+        --font-display: "Space Grotesk", system-ui, -apple-system, Segoe UI, Roboto,
+          Helvetica, Arial, sans-serif;
+        --font-body: "Figtree", system-ui, -apple-system, Segoe UI, Roboto, Helvetica,
+          Arial, sans-serif;
+      }
+
+      * { box-sizing: border-box; }
+      html { scroll-behavior: smooth; }
+      body {
+        margin: 0;
+        color: var(--text);
+        font-family: var(--font-body);
+        background:
+          radial-gradient(1200px 700px at 10% 0%, rgba(114, 5, 255, 0.16), transparent 60%),
+          radial-gradient(900px 600px at 92% 10%, rgba(2, 146, 92, 0.14), transparent 55%),
+          linear-gradient(180deg, var(--neutral-01), var(--neutral-00) 45%, var(--neutral-01));
+      }
+
+      a { color: inherit; text-decoration: none; }
+      a:hover { text-decoration: underline; }
+      img { max-width: 100%; height: auto; display: block; }
+
+      .sr-only {
+        position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+        overflow: hidden; clip: rect(0, 0, 0, 0); border: 0;
+      }
+
+      .skip-link {
+        position: absolute; left: 12px; top: 10px;
+        transform: translateY(-150%);
+        background: var(--neutral-00);
+        border: 1px solid var(--stroke);
+        border-radius: 999px;
+        padding: 10px 14px;
+        box-shadow: var(--shadow);
+        z-index: 1000;
+      }
+      .skip-link:focus { transform: translateY(0); outline: 2px solid var(--brand-30); }
+
+      .container {
+        max-width: var(--container);
+        margin: 0 auto;
+        padding: 0 20px;
+      }
+
+      header {
+        position: sticky;
+        top: 0;
+        z-index: 50;
+        backdrop-filter: blur(14px);
+        background: rgba(243, 237, 232, 0.6);
+        border-bottom: 1px solid rgba(10, 7, 5, 0.08);
+      }
+
+      .nav {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        padding: 14px 0;
+      }
+
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-family: var(--font-display);
+        font-weight: 700;
+        letter-spacing: -0.02em;
+      }
+
+      .logo {
+        width: 34px;
+        height: 34px;
+        border-radius: 10px;
+        background:
+          radial-gradient(12px 12px at 30% 30%, rgba(255,255,255,0.9), transparent 60%),
+          linear-gradient(135deg, var(--brand-50), var(--brand-10));
+        box-shadow: 0 10px 22px rgba(114, 5, 255, 0.24);
+        border: 1px solid rgba(255,255,255,0.55);
+      }
+
+      nav ul {
+        display: flex;
+        gap: 18px;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        align-items: center;
+      }
+
+      .navlink {
+        color: rgba(10, 7, 5, 0.82);
+        font-weight: 600;
+        font-size: 14px;
+        padding: 10px 10px;
+        border-radius: 999px;
+      }
+      .navlink:hover {
+        background: rgba(10, 7, 5, 0.05);
+        text-decoration: none;
+      }
+
+      .cta-row {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+      }
+
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        padding: 12px 14px;
+        border-radius: 999px;
+        font-weight: 700;
+        font-size: 14px;
+        border: 1px solid transparent;
+        cursor: pointer;
+        text-decoration: none !important;
+        transition: transform 120ms ease, box-shadow 120ms ease, background 120ms ease;
+        user-select: none;
+        white-space: nowrap;
+      }
+
+      .btn-primary {
+        background: linear-gradient(135deg, var(--brand-50), var(--brand-30));
+        color: white;
+        box-shadow: 0 18px 34px rgba(114, 5, 255, 0.22);
+      }
+      .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 22px 40px rgba(114, 5, 255, 0.26); }
+
+      .btn-secondary {
+        background: rgba(255,255,255,0.65);
+        color: var(--text);
+        border-color: rgba(10, 7, 5, 0.10);
+      }
+      .btn-secondary:hover { transform: translateY(-1px); }
+
+      .hamburger {
+        display: none;
+        border: 1px solid rgba(10, 7, 5, 0.12);
+        background: rgba(255,255,255,0.65);
+        border-radius: 12px;
+        padding: 10px 12px;
+        font-weight: 800;
+      }
+
+      .hero {
+        padding: 56px 0 26px;
+      }
+
+      .hero-grid {
+        display: grid;
+        grid-template-columns: 1.1fr 0.9fr;
+        gap: 28px;
+        align-items: center;
+      }
+
+      .eyebrow {
+        display: inline-flex;
+        gap: 8px;
+        align-items: center;
+        padding: 8px 12px;
+        border-radius: 999px;
+        border: 1px solid rgba(10, 7, 5, 0.12);
+        background: rgba(255,255,255,0.62);
+        color: rgba(10, 7, 5, 0.86);
+        font-weight: 700;
+        font-size: 13px;
+      }
+
+      .dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 999px;
+        background: var(--green-10);
+        box-shadow: 0 0 0 4px rgba(6, 188, 120, 0.16);
+      }
+
+      h1 {
+        font-family: var(--font-display);
+        letter-spacing: -0.04em;
+        line-height: 1.03;
+        font-size: clamp(38px, 5vw, 56px);
+        margin: 14px 0 12px;
+      }
+
+      .lead {
+        font-size: 18px;
+        line-height: 1.6;
+        color: var(--muted);
+        margin: 0 0 18px;
+        max-width: 58ch;
+      }
+
+      .bullets {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+        margin: 18px 0 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .pill {
+        display: inline-flex;
+        gap: 10px;
+        align-items: flex-start;
+        padding: 12px 12px;
+        border-radius: 16px;
+        background: rgba(255,255,255,0.62);
+        border: 1px solid rgba(10, 7, 5, 0.10);
+      }
+      .pill strong { display: block; font-size: 14px; }
+      .pill span { display: block; color: var(--muted); font-size: 13px; margin-top: 2px; }
+
+      .icon {
+        width: 20px; height: 20px;
+        flex: 0 0 20px;
+        color: var(--brand-50);
+      }
+
+      .mock {
+        position: relative;
+        border-radius: var(--radius-lg);
+        background:
+          radial-gradient(400px 250px at 25% 15%, rgba(114, 5, 255, 0.22), transparent 55%),
+          radial-gradient(380px 260px at 80% 25%, rgba(2, 146, 92, 0.18), transparent 60%),
+          linear-gradient(180deg, rgba(255,255,255,0.72), rgba(255,255,255,0.52));
+        border: 1px solid rgba(10, 7, 5, 0.10);
+        box-shadow: var(--shadow);
+        overflow: hidden;
+        padding: 18px;
+      }
+
+      .mock .screen {
+        border-radius: 22px;
+        background: linear-gradient(180deg, rgba(10,7,5,0.06), rgba(10,7,5,0.03));
+        border: 1px solid rgba(10, 7, 5, 0.08);
+        padding: 16px;
+      }
+
+      .mock h3 {
+        font-family: var(--font-display);
+        margin: 6px 0 6px;
+        font-size: 16px;
+        letter-spacing: -0.02em;
+      }
+      .mock p { margin: 0; color: var(--muted); font-size: 14px; line-height: 1.5; }
+
+      .calc {
+        margin-top: 14px;
+        display: grid;
+        gap: 10px;
+      }
+
+      .row {
+        display: flex;
+        justify-content: space-between;
+        gap: 12px;
+        padding: 10px 12px;
+        border-radius: 14px;
+        background: rgba(255,255,255,0.62);
+        border: 1px solid rgba(10,7,5,0.08);
+        font-size: 14px;
+      }
+      .row b { font-weight: 800; }
+      .tag {
+        font-weight: 800;
+        font-size: 12px;
+        padding: 6px 10px;
+        border-radius: 999px;
+        border: 1px solid rgba(10,7,5,0.10);
+        background: rgba(255,255,255,0.65);
+      }
+      .tag.brand { border-color: rgba(114,5,255,0.25); color: var(--brand-50); }
+      .tag.green { border-color: rgba(2,146,92,0.25); color: var(--green-20); }
+
+      .section {
+        padding: 46px 0;
+      }
+
+      .section h2 {
+        font-family: var(--font-display);
+        letter-spacing: -0.03em;
+        font-size: 30px;
+        margin: 0 0 10px;
+      }
+      .section p {
+        color: var(--muted);
+        line-height: 1.7;
+        margin: 0;
+        max-width: 78ch;
+      }
+
+      .grid-3 {
+        margin-top: 18px;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 14px;
+      }
+
+      .card {
+        border-radius: var(--radius);
+        background: var(--card);
+        border: 1px solid var(--stroke);
+        box-shadow: 0 10px 24px rgba(10, 7, 5, 0.08);
+        padding: 18px;
+      }
+      .card h3 {
+        font-family: var(--font-display);
+        letter-spacing: -0.02em;
+        font-size: 16px;
+        margin: 6px 0 6px;
+      }
+      .card p { font-size: 14px; }
+
+      .steps {
+        margin-top: 18px;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 14px;
+      }
+
+      .step {
+        display: flex;
+        gap: 12px;
+        align-items: flex-start;
+        padding: 16px;
+        border-radius: var(--radius);
+        border: 1px solid var(--stroke);
+        background: rgba(255,255,255,0.62);
+      }
+
+      .step .num {
+        width: 34px;
+        height: 34px;
+        border-radius: 12px;
+        display: grid;
+        place-items: center;
+        font-weight: 900;
+        font-family: var(--font-display);
+        background: rgba(114,5,255,0.12);
+        color: var(--brand-50);
+        border: 1px solid rgba(114,5,255,0.18);
+        flex: 0 0 34px;
+      }
+
+      .step h4 {
+        margin: 0 0 4px;
+        font-size: 15px;
+        font-family: var(--font-display);
+        letter-spacing: -0.02em;
+      }
+      .step p { margin: 0; font-size: 14px; }
+
+      .note {
+        margin-top: 14px;
+        padding: 14px 16px;
+        border-radius: var(--radius);
+        border: 1px dashed rgba(10, 7, 5, 0.20);
+        background: rgba(255,255,255,0.55);
+        color: rgba(10, 7, 5, 0.78);
+        font-size: 14px;
+        line-height: 1.6;
+      }
+
+      .faq {
+        margin-top: 18px;
+        display: grid;
+        gap: 10px;
+      }
+      details {
+        border: 1px solid var(--stroke);
+        background: rgba(255,255,255,0.62);
+        border-radius: var(--radius);
+        padding: 14px 16px;
+      }
+      summary {
+        cursor: pointer;
+        font-family: var(--font-display);
+        font-weight: 700;
+        letter-spacing: -0.02em;
+      }
+      details p { margin-top: 10px; }
+
+      footer {
+        padding: 26px 0 34px;
+        border-top: 1px solid rgba(10,7,5,0.10);
+        background: rgba(243, 237, 232, 0.55);
+      }
+      .footer-grid {
+        display: grid;
+        grid-template-columns: 1.2fr 0.8fr;
+        gap: 14px;
+        align-items: start;
+      }
+      .fine {
+        color: rgba(10, 7, 5, 0.66);
+        font-size: 13px;
+        line-height: 1.6;
+        margin: 10px 0 0;
+      }
+      .footer-links {
+        display: flex;
+        gap: 14px;
+        justify-content: flex-end;
+        flex-wrap: wrap;
+        font-weight: 700;
+        font-size: 13px;
+      }
+
+      .badge-row {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        margin-top: 14px;
+      }
+      .badge {
+        display: inline-flex;
+        gap: 10px;
+        align-items: center;
+        border-radius: 14px;
+        padding: 10px 12px;
+        border: 1px solid rgba(10,7,5,0.10);
+        background: rgba(255,255,255,0.62);
+        font-weight: 800;
+        font-size: 13px;
+      }
+      .badge small {
+        display: block;
+        font-weight: 700;
+        color: rgba(10,7,5,0.65);
+        margin-top: 2px;
+      }
+
+      @media (max-width: 920px) {
+        .hero-grid { grid-template-columns: 1fr; }
+        .grid-3 { grid-template-columns: 1fr; }
+        .steps { grid-template-columns: 1fr; }
+        .footer-grid { grid-template-columns: 1fr; }
+        .footer-links { justify-content: flex-start; }
+      }
+
+      @media (max-width: 780px) {
+        nav ul { display: none; }
+        nav ul.open {
+          display: grid;
+          gap: 10px;
+          padding: 12px;
+          border-radius: 16px;
+          border: 1px solid rgba(10,7,5,0.10);
+          background: rgba(255,255,255,0.72);
+          position: absolute;
+          left: 20px;
+          right: 20px;
+          top: 64px;
+        }
+        .hamburger { display: inline-flex; }
+        .bullets { grid-template-columns: 1fr; }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        html { scroll-behavior: auto; }
+        .btn { transition: none; }
+      }
+    </style>
   </head>
-  <body style="font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif; max-width: 800px; margin: 40px auto; padding: 0 16px;">
-    <h1>Tipza legal</h1>
-    <ul>
-      <li><a href="/privacy">Privacy Policy</a></li>
-      <li><a href="/terms">Terms and Conditions</a></li>
-    </ul>
+
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <header>
+      <div class="container">
+        <div class="nav">
+          <a class="brand" href="#top" aria-label="Tipza home">
+            <span class="logo" aria-hidden="true"></span>
+            <span>Tipza</span>
+          </a>
+
+          <nav aria-label="Primary navigation" style="position: relative">
+            <button class="hamburger" type="button" id="menuBtn" aria-expanded="false" aria-controls="menu">
+              Menu
+            </button>
+            <ul id="menu">
+              <li><a class="navlink" href="#purpose">Purpose</a></li>
+              <li><a class="navlink" href="#how">How it works</a></li>
+              <li><a class="navlink" href="#benefits">Benefits</a></li>
+              <li><a class="navlink" href="#faq">FAQ</a></li>
+              <li><a class="navlink" href="#contact">Contact</a></li>
+            </ul>
+          </nav>
+
+          <div class="cta-row">
+            <!-- Replace links with your real App Store / Play Store URLs -->
+            <a class="btn btn-secondary" href="#download">Get the app</a>
+            <a class="btn btn-primary" href="#how">See how it works</a>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main id="main">
+      <section class="hero" id="top">
+        <div class="container">
+          <div class="hero-grid">
+            <div>
+              <span class="eyebrow"><span class="dot" aria-hidden="true"></span>Fair tip splits for teams</span>
+
+              <h1>Split tips fairly. Share the breakdown instantly.</h1>
+
+              <p class="lead">
+                <strong>Tipza</strong> is a tip-splitting app designed for service teams (restaurants, bars, cafés, salons, delivery, events).
+                Add the totals, choose a fair split method, and Tipza calculates each person’s share clearly and consistently.
+              </p>
+
+              <div class="badge-row" id="download">
+                <span class="badge">
+                  iOS
+                  <small>Available on the App Store</small>
+                </span>
+                <span class="badge">
+                  Android
+                  <small>Available on Google Play</small>
+                </span>
+                <span class="badge">
+                  Transparent
+                  <small>No “mystery math”</small>
+                </span>
+              </div>
+
+              <ul class="bullets" aria-label="Key highlights">
+                <li class="pill">
+                  <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                    <path d="M20 7L9 18l-5-5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                  <div>
+                    <strong>Multiple split methods</strong>
+                    <span>Equal, hours, points, or custom weights.</span>
+                  </div>
+                </li>
+                <li class="pill">
+                  <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                    <path d="M12 2v4m0 12v4M4 12H2m20 0h-2M5 5l2.8 2.8M18.2 18.2 21 21M19 5l-2.8 2.8M5 19l2.8-2.8" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+                    <path d="M12 7a5 5 0 1 0 0 10 5 5 0 0 0 0-10Z" stroke="currentColor" stroke-width="2.2"/>
+                  </svg>
+                  <div>
+                    <strong>Fast and consistent</strong>
+                    <span>Same rules, every shift—less confusion.</span>
+                  </div>
+                </li>
+              </ul>
+            </div>
+
+            <div class="mock" aria-label="Tipza sample calculation preview">
+              <div class="screen">
+                <span class="tag brand">Example</span>
+                <h3>Tonight’s tip pool</h3>
+                <p>Tipza calculates a clear breakdown you can share with your team.</p>
+
+                <div class="calc" role="list">
+                  <div class="row" role="listitem">
+                    <span>Total tips</span>
+                    <b>$420.00</b>
+                  </div>
+                  <div class="row" role="listitem">
+                    <span>Method</span>
+                    <span class="tag green">Hours-based</span>
+                  </div>
+                  <div class="row" role="listitem">
+                    <span>Alex (6h)</span>
+                    <b>$140.00</b>
+                  </div>
+                  <div class="row" role="listitem">
+                    <span>Sam (5h)</span>
+                    <b>$116.67</b>
+                  </div>
+                  <div class="row" role="listitem">
+                    <span>Jordan (7h)</span>
+                    <b>$163.33</b>
+                  </div>
+                </div>
+
+                <p class="note">
+                  Tipza’s purpose is simple: <strong>make tip splits fair, transparent, and easy to repeat</strong>—so teams spend less time arguing and more time serving.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="purpose">
+        <div class="container">
+          <h2>What Tipza is (and why it exists)</h2>
+          <p>
+            Tipza is built to help service teams distribute tip pools in a way that feels fair and is easy to verify.
+            Whether you split tips equally, by hours worked, by points, or by custom rules, Tipza keeps the process consistent and transparent.
+          </p>
+
+          <div class="grid-3" role="list" aria-label="Purpose cards">
+            <div class="card" role="listitem">
+              <span class="tag brand">Fairness</span>
+              <h3>Fair splits, aligned with your team’s rules</h3>
+              <p>
+                Every workplace is different. Tipza supports common approaches (equal, hours, points, weights) so you can match how your team actually works.
+              </p>
+            </div>
+            <div class="card" role="listitem">
+              <span class="tag green">Clarity</span>
+              <h3>Transparent calculations anyone can understand</h3>
+              <p>
+                Tipza shows the inputs and the resulting shares, so team members can verify the breakdown without guesswork.
+              </p>
+            </div>
+            <div class="card" role="listitem">
+              <span class="tag">Speed</span>
+              <h3>Finish the split in minutes, not debates</h3>
+              <p>
+                Enter totals once, pick a method, and share the result. Less time on spreadsheets—more time closing out the shift.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="how">
+        <div class="container">
+          <h2>How Tipza works</h2>
+          <p>
+            Tipza guides you through a simple flow so tip pools are split the same way every time.
+          </p>
+
+          <div class="steps" aria-label="How it works steps">
+            <div class="step">
+              <div class="num" aria-hidden="true">1</div>
+              <div>
+                <h4>Add the totals</h4>
+                <p>Enter the tip pool amount (and any relevant adjustments your team uses).</p>
+              </div>
+            </div>
+
+            <div class="step">
+              <div class="num" aria-hidden="true">2</div>
+              <div>
+                <h4>Add team members</h4>
+                <p>Include everyone who shares tips for the shift (e.g., servers, bartenders, support roles).</p>
+              </div>
+            </div>
+
+            <div class="step">
+              <div class="num" aria-hidden="true">3</div>
+              <div>
+                <h4>Choose a split method</h4>
+                <p>Equal split, by hours worked, by points, or custom weights—whatever fits your policy.</p>
+              </div>
+            </div>
+
+            <div class="step">
+              <div class="num" aria-hidden="true">4</div>
+              <div>
+                <h4>Review & share</h4>
+                <p>Tipza calculates each person’s share and presents a clean breakdown you can share with the team.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="note">
+            <strong>Tipza is a calculator and organizer.</strong> It helps you apply your team’s agreed rules consistently.
+            Always follow your workplace policy and local regulations for tip distribution.
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="benefits">
+        <div class="container">
+          <h2>Benefits of using Tipza</h2>
+          <p>
+            Tipza helps teams reduce misunderstandings and keep tip splits consistent—even when staffing and shifts vary.
+          </p>
+
+          <div class="grid-3" role="list" aria-label="Benefits">
+            <div class="card" role="listitem">
+              <h3>Less conflict</h3>
+              <p>Clear inputs + clear outputs means fewer “who got what?” conversations.</p>
+            </div>
+            <div class="card" role="listitem">
+              <h3>Consistent across shifts</h3>
+              <p>Use the same split method every night, or switch methods when the situation calls for it.</p>
+            </div>
+            <div class="card" role="listitem">
+              <h3>Team-ready sharing</h3>
+              <p>Share a simple breakdown so everyone sees the same numbers.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="faq">
+        <div class="container">
+          <h2>FAQ</h2>
+          <p>Quick answers for reviewers and users.</p>
+
+          <div class="faq">
+            <details>
+              <summary>What is the primary purpose of Tipza?</summary>
+              <p>
+                Tipza’s primary purpose is to help service teams <strong>split tip pools fairly and transparently</strong>.
+                Users enter a total tip amount, choose a split method (equal, hours, points, or weights), and Tipza calculates each person’s share.
+              </p>
+            </details>
+
+            <details>
+              <summary>How does Tipza calculate a “fair” split?</summary>
+              <p>
+                “Fair” depends on your team’s rules. Tipza supports common policies (equal split, by hours, by points, or custom weights) and applies
+                the chosen method consistently to the inputs you provide.
+              </p>
+            </details>
+
+            <details>
+              <summary>Does Tipza handle payments or move money?</summary>
+              <p>
+                Tipza is designed to calculate and present the breakdown. If your workflow includes payouts, they happen outside Tipza according to your team’s process.
+              </p>
+            </details>
+
+            <details>
+              <summary>Why does Tipza use Google Sign-In?</summary>
+              <p>
+                Google Sign-In can be used to provide a fast, secure way to sign in and keep your account consistent across devices.
+                Tipza requests only the permissions needed for authentication and basic profile identification.
+              </p>
+            </details>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="contact">
+        <div class="container">
+          <h2>Contact</h2>
+          <p>
+            Questions, support, or verification requests:
+            <strong>replace this</strong> with your real support email (and/or a contact form).
+          </p>
+
+          <div class="grid-3" style="margin-top: 18px">
+            <div class="card">
+              <h3>Support email</h3>
+              <p><a href="mailto:support@tipza.app">support@tipza.app</a></p>
+            </div>
+            <div class="card">
+              <h3>Privacy</h3>
+              <p><a href="/privacy">Privacy Policy</a> (link to your policy page)</p>
+            </div>
+            <div class="card">
+              <h3>Terms</h3>
+              <p><a href="/terms">Terms of Service</a> (link to your terms page)</p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="container">
+        <div class="footer-grid">
+          <div>
+            <div class="brand">
+              <span class="logo" aria-hidden="true"></span>
+              <span>Tipza</span>
+            </div>
+            <p class="fine">
+              © <span id="year"></span> Tipza. Tipza helps teams calculate and share transparent tip splits.
+              Tipza does not replace workplace policies—always follow your local rules and employer guidelines.
+            </p>
+          </div>
+
+          <div class="footer-links" aria-label="Footer links">
+            <a href="#purpose">Purpose</a>
+            <a href="#how">How it works</a>
+            <a href="#faq">FAQ</a>
+            <a href="/privacy">Privacy</a>
+            <a href="/terms">Terms</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      // Footer year
+      document.getElementById("year").textContent = new Date().getFullYear();
+
+      // Mobile menu toggle
+      const btn = document.getElementById("menuBtn");
+      const menu = document.getElementById("menu");
+      if (btn && menu) {
+        btn.addEventListener("click", () => {
+          const open = menu.classList.toggle("open");
+          btn.setAttribute("aria-expanded", String(open));
+        });
+
+        // Close menu on navigation
+        menu.addEventListener("click", (e) => {
+          const target = e.target;
+          if (target && target.tagName === "A") {
+            menu.classList.remove("open");
+            btn.setAttribute("aria-expanded", "false");
+          }
+        });
+      }
+    </script>
   </body>
 </html>
