@@ -2,23 +2,9 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
+    <title>Privacy policy – Tipza</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta
-      name="description"
-      content="Tipza helps teams split tips fairly and transparently. Add the bill and tip, choose a split method (equal, hours, points, or custom weights), and share the final breakdown."
-    />
-    <meta name="theme-color" content="#7205ff" />
-
-    <title>Tipza — Fair Tip Splits Made Simple</title>
-
-    <!-- Social previews -->
-    <meta property="og:title" content="Tipza — Fair Tip Splits Made Simple" />
-    <meta
-      property="og:description"
-      content="Tipza helps teams split tips fairly and transparently. Choose equal, hours, points, or custom weights and share the breakdown."
-    />
-    <meta property="og:type" content="website" />
-
+    
     <!-- Fonts (Tipza: Space Grotesk + Figtree) -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -71,1267 +57,216 @@
         color: var(--text);
         font-family: var(--font-body);
         background: var(--neutral-01);
+        line-height: 1.7;
       }
 
-      a { color: inherit; text-decoration: none; }
-      a:hover { text-decoration: underline; }
-      img { max-width: 100%; height: auto; display: block; }
-
-      .sr-only {
-        position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
-        overflow: hidden; clip: rect(0, 0, 0, 0); border: 0;
+      a { 
+        color: inherit; 
+        text-decoration: none; 
+      }
+      a:hover { 
+        text-decoration: underline; 
+        color: var(--brand-50);
       }
 
-      .skip-link {
-        position: absolute; left: 12px; top: 10px;
-        transform: translateY(-150%);
-        background: var(--neutral-00);
-        border: 1px solid var(--stroke);
-        border-radius: 999px;
-        padding: 10px 14px;
-        box-shadow: var(--shadow);
-        z-index: 1000;
+      .back-button {
+        position: fixed;
+        top: 20px;
+        left: 20px;
+        z-index: 100;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 10px 16px;
+        background: rgba(255, 255, 255, 0.85);
+        backdrop-filter: blur(8px);
+        border: 1px solid rgba(10, 7, 5, 0.10);
+        border-radius: 12px;
+        color: var(--text);
+        font-family: var(--font-body);
+        font-weight: 600;
+        font-size: 14px;
+        transition: transform 120ms ease, box-shadow 120ms ease;
+        box-shadow: 0 4px 12px rgba(10, 7, 5, 0.08);
       }
-      .skip-link:focus { transform: translateY(0); outline: 2px solid var(--brand-30); }
+      .back-button:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 6px 16px rgba(10, 7, 5, 0.12);
+        text-decoration: none;
+      }
+      .back-button::before {
+        content: "←";
+        font-size: 18px;
+        line-height: 1;
+      }
 
       .container {
-        max-width: var(--container);
+        max-width: 820px;
         margin: 0 auto;
-        padding: 0 20px;
-      }
-
-      header {
-        position: sticky;
-        top: 0;
-        z-index: 50;
-        backdrop-filter: blur(8px);
-        background: rgba(243, 237, 232, 0.85);
-        border-bottom: 1px solid rgba(10, 7, 5, 0.08);
-      }
-
-      .nav {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 16px;
-        padding: 14px 0;
-      }
-
-      .brand {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        font-family: var(--font-display);
-        font-weight: 700;
-        letter-spacing: -0.02em;
-      }
-
-      .logo {
-        width: auto;
-        height: 42px;
-        display: block;
-      }
-
-      nav ul {
-        display: flex;
-        gap: 18px;
-        list-style: none;
-        padding: 0;
-        margin: 0;
-        align-items: center;
-      }
-
-      .navlink {
-        color: rgba(10, 7, 5, 0.82);
-        font-weight: 600;
-        font-size: 14px;
-        padding: 10px 10px;
-        border-radius: 999px;
-      }
-      .navlink:hover {
-        background: rgba(10, 7, 5, 0.05);
-        text-decoration: none;
-      }
-
-      .cta-row {
-        display: flex;
-        gap: 10px;
-        align-items: center;
-      }
-
-      .store-btn {
-        display: inline-flex;
-        align-items: center;
-        gap: 12px;
-        padding: 8px 16px;
-        border-radius: 8px;
-        font-family: var(--font-body);
-        text-decoration: none !important;
-        transition: transform 120ms ease, opacity 120ms ease;
-        user-select: none;
-      }
-      .store-btn:hover { transform: translateY(-1px); opacity: 0.9; }
-
-      .store-btn-apple {
-        background: #000;
-        color: #fff;
-      }
-
-      .store-btn-apple .store-logo {
-        width: 24px;
-        height: 24px;
-        flex-shrink: 0;
-      }
-
-      .store-btn-apple .store-text {
-        display: flex;
-        flex-direction: column;
-        line-height: 1.2;
-      }
-
-      .store-btn-apple .store-text-top {
-        font-size: 11px;
-        font-weight: 400;
-      }
-
-      .store-btn-apple .store-text-bottom {
-        font-size: 18px;
-        font-weight: 600;
-        letter-spacing: -0.01em;
-      }
-
-      .store-btn-google {
-        background: #fff;
-        color: #000;
-        border: 1px solid #000;
-      }
-
-      .store-btn-google .store-logo {
-        width: 24px;
-        height: 24px;
-        flex-shrink: 0;
-      }
-
-      .store-btn-google .store-text {
-        display: flex;
-        flex-direction: column;
-        line-height: 1.2;
-      }
-
-      .store-btn-google .store-text-top {
-        font-size: 10px;
-        font-weight: 500;
-        text-transform: uppercase;
-        letter-spacing: 0.03em;
-      }
-
-      .store-btn-google .store-text-bottom {
-        font-size: 16px;
-        font-weight: 500;
-      }
-
-      .btn {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        gap: 10px;
-        padding: 12px 14px;
-        border-radius: 999px;
-        font-weight: 700;
-        font-size: 14px;
-        border: 1px solid transparent;
-        cursor: pointer;
-        text-decoration: none !important;
-        transition: transform 120ms ease, box-shadow 120ms ease, background 120ms ease;
-        user-select: none;
-        white-space: nowrap;
-      }
-
-      .btn-primary {
-        background: linear-gradient(135deg, #ffc832, #ff9500);
-        color: white;
-        box-shadow: 0 18px 34px rgba(255, 180, 0, 0.25);
-      }
-      .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 22px 40px rgba(255, 180, 0, 0.30); }
-      .btn-black {
-        background: var(--neutral-99);
-        box-shadow: 0 18px 34px rgba(10, 7, 5, 0.22);
-      }
-      .btn-black:hover { box-shadow: 0 22px 40px rgba(10, 7, 5, 0.26); }
-
-      .btn-secondary {
-        background: rgba(255,255,255,0.65);
-        color: var(--text);
-        border-color: rgba(10, 7, 5, 0.10);
-      }
-      .btn-secondary:hover { transform: translateY(-1px); }
-
-      .hamburger {
-        display: none;
-        border: 1px solid rgba(10, 7, 5, 0.12);
-        background: rgba(255,255,255,0.65);
-        border-radius: 12px;
-        padding: 10px 12px;
-        font-weight: 800;
-        color: rgba(10, 7, 5, 0.82);
-        text-decoration: none;
-        cursor: pointer;
-        font-family: var(--font-body);
-        font-size: 14px;
-      }
-      .hamburger:hover {
-        background: rgba(255,255,255,0.85);
-      }
-
-      .mobile-store-buttons {
-        display: none;
-      }
-
-      .hero {
-        padding: 56px 0 26px;
-      }
-
-      .hero-grid {
-        display: grid;
-        grid-template-columns: 1.1fr 0.9fr;
-        gap: 28px;
-        align-items: center;
-      }
-
-      .eyebrow {
-        display: inline-flex;
-        gap: 8px;
-        align-items: center;
-        padding: 8px 12px;
-        border-radius: 999px;
-        border: 1px solid rgba(255, 180, 0, 0.25);
-        background: rgba(255, 245, 200, 0.75);
-        color: rgba(10, 7, 5, 0.86);
-        font-weight: 700;
-        font-size: 13px;
-      }
-
-      .dot {
-        width: 8px;
-        height: 8px;
-        border-radius: 999px;
-        background: #06bc78;
-        box-shadow: 0 0 0 4px rgba(6, 188, 120, 0.20);
+        padding: 80px 20px 40px;
       }
 
       h1 {
         font-family: var(--font-display);
-        letter-spacing: -0.04em;
-        line-height: 1.03;
-        font-size: clamp(38px, 5vw, 56px);
-        margin: 14px 0 12px;
-      }
-
-      .lead {
-        font-size: 18px;
-        line-height: 1.6;
-        color: var(--muted);
-        margin: 0 0 18px;
-        max-width: 58ch;
-      }
-
-      .bullets {
-        display: flex;
-        gap: 12px;
-        margin: 0;
-        padding: 0;
-        list-style: none;
-        flex-wrap: wrap;
-      }
-
-      .pill {
-        display: inline-flex;
-        gap: 10px;
-        align-items: flex-start;
-        padding: 12px 12px;
-        border-radius: 16px;
-        background: rgba(255,255,255,0.62);
-        border: 1px solid rgba(10, 7, 5, 0.10);
-      }
-      .pill strong { display: block; font-size: 14px; }
-      .pill span { display: block; color: var(--muted); font-size: 13px; margin-top: 2px; }
-
-      .icon {
-        width: 20px; height: 20px;
-        flex: 0 0 20px;
-        color: var(--brand-50);
-      }
-
-      .hero-image {
-        width: 100%;
-        height: auto;
-        display: block;
-        border-radius: var(--radius-lg);
-      }
-
-      @media (min-width: 781px) {
-        .hero-image {
-          transform: scale(1.1);
-          transform-origin: center;
-        }
-      }
-
-      .mock {
-        position: relative;
-        border-radius: var(--radius-lg);
-        background: rgba(255,255,255,0.75);
-        border: 1px solid rgba(10, 7, 5, 0.10);
-        box-shadow: var(--shadow);
-        overflow: hidden;
-        padding: 18px;
-      }
-
-      .mock .screen {
-        border-radius: 22px;
-        background: linear-gradient(180deg, rgba(10,7,5,0.06), rgba(10,7,5,0.03));
-        border: 1px solid rgba(10, 7, 5, 0.08);
-        padding: 16px;
-      }
-
-      .mock h3 {
-        font-family: var(--font-display);
-        margin: 6px 0 6px;
-        font-size: 16px;
-        letter-spacing: -0.02em;
-      }
-      .mock p { margin: 0; color: var(--muted); font-size: 14px; line-height: 1.5; }
-
-      .calc {
-        margin-top: 14px;
-        display: grid;
-        gap: 10px;
-      }
-
-      .row {
-        display: flex;
-        justify-content: space-between;
-        gap: 12px;
-        padding: 10px 12px;
-        border-radius: 14px;
-        background: rgba(255,255,255,0.62);
-        border: 1px solid rgba(10,7,5,0.08);
-        font-size: 14px;
-      }
-      .row b { font-weight: 800; }
-      .tag {
-        font-weight: 800;
-        font-size: 12px;
-        padding: 4px 8px;
-        border-radius: 999px;
-        border: none;
-        background: rgba(255,255,255,0.65);
-        display: inline-block;
-      }
-      .tag.brand { color: #d97706; background: rgba(255, 245, 200, 0.5); }
-      .tag.green { color: var(--green-20); background: rgba(6, 188, 120, 0.1); }
-
-      .section {
-        padding: 46px 0;
-      }
-      
-      /* Scroll offset for anchor links to account for sticky header */
-      #purpose,
-      #how,
-      #benefits,
-      #faq,
-      #contact {
-        scroll-margin-top: 90px;
-      }
-
-      .section h2 {
-        font-family: var(--font-display);
         letter-spacing: -0.03em;
-        font-size: 30px;
-        margin: 0 0 10px;
+        font-size: 36px;
+        margin: 0 0 8px;
+        color: var(--text);
       }
-      .centered-title {
-        text-align: center;
-        margin-bottom: 40px;
+
+      h2 {
+        font-family: var(--font-display);
+        letter-spacing: -0.02em;
+        font-size: 24px;
+        margin: 40px 0 12px;
+        color: var(--text);
       }
-      .section p {
-        color: var(--muted);
+
+      p {
+        color: var(--text);
+        margin: 0 0 16px;
         line-height: 1.7;
-        margin: 0;
-        max-width: 78ch;
       }
 
-      .grid-3 {
-        margin-top: 42px;
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 14px;
+      ul {
+        padding-left: 24px;
+        margin: 0 0 16px;
       }
 
-      .card {
-        border-radius: var(--radius);
-        background: var(--card);
-        border: 1px solid var(--stroke);
-        box-shadow: 0 10px 24px rgba(10, 7, 5, 0.08);
-        padding: 18px;
-      }
-      .benefit-image {
-        width: 100%;
-        max-width: 100%;
-        display: block;
-        height: auto;
-        object-fit: contain;
-        margin-bottom: 20px;
-        margin-left: 0;
-        margin-right: auto;
-      }
-      .card-content {
-        display: flex;
-        gap: 14px;
-        align-items: flex-start;
-      }
-      .card-icon {
-        width: 24px;
-        height: 24px;
-        flex-shrink: 0;
-        color: #ff9500;
-      }
-      .card-text {
-        flex: 1;
-      }
-      .card-link {
-        display: block;
-        text-decoration: none;
-        color: inherit;
-        border-radius: var(--radius);
-        border: 1px solid var(--stroke);
-        background: var(--card);
-        box-shadow: 0 10px 24px rgba(10, 7, 5, 0.08);
-        overflow: hidden;
-        transition: transform 120ms ease, box-shadow 120ms ease;
-      }
-      .card-link:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 14px 28px rgba(10, 7, 5, 0.12);
-        text-decoration: none;
-      }
-      .card-link .card {
-        border-radius: 0;
-        border: none;
-        box-shadow: none;
-        margin: 0;
-        background: transparent;
-      }
-      .card-link p {
-        text-decoration: none;
-      }
-      .card-link:hover p {
-        text-decoration: none;
-      }
-      .card-chip-image {
-        height: auto;
-        width: auto;
-        max-height: 175px;
-        max-width: 100%;
-        display: block;
+      li {
         margin-bottom: 8px;
-        object-fit: contain;
-        margin-left: 0;
-        margin-right: auto;
+        color: var(--text);
+        line-height: 1.7;
       }
-      .purpose-item {
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-      }
-      .purpose-item .card-chip-image {
-        margin-bottom: 8px;
-      }
-      .purpose-item h3 {
-        font-family: var(--font-display);
-        letter-spacing: -0.02em;
-        font-size: 16px;
-        margin: 8px 0 6px;
-      }
-      .card h3 {
-        font-family: var(--font-display);
-        letter-spacing: -0.02em;
-        font-size: 16px;
-        margin: 0 0 6px;
-      }
-      .card .card-chip-image + h3 {
-        margin-top: 8px;
-      }
-      .card p {
+
+      .muted {
+        color: var(--muted);
         font-size: 14px;
-        margin: 0;
+        margin-bottom: 32px;
       }
 
-      .steps {
-        margin-top: 18px;
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 14px;
-      }
-
-      .step {
-        display: flex;
-        gap: 12px;
-        align-items: flex-start;
-        padding: 16px;
-        border-radius: var(--radius);
-        border: 1px solid var(--stroke);
-        background: rgba(255,255,255,0.62);
-      }
-
-      .step .num {
-        width: 34px;
-        height: 34px;
-        border-radius: 10px;
-        display: grid;
-        place-items: center;
-        font-weight: 900;
-        font-family: var(--font-display);
-        background: #ffc832;
-        color: #000;
-        border: none;
-        flex: 0 0 34px;
-      }
-
-      .step h4 {
-        margin: 0 0 4px;
-        font-size: 15px;
-        font-family: var(--font-display);
-        letter-spacing: -0.02em;
-        font-weight: 700;
-        color: #000;
-      }
-      .step p {
-        margin: 0;
-        font-size: 14px;
-        font-weight: 700;
-        color: #000;
-      }
-
-      .note {
-        margin-top: 14px;
-        padding: 14px 16px;
-        border-radius: var(--radius);
-        border: none;
-        background: #EEE5DD;
-        color: rgba(10, 7, 5, 0.78);
-        font-size: 14px;
-        line-height: 1.6;
-        text-align: center;
-        max-width: 100%;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 8px;
-      }
-      .note strong {
-        display: block;
-      }
-      .note span {
-        display: block;
-        max-width: 800px;
-      }
-
-      .faq {
-        margin-top: 18px;
-        display: grid;
-        gap: 10px;
-      }
-      details {
-        border: 1px solid var(--stroke);
-        background: rgba(255,255,255,0.62);
-        border-radius: var(--radius);
-        padding: 14px 16px;
-        overflow: hidden;
-      }
-      summary {
-        cursor: pointer;
-        font-family: var(--font-display);
-        font-weight: 700;
-        letter-spacing: -0.02em;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        list-style: none;
-        gap: 12px;
-        margin-bottom: 0;
-      }
-      summary::-webkit-details-marker {
-        display: none;
-      }
-      summary::marker {
-        display: none;
-      }
-      .faq-icon {
-        width: 20px;
-        height: 20px;
-        flex-shrink: 0;
-        transition: transform 120ms ease;
-      }
-      details[open] .faq-icon-plus {
-        display: none;
-      }
-      details:not([open]) .faq-icon-minus {
-        display: none;
-      }
-      .faq-content {
-        height: 0;
-        overflow: hidden;
-        opacity: 0;
-        padding-top: 0;
-        transition: height 0.4s cubic-bezier(0.4, 0, 0.2, 1),
-                    opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1),
-                    padding-top 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-      }
-      details[open] .faq-content {
-        opacity: 1;
-        padding-top: 12px;
-      }
-      details p {
-        margin: 0;
-        margin-bottom: 0;
-      }
-
-      footer {
-        padding: 26px 0 34px;
-        border-top: 1px solid rgba(10,7,5,0.10);
-        background: rgba(243, 237, 232, 0.55);
-      }
-      .footer-grid {
-        display: grid;
-        grid-template-columns: 1.2fr 0.8fr;
-        gap: 14px;
-        align-items: start;
-      }
-      .fine {
-        color: rgba(10, 7, 5, 0.66);
-        font-size: 13px;
-        line-height: 1.6;
-        margin: 10px 0 0;
-      }
-      .footer-links {
-        display: flex;
-        gap: 14px;
-        justify-content: flex-end;
-        flex-wrap: wrap;
-        font-weight: 700;
-        font-size: 13px;
-      }
-
-      .badge-row {
-        display: flex;
-        gap: 10px;
-        flex-wrap: wrap;
-        margin-top: 14px;
-      }
-      .badge {
-        display: inline-flex;
-        gap: 10px;
-        align-items: center;
-        border-radius: 14px;
-        padding: 10px 12px;
-        border: 1px solid rgba(10,7,5,0.10);
-        background: rgba(255, 245, 200, 0.75);
-        font-weight: 800;
-        font-size: 13px;
-      }
-      .badge small {
-        display: block;
-        font-weight: 700;
-        color: rgba(10,7,5,0.65);
-        margin-top: 2px;
-      }
-
-      @media (max-width: 920px) {
-        .hero-grid { 
-          grid-template-columns: 1fr; 
+      @media (max-width: 768px) {
+        .back-button {
+          top: 16px;
+          left: 16px;
+          padding: 8px 14px;
+          font-size: 13px;
         }
-        .hero-grid > div {
-          order: 2;
+        .container {
+          padding: 70px 16px 32px;
         }
-        .hero-grid .hero-image {
-          order: -1;
+        h1 {
+          font-size: 28px;
         }
-        .grid-3 { grid-template-columns: 1fr; }
-        .grid-3 .purpose-item:not(:first-child) .card-chip-image {
-          margin-top: 40px;
+        h2 {
+          font-size: 20px;
+          margin-top: 32px;
         }
-        .grid-3 .purpose-item:not(:first-child) .benefit-image {
-          margin-top: 16px;
-        }
-        .steps { grid-template-columns: 1fr; }
-        .footer-grid { grid-template-columns: 1fr; }
-        .footer-links { justify-content: flex-start; }
-      }
-
-      @media (max-width: 1024px) {
-        header {
-          position: sticky;
-          top: 0;
-        }
-        header .container {
-          position: relative;
-        }
-        nav {
-          position: static;
-        }
-        nav ul { 
-          display: none;
-          list-style: none;
-          padding: 0;
-          margin: 0;
-        }
-        nav ul.open {
-          display: flex;
-          flex-direction: column;
-          gap: 8px;
-          padding: 12px;
-          border-radius: 16px;
-          border: 1px solid rgba(10,7,5,0.10);
-          background: rgba(255,255,255,0.98);
-          backdrop-filter: blur(4px);
-          position: fixed;
-          left: 20px;
-          right: 20px;
-          top: 70px;
-          z-index: 100;
-          box-shadow: 0 10px 40px rgba(10, 7, 5, 0.15);
-          width: calc(100vw - 40px);
-          max-width: calc(100vw - 40px);
-        }
-        nav ul.open li {
-          margin: 0;
-          width: 100%;
-        }
-        nav ul.open .navlink {
-          display: block;
-          padding: 16px;
-          border-radius: 12px;
-          width: 100%;
-          text-align: left;
-          background: rgba(255,255,255,0.5);
-          border: 1px solid rgba(10,7,5,0.08);
-        }
-        .hamburger { display: inline-flex; }
-        .bullets { grid-template-columns: 1fr; }
-        .cta-row { display: none; }
-        .logo { height: 34px; }
-        nav ul.open .mobile-store-buttons {
-          display: flex;
-          flex-direction: row;
-          gap: 8px;
-          margin: 0;
-          padding: 0;
-          border-top: none;
-          list-style: none;
-          width: 100%;
-        }
-        nav ul.open .mobile-store-buttons .store-btn {
-          flex: 1;
-          justify-content: center;
-          padding: 12px 16px;
-          gap: 12px;
-          width: 100%;
-        }
-        nav ul.open .mobile-store-buttons .store-logo {
-          width: 28px;
-          height: 28px;
-        }
-        nav ul.open .mobile-store-buttons .store-text-top {
-          font-size: 10px;
-        }
-        nav ul.open .mobile-store-buttons .store-text-bottom {
-          font-size: 16px;
-        }
-        nav ul.open .mobile-store-buttons .store-btn-apple .store-text-bottom {
-          font-size: 18px;
-        }
-      }
-
-      @media (prefers-reduced-motion: reduce) {
-        html { scroll-behavior: auto; }
-        .btn { transition: none; }
       }
     </style>
   </head>
 
   <body>
-    <a class="skip-link" href="#main">Skip to content</a>
+    <a href="/" class="back-button">Back</a>
+    
+    <div class="container">
+      <h1>Privacy policy</h1>
+      <p class="muted">Last updated: 19 December 2025</p>
 
-    <header>
-      <div class="container">
-        <div class="nav">
-          <a class="brand" href="#top" aria-label="Tipza home">
-            <img src="assets/images/Tipza_Logo.svg" alt="Tipza" class="logo" />
-          </a>
+      <h2>1. Controller</h2>
+      <p>
+        The controller responsible for data processing under GDPR is <strong>Tipza</strong>.
+      </p>
+      <p>
+        Contact email:
+        <a href="mailto:support@tipza.app">support@tipza.app</a>
+      </p>
 
-          <nav aria-label="Primary navigation" style="position: relative">
-            <button class="hamburger" type="button" id="menuBtn" aria-expanded="false" aria-controls="menu">
-              Menu
-            </button>
-            <ul id="menu">
-              <li><a class="navlink" href="#purpose">Purpose</a></li>
-              <li><a class="navlink" href="#how">How it works</a></li>
-              <li><a class="navlink" href="#benefits">Benefits</a></li>
-              <li><a class="navlink" href="#faq">FAQ</a></li>
-              <li><a class="navlink" href="#contact">Contact</a></li>
-              <li class="mobile-store-buttons">
-                <a class="store-btn store-btn-google" href="#download" aria-label="Get it on Google Play">
-                  <img src="assets/images/google-play-icon.svg" alt="" class="store-logo" />
-                  <span class="store-text">
-                    <span class="store-text-top">Get it on</span>
-                    <span class="store-text-bottom">Google Play</span>
-                  </span>
-                </a>
-                <a class="store-btn store-btn-apple" href="#download" aria-label="Download on the App Store">
-                  <svg class="store-logo" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M20.8428 17.1447C20.5101 17.9133 20.1163 18.6208 19.66 19.2713C19.0381 20.158 18.5288 20.7719 18.1364 21.1127C17.528 21.6722 16.8762 21.9587 16.1782 21.975C15.6771 21.975 15.0728 21.8324 14.3693 21.5432C13.6636 21.2553 13.015 21.1127 12.422 21.1127C11.8 21.1127 11.133 21.2553 10.4195 21.5432C9.70493 21.8324 9.12928 21.9832 8.68916 21.9981C8.01981 22.0266 7.35264 21.7319 6.68668 21.1127C6.26164 20.742 5.72999 20.1064 5.09309 19.2061C4.40976 18.2446 3.84796 17.1297 3.40784 15.8587C2.93648 14.4857 2.7002 13.1563 2.7002 11.8692C2.7002 10.3948 3.01878 9.12321 3.65689 8.0576C4.1584 7.20166 4.82557 6.52647 5.66059 6.03081C6.49562 5.53514 7.39786 5.28256 8.36949 5.2664C8.90114 5.2664 9.59833 5.43085 10.4647 5.75405C11.3287 6.07834 11.8834 6.24279 12.1266 6.24279C12.3085 6.24279 12.9247 6.0505 13.9694 5.66714C14.9573 5.31162 15.7911 5.16441 16.4742 5.2224C18.3251 5.37178 19.7157 6.10142 20.6405 7.41595C18.9851 8.41896 18.1662 9.82379 18.1825 11.626C18.1975 13.0297 18.7067 14.1979 19.7076 15.1254C20.1611 15.5558 20.6676 15.8885 21.2312 16.1248C21.109 16.4793 20.98 16.8188 20.8428 17.1447ZM16.5978 0.440125C16.5978 1.54038 16.1958 2.56768 15.3946 3.51854C14.4277 4.64892 13.2582 5.30211 11.99 5.19904C11.9738 5.06705 11.9645 4.92812 11.9645 4.78214C11.9645 3.7259 12.4243 2.59552 13.2408 1.67127C13.6485 1.20331 14.167 0.814209 14.7957 0.503814C15.4231 0.19805 16.0166 0.0289566 16.5747 0C16.591 0.147086 16.5978 0.294182 16.5978 0.440111V0.440125Z" fill="currentColor"/>
-                  </svg>
-                  <span class="store-text">
-                    <span class="store-text-top">Download on the</span>
-                    <span class="store-text-bottom">App Store</span>
-                  </span>
-                </a>
-              </li>
-            </ul>
-          </nav>
+      <h2>2. Data we collect</h2>
+      <p>We may collect the following personal data:</p>
+      <ul>
+        <li>Email address</li>
+        <li>Display name or nickname</li>
+        <li>Tip split records and history</li>
+        <li>Carry-over balances</li>
+        <li>App usage data (feature usage, crash reports)</li>
+        <li>Technical data (IP address, device type, operating system, app version)</li>
+      </ul>
 
-          <div class="cta-row">
-            <a class="store-btn store-btn-google" href="#download" aria-label="Get it on Google Play">
-              <img src="assets/images/google-play-icon.svg" alt="" class="store-logo" />
-              <span class="store-text">
-                <span class="store-text-top">Get it on</span>
-                <span class="store-text-bottom">Google Play</span>
-              </span>
-            </a>
-            <a class="store-btn store-btn-apple" href="#download" aria-label="Download on the App Store">
-              <svg class="store-logo" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M20.8428 17.1447C20.5101 17.9133 20.1163 18.6208 19.66 19.2713C19.0381 20.158 18.5288 20.7719 18.1364 21.1127C17.528 21.6722 16.8762 21.9587 16.1782 21.975C15.6771 21.975 15.0728 21.8324 14.3693 21.5432C13.6636 21.2553 13.015 21.1127 12.422 21.1127C11.8 21.1127 11.133 21.2553 10.4195 21.5432C9.70493 21.8324 9.12928 21.9832 8.68916 21.9981C8.01981 22.0266 7.35264 21.7319 6.68668 21.1127C6.26164 20.742 5.72999 20.1064 5.09309 19.2061C4.40976 18.2446 3.84796 17.1297 3.40784 15.8587C2.93648 14.4857 2.7002 13.1563 2.7002 11.8692C2.7002 10.3948 3.01878 9.12321 3.65689 8.0576C4.1584 7.20166 4.82557 6.52647 5.66059 6.03081C6.49562 5.53514 7.39786 5.28256 8.36949 5.2664C8.90114 5.2664 9.59833 5.43085 10.4647 5.75405C11.3287 6.07834 11.8834 6.24279 12.1266 6.24279C12.3085 6.24279 12.9247 6.0505 13.9694 5.66714C14.9573 5.31162 15.7911 5.16441 16.4742 5.2224C18.3251 5.37178 19.7157 6.10142 20.6405 7.41595C18.9851 8.41896 18.1662 9.82379 18.1825 11.626C18.1975 13.0297 18.7067 14.1979 19.7076 15.1254C20.1611 15.5558 20.6676 15.8885 21.2312 16.1248C21.109 16.4793 20.98 16.8188 20.8428 17.1447ZM16.5978 0.440125C16.5978 1.54038 16.1958 2.56768 15.3946 3.51854C14.4277 4.64892 13.2582 5.30211 11.99 5.19904C11.9738 5.06705 11.9645 4.92812 11.9645 4.78214C11.9645 3.7259 12.4243 2.59552 13.2408 1.67127C13.6485 1.20331 14.167 0.814209 14.7957 0.503814C15.4231 0.19805 16.0166 0.0289566 16.5747 0C16.591 0.147086 16.5978 0.294182 16.5978 0.440111V0.440125Z" fill="currentColor"/>
-              </svg>
-              <span class="store-text">
-                <span class="store-text-top">Download on the</span>
-                <span class="store-text-bottom">App Store</span>
-              </span>
-            </a>
-          </div>
-        </div>
-      </div>
-    </header>
+      <h2>3. Legal basis for processing</h2>
+      <p>We process personal data based on:</p>
+      <ul>
+        <li>Contractual necessity (to provide the service)</li>
+        <li>User consent (account creation, analytics where applicable)</li>
+        <li>Legitimate interest (app improvement and security)</li>
+      </ul>
 
-    <main id="main">
-      <section class="hero" id="top">
-        <div class="container">
-          <div class="hero-grid">
-            <div>
-              <h1>Fair tips, no drama</h1>
+      <h2>4. How we use your data</h2>
+      <ul>
+        <li>Create and manage user accounts</li>
+        <li>Perform and store tip calculations</li>
+        <li>Sync data across devices</li>
+        <li>Improve app stability and performance</li>
+        <li>Provide user support</li>
+      </ul>
 
-              <p class="lead">
-                Tipza helps service teams split tips fairly and stress free. Just add the total, choose how you want to split it, and Tipza instantly shows everyone's share clearly and consistently.
-              </p>
+      <h2>5. Data storage and retention</h2>
+      <p>
+        Data is stored securely using cloud infrastructure and local device storage.
+        We retain data only as long as necessary to provide the service or until you
+        request deletion.
+      </p>
 
-              <div class="bullets" id="download" style="display: flex; gap: 12px; margin-top: 24px;">
-                <a class="store-btn store-btn-google" href="#download" aria-label="Get it on Google Play">
-                  <img src="assets/images/google-play-icon.svg" alt="" class="store-logo" />
-                  <span class="store-text">
-                    <span class="store-text-top">Get it on</span>
-                    <span class="store-text-bottom">Google Play</span>
-                  </span>
-                </a>
-                <a class="store-btn store-btn-apple" href="#download" aria-label="Download on the App Store">
-                  <svg class="store-logo" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M20.8428 17.1447C20.5101 17.9133 20.1163 18.6208 19.66 19.2713C19.0381 20.158 18.5288 20.7719 18.1364 21.1127C17.528 21.6722 16.8762 21.9587 16.1782 21.975C15.6771 21.975 15.0728 21.8324 14.3693 21.5432C13.6636 21.2553 13.015 21.1127 12.422 21.1127C11.8 21.1127 11.133 21.2553 10.4195 21.5432C9.70493 21.8324 9.12928 21.9832 8.68916 21.9981C8.01981 22.0266 7.35264 21.7319 6.68668 21.1127C6.26164 20.742 5.72999 20.1064 5.09309 19.2061C4.40976 18.2446 3.84796 17.1297 3.40784 15.8587C2.93648 14.4857 2.7002 13.1563 2.7002 11.8692C2.7002 10.3948 3.01878 9.12321 3.65689 8.0576C4.1584 7.20166 4.82557 6.52647 5.66059 6.03081C6.49562 5.53514 7.39786 5.28256 8.36949 5.2664C8.90114 5.2664 9.59833 5.43085 10.4647 5.75405C11.3287 6.07834 11.8834 6.24279 12.1266 6.24279C12.3085 6.24279 12.9247 6.0505 13.9694 5.66714C14.9573 5.31162 15.7911 5.16441 16.4742 5.2224C18.3251 5.37178 19.7157 6.10142 20.6405 7.41595C18.9851 8.41896 18.1662 9.82379 18.1825 11.626C18.1975 13.0297 18.7067 14.1979 19.7076 15.1254C20.1611 15.5558 20.6676 15.8885 21.2312 16.1248C21.109 16.4793 20.98 16.8188 20.8428 17.1447ZM16.5978 0.440125C16.5978 1.54038 16.1958 2.56768 15.3946 3.51854C14.4277 4.64892 13.2582 5.30211 11.99 5.19904C11.9738 5.06705 11.9645 4.92812 11.9645 4.78214C11.9645 3.7259 12.4243 2.59552 13.2408 1.67127C13.6485 1.20331 14.167 0.814209 14.7957 0.503814C15.4231 0.19805 16.0166 0.0289566 16.5747 0C16.591 0.147086 16.5978 0.294182 16.5978 0.440111V0.440125Z" fill="currentColor"/>
-                  </svg>
-                  <span class="store-text">
-                    <span class="store-text-top">Download on the</span>
-                    <span class="store-text-bottom">App Store</span>
-                  </span>
-                </a>
-              </div>
-            </div>
+      <h2>6. Data sharing</h2>
+      <p>
+        We do not sell personal data. We may share limited data with trusted service
+        providers for:
+      </p>
+      <ul>
+        <li>Authentication</li>
+        <li>Analytics</li>
+        <li>Cloud hosting</li>
+      </ul>
+      <p>All providers are contractually bound to comply with GDPR.</p>
 
-            <img src="assets/images/website-hero-image.png" alt="Tipza app preview" class="hero-image" />
-          </div>
-        </div>
-      </section>
+      <h2>7. Your rights under GDPR</h2>
+      <p>You have the right to:</p>
+      <ul>
+        <li>Access your personal data</li>
+        <li>Correct inaccurate data</li>
+        <li>Request deletion of your data</li>
+        <li>Restrict or object to processing</li>
+        <li>Request data portability</li>
+      </ul>
+      <p>
+        Requests can be made by contacting
+        <a href="mailto:support@tipza.app">support@tipza.app</a>.
+      </p>
 
-      <section class="section" id="purpose">
-        <div class="container">
-          <h2 class="centered-title">What Tipza is and why it exists</h2>
+      <h2>8. International data transfers</h2>
+      <p>
+        If data is transferred outside the EU, we ensure appropriate safeguards such
+        as standard contractual clauses.
+      </p>
 
-          <div class="grid-3" role="list" aria-label="Purpose cards">
-            <div class="purpose-item" role="listitem">
-              <img src="assets/images/Fairness.png" alt="Fairness" class="card-chip-image" />
-              <h3>Fair splits that match your team's rules</h3>
-              <p>
-                Every workplace is different. Choose equal, hours-based, points, or weighted splits that reflect how your team actually works.
-              </p>
-            </div>
-            <div class="purpose-item" role="listitem">
-              <img src="assets/images/Clarity.png" alt="Clarity" class="card-chip-image" />
-              <h3>Clear calculations everyone can follow</h3>
-              <p>
-                Tipza shows the inputs and final shares, so everyone understands the breakdown at a glance.
-              </p>
-            </div>
-            <div class="purpose-item" role="listitem">
-              <img src="assets/images/Speed.png" alt="Speed" class="card-chip-image" />
-              <h3>Done in minutes, not debates</h3>
-              <p>
-                Add the total, pick a method, and share the result. Spend less time calculating and more time closing the shift.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
+      <h2>9. Security</h2>
+      <p>
+        We implement appropriate technical and organizational measures to protect
+        personal data against unauthorized access, loss, or misuse.
+      </p>
 
-      <section class="section" id="how">
-        <div class="container">
-          <h2>How Tipza works</h2>
-          <p>
-            Tipza guides you through a simple flow so tip pools are split the same way every time.
-          </p>
+      <h2>10. Changes to this policy</h2>
+      <p>
+        We may update this privacy policy from time to time. Changes will be reflected
+        on this page with an updated date.
+      </p>
 
-          <div class="steps" aria-label="How it works steps">
-            <div class="step">
-              <div class="num" aria-hidden="true">1</div>
-              <div>
-                <h4>Add the totals</h4>
-                <p>Enter the tip pool amount (and any relevant adjustments your team uses).</p>
-              </div>
-            </div>
-
-            <div class="step">
-              <div class="num" aria-hidden="true">2</div>
-              <div>
-                <h4>Add team members</h4>
-                <p>Include everyone who shares tips for the shift (e.g., servers, bartenders, support roles).</p>
-              </div>
-            </div>
-
-            <div class="step">
-              <div class="num" aria-hidden="true">3</div>
-              <div>
-                <h4>Choose a split method</h4>
-                <p>Equal split, by hours worked, by points, or custom weights—whatever fits your policy.</p>
-              </div>
-            </div>
-
-            <div class="step">
-              <div class="num" aria-hidden="true">4</div>
-              <div>
-                <h4>Review & share</h4>
-                <p>Tipza calculates each person’s share and presents a clean breakdown you can share with the team.</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="note">
-            <strong>Tipza is a calculator and organizer.</strong>
-            <span>It helps you apply your team's agreed rules consistently. Always follow your workplace policy and local regulations for tip distribution.</span>
-          </div>
-        </div>
-      </section>
-
-      <section class="section" id="benefits">
-        <div class="container">
-          <h2>Benefits of using Tipza</h2>
-          <p>
-            Tipza helps teams reduce misunderstandings and keep tip splits consistent—even when staffing and shifts vary.
-          </p>
-
-          <div class="grid-3" role="list" aria-label="Benefits">
-            <div class="purpose-item" role="listitem">
-              <img src="assets/images/Less-conflict.png" alt="Less conflict" class="benefit-image" />
-              <h3>Less conflict</h3>
-              <p>Clear inputs + clear outputs means fewer "who got what?" conversations.</p>
-            </div>
-            <div class="purpose-item" role="listitem">
-              <img src="assets/images/Consistent.png" alt="Consistent across shifts" class="benefit-image" />
-              <h3>Consistent across shifts</h3>
-              <p>Use the same split method every night, or switch methods when the situation calls for it.</p>
-            </div>
-            <div class="purpose-item" role="listitem">
-              <img src="assets/images/Team-ready-sharing.png" alt="Team-ready sharing" class="benefit-image" />
-              <h3>Team-ready sharing</h3>
-              <p>Share a simple breakdown so everyone sees the same numbers.</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section class="section" id="faq">
-        <div class="container">
-          <h2>FAQ</h2>
-          <p>Quick, clear answers about how Tipza works.</p>
-
-          <div class="faq">
-            <details>
-              <summary>
-                <span>What is the primary purpose of Tipza?</span>
-                <span style="display: flex; align-items: center;">
-                  <img src="assets/images/Plus.svg" alt="" class="faq-icon faq-icon-plus" />
-                  <img src="assets/images/Minus.svg" alt="" class="faq-icon faq-icon-minus" />
-                </span>
-              </summary>
-              <div class="faq-content">
-                <p>
-                  Tipza helps service teams <strong>split tips fairly and consistently</strong>. Enter the total, pick a method, and get a clear breakdown for each person.
-                </p>
-              </div>
-            </details>
-
-            <details>
-              <summary>
-                <span>How does Tipza calculate a "fair" split?</span>
-                <span style="display: flex; align-items: center;">
-                  <img src="assets/images/Plus.svg" alt="" class="faq-icon faq-icon-plus" />
-                  <img src="assets/images/Minus.svg" alt="" class="faq-icon faq-icon-minus" />
-                </span>
-              </summary>
-              <div class="faq-content">
-                <p>
-                  Fair depends on your team’s rules. Tipza supports equal, hours, points, and custom weights—and applies the same method consistently every time.
-                </p>
-              </div>
-            </details>
-
-            <details>
-              <summary>
-                <span>Does Tipza handle payments or move money?</span>
-                <span style="display: flex; align-items: center;">
-                  <img src="assets/images/Plus.svg" alt="" class="faq-icon faq-icon-plus" />
-                  <img src="assets/images/Minus.svg" alt="" class="faq-icon faq-icon-minus" />
-                </span>
-              </summary>
-              <div class="faq-content">
-                <p>
-                  No. Tipza is a calculator and record keeper. It shows the split—payouts happen outside the app based on your workplace process.
-                </p>
-              </div>
-            </details>
-
-            <details>
-              <summary>
-                <span>Can I share the results with my team?</span>
-                <span style="display: flex; align-items: center;">
-                  <img src="assets/images/Plus.svg" alt="" class="faq-icon faq-icon-plus" />
-                  <img src="assets/images/Minus.svg" alt="" class="faq-icon faq-icon-minus" />
-                </span>
-              </summary>
-              <div class="faq-content">
-                <p>
-                  Yes. After you calculate a split, you can share the breakdown so everyone sees the same numbers.
-                </p>
-              </div>
-            </details>
-
-            <details>
-              <summary>
-                <span>Why does Tipza use Google Sign-In?</span>
-                <span style="display: flex; align-items: center;">
-                  <img src="assets/images/Plus.svg" alt="" class="faq-icon faq-icon-plus" />
-                  <img src="assets/images/Minus.svg" alt="" class="faq-icon faq-icon-minus" />
-                </span>
-              </summary>
-              <div class="faq-content">
-                <p>
-                  It helps you sign in quickly and keep your data available across devices. Tipza only requests what’s needed for authentication and basic profile info.
-                </p>
-              </div>
-            </details>
-          </div>
-        </div>
-      </section>
-
-      <section class="section" id="contact">
-        <div class="container">
-          <h2>Contact</h2>
-          <p>
-            Get in touch with our support team, or review our privacy policy and terms of service.
-          </p>
-
-          <div class="grid-3" style="margin-top: 18px">
-            <div class="card">
-              <div class="card-content">
-                <img src="assets/images/Email.svg" alt="" class="card-icon" />
-                <div class="card-text">
-                  <h3>Support email</h3>
-                  <p><a href="mailto:support@tipza.app">support@tipza.app</a></p>
-                </div>
-              </div>
-            </div>
-            <a href="https://tipza.app/privacy/" class="card-link">
-              <div class="card">
-                <div class="card-content">
-                  <img src="assets/images/Privacy.svg" alt="" class="card-icon" />
-                  <div class="card-text">
-                    <h3>Privacy</h3>
-                    <p>Our privacy policy and data practices</p>
-                  </div>
-                </div>
-              </div>
-            </a>
-            <a href="https://tipza.app/terms/" class="card-link">
-              <div class="card">
-                <div class="card-content">
-                  <img src="assets/images/Terms.svg" alt="" class="card-icon" />
-                  <div class="card-text">
-                    <h3>Terms</h3>
-                    <p>Terms and conditions for using Tipza</p>
-                  </div>
-                </div>
-              </div>
-            </a>
-          </div>
-        </div>
-      </section>
-    </main>
-
-    <footer>
-      <div class="container">
-        <div class="footer-grid">
-          <div>
-            <div class="brand">
-              <img src="assets/images/Tipza_Logo.svg" alt="Tipza" class="logo" />
-            </div>
-            <p class="fine">
-              © <span id="year"></span> Tipza. Tipza helps teams calculate and share transparent tip splits.
-              Tipza does not replace workplace policies—always follow your local rules and employer guidelines.
-            </p>
-          </div>
-
-          <div class="footer-links" aria-label="Footer links">
-            <a href="#purpose">Purpose</a>
-            <a href="#how">How it works</a>
-            <a href="#faq">FAQ</a>
-            <a href="https://tipza.app/privacy/">Privacy</a>
-            <a href="https://tipza.app/terms/">Terms</a>
-          </div>
-        </div>
-      </div>
-    </footer>
-
-    <script>
-      // Footer year
-      document.getElementById("year").textContent = new Date().getFullYear();
-
-      // Mobile menu toggle
-      const btn = document.getElementById("menuBtn");
-      const menu = document.getElementById("menu");
-      if (btn && menu) {
-        btn.addEventListener("click", (e) => {
-          e.stopPropagation();
-          const open = menu.classList.toggle("open");
-          btn.setAttribute("aria-expanded", String(open));
-        });
-
-        // Close menu on navigation
-        menu.addEventListener("click", (e) => {
-          const target = e.target;
-          if (target && target.tagName === "A") {
-            menu.classList.remove("open");
-            btn.setAttribute("aria-expanded", "false");
-          }
-        });
-
-        // Close menu when clicking outside
-        document.addEventListener("click", (e) => {
-          if (menu.classList.contains("open")) {
-            const isClickInsideMenu = menu.contains(e.target);
-            const isClickOnButton = btn.contains(e.target);
-            if (!isClickInsideMenu && !isClickOnButton) {
-              menu.classList.remove("open");
-              btn.setAttribute("aria-expanded", "false");
-            }
-          }
-        });
-      }
-
-      // FAQ accordion - smooth animation with actual height measurement
-      const faqDetails = document.querySelectorAll(".faq details");
-      
-      faqDetails.forEach((detail) => {
-        const content = detail.querySelector(".faq-content");
-        const summary = detail.querySelector("summary");
-        if (!content || !summary) return;
-        
-        // Set initial state
-        if (!detail.open) {
-          content.style.height = "0px";
-        } else {
-          content.style.height = "auto";
-        }
-        
-        summary.addEventListener("click", (e) => {
-          e.preventDefault();
-          
-          const isCurrentlyOpen = detail.hasAttribute("open");
-          
-          if (!isCurrentlyOpen) {
-            // Opening this one
-            
-            // Close any other open details with smooth animation
-            faqDetails.forEach((other) => {
-              if (other !== detail && other.hasAttribute("open")) {
-                const otherContent = other.querySelector(".faq-content");
-                if (otherContent) {
-                  // Get actual height if set to auto
-                  const currentHeight = otherContent.scrollHeight;
-                  otherContent.style.height = currentHeight + "px";
-                  // Force reflow
-                  requestAnimationFrame(() => {
-                    otherContent.style.height = "0px";
-                  });
-                }
-                other.removeAttribute("open");
-              }
-            });
-            
-            // Open this details element immediately
-            detail.setAttribute("open", "");
-            
-            // Measure and animate to open
-            const targetHeight = content.scrollHeight;
-            content.style.height = "0px";
-            
-            // Animate to actual height
-            requestAnimationFrame(() => {
-              content.style.height = targetHeight + "px";
-            });
-            
-          } else {
-            // Closing this one
-            
-            // Get current height
-            const currentHeight = content.scrollHeight;
-            content.style.height = currentHeight + "px";
-            
-            // Animate to 0
-            requestAnimationFrame(() => {
-              content.style.height = "0px";
-            });
-            
-            // Remove open attribute after animation completes
-            content.addEventListener("transitionend", function closeHandler() {
-              if (content.style.height === "0px") {
-                detail.removeAttribute("open");
-              }
-              content.removeEventListener("transitionend", closeHandler);
-            });
-          }
-        });
-        
-        // Handle transition end - set to auto for better responsiveness
-        content.addEventListener("transitionend", () => {
-          if (detail.hasAttribute("open") && content.style.height !== "0px") {
-            content.style.height = "auto";
-          }
-        });
-      });
-    </script>
+      <h2>11. Contact</h2>
+      <p>
+        If you have questions about this privacy policy or your data rights, contact:
+        <br />
+        <a href="mailto:support@tipza.app">support@tipza.app</a>
+      </p>
+    </div>
   </body>
 </html>
