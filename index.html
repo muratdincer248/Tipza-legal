@@ -157,6 +157,9 @@
         background: rgba(10, 7, 5, 0.05);
         text-decoration: none;
       }
+      .navlink .chevron-icon {
+        display: none;
+      }
 
       .cta-row {
         display: flex;
@@ -303,6 +306,12 @@
         align-items: center;
       }
 
+      @media (min-width: 921px) {
+        .hero-grid > div:first-child {
+          max-width: 520px;
+        }
+      }
+
       .eyebrow {
         display: inline-flex;
         gap: 8px;
@@ -376,7 +385,7 @@
 
       @media (min-width: 781px) {
         .hero-image {
-          transform: scale(1.1);
+          transform: scale(1.18);
           transform-origin: center;
         }
       }
@@ -525,6 +534,19 @@
         box-shadow: none;
         margin: 0;
         background: transparent;
+        position: relative;
+      }
+      .card-link .card-content {
+        position: relative;
+      }
+      .card-link .card-chevron {
+        position: absolute;
+        top: 18px;
+        right: 2px;
+        width: 16px;
+        height: 16px;
+        opacity: 0.7;
+        filter: brightness(0);
       }
       .card-link p {
         text-decoration: none;
@@ -535,7 +557,7 @@
       .card-chip-image {
         height: auto;
         width: auto;
-        max-height: 175px;
+        max-height: 200px;
         max-width: 100%;
         display: block;
         margin-bottom: 8px;
@@ -613,7 +635,7 @@
       .step p {
         margin: 0;
         font-size: 14px;
-        font-weight: 700;
+        font-weight: 400;
         color: #000;
       }
 
@@ -751,7 +773,56 @@
         margin-top: 2px;
       }
 
+      .section.cta-section {
+        padding: 12px 0;
+      }
+
+      .cta-card {
+        background: linear-gradient(135deg, var(--green-20), #017a4f);
+        border-radius: var(--radius-lg);
+        padding: 40px;
+        text-align: center;
+        color: var(--neutral-00);
+        margin: 0;
+      }
+
+      .cta-card h3 {
+        font-family: var(--font-display);
+        font-size: 28px;
+        font-weight: 700;
+        letter-spacing: -0.03em;
+        margin: 0 0 20px;
+        color: var(--neutral-00);
+      }
+
+      .cta-card p {
+        text-align: center;
+        margin: 0 auto;
+        color: var(--neutral-00);
+      }
+
+      .cta-card .store-buttons {
+        display: flex;
+        gap: 12px;
+        justify-content: center;
+        flex-wrap: wrap;
+        margin-top: 24px;
+      }
+
       @media (max-width: 920px) {
+        .section.cta-section {
+          padding: 12px 0;
+        }
+        .cta-card {
+          padding: 32px 24px;
+          margin: 0;
+        }
+        .cta-card h3 {
+          font-size: 24px;
+        }
+        .hero {
+          padding-top: 8px;
+        }
         .hero-grid { 
           grid-template-columns: 1fr; 
         }
@@ -760,6 +831,11 @@
         }
         .hero-grid .hero-image {
           order: -1;
+          position: relative;
+          left: 50%;
+          transform: translateX(-50%);
+          width: calc(100% + 32px);
+          max-width: calc(100vw - 8px);
         }
         .grid-3 { grid-template-columns: 1fr; }
         .grid-3 .purpose-item:not(:first-child) .card-chip-image {
@@ -767,6 +843,15 @@
         }
         .grid-3 .purpose-item:not(:first-child) .benefit-image {
           margin-top: 16px;
+        }
+        /* Make images full-width in the purpose section on mobile */
+        #purpose .card-chip-image {
+          width: 100%;
+          max-width: 100%;
+          max-height: none;
+          margin-left: 0;
+          margin-right: 0;
+          object-fit: contain;
         }
         .steps { grid-template-columns: 1fr; }
         .footer-grid { grid-template-columns: 1fr; }
@@ -793,10 +878,10 @@
         nav ul.open {
           display: flex;
           flex-direction: column;
-          gap: 8px;
-          padding: 12px;
+          gap: 0;
+          padding: 12px 0 4px 0;
           border-radius: 16px;
-          border: 1px solid rgba(10,7,5,0.10);
+          border: none;
           background: rgba(255,255,255,0.98);
           backdrop-filter: blur(4px);
           position: fixed;
@@ -807,19 +892,45 @@
           box-shadow: 0 10px 40px rgba(10, 7, 5, 0.15);
           width: calc(100vw - 40px);
           max-width: calc(100vw - 40px);
+          overflow: hidden;
         }
         nav ul.open li {
           margin: 0;
           width: 100%;
+          padding: 0 20px;
+          position: relative;
+        }
+        nav ul.open li:not(.mobile-store-buttons)::after {
+          content: '';
+          position: absolute;
+          bottom: 0;
+          left: 20px;
+          right: 20px;
+          height: 1px;
+          background: rgba(10,7,5,0.08);
+        }
+        nav ul.open li.mobile-store-buttons {
+          border-bottom: none;
+          padding: 12px 20px;
+          margin-top: 8px;
         }
         nav ul.open .navlink {
-          display: block;
-          padding: 16px;
-          border-radius: 12px;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          padding: 16px 0;
+          border-radius: 0;
           width: 100%;
           text-align: left;
-          background: rgba(255,255,255,0.5);
-          border: 1px solid rgba(10,7,5,0.08);
+          background: transparent;
+          border: none;
+        }
+        nav ul.open .navlink .chevron-icon {
+          display: block;
+          width: 16px;
+          height: 16px;
+          flex-shrink: 0;
+          opacity: 0.6;
         }
         .hamburger { display: inline-flex; }
         .bullets { grid-template-columns: 1fr; }
@@ -830,8 +941,7 @@
           flex-direction: row;
           gap: 8px;
           margin: 0;
-          padding: 0;
-          border-top: none;
+          padding: 12px;
           list-style: none;
           width: 100%;
         }
@@ -879,11 +989,11 @@
               Menu
             </button>
             <ul id="menu">
-              <li><a class="navlink" href="#purpose">Purpose</a></li>
-              <li><a class="navlink" href="#how">How it works</a></li>
-              <li><a class="navlink" href="#benefits">Benefits</a></li>
-              <li><a class="navlink" href="#faq">FAQ</a></li>
-              <li><a class="navlink" href="#contact">Contact</a></li>
+              <li><a class="navlink" href="#purpose">Purpose<img src="assets/images/Chevron-right.svg" alt="" class="chevron-icon" /></a></li>
+              <li><a class="navlink" href="#how">How it works<img src="assets/images/Chevron-right.svg" alt="" class="chevron-icon" /></a></li>
+              <li><a class="navlink" href="#benefits">Benefits<img src="assets/images/Chevron-right.svg" alt="" class="chevron-icon" /></a></li>
+              <li><a class="navlink" href="#faq">FAQ<img src="assets/images/Chevron-right.svg" alt="" class="chevron-icon" /></a></li>
+              <li><a class="navlink" href="#contact">Contact<img src="assets/images/Chevron-right.svg" alt="" class="chevron-icon" /></a></li>
               <li class="mobile-store-buttons">
                 <a class="store-btn store-btn-google" href="#download" aria-label="Get it on Google Play">
                   <img src="assets/images/google-play-icon.svg" alt="" class="store-logo" />
@@ -1012,23 +1122,23 @@
             <div class="step">
               <div class="num" aria-hidden="true">2</div>
               <div>
-                <h4>Add team members</h4>
-                <p>Include everyone who shares tips for the shift (e.g., servers, bartenders, support roles).</p>
+                <h4>Choose the date or date range for the shift</h4>
+                <p>Select the specific date or range when tips were earned. This helps you organize and track splits by shift or pay period.</p>
               </div>
             </div>
 
             <div class="step">
               <div class="num" aria-hidden="true">3</div>
               <div>
-                <h4>Choose a split method</h4>
-                <p>Equal split, by hours worked, by points, or custom weights—whatever fits your policy.</p>
+                <h4>Add team members</h4>
+                <p>Include everyone who shares tips for the shift (e.g., servers, bartenders, support roles).</p>
               </div>
             </div>
 
             <div class="step">
               <div class="num" aria-hidden="true">4</div>
               <div>
-                <h4>Review & share</h4>
+                <h4>Review and share</h4>
                 <p>Tipza calculates each person’s share and presents a clean breakdown you can share with the team.</p>
               </div>
             </div>
@@ -1152,6 +1262,33 @@
         </div>
       </section>
 
+      <section class="section cta-section">
+        <div class="container">
+          <div class="cta-card">
+            <h3>Let's start fair splits now</h3>
+            <p style="font-size: 16px; line-height: 1.6; margin: 0 auto; opacity: 0.95; text-align: center;">Download Tipza and make tip splitting simple, fair, and stress-free for your team.</p>
+            <div class="store-buttons">
+              <a class="store-btn store-btn-google" href="#download" aria-label="Get it on Google Play">
+                <img src="assets/images/google-play-icon.svg" alt="" class="store-logo" />
+                <span class="store-text">
+                  <span class="store-text-top">Get it on</span>
+                  <span class="store-text-bottom">Google Play</span>
+                </span>
+              </a>
+              <a class="store-btn store-btn-apple" href="#download" aria-label="Download on the App Store">
+                <svg class="store-logo" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M20.8428 17.1447C20.5101 17.9133 20.1163 18.6208 19.66 19.2713C19.0381 20.158 18.5288 20.7719 18.1364 21.1127C17.528 21.6722 16.8762 21.9587 16.1782 21.975C15.6771 21.975 15.0728 21.8324 14.3693 21.5432C13.6636 21.2553 13.015 21.1127 12.422 21.1127C11.8 21.1127 11.133 21.2553 10.4195 21.5432C9.70493 21.8324 9.12928 21.9832 8.68916 21.9981C8.01981 22.0266 7.35264 21.7319 6.68668 21.1127C6.26164 20.742 5.72999 20.1064 5.09309 19.2061C4.40976 18.2446 3.84796 17.1297 3.40784 15.8587C2.93648 14.4857 2.7002 13.1563 2.7002 11.8692C2.7002 10.3948 3.01878 9.12321 3.65689 8.0576C4.1584 7.20166 4.82557 6.52647 5.66059 6.03081C6.49562 5.53514 7.39786 5.28256 8.36949 5.2664C8.90114 5.2664 9.59833 5.43085 10.4647 5.75405C11.3287 6.07834 11.8834 6.24279 12.1266 6.24279C12.3085 6.24279 12.9247 6.0505 13.9694 5.66714C14.9573 5.31162 15.7911 5.16441 16.4742 5.2224C18.3251 5.37178 19.7157 6.10142 20.6405 7.41595C18.9851 8.41896 18.1662 9.82379 18.1825 11.626C18.1975 13.0297 18.7067 14.1979 19.7076 15.1254C20.1611 15.5558 20.6676 15.8885 21.2312 16.1248C21.109 16.4793 20.98 16.8188 20.8428 17.1447ZM16.5978 0.440125C16.5978 1.54038 16.1958 2.56768 15.3946 3.51854C14.4277 4.64892 13.2582 5.30211 11.99 5.19904C11.9738 5.06705 11.9645 4.92812 11.9645 4.78214C11.9645 3.7259 12.4243 2.59552 13.2408 1.67127C13.6485 1.20331 14.167 0.814209 14.7957 0.503814C15.4231 0.19805 16.0166 0.0289566 16.5747 0C16.591 0.147086 16.5978 0.294182 16.5978 0.440111V0.440125Z" fill="currentColor"/>
+                </svg>
+                <span class="store-text">
+                  <span class="store-text-top">Download on the</span>
+                  <span class="store-text-bottom">App Store</span>
+                </span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <section class="section" id="contact">
         <div class="container">
           <h2>Contact</h2>
@@ -1177,6 +1314,7 @@
                     <h3>Privacy</h3>
                     <p>Our privacy policy and data practices</p>
                   </div>
+                  <img src="assets/images/Chevron-right.svg" alt="" class="card-chevron" />
                 </div>
               </div>
             </a>
@@ -1188,6 +1326,7 @@
                     <h3>Terms</h3>
                     <p>Terms and conditions for using Tipza</p>
                   </div>
+                  <img src="assets/images/Chevron-right.svg" alt="" class="card-chevron" />
                 </div>
               </div>
             </a>
@@ -1223,6 +1362,16 @@
     <script>
       // Footer year
       document.getElementById("year").textContent = new Date().getFullYear();
+
+      // Logo click - scroll to top
+      const brandLink = document.querySelector(".brand");
+      if (brandLink) {
+        brandLink.addEventListener("click", (e) => {
+          e.preventDefault();
+          // Scroll to very top, accounting for sticky header
+          window.scrollTo({ top: -35, behavior: "smooth" });
+        });
+      }
 
       // Mobile menu toggle
       const btn = document.getElementById("menuBtn");
