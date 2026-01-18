@@ -170,15 +170,17 @@
       .store-btn {
         display: inline-flex;
         align-items: center;
+        justify-content: flex-start;
         gap: 12px;
-        padding: 8px 16px;
-        border-radius: 8px;
-        font-family: var(--font-body);
+        height: 56px;
+        padding: 0 16px;
+        border-radius: 12px;
+        font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
         text-decoration: none !important;
-        transition: transform 120ms ease, opacity 120ms ease;
+        transition: opacity 120ms ease;
         user-select: none;
       }
-      .store-btn:hover { transform: translateY(-1px); opacity: 0.9; }
+      .store-btn:hover { opacity: 0.85; }
 
       .store-btn-apple {
         background: #000;
@@ -186,8 +188,8 @@
       }
 
       .store-btn-apple .store-logo {
-        width: 24px;
-        height: 24px;
+        width: 21px;
+        height: 21px;
         flex-shrink: 0;
       }
 
@@ -195,28 +197,30 @@
         display: flex;
         flex-direction: column;
         line-height: 1.2;
+        text-align: left;
       }
 
       .store-btn-apple .store-text-top {
         font-size: 11px;
         font-weight: 400;
+        text-align: left;
       }
 
       .store-btn-apple .store-text-bottom {
-        font-size: 18px;
+        font-size: 15px;
         font-weight: 600;
-        letter-spacing: -0.01em;
+        text-align: left;
       }
 
       .store-btn-google {
         background: #fff;
         color: #000;
-        border: 1px solid #000;
+        border: 1.5px solid #e5e7eb;
       }
 
       .store-btn-google .store-logo {
-        width: 24px;
-        height: 24px;
+        width: 21px;
+        height: 21px;
         flex-shrink: 0;
       }
 
@@ -224,18 +228,19 @@
         display: flex;
         flex-direction: column;
         line-height: 1.2;
+        text-align: left;
       }
 
       .store-btn-google .store-text-top {
-        font-size: 10px;
-        font-weight: 500;
-        text-transform: uppercase;
-        letter-spacing: 0.03em;
+        font-size: 11px;
+        font-weight: 400;
+        text-align: left;
       }
 
       .store-btn-google .store-text-bottom {
-        font-size: 16px;
-        font-weight: 500;
+        font-size: 15px;
+        font-weight: 600;
+        text-align: left;
       }
 
       .btn {
@@ -784,6 +789,35 @@
         text-align: center;
         color: var(--neutral-00);
         margin: 0;
+        display: flex;
+        align-items: center;
+        gap: 40px;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .cta-illustration {
+        display: none;
+        flex-shrink: 0;
+        width: 32%;
+        align-self: stretch;
+        overflow: hidden;
+        margin: 0;
+        padding: 0;
+      }
+
+      .cta-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+      }
+
+      .cta-content {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
       }
 
       .cta-card h3 {
@@ -809,6 +843,24 @@
         margin-top: 24px;
       }
 
+      @media (min-width: 921px) {
+        .cta-card {
+          padding: 0;
+          gap: 0;
+          max-height: 300px;
+        }
+        .cta-illustration {
+          display: block;
+          margin: 0;
+          padding: 0;
+        }
+        .cta-content {
+          padding: 0 40px;
+          margin-top: -60px;
+          margin-bottom: -60px;
+        }
+      }
+
       @media (max-width: 920px) {
         .section.cta-section {
           padding: 12px 0;
@@ -816,6 +868,10 @@
         .cta-card {
           padding: 32px 24px;
           margin: 0;
+          flex-direction: column;
+        }
+        .cta-illustration {
+          display: none;
         }
         .cta-card h3 {
           font-size: 24px;
@@ -952,22 +1008,20 @@
         nav ul.open .mobile-store-buttons .store-btn {
           flex: 1;
           justify-content: center;
-          padding: 12px 16px;
+          height: 56px;
+          padding: 0 16px;
           gap: 12px;
           width: 100%;
         }
         nav ul.open .mobile-store-buttons .store-logo {
-          width: 28px;
-          height: 28px;
+          width: 21px;
+          height: 21px;
         }
         nav ul.open .mobile-store-buttons .store-text-top {
-          font-size: 10px;
+          font-size: 11px;
         }
         nav ul.open .mobile-store-buttons .store-text-bottom {
-          font-size: 16px;
-        }
-        nav ul.open .mobile-store-buttons .store-btn-apple .store-text-bottom {
-          font-size: 18px;
+          font-size: 15px;
         }
       }
 
@@ -1250,7 +1304,7 @@
 
             <details>
               <summary>
-                <span>Why does Tipza use Google Sign-In?</span>
+                <span>Why does Tipza use Google and Apple Sign-In?</span>
                 <span style="display: flex; align-items: center;">
                   <img src="assets/images/Plus.svg" alt="" class="faq-icon faq-icon-plus" />
                   <img src="assets/images/Minus.svg" alt="" class="faq-icon faq-icon-minus" />
@@ -1258,7 +1312,7 @@
               </summary>
               <div class="faq-content">
                 <p>
-                  It helps you sign in quickly and keep your data available across devices. Tipza only requests what’s needed for authentication and basic profile info.
+                  These methods help you sign in quickly and keep your data available across devices. Tipza only requests what’s needed for authentication and basic profile info.
                 </p>
               </div>
             </details>
@@ -1269,25 +1323,30 @@
       <section class="section cta-section">
         <div class="container">
           <div class="cta-card">
-            <h3>Let's start fair splits now</h3>
-            <p style="font-size: 16px; line-height: 1.6; margin: 0 auto; opacity: 0.95; text-align: center;">Download Tipza and make tip splitting simple, fair, and stress-free for your team.</p>
-            <div class="store-buttons">
-              <a class="store-btn store-btn-google" href="#download" aria-label="Get it on Google Play">
-                <img src="assets/images/google-play-icon.svg" alt="" class="store-logo" />
-                <span class="store-text">
-                  <span class="store-text-top">Get it on</span>
-                  <span class="store-text-bottom">Google Play</span>
-                </span>
-              </a>
-              <a class="store-btn store-btn-apple" href="#download" aria-label="Download on the App Store">
-                <svg class="store-logo" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M20.8428 17.1447C20.5101 17.9133 20.1163 18.6208 19.66 19.2713C19.0381 20.158 18.5288 20.7719 18.1364 21.1127C17.528 21.6722 16.8762 21.9587 16.1782 21.975C15.6771 21.975 15.0728 21.8324 14.3693 21.5432C13.6636 21.2553 13.015 21.1127 12.422 21.1127C11.8 21.1127 11.133 21.2553 10.4195 21.5432C9.70493 21.8324 9.12928 21.9832 8.68916 21.9981C8.01981 22.0266 7.35264 21.7319 6.68668 21.1127C6.26164 20.742 5.72999 20.1064 5.09309 19.2061C4.40976 18.2446 3.84796 17.1297 3.40784 15.8587C2.93648 14.4857 2.7002 13.1563 2.7002 11.8692C2.7002 10.3948 3.01878 9.12321 3.65689 8.0576C4.1584 7.20166 4.82557 6.52647 5.66059 6.03081C6.49562 5.53514 7.39786 5.28256 8.36949 5.2664C8.90114 5.2664 9.59833 5.43085 10.4647 5.75405C11.3287 6.07834 11.8834 6.24279 12.1266 6.24279C12.3085 6.24279 12.9247 6.0505 13.9694 5.66714C14.9573 5.31162 15.7911 5.16441 16.4742 5.2224C18.3251 5.37178 19.7157 6.10142 20.6405 7.41595C18.9851 8.41896 18.1662 9.82379 18.1825 11.626C18.1975 13.0297 18.7067 14.1979 19.7076 15.1254C20.1611 15.5558 20.6676 15.8885 21.2312 16.1248C21.109 16.4793 20.98 16.8188 20.8428 17.1447ZM16.5978 0.440125C16.5978 1.54038 16.1958 2.56768 15.3946 3.51854C14.4277 4.64892 13.2582 5.30211 11.99 5.19904C11.9738 5.06705 11.9645 4.92812 11.9645 4.78214C11.9645 3.7259 12.4243 2.59552 13.2408 1.67127C13.6485 1.20331 14.167 0.814209 14.7957 0.503814C15.4231 0.19805 16.0166 0.0289566 16.5747 0C16.591 0.147086 16.5978 0.294182 16.5978 0.440111V0.440125Z" fill="currentColor"/>
-                </svg>
-                <span class="store-text">
-                  <span class="store-text-top">Download on the</span>
-                  <span class="store-text-bottom">App Store</span>
-                </span>
-              </a>
+            <div class="cta-illustration">
+              <img src="assets/images/split-pizza.svg" alt="" class="cta-image" />
+            </div>
+            <div class="cta-content">
+              <h3>Let's start fair splits now</h3>
+              <p style="font-size: 16px; line-height: 1.6; margin: 0 auto; opacity: 0.95; text-align: center;">Download Tipza and make tip splitting simple, fair, and stress-free for your team.</p>
+              <div class="store-buttons">
+                <a class="store-btn store-btn-google" href="#download" aria-label="Get it on Google Play">
+                  <img src="assets/images/google-play-icon.svg" alt="" class="store-logo" />
+                  <span class="store-text">
+                    <span class="store-text-top">Get it on</span>
+                    <span class="store-text-bottom">Google Play</span>
+                  </span>
+                </a>
+                <a class="store-btn store-btn-apple" href="#download" aria-label="Download on the App Store">
+                  <svg class="store-logo" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M20.8428 17.1447C20.5101 17.9133 20.1163 18.6208 19.66 19.2713C19.0381 20.158 18.5288 20.7719 18.1364 21.1127C17.528 21.6722 16.8762 21.9587 16.1782 21.975C15.6771 21.975 15.0728 21.8324 14.3693 21.5432C13.6636 21.2553 13.015 21.1127 12.422 21.1127C11.8 21.1127 11.133 21.2553 10.4195 21.5432C9.70493 21.8324 9.12928 21.9832 8.68916 21.9981C8.01981 22.0266 7.35264 21.7319 6.68668 21.1127C6.26164 20.742 5.72999 20.1064 5.09309 19.2061C4.40976 18.2446 3.84796 17.1297 3.40784 15.8587C2.93648 14.4857 2.7002 13.1563 2.7002 11.8692C2.7002 10.3948 3.01878 9.12321 3.65689 8.0576C4.1584 7.20166 4.82557 6.52647 5.66059 6.03081C6.49562 5.53514 7.39786 5.28256 8.36949 5.2664C8.90114 5.2664 9.59833 5.43085 10.4647 5.75405C11.3287 6.07834 11.8834 6.24279 12.1266 6.24279C12.3085 6.24279 12.9247 6.0505 13.9694 5.66714C14.9573 5.31162 15.7911 5.16441 16.4742 5.2224C18.3251 5.37178 19.7157 6.10142 20.6405 7.41595C18.9851 8.41896 18.1662 9.82379 18.1825 11.626C18.1975 13.0297 18.7067 14.1979 19.7076 15.1254C20.1611 15.5558 20.6676 15.8885 21.2312 16.1248C21.109 16.4793 20.98 16.8188 20.8428 17.1447ZM16.5978 0.440125C16.5978 1.54038 16.1958 2.56768 15.3946 3.51854C14.4277 4.64892 13.2582 5.30211 11.99 5.19904C11.9738 5.06705 11.9645 4.92812 11.9645 4.78214C11.9645 3.7259 12.4243 2.59552 13.2408 1.67127C13.6485 1.20331 14.167 0.814209 14.7957 0.503814C15.4231 0.19805 16.0166 0.0289566 16.5747 0C16.591 0.147086 16.5978 0.294182 16.5978 0.440111V0.440125Z" fill="currentColor"/>
+                  </svg>
+                  <span class="store-text">
+                    <span class="store-text-top">Download on the</span>
+                    <span class="store-text-bottom">App Store</span>
+                  </span>
+                </a>
+              </div>
             </div>
           </div>
         </div>
@@ -1439,13 +1498,35 @@
                 if (otherContent) {
                   // Get actual height if set to auto
                   const currentHeight = otherContent.scrollHeight;
+                  // Explicitly set all animating properties via inline styles
                   otherContent.style.height = currentHeight + "px";
+                  otherContent.style.opacity = "1";
+                  otherContent.style.paddingTop = "12px";
                   // Force reflow
                   requestAnimationFrame(() => {
                     otherContent.style.height = "0px";
+                    otherContent.style.opacity = "0";
+                    otherContent.style.paddingTop = "0px";
                   });
+                  
+                  // Remove open attribute after animation completes
+                  const closeHandler = function(e) {
+                    // Only remove when height transition completes (the longest one at 0.4s)
+                    if (e.propertyName === "height" && otherContent.style.height === "0px") {
+                      other.removeAttribute("open");
+                      // Clean up inline styles after a brief delay to let CSS take over
+                      setTimeout(() => {
+                        otherContent.style.height = "";
+                        otherContent.style.opacity = "";
+                        otherContent.style.paddingTop = "";
+                      }, 50);
+                    }
+                    if (otherContent.style.height === "0px") {
+                      otherContent.removeEventListener("transitionend", closeHandler);
+                    }
+                  };
+                  otherContent.addEventListener("transitionend", closeHandler);
                 }
-                other.removeAttribute("open");
               }
             });
             
@@ -1466,19 +1547,33 @@
             
             // Get current height
             const currentHeight = content.scrollHeight;
+            // Explicitly set all animating properties via inline styles
             content.style.height = currentHeight + "px";
+            content.style.opacity = "1";
+            content.style.paddingTop = "12px";
             
             // Animate to 0
             requestAnimationFrame(() => {
               content.style.height = "0px";
+              content.style.opacity = "0";
+              content.style.paddingTop = "0px";
             });
             
             // Remove open attribute after animation completes
-            content.addEventListener("transitionend", function closeHandler() {
-              if (content.style.height === "0px") {
+            content.addEventListener("transitionend", function closeHandler(e) {
+              // Only remove when height transition completes (the longest one at 0.4s)
+              if (e.propertyName === "height" && content.style.height === "0px") {
                 detail.removeAttribute("open");
+                // Clean up inline styles after a brief delay to let CSS take over
+                setTimeout(() => {
+                  content.style.height = "";
+                  content.style.opacity = "";
+                  content.style.paddingTop = "";
+                }, 50);
               }
-              content.removeEventListener("transitionend", closeHandler);
+              if (content.style.height === "0px") {
+                content.removeEventListener("transitionend", closeHandler);
+              }
             });
           }
         });
