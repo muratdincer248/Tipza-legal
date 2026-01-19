@@ -697,6 +697,15 @@
         margin-bottom: 0;
         padding: 8px;
         margin: -8px;
+        border-radius: 8px;
+        transition: background-color 0.15s ease;
+      }
+      summary:active {
+        background-color: rgba(209, 183, 163, 0.16);
+      }
+      summary:focus-visible {
+        outline: 2px solid rgba(209, 183, 163, 0.4);
+        outline-offset: 2px;
       }
       summary::-webkit-details-marker {
         display: none;
