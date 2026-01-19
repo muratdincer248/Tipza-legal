@@ -695,6 +695,8 @@
         list-style: none;
         gap: 12px;
         margin-bottom: 0;
+        padding: 8px;
+        margin: -8px;
       }
       summary::-webkit-details-marker {
         display: none;
@@ -702,17 +704,34 @@
       summary::marker {
         display: none;
       }
+      summary > span:last-child {
+        position: relative;
+        width: 20px;
+        height: 20px;
+        flex-shrink: 0;
+      }
       .faq-icon {
         width: 20px;
         height: 20px;
         flex-shrink: 0;
-        transition: transform 120ms ease;
+        position: absolute;
+        top: 0;
+        left: 0;
+        transition: opacity 0.2s ease;
       }
       details[open] .faq-icon-plus {
-        display: none;
+        opacity: 0;
+        pointer-events: none;
+      }
+      details:not([open]) .faq-icon-plus {
+        opacity: 1;
+      }
+      details[open] .faq-icon-minus {
+        opacity: 1;
       }
       details:not([open]) .faq-icon-minus {
-        display: none;
+        opacity: 0;
+        pointer-events: none;
       }
       .faq-content {
         height: 0;
@@ -1472,120 +1491,126 @@
         });
       }
 
-      // FAQ accordion - smooth animation with actual height measurement
+      // FAQ accordion - smooth animation with robust open/close handling
       const faqDetails = document.querySelectorAll(".faq details");
-      
+      const faqTransitionMs = 420;
+      const faqPaddingTop = 12;
+
+      const faqHeightBuffer = 8;
+      const getInnerHeight = (content) => {
+        const styles = getComputedStyle(content);
+        const paddingTop = parseFloat(styles.paddingTop) || 0;
+        const paddingBottom = parseFloat(styles.paddingBottom) || 0;
+        return Math.ceil(content.scrollHeight - paddingTop - paddingBottom);
+      };
+
+      const closeDetail = (detail) => {
+        const content = detail.querySelector(".faq-content");
+        if (!content) return;
+
+        clearTimeout(detail._faqTimeout);
+        detail.dataset.faqClosing = "true";
+
+        const currentHeight = Math.max(getInnerHeight(content) + faqHeightBuffer, 0);
+        content.style.height = currentHeight + "px";
+        content.style.opacity = "1";
+        content.style.paddingTop = faqPaddingTop + "px";
+
+        requestAnimationFrame(() => {
+          content.style.height = "0px";
+          content.style.opacity = "0";
+          content.style.paddingTop = "0px";
+        });
+
+        const finalizeClose = () => {
+          detail.removeAttribute("open");
+          detail.dataset.faqClosing = "";
+          content.style.height = "";
+          content.style.opacity = "";
+          content.style.paddingTop = "";
+        };
+
+        const onEnd = (e) => {
+          if (e.propertyName !== "height") return;
+          content.removeEventListener("transitionend", onEnd);
+          finalizeClose();
+        };
+
+        content.addEventListener("transitionend", onEnd);
+        detail._faqTimeout = setTimeout(() => {
+          content.removeEventListener("transitionend", onEnd);
+          finalizeClose();
+        }, faqTransitionMs);
+      };
+
+      const openDetail = (detail) => {
+        const content = detail.querySelector(".faq-content");
+        if (!content) return;
+
+        clearTimeout(detail._faqTimeout);
+        detail.dataset.faqClosing = "";
+        detail.setAttribute("open", "");
+
+        content.style.height = "0px";
+        content.style.opacity = "0";
+        content.style.paddingTop = "0px";
+        const targetHeight = Math.max(getInnerHeight(content) + faqHeightBuffer, 0);
+
+        requestAnimationFrame(() => {
+          content.style.height = targetHeight + "px";
+          content.style.opacity = "1";
+          content.style.paddingTop = faqPaddingTop + "px";
+        });
+
+        const finalizeOpen = () => {
+          if (!detail.hasAttribute("open")) return;
+          const settledHeight = Math.max(getInnerHeight(content) + faqHeightBuffer, 0);
+          content.style.height = settledHeight + "px";
+          content.style.opacity = "";
+          content.style.paddingTop = "";
+        };
+
+        const onEnd = (e) => {
+          if (e.propertyName !== "height") return;
+          content.removeEventListener("transitionend", onEnd);
+          finalizeOpen();
+        };
+
+        content.addEventListener("transitionend", onEnd);
+        detail._faqTimeout = setTimeout(() => {
+          content.removeEventListener("transitionend", onEnd);
+          finalizeOpen();
+        }, faqTransitionMs);
+      };
+
       faqDetails.forEach((detail) => {
         const content = detail.querySelector(".faq-content");
         const summary = detail.querySelector("summary");
         if (!content || !summary) return;
-        
-        // Set initial state
-        if (!detail.open) {
-          content.style.height = "0px";
+
+        if (detail.open) {
+          const initialHeight = Math.max(getInnerHeight(content) + faqHeightBuffer, 0);
+          content.style.height = initialHeight + "px";
         } else {
-          content.style.height = "auto";
+          content.style.height = "0px";
         }
-        
+
         summary.addEventListener("click", (e) => {
           e.preventDefault();
-          
-          const isCurrentlyOpen = detail.hasAttribute("open");
-          
-          if (!isCurrentlyOpen) {
-            // Opening this one
-            
-            // Close any other open details with smooth animation
-            faqDetails.forEach((other) => {
-              if (other !== detail && other.hasAttribute("open")) {
-                const otherContent = other.querySelector(".faq-content");
-                if (otherContent) {
-                  // Get actual height if set to auto
-                  const currentHeight = otherContent.scrollHeight;
-                  // Explicitly set all animating properties via inline styles
-                  otherContent.style.height = currentHeight + "px";
-                  otherContent.style.opacity = "1";
-                  otherContent.style.paddingTop = "12px";
-                  // Force reflow
-                  requestAnimationFrame(() => {
-                    otherContent.style.height = "0px";
-                    otherContent.style.opacity = "0";
-                    otherContent.style.paddingTop = "0px";
-                  });
-                  
-                  // Remove open attribute after animation completes
-                  const closeHandler = function(e) {
-                    // Only remove when height transition completes (the longest one at 0.4s)
-                    if (e.propertyName === "height" && otherContent.style.height === "0px") {
-                      other.removeAttribute("open");
-                      // Clean up inline styles after a brief delay to let CSS take over
-                      setTimeout(() => {
-                        otherContent.style.height = "";
-                        otherContent.style.opacity = "";
-                        otherContent.style.paddingTop = "";
-                      }, 50);
-                    }
-                    if (otherContent.style.height === "0px") {
-                      otherContent.removeEventListener("transitionend", closeHandler);
-                    }
-                  };
-                  otherContent.addEventListener("transitionend", closeHandler);
-                }
-              }
-            });
-            
-            // Open this details element immediately
-            detail.setAttribute("open", "");
-            
-            // Measure and animate to open
-            const targetHeight = content.scrollHeight;
-            content.style.height = "0px";
-            
-            // Animate to actual height
-            requestAnimationFrame(() => {
-              content.style.height = targetHeight + "px";
-            });
-            
+
+          const isOpen = detail.hasAttribute("open");
+          const isClosing = detail.dataset.faqClosing === "true";
+
+          faqDetails.forEach((other) => {
+            if (other !== detail && other.hasAttribute("open")) {
+              closeDetail(other);
+            }
+          });
+
+          if (isOpen && !isClosing) {
+            closeDetail(detail);
           } else {
-            // Closing this one
-            
-            // Get current height
-            const currentHeight = content.scrollHeight;
-            // Explicitly set all animating properties via inline styles
-            content.style.height = currentHeight + "px";
-            content.style.opacity = "1";
-            content.style.paddingTop = "12px";
-            
-            // Animate to 0
-            requestAnimationFrame(() => {
-              content.style.height = "0px";
-              content.style.opacity = "0";
-              content.style.paddingTop = "0px";
-            });
-            
-            // Remove open attribute after animation completes
-            content.addEventListener("transitionend", function closeHandler(e) {
-              // Only remove when height transition completes (the longest one at 0.4s)
-              if (e.propertyName === "height" && content.style.height === "0px") {
-                detail.removeAttribute("open");
-                // Clean up inline styles after a brief delay to let CSS take over
-                setTimeout(() => {
-                  content.style.height = "";
-                  content.style.opacity = "";
-                  content.style.paddingTop = "";
-                }, 50);
-              }
-              if (content.style.height === "0px") {
-                content.removeEventListener("transitionend", closeHandler);
-              }
-            });
-          }
-        });
-        
-        // Handle transition end - set to auto for better responsiveness
-        content.addEventListener("transitionend", () => {
-          if (detail.hasAttribute("open") && content.style.height !== "0px") {
-            content.style.height = "auto";
+            openDetail(detail);
           }
         });
       });
