@@ -8,6 +8,7 @@
       content="Tipza helps teams split tips fairly and transparently. Add the bill and tip, choose a split method (equal, hours, points, or custom weights), and share the final breakdown."
     />
     <meta name="theme-color" content="#7205ff" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="/favicon.png" />
@@ -23,6 +24,10 @@
       content="Tipza helps teams split tips fairly and transparently. Choose equal, hours, points, or custom weights and share the breakdown."
     />
     <meta property="og:type" content="website" />
+
+    <!-- Preload critical resources -->
+    <link rel="preload" href="assets/images/Tipza_Logo.svg" as="image" type="image/svg+xml" />
+    <link rel="preload" href="assets/images/website-hero-image.png" as="image" />
 
     <!-- Fonts (Tipza: Space Grotesk + Figtree) -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -63,10 +68,10 @@
 
         --container: 1120px;
 
-        --font-display: "Space Grotesk", system-ui, -apple-system, Segoe UI, Roboto,
-          Helvetica, Arial, sans-serif;
-        --font-body: "Figtree", system-ui, -apple-system, Segoe UI, Roboto, Helvetica,
-          Arial, sans-serif;
+        --font-display: "Space Grotesk", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          "Helvetica Neue", Arial, sans-serif;
+        --font-body: "Figtree", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          "Helvetica Neue", Arial, sans-serif;
       }
 
       * { box-sizing: border-box; }
@@ -80,7 +85,14 @@
 
       a { color: inherit; text-decoration: none; }
       a:hover { text-decoration: underline; }
-      img { max-width: 100%; height: auto; display: block; }
+      img { 
+        max-width: 100%; 
+        height: auto; 
+        display: block; 
+      }
+      img[src=""], img:not([src]) {
+        opacity: 0;
+      }
 
       .sr-only {
         position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
@@ -1071,7 +1083,7 @@
       <div class="container">
         <div class="nav">
           <a class="brand" href="#top" aria-label="Tipza home">
-            <img src="assets/images/Tipza_Logo.svg" alt="Tipza" class="logo" />
+            <img src="assets/images/Tipza_Logo.svg" alt="Tipza" class="logo" loading="eager" />
           </a>
 
           <nav aria-label="Primary navigation" style="position: relative">
@@ -1079,14 +1091,14 @@
               Menu
             </button>
             <ul id="menu">
-              <li><a class="navlink" href="#purpose">Purpose<img src="assets/images/Chevron-right.svg" alt="" class="chevron-icon" /></a></li>
-              <li><a class="navlink" href="#how">How it works<img src="assets/images/Chevron-right.svg" alt="" class="chevron-icon" /></a></li>
-              <li><a class="navlink" href="#benefits">Benefits<img src="assets/images/Chevron-right.svg" alt="" class="chevron-icon" /></a></li>
-              <li><a class="navlink" href="#faq">FAQ<img src="assets/images/Chevron-right.svg" alt="" class="chevron-icon" /></a></li>
-              <li><a class="navlink" href="#contact">Contact<img src="assets/images/Chevron-right.svg" alt="" class="chevron-icon" /></a></li>
+              <li><a class="navlink" href="#purpose">Purpose<img src="assets/images/Chevron-right.svg" alt="" class="chevron-icon" loading="lazy" /></a></li>
+              <li><a class="navlink" href="#how">How it works<img src="assets/images/Chevron-right.svg" alt="" class="chevron-icon" loading="lazy" /></a></li>
+              <li><a class="navlink" href="#benefits">Benefits<img src="assets/images/Chevron-right.svg" alt="" class="chevron-icon" loading="lazy" /></a></li>
+              <li><a class="navlink" href="#faq">FAQ<img src="assets/images/Chevron-right.svg" alt="" class="chevron-icon" loading="lazy" /></a></li>
+              <li><a class="navlink" href="#contact">Contact<img src="assets/images/Chevron-right.svg" alt="" class="chevron-icon" loading="lazy" /></a></li>
               <li class="mobile-store-buttons">
                 <a class="store-btn store-btn-google" href="#download" aria-label="Get it on Google Play">
-                  <img src="assets/images/google-play-icon.svg" alt="" class="store-logo" />
+                  <img src="assets/images/google-play-icon.svg" alt="" class="store-logo" loading="eager" />
                   <span class="store-text">
                     <span class="store-text-top">Get it on</span>
                     <span class="store-text-bottom">Google Play</span>
@@ -1140,7 +1152,7 @@
 
               <div class="bullets" id="download" style="display: flex; gap: 12px; margin-top: 24px;">
                 <a class="store-btn store-btn-google" href="#download" aria-label="Get it on Google Play">
-                  <img src="assets/images/google-play-icon.svg" alt="" class="store-logo" />
+                  <img src="assets/images/google-play-icon.svg" alt="" class="store-logo" loading="eager" />
                   <span class="store-text">
                     <span class="store-text-top">Get it on</span>
                     <span class="store-text-bottom">Google Play</span>
@@ -1158,7 +1170,7 @@
               </div>
             </div>
 
-            <img src="assets/images/website-hero-image.png" alt="Tipza app preview" class="hero-image" />
+            <img src="assets/images/website-hero-image.png" alt="Tipza app preview" class="hero-image" loading="eager" />
           </div>
         </div>
       </section>
@@ -1169,21 +1181,21 @@
 
           <div class="grid-3" role="list" aria-label="Purpose cards">
             <div class="purpose-item" role="listitem">
-              <img src="assets/images/Fairness.png" alt="Fairness" class="card-chip-image" />
+              <img src="assets/images/Fairness.png" alt="Fairness" class="card-chip-image" loading="lazy" />
               <h3>Fair splits that match your team's rules</h3>
               <p>
                 Every workplace is different. Choose equal, hours-based, points, or weighted splits that reflect how your team actually works.
               </p>
             </div>
             <div class="purpose-item" role="listitem">
-              <img src="assets/images/Clarity.png" alt="Clarity" class="card-chip-image" />
+              <img src="assets/images/Clarity.png" alt="Clarity" class="card-chip-image" loading="lazy" />
               <h3>Clear calculations everyone can follow</h3>
               <p>
                 Tipza shows the inputs and final shares, so everyone understands the breakdown at a glance.
               </p>
             </div>
             <div class="purpose-item" role="listitem">
-              <img src="assets/images/Speed.png" alt="Speed" class="card-chip-image" />
+              <img src="assets/images/Speed.png" alt="Speed" class="card-chip-image" loading="lazy" />
               <h3>Done in minutes, not debates</h3>
               <p>
                 Add the total, pick a method, and share the result. Spend less time calculating and more time closing the shift.
@@ -1250,17 +1262,17 @@
 
           <div class="grid-3" role="list" aria-label="Benefits">
             <div class="purpose-item" role="listitem">
-              <img src="assets/images/Less-conflict.png" alt="Less conflict" class="benefit-image" />
+              <img src="assets/images/Less-conflict.png" alt="Less conflict" class="benefit-image" loading="lazy" />
               <h3>Less conflict</h3>
               <p>Clear inputs + clear outputs means fewer "who got what?" conversations.</p>
             </div>
             <div class="purpose-item" role="listitem">
-              <img src="assets/images/Consistent.png" alt="Consistent across shifts" class="benefit-image" />
+              <img src="assets/images/Consistent.png" alt="Consistent across shifts" class="benefit-image" loading="lazy" />
               <h3>Consistent across shifts</h3>
               <p>Use the same split method every night, or switch methods when the situation calls for it.</p>
             </div>
             <div class="purpose-item" role="listitem">
-              <img src="assets/images/Team-ready-sharing.png" alt="Team-ready sharing" class="benefit-image" />
+              <img src="assets/images/Team-ready-sharing.png" alt="Team-ready sharing" class="benefit-image" loading="lazy" />
               <h3>Team-ready sharing</h3>
               <p>Share a simple breakdown so everyone sees the same numbers.</p>
             </div>
@@ -1278,8 +1290,8 @@
               <summary>
                 <span>What is the primary purpose of Tipza?</span>
                 <span style="display: flex; align-items: center;">
-                  <img src="assets/images/Plus.svg" alt="" class="faq-icon faq-icon-plus" />
-                  <img src="assets/images/Minus.svg" alt="" class="faq-icon faq-icon-minus" />
+                  <img src="assets/images/Plus.svg" alt="" class="faq-icon faq-icon-plus" loading="lazy" />
+                  <img src="assets/images/Minus.svg" alt="" class="faq-icon faq-icon-minus" loading="lazy" />
                 </span>
               </summary>
               <div class="faq-content">
@@ -1293,8 +1305,8 @@
               <summary>
                 <span>How does Tipza calculate a "fair" split?</span>
                 <span style="display: flex; align-items: center;">
-                  <img src="assets/images/Plus.svg" alt="" class="faq-icon faq-icon-plus" />
-                  <img src="assets/images/Minus.svg" alt="" class="faq-icon faq-icon-minus" />
+                  <img src="assets/images/Plus.svg" alt="" class="faq-icon faq-icon-plus" loading="lazy" />
+                  <img src="assets/images/Minus.svg" alt="" class="faq-icon faq-icon-minus" loading="lazy" />
                 </span>
               </summary>
               <div class="faq-content">
@@ -1308,8 +1320,8 @@
               <summary>
                 <span>Does Tipza handle payments or move money?</span>
                 <span style="display: flex; align-items: center;">
-                  <img src="assets/images/Plus.svg" alt="" class="faq-icon faq-icon-plus" />
-                  <img src="assets/images/Minus.svg" alt="" class="faq-icon faq-icon-minus" />
+                  <img src="assets/images/Plus.svg" alt="" class="faq-icon faq-icon-plus" loading="lazy" />
+                  <img src="assets/images/Minus.svg" alt="" class="faq-icon faq-icon-minus" loading="lazy" />
                 </span>
               </summary>
               <div class="faq-content">
@@ -1323,8 +1335,8 @@
               <summary>
                 <span>Can I share the results with my team?</span>
                 <span style="display: flex; align-items: center;">
-                  <img src="assets/images/Plus.svg" alt="" class="faq-icon faq-icon-plus" />
-                  <img src="assets/images/Minus.svg" alt="" class="faq-icon faq-icon-minus" />
+                  <img src="assets/images/Plus.svg" alt="" class="faq-icon faq-icon-plus" loading="lazy" />
+                  <img src="assets/images/Minus.svg" alt="" class="faq-icon faq-icon-minus" loading="lazy" />
                 </span>
               </summary>
               <div class="faq-content">
@@ -1338,8 +1350,8 @@
               <summary>
                 <span>Why does Tipza use Google and Apple Sign-In?</span>
                 <span style="display: flex; align-items: center;">
-                  <img src="assets/images/Plus.svg" alt="" class="faq-icon faq-icon-plus" />
-                  <img src="assets/images/Minus.svg" alt="" class="faq-icon faq-icon-minus" />
+                  <img src="assets/images/Plus.svg" alt="" class="faq-icon faq-icon-plus" loading="lazy" />
+                  <img src="assets/images/Minus.svg" alt="" class="faq-icon faq-icon-minus" loading="lazy" />
                 </span>
               </summary>
               <div class="faq-content">
@@ -1356,14 +1368,14 @@
         <div class="container">
           <div class="cta-card">
             <div class="cta-illustration">
-              <img src="assets/images/split-pizza.svg" alt="" class="cta-image" />
+              <img src="assets/images/split-pizza.svg" alt="" class="cta-image" loading="lazy" />
             </div>
             <div class="cta-content">
               <h3>Let's start fair splits now</h3>
               <p style="font-size: 16px; line-height: 1.6; margin: 0 auto; opacity: 0.95; text-align: center;">Download Tipza and make tip splitting simple, fair, and stress-free for your team.</p>
               <div class="store-buttons">
                 <a class="store-btn store-btn-google" href="#download" aria-label="Get it on Google Play">
-                  <img src="assets/images/google-play-icon.svg" alt="" class="store-logo" />
+                  <img src="assets/images/google-play-icon.svg" alt="" class="store-logo" loading="eager" />
                   <span class="store-text">
                     <span class="store-text-top">Get it on</span>
                     <span class="store-text-bottom">Google Play</span>
@@ -1394,7 +1406,7 @@
           <div class="grid-3" style="margin-top: 18px">
             <div class="card">
               <div class="card-content">
-                <img src="assets/images/Email.svg" alt="" class="card-icon" />
+                <img src="assets/images/Email.svg" alt="" class="card-icon" loading="lazy" />
                 <div class="card-text">
                   <h3>Support email</h3>
                   <p><a href="mailto:support@tipza.app">support@tipza.app</a></p>
@@ -1404,24 +1416,24 @@
             <a href="https://tipza.app/privacy/" class="card-link">
               <div class="card">
                 <div class="card-content">
-                  <img src="assets/images/Privacy.svg" alt="" class="card-icon" />
+                  <img src="assets/images/Privacy.svg" alt="" class="card-icon" loading="lazy" />
                   <div class="card-text">
                     <h3>Privacy</h3>
                     <p>Our privacy policy and data practices</p>
                   </div>
-                  <img src="assets/images/Chevron-right.svg" alt="" class="card-chevron" />
+                  <img src="assets/images/Chevron-right.svg" alt="" class="card-chevron" loading="lazy" />
                 </div>
               </div>
             </a>
             <a href="https://tipza.app/terms/" class="card-link">
               <div class="card">
                 <div class="card-content">
-                  <img src="assets/images/Terms.svg" alt="" class="card-icon" />
+                  <img src="assets/images/Terms.svg" alt="" class="card-icon" loading="lazy" />
                   <div class="card-text">
                     <h3>Terms</h3>
                     <p>Terms and conditions for using Tipza</p>
                   </div>
-                  <img src="assets/images/Chevron-right.svg" alt="" class="card-chevron" />
+                  <img src="assets/images/Chevron-right.svg" alt="" class="card-chevron" loading="lazy" />
                 </div>
               </div>
             </a>
@@ -1435,7 +1447,7 @@
         <div class="footer-grid">
           <div>
             <div class="brand">
-              <img src="assets/images/Tipza_Logo.svg" alt="Tipza" class="logo" />
+              <img src="assets/images/Tipza_Logo.svg" alt="Tipza" class="logo" loading="lazy" />
             </div>
             <p class="fine">
               © <span id="year"></span> Tipza. Tipza helps teams calculate and share transparent tip splits.
@@ -1455,6 +1467,71 @@
     </footer>
 
     <script>
+      // Image error handling - retry failed images and provide fallbacks
+      (function() {
+        const handleImageError = function(img) {
+          if (img.dataset.retryCount && parseInt(img.dataset.retryCount) >= 2) {
+            // Already retried twice, keep image hidden but don't break layout
+            img.style.opacity = '0';
+            img.style.visibility = 'hidden';
+            return;
+          }
+          
+          const originalSrc = img.getAttribute('src');
+          if (!originalSrc) return;
+          
+          img.dataset.retryCount = (parseInt(img.dataset.retryCount || '0') + 1).toString();
+          
+          // Retry loading after a short delay with cache busting
+          setTimeout(function() {
+            const newImg = new Image();
+            newImg.onload = function() {
+              img.src = originalSrc;
+              img.style.opacity = '';
+              img.style.visibility = '';
+              img.style.display = '';
+            };
+            newImg.onerror = function() {
+              // Second retry failed, hide gracefully
+              img.style.opacity = '0';
+              img.style.visibility = 'hidden';
+            };
+            // Add cache busting parameter
+            const separator = originalSrc.indexOf('?') > -1 ? '&' : '?';
+            newImg.src = originalSrc + separator + '_retry=' + Date.now();
+          }, 1000);
+        };
+
+        // Add error handlers to all images
+        function setupImageHandlers() {
+          const images = document.querySelectorAll('img[src]');
+          images.forEach(function(img) {
+            // Skip if already has handler
+            if (img.dataset.errorHandler) return;
+            img.dataset.errorHandler = 'true';
+            
+            img.addEventListener('error', function() {
+              handleImageError(this);
+            }, { once: false });
+            
+            // Check if image is already broken
+            if (img.complete && img.naturalHeight === 0 && img.src) {
+              // Image failed to load, try to recover
+              setTimeout(function() {
+                handleImageError(img);
+              }, 100);
+            }
+          });
+        }
+
+        // Setup handlers when DOM is ready
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', setupImageHandlers);
+        } else {
+          setupImageHandlers();
+        }
+      })();
+
       // Footer year
       document.getElementById("year").textContent = new Date().getFullYear();
 
