@@ -159,6 +159,10 @@
         margin-bottom: 32px;
       }
 
+      .mobile-spacer {
+        display: none;
+      }
+
       @media (max-width: 768px) {
         .back-button {
           bottom: 32px;
@@ -175,6 +179,10 @@
         h2 {
           font-size: 20px;
           margin-top: 32px;
+        }
+        .mobile-spacer {
+          display: block;
+          height: 64px;
         }
       }
     </style>
@@ -297,6 +305,8 @@
         <br />
         <a href="mailto:support@tipza.app">support@tipza.app</a>
       </p>
+
+      <div class="mobile-spacer"></div>
     </div>
   </body>
 </html>
