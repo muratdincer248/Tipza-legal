@@ -28,6 +28,12 @@
     <!-- Preload critical resources -->
     <link rel="preload" href="assets/images/Tipza_Logo.svg" as="image" type="image/svg+xml" />
     <link rel="preload" href="assets/images/website-hero-image.png" as="image" />
+    <link rel="preload" href="assets/images/Plus.svg" as="image" type="image/svg+xml" />
+    <link rel="preload" href="assets/images/Minus.svg" as="image" type="image/svg+xml" />
+    <link rel="preload" href="assets/images/Email.svg" as="image" type="image/svg+xml" />
+    <link rel="preload" href="assets/images/Privacy.svg" as="image" type="image/svg+xml" />
+    <link rel="preload" href="assets/images/Terms.svg" as="image" type="image/svg+xml" />
+    <link rel="preload" href="assets/images/Chevron-right.svg" as="image" type="image/svg+xml" />
 
     <!-- Fonts (Tipza: Space Grotesk + Figtree) -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -529,6 +535,13 @@
         height: 24px;
         flex-shrink: 0;
         color: #ff9500;
+        min-width: 24px;
+        min-height: 24px;
+      }
+      .card-icon:not([src]),
+      .card-icon[src=""],
+      .card-icon[src*="undefined"] {
+        display: none;
       }
       .card-text {
         flex: 1;
@@ -568,6 +581,13 @@
         height: 16px;
         opacity: 0.7;
         filter: brightness(0);
+        min-width: 16px;
+        min-height: 16px;
+      }
+      .card-chevron:not([src]),
+      .card-chevron[src=""],
+      .card-chevron[src*="undefined"] {
+        display: none;
       }
       .card-link p {
         text-decoration: none;
@@ -739,6 +759,13 @@
         top: 0;
         left: 0;
         transition: opacity 0.2s ease;
+        min-width: 20px;
+        min-height: 20px;
+      }
+      .faq-icon:not([src]),
+      .faq-icon[src=""],
+      .faq-icon[src*="undefined"] {
+        display: none;
       }
       details[open] .faq-icon-plus {
         opacity: 0;
@@ -1290,8 +1317,8 @@
               <summary>
                 <span>What is the primary purpose of Tipza?</span>
                 <span style="display: flex; align-items: center;">
-                  <img src="assets/images/Plus.svg" alt="" class="faq-icon faq-icon-plus" loading="lazy" />
-                  <img src="assets/images/Minus.svg" alt="" class="faq-icon faq-icon-minus" loading="lazy" />
+                  <img src="assets/images/Plus.svg" alt="" class="faq-icon faq-icon-plus" loading="eager" />
+                  <img src="assets/images/Minus.svg" alt="" class="faq-icon faq-icon-minus" loading="eager" />
                 </span>
               </summary>
               <div class="faq-content">
@@ -1305,8 +1332,8 @@
               <summary>
                 <span>How does Tipza calculate a "fair" split?</span>
                 <span style="display: flex; align-items: center;">
-                  <img src="assets/images/Plus.svg" alt="" class="faq-icon faq-icon-plus" loading="lazy" />
-                  <img src="assets/images/Minus.svg" alt="" class="faq-icon faq-icon-minus" loading="lazy" />
+                  <img src="assets/images/Plus.svg" alt="" class="faq-icon faq-icon-plus" loading="eager" />
+                  <img src="assets/images/Minus.svg" alt="" class="faq-icon faq-icon-minus" loading="eager" />
                 </span>
               </summary>
               <div class="faq-content">
@@ -1320,8 +1347,8 @@
               <summary>
                 <span>Does Tipza handle payments or move money?</span>
                 <span style="display: flex; align-items: center;">
-                  <img src="assets/images/Plus.svg" alt="" class="faq-icon faq-icon-plus" loading="lazy" />
-                  <img src="assets/images/Minus.svg" alt="" class="faq-icon faq-icon-minus" loading="lazy" />
+                  <img src="assets/images/Plus.svg" alt="" class="faq-icon faq-icon-plus" loading="eager" />
+                  <img src="assets/images/Minus.svg" alt="" class="faq-icon faq-icon-minus" loading="eager" />
                 </span>
               </summary>
               <div class="faq-content">
@@ -1335,8 +1362,8 @@
               <summary>
                 <span>Can I share the results with my team?</span>
                 <span style="display: flex; align-items: center;">
-                  <img src="assets/images/Plus.svg" alt="" class="faq-icon faq-icon-plus" loading="lazy" />
-                  <img src="assets/images/Minus.svg" alt="" class="faq-icon faq-icon-minus" loading="lazy" />
+                  <img src="assets/images/Plus.svg" alt="" class="faq-icon faq-icon-plus" loading="eager" />
+                  <img src="assets/images/Minus.svg" alt="" class="faq-icon faq-icon-minus" loading="eager" />
                 </span>
               </summary>
               <div class="faq-content">
@@ -1350,8 +1377,8 @@
               <summary>
                 <span>Why does Tipza use Google and Apple Sign-In?</span>
                 <span style="display: flex; align-items: center;">
-                  <img src="assets/images/Plus.svg" alt="" class="faq-icon faq-icon-plus" loading="lazy" />
-                  <img src="assets/images/Minus.svg" alt="" class="faq-icon faq-icon-minus" loading="lazy" />
+                  <img src="assets/images/Plus.svg" alt="" class="faq-icon faq-icon-plus" loading="eager" />
+                  <img src="assets/images/Minus.svg" alt="" class="faq-icon faq-icon-minus" loading="eager" />
                 </span>
               </summary>
               <div class="faq-content">
@@ -1406,7 +1433,7 @@
           <div class="grid-3" style="margin-top: 18px">
             <div class="card">
               <div class="card-content">
-                <img src="assets/images/Email.svg" alt="" class="card-icon" loading="lazy" />
+                <img src="assets/images/Email.svg" alt="" class="card-icon" loading="eager" />
                 <div class="card-text">
                   <h3>Support email</h3>
                   <p><a href="mailto:support@tipza.app">support@tipza.app</a></p>
@@ -1416,24 +1443,24 @@
             <a href="https://tipza.app/privacy/" class="card-link">
               <div class="card">
                 <div class="card-content">
-                  <img src="assets/images/Privacy.svg" alt="" class="card-icon" loading="lazy" />
+                  <img src="assets/images/Privacy.svg" alt="" class="card-icon" loading="eager" />
                   <div class="card-text">
                     <h3>Privacy</h3>
                     <p>Our privacy policy and data practices</p>
                   </div>
-                  <img src="assets/images/Chevron-right.svg" alt="" class="card-chevron" loading="lazy" />
+                  <img src="assets/images/Chevron-right.svg" alt="" class="card-chevron" loading="eager" />
                 </div>
               </div>
             </a>
             <a href="https://tipza.app/terms/" class="card-link">
               <div class="card">
                 <div class="card-content">
-                  <img src="assets/images/Terms.svg" alt="" class="card-icon" loading="lazy" />
+                  <img src="assets/images/Terms.svg" alt="" class="card-icon" loading="eager" />
                   <div class="card-text">
                     <h3>Terms</h3>
                     <p>Terms and conditions for using Tipza</p>
                   </div>
-                  <img src="assets/images/Chevron-right.svg" alt="" class="card-chevron" loading="lazy" />
+                  <img src="assets/images/Chevron-right.svg" alt="" class="card-chevron" loading="eager" />
                 </div>
               </div>
             </a>
@@ -1469,20 +1496,47 @@
     <script>
       // Image error handling - retry failed images and provide fallbacks
       (function() {
+        const isCriticalIcon = function(img) {
+          // Critical UI icons that should never be hidden
+          const criticalClasses = ['faq-icon', 'card-icon', 'card-chevron', 'store-logo', 'chevron-icon', 'logo'];
+          return criticalClasses.some(function(cls) {
+            return img.classList.contains(cls);
+          });
+        };
+
         const handleImageError = function(img) {
-          if (img.dataset.retryCount && parseInt(img.dataset.retryCount) >= 2) {
-            // Already retried twice, keep image hidden but don't break layout
-            img.style.opacity = '0';
-            img.style.visibility = 'hidden';
+          const retryCount = parseInt(img.dataset.retryCount || '0');
+          const isCritical = isCriticalIcon(img);
+          
+          // For critical icons, retry more times and never hide them
+          const maxRetries = isCritical ? 5 : 2;
+          
+          if (retryCount >= maxRetries) {
+            if (isCritical) {
+              // For critical icons, keep retrying periodically
+              setTimeout(function() {
+                const originalSrc = img.getAttribute('src');
+                if (originalSrc) {
+                  const separator = originalSrc.indexOf('?') > -1 ? '&' : '?';
+                  img.src = originalSrc + separator + '_retry=' + Date.now();
+                  img.dataset.retryCount = '0'; // Reset counter for another round
+                }
+              }, 3000);
+            } else {
+              // Non-critical images: hide gracefully
+              img.style.opacity = '0';
+              img.style.visibility = 'hidden';
+            }
             return;
           }
           
           const originalSrc = img.getAttribute('src');
           if (!originalSrc) return;
           
-          img.dataset.retryCount = (parseInt(img.dataset.retryCount || '0') + 1).toString();
+          img.dataset.retryCount = (retryCount + 1).toString();
           
           // Retry loading after a short delay with cache busting
+          const retryDelay = isCritical ? 500 : 1000;
           setTimeout(function() {
             const newImg = new Image();
             newImg.onload = function() {
@@ -1490,16 +1544,16 @@
               img.style.opacity = '';
               img.style.visibility = '';
               img.style.display = '';
+              img.dataset.retryCount = '0'; // Reset on success
             };
             newImg.onerror = function() {
-              // Second retry failed, hide gracefully
-              img.style.opacity = '0';
-              img.style.visibility = 'hidden';
+              // Retry failed, try again
+              handleImageError(img);
             };
             // Add cache busting parameter
             const separator = originalSrc.indexOf('?') > -1 ? '&' : '?';
             newImg.src = originalSrc + separator + '_retry=' + Date.now();
-          }, 1000);
+          }, retryDelay);
         };
 
         // Add error handlers to all images
@@ -1514,12 +1568,25 @@
               handleImageError(this);
             }, { once: false });
             
-            // Check if image is already broken
-            if (img.complete && img.naturalHeight === 0 && img.src) {
-              // Image failed to load, try to recover
-              setTimeout(function() {
+            // For critical icons, verify they loaded correctly
+            if (isCriticalIcon(img)) {
+              // Force immediate check for critical icons
+              if (!img.complete) {
+                img.addEventListener('load', function() {
+                  // Icon loaded successfully
+                }, { once: true });
+              } else if (img.complete && img.naturalHeight === 0) {
+                // Image appears broken, retry immediately
                 handleImageError(img);
-              }, 100);
+              }
+            } else {
+              // Check if image is already broken (non-critical)
+              if (img.complete && img.naturalHeight === 0 && img.src) {
+                // Image failed to load, try to recover
+                setTimeout(function() {
+                  handleImageError(img);
+                }, 100);
+              }
             }
           });
         }
