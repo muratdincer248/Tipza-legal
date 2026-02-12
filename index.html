@@ -64,6 +64,7 @@
 
         --text: var(--neutral-99);
         --muted: rgba(10, 7, 5, 0.72);
+        --text-color-inverse-disabled: #C19D81;
 
         --card: rgba(255, 255, 255, 0.74);
         --stroke: rgba(10, 7, 5, 0.10);
@@ -479,6 +480,7 @@
       #purpose,
       #how,
       #benefits,
+      #pro,
       #faq,
       #contact {
         scroll-margin-top: 90px;
@@ -506,6 +508,12 @@
         display: grid;
         grid-template-columns: repeat(3, 1fr);
         gap: 14px;
+      }
+      #contact .contact-cards {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 14px;
+        margin-top: 18px;
       }
 
       .card {
@@ -932,6 +940,89 @@
         }
       }
 
+      .section.pro-section {
+        padding: 46px 0;
+      }
+      .pro-section .pro-card {
+        width: 100%;
+        background: #0A0705;
+        border-radius: var(--radius-lg);
+        padding: 40px 24px;
+        color: var(--neutral-00);
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 32px;
+        overflow: hidden;
+      }
+      .pro-card .pro-badge {
+        flex-shrink: 0;
+        max-width: 168px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .pro-card .pro-badge img {
+        width: 100%;
+        height: auto;
+        display: block;
+      }
+      .pro-card .pro-content {
+        text-align: center;
+        min-width: 0;
+      }
+      .pro-card .pro-content h2 {
+        color: var(--neutral-00);
+        margin: 0 0 12px;
+        font-size: 28px;
+      }
+      .pro-card .pro-content .pro-lead {
+        color: var(--text-color-inverse-disabled);
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 1.6;
+        margin: 0 0 24px;
+      }
+      .pro-benefits {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        text-align: left;
+      }
+      .pro-benefits li {
+        display: flex;
+        align-items: flex-start;
+        gap: 12px;
+        margin-bottom: 14px;
+        color: var(--neutral-00);
+      }
+      .pro-benefits li::before {
+        content: "✓";
+        flex-shrink: 0;
+        font-weight: 700;
+        color: var(--green-10);
+      }
+      .pro-benefit-title {
+        font-weight: 500;
+        color: rgba(255, 255, 255, 0.95);
+      }
+      @media (min-width: 921px) {
+        .pro-section .pro-card {
+          display: grid;
+          grid-template-columns: 25% 75%;
+          padding: 48px 40px;
+          gap: 40px;
+          align-items: center;
+        }
+        .pro-card .pro-badge {
+          max-width: 235px;
+        }
+        .pro-card .pro-content {
+          text-align: left;
+        }
+      }
+
       @media (max-width: 920px) {
         .section.cta-section {
           padding: 12px 0;
@@ -946,6 +1037,21 @@
         }
         .cta-card h3 {
           font-size: 24px;
+        }
+        .pro-section .pro-card {
+          padding: 32px 24px;
+          align-items: stretch;
+          gap: 28px;
+        }
+        .pro-section .pro-card .pro-content {
+          text-align: left;
+          align-self: stretch;
+        }
+        .pro-section .pro-card .pro-content h2 {
+          margin: 0 0 10px;
+        }
+        .pro-section .pro-card .pro-content .pro-lead {
+          margin: 0 0 20px;
         }
         .hero {
           padding-top: 8px;
@@ -966,6 +1072,7 @@
           max-width: calc(100vw - 8px);
         }
         .grid-3 { grid-template-columns: 1fr; }
+        #contact .contact-cards { grid-template-columns: 1fr; }
         .grid-3 .purpose-item:not(:first-child) .card-chip-image {
           margin-top: 40px;
         }
@@ -1121,6 +1228,7 @@
               <li><a class="navlink" href="#purpose">Purpose<img src="assets/images/Chevron-right.svg" alt="" class="chevron-icon" loading="lazy" /></a></li>
               <li><a class="navlink" href="#how">How it works<img src="assets/images/Chevron-right.svg" alt="" class="chevron-icon" loading="lazy" /></a></li>
               <li><a class="navlink" href="#benefits">Benefits<img src="assets/images/Chevron-right.svg" alt="" class="chevron-icon" loading="lazy" /></a></li>
+              <li><a class="navlink" href="#pro">Pro<img src="assets/images/Chevron-right.svg" alt="" class="chevron-icon" loading="lazy" /></a></li>
               <li><a class="navlink" href="#faq">FAQ<img src="assets/images/Chevron-right.svg" alt="" class="chevron-icon" loading="lazy" /></a></li>
               <li><a class="navlink" href="#contact">Contact<img src="assets/images/Chevron-right.svg" alt="" class="chevron-icon" loading="lazy" /></a></li>
               <li class="mobile-store-buttons">
@@ -1307,6 +1415,25 @@
         </div>
       </section>
 
+      <section class="section pro-section" id="pro">
+        <div class="container">
+          <div class="pro-card">
+            <div class="pro-badge">
+              <img src="assets/images/Tipza-pro-badge.svg" alt="Tipza Pro" loading="lazy" />
+            </div>
+            <div class="pro-content">
+              <h2>Upgrade to Pro</h2>
+              <p class="pro-lead">Ideal for larger teams and frequent tip pooling—more control, more clarity, less friction.</p>
+              <ul class="pro-benefits" role="list">
+                <li><span class="pro-benefit-title">Unlimited team members</span></li>
+                <li><span class="pro-benefit-title">Detailed statistics</span></li>
+                <li><span class="pro-benefit-title">Priority support</span></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <section class="section" id="faq">
         <div class="container">
           <h2>FAQ</h2>
@@ -1430,16 +1557,7 @@
             Get in touch with our support team, or review our privacy policy and terms of service.
           </p>
 
-          <div class="grid-3" style="margin-top: 18px">
-            <div class="card">
-              <div class="card-content">
-                <img src="assets/images/Email.svg" alt="" class="card-icon" loading="eager" />
-                <div class="card-text">
-                  <h3>Support email</h3>
-                  <p><a href="mailto:support@tipza.app">support@tipza.app</a></p>
-                </div>
-              </div>
-            </div>
+          <div class="contact-cards" role="list" aria-label="Contact options">
             <a href="https://tipza.app/privacy/" class="card-link">
               <div class="card">
                 <div class="card-content">
@@ -1467,7 +1585,7 @@
             <a href="https://tipza.app/account-deletion/" class="card-link">
               <div class="card">
                 <div class="card-content">
-                  <img src="assets/images/Privacy.svg" alt="" class="card-icon" loading="eager" />
+                  <img src="assets/images/User-remove.svg" alt="" class="card-icon" loading="eager" />
                   <div class="card-text">
                     <h3>Account and data deletion</h3>
                     <p>How to delete your account and what happens to your data</p>
@@ -1476,6 +1594,15 @@
                 </div>
               </div>
             </a>
+            <div class="card">
+              <div class="card-content">
+                <img src="assets/images/Email.svg" alt="" class="card-icon" loading="eager" />
+                <div class="card-text">
+                  <h3>Support email</h3>
+                  <p><a href="mailto:support@tipza.app">support@tipza.app</a></p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -1497,6 +1624,7 @@
           <div class="footer-links" aria-label="Footer links">
             <a href="#purpose">Purpose</a>
             <a href="#how">How it works</a>
+            <a href="#pro">Pro</a>
             <a href="#faq">FAQ</a>
             <a href="https://tipza.app/privacy/">Privacy</a>
             <a href="https://tipza.app/terms/">Terms</a>
