@@ -1,0 +1,37 @@
+---
+import type { Dictionary } from '~/i18n/types';
+
+interface Props {
+  copy: Dictionary['how'];
+}
+
+const { copy } = Astro.props;
+---
+
+<section class="section" id="how">
+  <div class="container">
+    <h2>{copy.heading}</h2>
+    <p>{copy.lead}</p>
+
+    <div class="steps" aria-label={copy.stepsLabel}>
+      {
+        copy.steps.map((step, i) => (
+          <div class="step">
+            <div class="num" aria-hidden="true">
+              {i + 1}
+            </div>
+            <div>
+              <h4>{step.heading}</h4>
+              <p>{step.body}</p>
+            </div>
+          </div>
+        ))
+      }
+    </div>
+
+    <div class="note">
+      <strong>{copy.note.heading}</strong>
+      <span>{copy.note.body}</span>
+    </div>
+  </div>
+</section>

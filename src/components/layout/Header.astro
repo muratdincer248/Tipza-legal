@@ -1,0 +1,99 @@
+---
+import StoreButtons from './StoreButtons.astro';
+
+interface NavItem {
+  href: string;
+  label: string;
+}
+
+interface Props {
+  /** Where the logo links to. */
+  homeHref: string;
+  navItems: NavItem[];
+}
+
+const { homeHref, navItems } = Astro.props;
+---
+
+<header>
+  <div class="container">
+    <div class="nav">
+      <a class="brand" href={homeHref} aria-label="Tipza home">
+        <img src="/assets/images/Tipza_Logo.svg" alt="Tipza" class="logo" loading="eager" />
+      </a>
+
+      <nav aria-label="Primary navigation" style="position: relative">
+        <button class="hamburger" type="button" id="menuBtn" aria-expanded="false" aria-controls="menu">
+          Menu
+        </button>
+        <ul id="menu">
+          {
+            navItems.map((item) => (
+              <li>
+                <a class="navlink" href={item.href}>
+                  {item.label}
+                  <img src="/assets/images/Chevron-right.svg" alt="" class="chevron-icon" loading="lazy" />
+                </a>
+              </li>
+            ))
+          }
+          <li class="mobile-store-buttons">
+            <StoreButtons eager />
+          </li>
+        </ul>
+      </nav>
+
+      <div class="cta-row">
+        <StoreButtons eager />
+      </div>
+    </div>
+  </div>
+</header>
+
+<script>
+  const btn = document.getElementById('menuBtn');
+  const menu = document.getElementById('menu');
+
+  if (btn && menu) {
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const open = menu.classList.toggle('open');
+      btn.setAttribute('aria-expanded', String(open));
+    });
+
+    const close = () => {
+      menu.classList.remove('open');
+      btn.setAttribute('aria-expanded', 'false');
+    };
+
+    menu.addEventListener('click', (e) => {
+      const target = e.target as HTMLElement | null;
+      if (target?.closest('a')) close();
+    });
+
+    document.addEventListener('click', (e) => {
+      if (!menu.classList.contains('open')) return;
+      const target = e.target as Node;
+      if (!menu.contains(target) && !btn.contains(target)) close();
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && menu.classList.contains('open')) {
+        close();
+        btn.focus();
+      }
+    });
+  }
+
+  // Clicking the logo while already on the home page scrolls up instead of
+  // triggering a full navigation.
+  const brand = document.querySelector<HTMLAnchorElement>('header .brand');
+  if (brand) {
+    brand.addEventListener('click', (e) => {
+      if (new URL(brand.href).pathname === window.location.pathname) {
+        e.preventDefault();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    });
+  }
+</script>

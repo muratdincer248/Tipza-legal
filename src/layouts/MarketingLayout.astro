@@ -1,0 +1,32 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import Header from '~/components/layout/Header.astro';
+import Footer from '~/components/layout/Footer.astro';
+import { primaryNav, footerNav } from '~/lib/nav';
+import type { Dictionary } from '~/i18n/types';
+
+interface Props {
+  dict: Dictionary;
+  /** Locale base path, e.g. `/` or `/en/`. */
+  base: string;
+  title: string;
+  description?: string;
+  preloadImages?: string[];
+}
+
+const { dict, base, title, description, preloadImages } = Astro.props;
+---
+
+<BaseLayout title={title} description={description} preloadImages={preloadImages}>
+  <slot name="head" slot="head" />
+
+  <a class="skip-link" href="#main">{dict.nav.skipToContent}</a>
+
+  <Header homeHref={base} navItems={primaryNav(dict, base)} />
+
+  <main id="main">
+    <slot />
+  </main>
+
+  <Footer links={footerNav(dict, base)} fineprint={dict.footer.fineprint} />
+</BaseLayout>

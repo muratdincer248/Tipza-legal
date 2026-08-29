@@ -1,0 +1,159 @@
+---
+import type { Dictionary } from '~/i18n/types';
+
+interface Props {
+  copy: Dictionary['faq'];
+}
+
+const { copy } = Astro.props;
+---
+
+<section class="section" id="faq">
+  <div class="container">
+    <h2>{copy.heading}</h2>
+    <p>{copy.lead}</p>
+
+    <div class="faq">
+      {
+        copy.items.map((item) => (
+          <details>
+            <summary>
+              <span>{item.question}</span>
+              <span style="display: flex; align-items: center;">
+                <img src="/assets/images/Plus.svg" alt="" class="faq-icon faq-icon-plus" loading="eager" />
+                <img src="/assets/images/Minus.svg" alt="" class="faq-icon faq-icon-minus" loading="eager" />
+              </span>
+            </summary>
+            <div class="faq-content">
+              <p set:html={item.answer} />
+            </div>
+          </details>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<script>
+  // Accordion behaviour: animates height, and only one panel stays open.
+  const faqDetails = document.querySelectorAll<HTMLDetailsElement>('.faq details');
+  const transitionMs = 420;
+  const paddingTop = 12;
+  const heightBuffer = 8;
+
+  const innerHeight = (content: HTMLElement) => {
+    const styles = getComputedStyle(content);
+    const top = parseFloat(styles.paddingTop) || 0;
+    const bottom = parseFloat(styles.paddingBottom) || 0;
+    return Math.ceil(content.scrollHeight - top - bottom);
+  };
+
+  const timers = new WeakMap<HTMLDetailsElement, number>();
+
+  const closeDetail = (detail: HTMLDetailsElement) => {
+    const content = detail.querySelector<HTMLElement>('.faq-content');
+    if (!content) return;
+
+    clearTimeout(timers.get(detail));
+    detail.dataset.faqClosing = 'true';
+
+    content.style.height = `${Math.max(innerHeight(content) + heightBuffer, 0)}px`;
+    content.style.opacity = '1';
+    content.style.paddingTop = `${paddingTop}px`;
+
+    requestAnimationFrame(() => {
+      content.style.height = '0px';
+      content.style.opacity = '0';
+      content.style.paddingTop = '0px';
+    });
+
+    const finalize = () => {
+      detail.removeAttribute('open');
+      detail.dataset.faqClosing = '';
+      content.style.height = '';
+      content.style.opacity = '';
+      content.style.paddingTop = '';
+    };
+
+    const onEnd = (e: TransitionEvent) => {
+      if (e.propertyName !== 'height') return;
+      content.removeEventListener('transitionend', onEnd);
+      finalize();
+    };
+
+    content.addEventListener('transitionend', onEnd);
+    timers.set(
+      detail,
+      window.setTimeout(() => {
+        content.removeEventListener('transitionend', onEnd);
+        finalize();
+      }, transitionMs)
+    );
+  };
+
+  const openDetail = (detail: HTMLDetailsElement) => {
+    const content = detail.querySelector<HTMLElement>('.faq-content');
+    if (!content) return;
+
+    clearTimeout(timers.get(detail));
+    detail.dataset.faqClosing = '';
+    detail.setAttribute('open', '');
+
+    content.style.height = '0px';
+    content.style.opacity = '0';
+    content.style.paddingTop = '0px';
+    const target = Math.max(innerHeight(content) + heightBuffer, 0);
+
+    requestAnimationFrame(() => {
+      content.style.height = `${target}px`;
+      content.style.opacity = '1';
+      content.style.paddingTop = `${paddingTop}px`;
+    });
+
+    const finalize = () => {
+      if (!detail.hasAttribute('open')) return;
+      content.style.height = `${Math.max(innerHeight(content) + heightBuffer, 0)}px`;
+      content.style.opacity = '';
+      content.style.paddingTop = '';
+    };
+
+    const onEnd = (e: TransitionEvent) => {
+      if (e.propertyName !== 'height') return;
+      content.removeEventListener('transitionend', onEnd);
+      finalize();
+    };
+
+    content.addEventListener('transitionend', onEnd);
+    timers.set(
+      detail,
+      window.setTimeout(() => {
+        content.removeEventListener('transitionend', onEnd);
+        finalize();
+      }, transitionMs)
+    );
+  };
+
+  faqDetails.forEach((detail) => {
+    const content = detail.querySelector<HTMLElement>('.faq-content');
+    const summary = detail.querySelector('summary');
+    if (!content || !summary) return;
+
+    content.style.height = detail.open
+      ? `${Math.max(innerHeight(content) + heightBuffer, 0)}px`
+      : '0px';
+
+    summary.addEventListener('click', (e) => {
+      e.preventDefault();
+
+      const isOpen = detail.hasAttribute('open');
+      const isClosing = detail.dataset.faqClosing === 'true';
+
+      faqDetails.forEach((other) => {
+        if (other !== detail && other.hasAttribute('open')) closeDetail(other);
+      });
+
+      if (isOpen && !isClosing) closeDetail(detail);
+      else openDetail(detail);
+    });
+  });
+</script>

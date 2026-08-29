@@ -1,0 +1,31 @@
+---
+import StoreButtons from '../layout/StoreButtons.astro';
+import type { Dictionary } from '~/i18n/types';
+
+interface Props {
+  copy: Dictionary['downloadCta'];
+}
+
+const { copy } = Astro.props;
+---
+
+<section class="section cta-section">
+  <div class="container">
+    <div class="cta-card">
+      <div class="cta-illustration">
+        <img src="/assets/images/split-pizza.svg" alt="" class="cta-image" loading="lazy" />
+      </div>
+      <div class="cta-content">
+        <h3>{copy.heading}</h3>
+        <p
+          style="font-size: 16px; line-height: 1.6; margin: 0 auto; opacity: 0.95; text-align: center;"
+        >
+          {copy.body}
+        </p>
+        <div class="store-buttons">
+          <StoreButtons eager />
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

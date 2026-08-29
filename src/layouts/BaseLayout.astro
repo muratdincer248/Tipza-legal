@@ -1,0 +1,51 @@
+---
+import '~/styles/tokens.css';
+import '~/styles/base.css';
+import '~/styles/layout.css';
+import '~/styles/components.css';
+import '~/styles/responsive.css';
+
+interface Props {
+  title: string;
+  description?: string;
+  /** Absolute or root-relative images to preload for LCP. */
+  preloadImages?: string[];
+  bodyClass?: string;
+}
+
+const { title, description, preloadImages = [], bodyClass } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    {description && <meta name="description" content={description} />}
+    <meta name="theme-color" content="#7205ff" />
+    <meta name="apple-itunes-app" content="app-id=6756809306" />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+    <title>{title}</title>
+
+    {preloadImages.map((href) => <link rel="preload" href={href} as="image" />)}
+
+    <!-- Fonts (Tipza: Space Grotesk + Figtree) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <slot name="head" />
+  </head>
+
+  <body class={bodyClass}>
+    <slot />
+  </body>
+</html>

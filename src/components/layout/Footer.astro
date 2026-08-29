@@ -1,0 +1,31 @@
+---
+interface FooterLink {
+  href: string;
+  label: string;
+}
+
+interface Props {
+  links: FooterLink[];
+  fineprint: string;
+}
+
+const { links, fineprint } = Astro.props;
+const year = new Date().getFullYear();
+---
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="brand">
+          <img src="/assets/images/Tipza_Logo.svg" alt="Tipza" class="logo" loading="lazy" />
+        </div>
+        <p class="fine">© {year} {fineprint}</p>
+      </div>
+
+      <div class="footer-links" aria-label="Footer links">
+        {links.map((link) => <a href={link.href}>{link.label}</a>)}
+      </div>
+    </div>
+  </div>
+</footer>

@@ -1,0 +1,24 @@
+{
+  "name": "tipza-website",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Tipza marketing website and multilingual blog",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "check": "astro check",
+    "astro": "astro"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/muratdincer248/Tipza-legal.git"
+  },
+  "license": "UNLICENSED",
+  "dependencies": {
+    "@astrojs/mdx": "^7.0.8",
+    "@astrojs/sitemap": "^3.7.3",
+    "astro": "^7.2.9"
+  }
+}

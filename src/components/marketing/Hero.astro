@@ -1,0 +1,33 @@
+---
+import StoreButtons from '../layout/StoreButtons.astro';
+import type { Dictionary } from '~/i18n/types';
+
+interface Props {
+  copy: Dictionary['hero'];
+}
+
+const { copy } = Astro.props;
+---
+
+<section class="hero" id="top">
+  <div class="container">
+    <div class="hero-grid">
+      <div>
+        <h1>{copy.heading}</h1>
+
+        <p class="lead">{copy.lead}</p>
+
+        <div class="bullets" id="download" style="display: flex; gap: 12px; margin-top: 24px;">
+          <StoreButtons eager />
+        </div>
+      </div>
+
+      <img
+        src="/assets/images/website-hero-image.png"
+        alt={copy.imageAlt}
+        class="hero-image"
+        loading="eager"
+      />
+    </div>
+  </div>
+</section>

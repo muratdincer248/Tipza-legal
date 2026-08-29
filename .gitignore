@@ -7,3 +7,10 @@ ehthumbs.db
 Thumbs.db
 *.log
 node_modules/
+
+# Astro build output and cache
+dist/
+.astro/
+
+# Cloudflare local state
+.wrangler/

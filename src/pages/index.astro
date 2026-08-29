@@ -1,0 +1,37 @@
+---
+import MarketingLayout from '~/layouts/MarketingLayout.astro';
+import Hero from '~/components/marketing/Hero.astro';
+import PurposeSection from '~/components/marketing/PurposeSection.astro';
+import HowItWorks from '~/components/marketing/HowItWorks.astro';
+import Benefits from '~/components/marketing/Benefits.astro';
+import ProSection from '~/components/marketing/ProSection.astro';
+import FaqSection from '~/components/marketing/FaqSection.astro';
+import DownloadCta from '~/components/marketing/DownloadCta.astro';
+import ContactSection from '~/components/marketing/ContactSection.astro';
+import { getDictionary } from '~/i18n';
+
+const dict = getDictionary('en');
+const base = '/';
+---
+
+<MarketingLayout
+  dict={dict}
+  base={base}
+  title={dict.meta.homeTitle}
+  description={dict.meta.homeDescription}
+  preloadImages={['/assets/images/website-hero-image.png']}
+>
+  <Hero copy={dict.hero} />
+  <PurposeSection copy={dict.purpose} />
+  <HowItWorks copy={dict.how} />
+  <Benefits copy={dict.benefits} />
+  <ProSection copy={dict.pro} />
+  <FaqSection copy={dict.faq} />
+  <DownloadCta copy={dict.downloadCta} />
+  <ContactSection
+    copy={dict.contact}
+    privacyHref={`${base}privacy/`}
+    termsHref={`${base}terms/`}
+    accountDeletionHref={`${base}account-deletion/`}
+  />
+</MarketingLayout>

@@ -1,0 +1,32 @@
+---
+import type { Dictionary } from '~/i18n/types';
+
+interface Props {
+  copy: Dictionary['pro'];
+}
+
+const { copy } = Astro.props;
+---
+
+<section class="section pro-section" id="pro">
+  <div class="container">
+    <div class="pro-card">
+      <div class="pro-badge">
+        <img src="/assets/images/Tipza-pro-badge.svg" alt={copy.badgeAlt} loading="lazy" />
+      </div>
+      <div class="pro-content">
+        <h2>{copy.heading}</h2>
+        <p class="pro-lead">{copy.lead}</p>
+        <ul class="pro-benefits" role="list">
+          {
+            copy.benefits.map((benefit) => (
+              <li>
+                <span class="pro-benefit-title">{benefit}</span>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>

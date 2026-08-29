@@ -1,0 +1,31 @@
+---
+import { getCollection, render } from 'astro:content';
+import LegalLayout from '~/layouts/LegalLayout.astro';
+import { getDictionary } from '~/i18n';
+
+export async function getStaticPaths() {
+  const entries = await getCollection('legal');
+  return entries
+    .filter((entry) => entry.id.startsWith('en/'))
+    .map((entry) => ({
+      params: { legal: entry.id.replace(/^en\//, '') },
+      props: { entry },
+    }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+
+const dict = getDictionary('en');
+---
+
+<LegalLayout
+  dict={dict}
+  base="/"
+  title={entry.data.title}
+  heading={entry.data.heading}
+  description={entry.data.description}
+  lastUpdated={entry.data.lastUpdated}
+>
+  <Content />
+</LegalLayout>

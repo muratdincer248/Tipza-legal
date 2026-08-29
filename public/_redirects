@@ -1,0 +1,2 @@
+# Cloudflare Pages redirects. Locale-prefixed routes land in Phase 1; until then
+# this file only carries the legacy paths that must never 404.

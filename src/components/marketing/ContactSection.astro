@@ -1,0 +1,59 @@
+---
+import { site } from '~/config/site';
+import type { Dictionary } from '~/i18n/types';
+
+interface Props {
+  copy: Dictionary['contact'];
+  privacyHref: string;
+  termsHref: string;
+  accountDeletionHref: string;
+}
+
+const { copy, privacyHref, termsHref, accountDeletionHref } = Astro.props;
+
+const cards = [
+  { href: privacyHref, icon: '/assets/images/Privacy.svg', ...copy.privacy },
+  { href: termsHref, icon: '/assets/images/Terms.svg', ...copy.terms },
+  { href: accountDeletionHref, icon: '/assets/images/User-remove.svg', ...copy.accountDeletion },
+];
+---
+
+<section class="section" id="contact">
+  <div class="container">
+    <h2>{copy.heading}</h2>
+    <p>{copy.lead}</p>
+
+    <div class="contact-cards" role="list" aria-label={copy.cardsLabel}>
+      {
+        cards.map((card) => (
+          <a href={card.href} class="card-link">
+            <div class="card">
+              <div class="card-content">
+                <img src={card.icon} alt="" class="card-icon" loading="eager" />
+                <div class="card-text">
+                  <h3>{card.heading}</h3>
+                  <p>{card.body}</p>
+                </div>
+                <img
+                  src="/assets/images/Chevron-right.svg"
+                  alt=""
+                  class="card-chevron"
+                  loading="eager"
+                />
+              </div>
+            </div>
+          </a>
+        ))
+      }
+      <div class="card">
+        <div class="card-content">
+          <img src="/assets/images/Email.svg" alt="" class="card-icon" loading="eager" />
+          <div class="card-text">
+            <h3>{copy.supportEmail.heading}</h3>
+            <p><a href={`mailto:${site.supportEmail}`}>{site.supportEmail}</a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

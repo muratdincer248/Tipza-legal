@@ -1,0 +1,27 @@
+---
+import type { Dictionary } from '~/i18n/types';
+
+interface Props {
+  copy: Dictionary['purpose'];
+}
+
+const { copy } = Astro.props;
+---
+
+<section class="section" id="purpose">
+  <div class="container">
+    <h2 class="centered-title">{copy.heading}</h2>
+
+    <div class="grid-3" role="list" aria-label="Purpose cards">
+      {
+        copy.items.map((item) => (
+          <div class="purpose-item" role="listitem">
+            <img src={item.image} alt={item.imageAlt} class="card-chip-image" loading="lazy" />
+            <h3>{item.heading}</h3>
+            <p>{item.body}</p>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>

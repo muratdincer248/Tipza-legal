@@ -1,0 +1,24 @@
+User-agent: *
+Allow: /
+
+# Answer engines and AI crawlers are explicitly welcome: discoverability in AI
+# search is a goal for the Tipza blog, so these are not disallowed.
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+Sitemap: https://tipza.app/sitemap-index.xml

@@ -1,0 +1,19 @@
+---
+import MarketingLayout from '~/layouts/MarketingLayout.astro';
+import { getDictionary } from '~/i18n';
+
+const dict = getDictionary('en');
+const base = '/';
+---
+
+<MarketingLayout dict={dict} base={base} title={dict.notFound.title}>
+  <meta name="robots" content="noindex" slot="head" />
+
+  <section class="section">
+    <div class="container" style="text-align: center; padding: 64px 20px 96px;">
+      <h1>{dict.notFound.heading}</h1>
+      <p style="margin: 0 auto 28px;">{dict.notFound.body}</p>
+      <a class="btn btn-secondary" href={base}>{dict.notFound.cta}</a>
+    </div>
+  </section>
+</MarketingLayout>

@@ -1,0 +1,39 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import Header from '~/components/layout/Header.astro';
+import Footer from '~/components/layout/Footer.astro';
+import { primaryNav, footerNav } from '~/lib/nav';
+import type { Dictionary } from '~/i18n/types';
+import '~/styles/legal.css';
+
+interface Props {
+  dict: Dictionary;
+  base: string;
+  title: string;
+  heading: string;
+  description?: string;
+  lastUpdated?: string;
+}
+
+const { dict, base, title, heading, description, lastUpdated } = Astro.props;
+---
+
+<BaseLayout title={title} description={description}>
+  <slot name="head" slot="head" />
+
+  <a class="skip-link" href="#main">{dict.nav.skipToContent}</a>
+
+  <Header homeHref={base} navItems={primaryNav(dict, base)} />
+
+  <main id="main">
+    <div class="container legal-container">
+      <h1>{heading}</h1>
+      {lastUpdated && <p class="muted">{dict.legal.lastUpdatedLabel}: {lastUpdated}</p>}
+      <div class="legal-body">
+        <slot />
+      </div>
+    </div>
+  </main>
+
+  <Footer links={footerNav(dict, base)} fineprint={dict.footer.fineprint} />
+</BaseLayout>
