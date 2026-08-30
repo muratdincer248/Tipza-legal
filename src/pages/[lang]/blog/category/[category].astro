@@ -78,6 +78,8 @@ const crumbs: Crumb[] = [
   { label: copy.label },
 ];
 
+const otherCategories = localeCategories.filter((other) => other !== category);
+
 const path = categoryRelativePath(category, locale);
 const title = `${copy.heading} — ${dict.blog.meta.categoryTitleSuffix}`;
 ---
@@ -105,30 +107,6 @@ const title = `${copy.heading} — ${dict.blog.meta.categoryTitleSuffix}`;
     </div>
   </section>
 
-  <section class="section blog-topics">
-    <div class="container">
-      <h2>{dict.blog.topicsLabel}</h2>
-      <ul class="blog-topic-list">
-        <li>
-          <a class="tag tag-category" href={blogIndexHref(locale)}>{dict.blog.allTopics}</a>
-        </li>
-        {
-          localeCategories.map((other) => (
-            <li>
-              <a
-                class="tag tag-category"
-                href={categoryHref(other, locale)}
-                aria-current={other === category ? 'page' : undefined}
-              >
-                {categoryLabel(other, locale)}
-              </a>
-            </li>
-          ))
-        }
-      </ul>
-    </div>
-  </section>
-
   <section class="section blog-list" aria-label={dict.blog.articlesLabel}>
     <div class="container">
       <div class="grid-3">
@@ -140,4 +118,31 @@ const title = `${copy.heading} — ${dict.blog.meta.categoryTitleSuffix}`;
       </div>
     </div>
   </section>
+
+  {/* Siblings only, and below the articles: repeating the whole filter row above
+      the heading made a category page read as a second copy of the index. Going
+      up is the breadcrumb's job, so this row only offers somewhere sideways. */}
+  {
+    otherCategories.length > 0 && (
+      <section class="section blog-topics blog-topics-more">
+        <div class="container">
+          <h2>{dict.blog.otherTopicsLabel}</h2>
+          <ul class="blog-topic-list">
+            {otherCategories.map((other) => (
+              <li>
+                <a class="tag tag-category" href={categoryHref(other, locale)} data-astro-prefetch>
+                  {categoryLabel(other, locale)}
+                </a>
+              </li>
+            ))}
+            <li>
+              <a class="tag tag-category" href={blogIndexHref(locale)} data-astro-prefetch>
+                {dict.blog.allArticles}
+              </a>
+            </li>
+          </ul>
+        </div>
+      </section>
+    )
+  }
 </MarketingLayout>

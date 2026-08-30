@@ -122,6 +122,8 @@ export interface Dictionary {
     featuredLabel: string;
     /** Heading above the category filter row. */
     topicsLabel: string;
+    /** Heading above the sibling categories at the foot of a category page. */
+    otherTopicsLabel: string;
     /** Filter pill that clears the category filter. */
     allTopics: string;
     /** Link back from a category page to the full listing. */

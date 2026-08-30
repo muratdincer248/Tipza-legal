@@ -198,6 +198,7 @@ export const de: Dictionary = {
 
     featuredLabel: 'Empfohlen',
     topicsLabel: 'Nach Thema stöbern',
+    otherTopicsLabel: 'Weitere Themen',
     allTopics: 'Alle Themen',
     allArticles: 'Alle Artikel',
     articlesLabel: 'Artikel',
