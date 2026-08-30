@@ -32,6 +32,10 @@
 }
 
 .heading-anchor-copied {
+  /* Hidden by `display`, not just `opacity`: it sits to the right of the
+     anchor and, near the right edge of a narrow screen, an invisible-but-laid-out
+     bubble still forces the whole page to scroll horizontally. */
+  display: none;
   position: absolute;
   left: calc(100% + 8px);
   top: 50%;
@@ -46,7 +50,6 @@
   border-radius: 999px;
   padding: 5px 8px;
   pointer-events: none;
-  opacity: 0;
 }
 
 .article-body h2:hover .heading-anchor,
@@ -65,7 +68,7 @@
 }
 
 .heading-anchor.is-copied .heading-anchor-copied {
-  opacity: 1;
+  display: block;
 }
 
 /* -------------------------------------------------------------------- links */
@@ -230,6 +233,12 @@
    scroll with the content and uncover the shadow layers only while there is
    more table in that direction. */
 .table-scroll {
+  /* Establishes a containing block for absolutely positioned descendants
+     (e.g. the sr-only labels in ComparisonTable cells). Without this, those
+     spans anchor to the viewport instead of this box, and their position deep
+     inside the — otherwise properly clipped — wide table forces the whole
+     page to scroll horizontally on narrow screens. */
+  position: relative;
   overflow-x: auto;
   margin: 26px 0;
   max-width: 100%;
