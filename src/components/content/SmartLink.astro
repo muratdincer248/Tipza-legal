@@ -1,0 +1,27 @@
+---
+import { site } from '~/config/site';
+
+/**
+ * Replaces `[text](url)` in article MDX. External links open in a new tab with
+ * `rel="noopener"`, and stay followable on purpose — linking to a statute or a
+ * ministry is a trust signal, not something to hide from crawlers.
+ */
+interface Props {
+  href?: string;
+}
+
+const { href = '' } = Astro.props;
+
+const isExternal = /^https?:\/\//i.test(href) && !href.startsWith(site.url);
+const isMail = href.startsWith('mailto:');
+---
+
+<a
+  href={href}
+  class={isExternal ? 'external-link' : undefined}
+  target={isExternal ? '_blank' : undefined}
+  rel={isExternal ? 'noopener' : undefined}
+>
+  <slot />
+  {isExternal && !isMail && <span class="external-link-mark" aria-hidden="true">↗</span>}
+</a>

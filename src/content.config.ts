@@ -89,6 +89,16 @@ const blog = defineCollection({
       keywords: z.array(z.string()).default([]),
 
       /**
+       * Question-and-answer pairs for `<FaqBlock items={frontmatter.faq} />`.
+       * Kept in frontmatter rather than written inline so the visible Q&A and
+       * the FAQPage structured data are generated from one source. Answers may
+       * contain inline HTML.
+       */
+      faq: z
+        .array(z.object({ question: z.string(), answer: z.string() }))
+        .default([]),
+
+      /**
        * Structured rather than prose, so one entry can render as an inline
        * citation, as a Sources section, and as JSON-LD `citation`.
        */

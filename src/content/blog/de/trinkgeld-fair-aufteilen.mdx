@@ -23,12 +23,54 @@ keywords:
   - trinkgeld nach stunden
 relatedArticles:
   - tip-pooling-tax-germany
+faq:
+  - question: Wie teilt man Trinkgeld am fairsten auf?
+    answer: >-
+      Für die meisten Teams ist die Aufteilung nach gearbeiteten Stunden der
+      fairste Ausgangspunkt: die Stunden werden ohnehin erfasst, jeder kann die
+      Rechnung nachvollziehen, und das Ergebnis deckt sich mit dem, was die
+      meisten intuitiv erwarten. Teams mit sehr unterschiedlichen Rollen oder mit
+      Beteiligung der Küche brauchen zusätzlich ein Punktesystem.
+  - question: Soll die Küche am Trinkgeld beteiligt werden?
+    answer: >-
+      Das ist eine Entscheidung des Betriebs, keine Vorschrift. Wenn das Essen
+      ein großer Teil des Grunds ist, warum Gäste Trinkgeld geben, funktionieren
+      zwei Wege: ein fester Prozentsatz des Topfs für die Küche, üblich sind 20
+      bis 30 Prozent, oder eine Punktgewichtung für Küchenrollen. Egal welcher
+      Weg – die Zahl gehört überprüft, wenn die Küche wächst oder die Karte sich
+      ändert.
+  - question: Wie teilt man Trinkgeld bei unterschiedlich langen Schichten?
+    answer: >-
+      Den Topf durch die insgesamt gearbeiteten Stunden teilen, um einen
+      Stundenwert zu erhalten, und diesen Wert mit den Stunden jeder Person
+      multiplizieren. Eine gleichmäßige Aufteilung über unterschiedlich lange
+      Schichten ist die häufigste Ursache für Streit ums Trinkgeld.
+  - question: Muss die Aufteilungsregel schriftlich festgehalten werden?
+    answer: >-
+      Es gibt keine allgemeine Pflicht dazu, aber es ist der Unterschied
+      zwischen einer Regel und einer Gewohnheit. Eine schriftliche Regel
+      übersteht Personalwechsel, beendet Diskussionen ohne neue Verhandlung –
+      und bei einem gemeinsamen Topf ist sie eines der ersten Dinge, nach denen
+      das Finanzamt fragt.
 sources:
   - id: estg-3-51
     title: 'Einkommensteuergesetz § 3 Nr. 51'
     publisher: Bundesministerium der Justiz
     url: https://www.gesetze-im-internet.de/estg/__3.html
 ---
+
+import {
+  BarChart,
+  CalculationExample,
+  ComparisonTable,
+  DonutChart,
+  FaqBlock,
+  Formula,
+  ProcessSteps,
+  PullQuote,
+  TipBox,
+  WarningBox,
+} from '~/components/content';
 
 Bei Streit ums Trinkgeld geht es selten wirklich ums Geld. Es geht um eine Zahl, die niemand erklären kann. Wenn eine Servicekraft nach einem vollen Samstag weniger bekommt als die Kollegin, die drei Stunden früher gegangen ist, ist nicht der Betrag das Problem – sondern dass niemand sagen kann, *warum*.
 
@@ -49,7 +91,15 @@ Keine davon ist objektiv richtig. Ein kleines Café, in dem alle alles machen, k
 
 Trinkgeld zusammenrechnen, durch die Anzahl der Personen in der Schicht teilen.
 
-> Ein Team von vier Personen sammelt 240 € Trinkgeld. Jede Person bekommt 60 €.
+<CalculationExample
+  title="Gleichmäßig auf vier Personen"
+  steps={[
+    { label: 'Trinkgeld in der Schicht', value: '240,00 €' },
+    { label: 'Personen in der Schicht', value: '4' },
+    { label: 'Rechnung', value: '240,00 € ÷ 4' },
+  ]}
+  result={{ label: 'Pro Person', value: '60,00 €' }}
+/>
 
 **Passt** für kleine Teams, ähnlich lange Schichten und Betriebe, in denen wirklich jeder für jeden einspringt.
 
@@ -59,9 +109,22 @@ Trinkgeld zusammenrechnen, durch die Anzahl der Personen in der Schicht teilen.
 
 Den Topf im Verhältnis zu den gearbeiteten Stunden aufteilen: erst einen Stundenwert bilden, dann mit den Stunden jeder Person multiplizieren.
 
-> 240 € Trinkgeld, in der Schicht wurden 4 + 8 + 6 + 6 = 24 Stunden gearbeitet.
-> Der Stundenwert ist 240 € ÷ 24 = 10 € pro Stunde.
-> Anteile: 40 €, 80 €, 60 € und 60 €.
+<Formula
+  label="Stundenwert"
+  note="Den Stundenwert mit den Stunden jeder Person multiplizieren, um den Anteil zu erhalten. Die Anteile summieren sich immer genau auf den Topf – genau das macht die Methode nachprüfbar."
+>
+  Stundenwert = Trinkgeld gesamt ÷ Stunden gesamt
+</Formula>
+
+<CalculationExample
+  title="Nach Stunden bei 24 Schichtstunden"
+  steps={[
+    { label: 'Trinkgeld in der Schicht', value: '240,00 €' },
+    { label: 'Gearbeitete Stunden (4 + 8 + 6 + 6)', value: '24' },
+    { label: 'Stundenwert', value: '10,00 €' },
+  ]}
+  result={{ label: 'Anteile', value: '40 € · 80 € · 60 € · 60 €' }}
+/>
 
 **Passt** für fast jedes Team mit unterschiedlich langen Schichten – also für die meisten. Nicht ohne Grund der Standard: Stunden werden ohnehin erfasst, die Rechnung kann jeder nachvollziehen, und das Ergebnis deckt sich mit dem, was die meisten intuitiv fair finden.
 
@@ -79,19 +142,53 @@ Jeder Rolle einen Punktwert geben, Punkte mit Stunden multiplizieren, dann den T
 | Empfang | 0,5 |
 | Küche | 0,5 |
 
-> 240 € Trinkgeld. Service arbeitet 8 Stunden (8,0 Punkte), Bar 6 Stunden (6,0), Runner 6 Stunden (4,2) und Empfang 4 Stunden (2,0) – zusammen 20,2 Punkte.
-> Der Punktwert ist 240 € ÷ 20,2 = 11,88 € pro Punkt.
-> Anteile: 95,05 €, 71,29 €, 49,90 € und 23,76 €.
+<CalculationExample
+  title="Nach Punkten bei vier Rollen"
+  steps={[
+    { label: 'Service, 8 Stunden × 1,0', value: '8,0 Punkte' },
+    { label: 'Bar, 6 Stunden × 1,0', value: '6,0 Punkte' },
+    { label: 'Runner, 6 Stunden × 0,7', value: '4,2 Punkte' },
+    { label: 'Empfang, 4 Stunden × 0,5', value: '2,0 Punkte' },
+    { label: 'Punkte gesamt', value: '20,2' },
+    { label: 'Punktwert (240 € ÷ 20,2)', value: '11,88 €' },
+  ]}
+  result={{ label: 'Anteile', value: '95,05 € · 71,29 € · 49,90 € · 23,76 €' }}
+/>
+
+<BarChart
+  caption="Was jede Rolle aus einem Topf von 240 € mitnimmt"
+  bars={[
+    { label: 'Service', value: 95.05, display: '95,05 €' },
+    { label: 'Bar', value: 71.29, display: '71,29 €' },
+    { label: 'Runner', value: 49.9, display: '49,90 €' },
+    { label: 'Empfang', value: 23.76, display: '23,76 €' },
+  ]}
+/>
 
 **Passt** für größere Teams mit klar getrennten Rollen und für jeden Betrieb, der die Küche am Trinkgeld beteiligt.
 
-**Bricht** an der Politik der Punktwerte selbst. Die Zahlen sind ein Urteil über relative Bedeutung, und jede Überprüfung ist eine Verhandlung. Einmal gemeinsam festlegen und zu festen Terminen überprüfen – nicht nach einer schlechten Schicht.
+**Bricht** an der Politik der Punktwerte selbst. Die Zahlen sind ein Urteil über relative Bedeutung, und jede Überprüfung ist eine Verhandlung.
+
+<TipBox title="Punktwerte einmal gemeinsam und offen festlegen">
+  Die Gewichtung mit dem Team abstimmen und festhalten, wann sie abgestimmt
+  wurde. Und dann zu festen Anlässen überprüfen – nach einer neuen Karte oder
+  einer neuen Rolle, nicht nach einer schlechten Schicht. Wer die Zahlen mitten
+  im Streit wieder aufmacht, macht aus einer Regel wieder eine Verhandlung.
+</TipBox>
 
 ## 4. Anteil am eigenen Umsatz
 
 Jede Person behält einen Prozentsatz des Trinkgelds auf den eigenen Rechnungen und gibt oft einen festen Anteil an die unterstützenden Rollen ab.
 
-> Eine Servicekraft macht 1.800 € Umsatz, bekommt darauf 190 € Trinkgeld und gibt 20 % – also 38 € – in den Topf für Runner und Bar. 152 € bleiben.
+<CalculationExample
+  title="Nach Umsatz mit 20 % für den Support"
+  steps={[
+    { label: 'Eigener Umsatz', value: '1.800,00 €' },
+    { label: 'Trinkgeld auf diese Rechnungen', value: '190,00 €' },
+    { label: 'An den Topf für Runner und Bar (20 %)', value: '−38,00 €' },
+  ]}
+  result={{ label: 'Bleibt im Service', value: '152,00 €' }}
+/>
 
 **Passt** dort, wo Servicekräfte ihre Stationen wirklich allein führen und das Kassensystem jede Rechnung zuverlässig zuordnet.
 
@@ -101,14 +198,45 @@ Jede Person behält einen Prozentsatz des Trinkgelds auf den eigenen Rechnungen 
 
 Das gesamte Trinkgeld im Service sammeln, diesen Topf nach Stunden oder Punkten verteilen und einen festen Prozentsatz des Gesamtbetrags an die Küche geben.
 
-> 240 € Trinkgeld, davon 25 % (60 €) an die Küche.
-> Die restlichen 180 € werden auf 24 Servicestunden verteilt: 7,50 € pro Stunde.
+<DonutChart
+  caption="Ein Topf von 240 € mit 25 % für die Küche"
+  slices={[
+    { label: 'Service (nach Stunden)', value: 180, display: '180,00 €' },
+    { label: 'Küche (feste 25 %)', value: 60, display: '60,00 €' },
+  ]}
+/>
+
+<CalculationExample
+  title="Mischform mit 25 % für die Küche"
+  steps={[
+    { label: 'Trinkgeld in der Schicht', value: '240,00 €' },
+    { label: 'Anteil Küche (25 %)', value: '60,00 €' },
+    { label: 'Rest für den Service', value: '180,00 €' },
+    { label: 'Servicestunden', value: '24' },
+  ]}
+  result={{ label: 'Stundenwert im Service', value: '7,50 €' }}
+/>
 
 **Passt** für Betriebe, in denen das Essen ein großer Teil des Grunds ist, warum überhaupt Trinkgeld gegeben wird – und in denen die Küche sonst leer ausgeht.
 
 **Bricht**, wenn der feste Prozentsatz nie überprüft wird. Eine Zahl, die bei sechs Gerichten auf der Karte festgelegt wurde, passt selten noch zu einer doppelt so großen Küche.
 
 ## Welche Methode für welches Team?
+
+<ComparisonTable
+  caption="Was jede Methode berücksichtigt"
+  columns={['Methode', 'Schichtlänge', 'Rollengewicht', 'Küche beteiligt', 'Braucht Umsatzdaten']}
+  rows={[
+    ['Gleichmäßig', false, false, false, false],
+    ['Nach Stunden', true, false, false, false],
+    ['Nach Punkten', true, true, true, false],
+    ['Nach Umsatz', false, false, false, true],
+    ['Mischform', true, true, true, false],
+  ]}
+  yesLabel="Ja"
+  noLabel="Nein"
+  note="„Küche beteiligt“ heißt, dass die Methode einen natürlichen Platz für Anteile der Küche hat – nicht, dass sie einen verlangt."
+/>
 
 Die Kurzfassung für alle, die aufhören wollen zu diskutieren und anfangen wollen:
 
@@ -120,12 +248,39 @@ Die Kurzfassung für alle, die aufhören wollen zu diskutieren und anfangen woll
 
 ## Die Regel zählt mehr als die Methode
 
+<PullQuote>
+  Menschen akzeptieren einen kleineren Anteil deutlich leichter, wenn sie die
+  Rechnung dahinter sehen können.
+</PullQuote>
+
 Welche Methode auch gewählt wird: drei Dinge bringen für die Fairness mehr als die Wahl selbst.
 
-**Aufschreiben.** Eine Methode, die nur im Kopf der Person existiert, die die Kasse abrechnet, ist keine Regel, sondern eine Gewohnheit – und Gewohnheiten verschieben sich.
+<ProcessSteps
+  label="Damit eine Aufteilungsregel hält"
+  steps={[
+    {
+      title: 'Aufschreiben',
+      body: 'Eine Methode, die nur im Kopf der Person existiert, die die Kasse abrechnet, ist keine Regel, sondern eine Gewohnheit – und Gewohnheiten verschieben sich.',
+    },
+    {
+      title: 'Jedes Mal gleich anwenden',
+      body: 'Eine einzige Ausnahme, aus guten Gründen an einem schwierigen Abend gemacht, ist der Präzedenzfall für die nächste Diskussion.',
+    },
+    {
+      title: 'Den Rechenweg zeigen',
+      body: 'Ein Anteil, den niemand nachprüfen kann, wird irgendwann angezweifelt. Genau deshalb zeigt Tipza jeden Schritt einer Aufteilung und nicht nur das Endergebnis.',
+    },
+  ]}
+/>
 
-**Jedes Mal gleich anwenden.** Eine einzige Ausnahme, aus guten Gründen an einem schwierigen Abend gemacht, ist der Präzedenzfall für die nächste Diskussion.
+<WarningBox title="Die steuerliche Seite klären, bevor umgestellt wird">
+  Wie Trinkgeld gesammelt wird, kann sich darauf auswirken, wie es besteuert
+  wird – und die Antwort ist von Land zu Land unterschiedlich. In Deutschland
+  wird Trinkgeld, das direkt an die Beschäftigten geht, anders behandelt als
+  Geld, das der Betrieb einsammelt und weiterverteilt. Wer auf ein Topfmodell
+  umstellt, sollte das vor der ersten Auszahlung klären – nicht danach.
+</WarningBox>
 
-**Den Rechenweg zeigen.** Menschen akzeptieren einen kleineren Anteil deutlich leichter, wenn sie die Rechnung dahinter sehen können. Genau deshalb zeigt Tipza jeden Schritt einer Aufteilung und nicht nur das Endergebnis – ein Anteil, den niemand nachprüfen kann, wird irgendwann angezweifelt.
+## Häufige Fragen
 
-Ein praktischer Hinweis, bevor du etwas umstellst: Wie Trinkgeld gesammelt wird, kann sich darauf auswirken, wie es besteuert wird. In Deutschland wird Trinkgeld, das direkt an die Beschäftigten geht, anders behandelt als Geld, das der Betrieb einsammelt und weiterverteilt. Wer auf ein Topfmodell umstellt, sollte die steuerliche Seite vor der ersten Auszahlung klären – nicht danach.
+<FaqBlock items={frontmatter.faq} />

@@ -1,0 +1,48 @@
+---
+import type { MarkdownHeading } from 'astro';
+
+/**
+ * Built from the headings Astro already extracted, so it cannot list a section
+ * the article does not have. Only `h2`s are included: an outline that mirrors
+ * every subheading is as hard to scan as the article itself.
+ *
+ * Rendered twice by the layout — once as a closed `<details>` above the article
+ * and once as a sidebar — because the two need different positions in the
+ * document, not just different CSS. Each breakpoint shows one. Both are plain
+ * links, so neither needs JavaScript.
+ */
+interface Props {
+  headings: MarkdownHeading[];
+  label: string;
+  variant: 'inline' | 'aside';
+}
+
+const { headings, label, variant } = Astro.props;
+const sections = headings.filter((heading) => heading.depth === 2);
+---
+
+{
+  variant === 'inline' ? (
+    <details class="toc toc-inline">
+      <summary>{label}</summary>
+      <ol>
+        {sections.map((section) => (
+          <li>
+            <a href={`#${section.slug}`}>{section.text}</a>
+          </li>
+        ))}
+      </ol>
+    </details>
+  ) : (
+    <nav class="toc toc-aside" aria-label={label}>
+      <p class="toc-label">{label}</p>
+      <ol>
+        {sections.map((section) => (
+          <li>
+            <a href={`#${section.slug}`}>{section.text}</a>
+          </li>
+        ))}
+      </ol>
+    </nav>
+  )
+}

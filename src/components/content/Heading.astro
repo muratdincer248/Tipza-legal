@@ -1,0 +1,25 @@
+---
+/**
+ * Replaces `##` / `###` in article MDX. Astro already gives every heading a
+ * slug id; this adds a permalink that only appears on hover or keyboard focus,
+ * so readers can cite a section without the page looking like a wiki.
+ */
+interface Props {
+  level: 2 | 3;
+  id?: string;
+}
+
+const { level, id } = Astro.props;
+const Tag = `h${level}` as 'h2' | 'h3';
+---
+
+<Tag id={id}>
+  <slot />
+  {
+    id && (
+      <a class="heading-anchor" href={`#${id}`} aria-label="Link to this section">
+        <span aria-hidden="true">#</span>
+      </a>
+    )
+  }
+</Tag>

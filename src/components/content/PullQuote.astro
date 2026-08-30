@@ -1,0 +1,16 @@
+---
+/**
+ * A line lifted out of the prose for emphasis. Distinct from `Quote`, which
+ * renders an actual quotation from a source.
+ */
+interface Props {
+  attribution?: string;
+}
+
+const { attribution } = Astro.props;
+---
+
+<aside class="pull-quote">
+  <p><slot /></p>
+  {attribution && <p class="pull-quote-attribution">{attribution}</p>}
+</aside>

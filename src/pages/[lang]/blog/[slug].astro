@@ -2,6 +2,11 @@
 import type { GetStaticPaths } from 'astro';
 import { getEntry, render } from 'astro:content';
 import ArticleLayout from '~/layouts/ArticleLayout.astro';
+import H2 from '~/components/content/H2.astro';
+import H3 from '~/components/content/H3.astro';
+import DataTable from '~/components/content/DataTable.astro';
+import Quote from '~/components/content/Quote.astro';
+import SmartLink from '~/components/content/SmartLink.astro';
 import { allArticles, articleAlternates, type Article } from '~/lib/blog';
 import type { Alternate } from '~/lib/translations';
 
@@ -28,9 +33,28 @@ if (!author) {
   );
 }
 
-const { Content } = await render(article.entry);
+const { Content, headings } = await render(article.entry);
+
+/**
+ * Ordinary Markdown gets the styled components without the author importing
+ * anything, which is what keeps a plain article a plain file. Only the genuinely
+ * special blocks — callouts, comparison tables, charts — are imported in the MDX.
+ */
+const components = {
+  h2: H2,
+  h3: H3,
+  table: DataTable,
+  blockquote: Quote,
+  a: SmartLink,
+};
 ---
 
-<ArticleLayout article={article} author={author} locale={article.locale} alternates={alternates}>
-  <Content />
+<ArticleLayout
+  article={article}
+  author={author}
+  locale={article.locale}
+  alternates={alternates}
+  headings={headings}
+>
+  <Content components={components} />
 </ArticleLayout>

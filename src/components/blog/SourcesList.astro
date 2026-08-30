@@ -1,0 +1,52 @@
+---
+import { formatDate } from '~/lib/formatDate';
+import type { Locale } from '~/config/locales';
+
+/**
+ * The references section, generated from frontmatter so it stays in step with
+ * the inline `SourceRef` markers — the `id` on each entry is what those markers
+ * link to. External links stay followable: pointing at a statute or a ministry
+ * is a trust signal, not something to hide from crawlers.
+ */
+export interface Source {
+  id: string;
+  title: string;
+  publisher: string;
+  url: string;
+  accessedAt?: Date;
+}
+
+interface Props {
+  sources: Source[];
+  heading: string;
+  accessedLabel: string;
+  locale: Locale;
+}
+
+const { sources, heading, accessedLabel, locale } = Astro.props;
+---
+
+{
+  sources.length > 0 && (
+    <section class="sources">
+      <h2>{heading}</h2>
+      <ol>
+        {sources.map((source) => (
+          <li id={`source-${source.id}`}>
+            <a href={source.url} target="_blank" rel="noopener">
+              {source.title}
+            </a>
+            <span class="sources-publisher">{source.publisher}</span>
+            {source.accessedAt && (
+              <span class="sources-accessed">
+                {accessedLabel} <time datetime={source.accessedAt.toISOString().slice(0, 10)}>
+                  {formatDate(source.accessedAt, locale)}
+                </time>
+              </span>
+            )}
+          </li>
+        ))}
+      </ol>
+    </section>
+  )
+}

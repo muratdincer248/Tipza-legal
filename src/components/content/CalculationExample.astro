@@ -1,0 +1,44 @@
+---
+/**
+ * A worked example: the inputs, the steps, and the answer. Structured rather
+ * than prose so the numbers line up visually and stay extractable — this is the
+ * shape of thing readers screenshot and send to a colleague, so it has to be
+ * legible on its own.
+ */
+interface Step {
+  label: string;
+  value: string;
+}
+
+interface Props {
+  title: string;
+  /** Inputs and intermediate steps, in order. */
+  steps: Step[];
+  /** The answer, emphasised. */
+  result: Step;
+  note?: string;
+}
+
+const { title, steps, result, note } = Astro.props;
+---
+
+<div class="calc">
+  <p class="calc-title">{title}</p>
+
+  <dl class="calc-steps">
+    {
+      steps.map((step) => (
+        <div class="calc-row">
+          <dt>{step.label}</dt>
+          <dd>{step.value}</dd>
+        </div>
+      ))
+    }
+    <div class="calc-row calc-result">
+      <dt>{result.label}</dt>
+      <dd>{result.value}</dd>
+    </div>
+  </dl>
+
+  {note && <p class="calc-note">{note}</p>}
+</div>

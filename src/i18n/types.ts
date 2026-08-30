@@ -138,6 +138,12 @@ export interface Dictionary {
     /** Unit appended to the reading-time number, e.g. `6 min read`. */
     minRead: string;
 
+    /** Heading for the table of contents. */
+    tocLabel: string;
+    /** Heading for the references section. */
+    sourcesLabel: string;
+    /** Prefix before a source access date. */
+    accessedLabel: string;
     breadcrumbLabel: string;
     home: string;
 

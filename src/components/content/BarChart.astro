@@ -1,0 +1,52 @@
+---
+/**
+ * A horizontal bar chart built from CSS widths, not an image.
+ *
+ * Every label and value is real visible text, so there is no separate
+ * screen-reader-only copy to keep in sync — the accessible version and the
+ * visible version are the same markup. The bars are decoration on top of a
+ * definition list.
+ */
+interface Bar {
+  label: string;
+  value: number;
+  /** Overrides the displayed number, e.g. `€1,240` instead of `1240`. */
+  display?: string;
+}
+
+interface Props {
+  caption: string;
+  bars: Bar[];
+  /** Scale ceiling. Defaults to the largest value, making bars relative. */
+  max?: number;
+  unit?: string;
+}
+
+const { caption, bars, max, unit } = Astro.props;
+
+const ceiling = max ?? Math.max(...bars.map((bar) => bar.value));
+const percent = (value: number) => (ceiling > 0 ? Math.round((value / ceiling) * 100) : 0);
+---
+
+<figure class="bar-chart">
+  <figcaption>{caption}</figcaption>
+
+  <dl>
+    {
+      bars.map((bar) => (
+        <div class="bar-row">
+          <dt>{bar.label}</dt>
+          <dd>
+            <span class="bar-track">
+              <span class="bar-fill" style={`width: ${percent(bar.value)}%`}></span>
+            </span>
+            <span class="bar-value">
+              {bar.display ?? bar.value}
+              {unit && !bar.display && <span class="bar-unit"> {unit}</span>}
+            </span>
+          </dd>
+        </div>
+      ))
+    }
+  </dl>
+</figure>

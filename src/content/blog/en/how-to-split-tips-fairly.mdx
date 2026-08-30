@@ -23,12 +23,51 @@ keywords:
   - restaurant tip distribution
 relatedArticles:
   - tip-pooling-tax-germany
+faq:
+  - question: What is the fairest way to split tips?
+    answer: >-
+      For most teams, splitting in proportion to hours worked is the fairest
+      starting point: the hours are already tracked, anyone can check the
+      arithmetic, and the result matches what people intuitively expect. Teams
+      with sharply different roles, or that share tips with the kitchen, usually
+      need a points system layered on top of hours.
+  - question: Should the kitchen get a share of tips?
+    answer: >-
+      That is a policy choice, not a rule. If the food is a large part of why
+      guests tip, the two workable approaches are a fixed percentage of the pool
+      to the kitchen, commonly 20 to 30 percent, or a points weighting for
+      kitchen roles. Whichever you pick, revisit the number when the kitchen's
+      size or the menu changes.
+  - question: How do you split tips when shifts are different lengths?
+    answer: >-
+      Divide the pool by the total hours worked to get a per-hour rate, then
+      multiply that rate by each person's hours. An equal split across unequal
+      shifts is the single most common source of tip disputes.
+  - question: Do you have to write the tip split rule down?
+    answer: >-
+      There is no universal legal requirement, but writing it down is the
+      difference between a rule and a habit. A written rule survives staff
+      turnover, settles arguments without a fresh negotiation, and if you pool
+      tips it is one of the first things a tax authority will ask to see.
 sources:
   - id: estg-3-51
     title: 'Einkommensteuergesetz § 3 Nr. 51'
     publisher: Bundesministerium der Justiz
     url: https://www.gesetze-im-internet.de/estg/__3.html
 ---
+
+import {
+  BarChart,
+  CalculationExample,
+  ComparisonTable,
+  DonutChart,
+  FaqBlock,
+  Formula,
+  ProcessSteps,
+  PullQuote,
+  TipBox,
+  WarningBox,
+} from '~/components/content';
 
 Most tip disputes are not really about money. They are about a number nobody can explain. When a server finishes a busy Saturday and receives less than the colleague who left three hours early, the problem is not the amount — it is that no one can say *why*.
 
@@ -49,7 +88,15 @@ None of these is objectively correct. A small café where everyone does everythi
 
 Total the tips, divide by the number of people who worked the shift.
 
-> A team of four collects €240 in tips. Each person receives €60.
+<CalculationExample
+  title="Equal split across four people"
+  steps={[
+    { label: 'Tips collected', value: '€240.00' },
+    { label: 'People on shift', value: '4' },
+    { label: 'Calculation', value: '€240.00 ÷ 4' },
+  ]}
+  result={{ label: 'Each person receives', value: '€60.00' }}
+/>
 
 **It suits** small teams, shifts of roughly equal length, and rooms where everyone genuinely covers for everyone else.
 
@@ -57,11 +104,24 @@ Total the tips, divide by the number of people who worked the shift.
 
 ## 2. The hours-weighted split
 
-Divide the pool in proportion to hours worked. Calculate a per-hour rate, then multiply by each person's hours.
+Divide the pool in proportion to hours worked: work out a per-hour rate, then multiply by each person's hours.
 
-> €240 in tips across a shift with 4 + 8 + 6 + 6 = 24 hours worked.
-> The rate is €240 ÷ 24 = €10 per hour.
-> Shares: €40, €80, €60 and €60.
+<Formula
+  label="Per-hour rate"
+  note="Multiply the rate by each person's hours to get their share. The shares always add back up to the pool, which is what makes the method easy to check."
+>
+  rate = total tips ÷ total hours worked
+</Formula>
+
+<CalculationExample
+  title="Hours-weighted split across a 24-hour shift"
+  steps={[
+    { label: 'Tips collected', value: '€240.00' },
+    { label: 'Hours worked (4 + 8 + 6 + 6)', value: '24' },
+    { label: 'Per-hour rate', value: '€10.00' },
+  ]}
+  result={{ label: 'Shares', value: '€40 · €80 · €60 · €60' }}
+/>
 
 **It suits** almost every team with variable shift lengths, which is most teams. It is the default for a reason: hours are already tracked, the arithmetic is checkable by anyone, and the result matches most people's intuition about fairness.
 
@@ -79,19 +139,53 @@ Assign each role a point value, multiply points by hours, then divide the pool b
 | Host | 0.5 |
 | Kitchen | 0.5 |
 
-> €240 in tips. A server works 8 hours (8.0 points), a bartender 6 hours (6.0), a runner 6 hours (4.2) and a host 4 hours (2.0) — 20.2 points in total.
-> The rate is €240 ÷ 20.2 = €11.88 per point.
-> Shares: €95.05, €71.29, €49.90 and €23.76.
+<CalculationExample
+  title="Points split with four roles"
+  steps={[
+    { label: 'Server, 8 hours × 1.0', value: '8.0 points' },
+    { label: 'Bartender, 6 hours × 1.0', value: '6.0 points' },
+    { label: 'Runner, 6 hours × 0.7', value: '4.2 points' },
+    { label: 'Host, 4 hours × 0.5', value: '2.0 points' },
+    { label: 'Total points', value: '20.2' },
+    { label: 'Per-point rate (€240 ÷ 20.2)', value: '€11.88' },
+  ]}
+  result={{ label: 'Shares', value: '€95.05 · €71.29 · €49.90 · €23.76' }}
+/>
+
+<BarChart
+  caption="What each role takes home from a €240 pool"
+  bars={[
+    { label: 'Server', value: 95.05, display: '€95.05' },
+    { label: 'Bartender', value: 71.29, display: '€71.29' },
+    { label: 'Runner', value: 49.9, display: '€49.90' },
+    { label: 'Host', value: 23.76, display: '€23.76' },
+  ]}
+/>
 
 **It suits** larger teams with clearly distinct roles, and any operation that shares tips with the kitchen.
 
-**It breaks down** on the politics of the point values themselves. The numbers are a judgement about relative worth, and every review of them is a negotiation. Set them once, with the team, and revisit them on a schedule rather than after a bad shift.
+**It breaks down** on the politics of the point values themselves. The numbers are a judgement about relative worth, and every review of them is a negotiation.
+
+<TipBox title="Set the point values once, in the open">
+  Agree the weightings with the team and write down when you agreed them. Then
+  revisit them on a schedule — after a menu change or a new role, not after a bad
+  shift. Reopening the numbers in the middle of an argument turns a rule back
+  into a negotiation.
+</TipBox>
 
 ## 4. Percentage of personal sales
 
 Each person keeps a percentage of the tips generated on their own checks, often with a fixed cut passed to support roles.
 
-> A server closes €1,800 in sales, receives €190 in tips on those checks, and passes 20% — €38 — to the support pool. They keep €152.
+<CalculationExample
+  title="Percentage of sales with a 20% support cut"
+  steps={[
+    { label: 'Sales closed', value: '€1,800.00' },
+    { label: 'Tips on those checks', value: '€190.00' },
+    { label: 'Passed to the support pool (20%)', value: '−€38.00' },
+  ]}
+  result={{ label: 'Server keeps', value: '€152.00' }}
+/>
 
 **It suits** rooms where servers own their sections end to end and where the point of sale can attribute every check reliably.
 
@@ -101,14 +195,49 @@ Each person keeps a percentage of the tips generated on their own checks, often 
 
 Pool all tips from the front of house, distribute that pool by hours or points, and pass a fixed percentage of the total to the kitchen.
 
-> €240 in tips, with 25% (€60) to the kitchen.
-> The remaining €180 is split across 24 front-of-house hours at €7.50 per hour.
+<DonutChart
+  caption="A €240 pool with a 25% kitchen share"
+  slices={[
+    { label: 'Front of house (by hours)', value: 180, display: '€180.00' },
+    { label: 'Kitchen (fixed 25%)', value: 60, display: '€60.00' },
+  ]}
+/>
+
+<CalculationExample
+  title="Hybrid split, 25% to the kitchen"
+  steps={[
+    { label: 'Tips collected', value: '€240.00' },
+    { label: 'Kitchen share (25%)', value: '€60.00' },
+    { label: 'Remaining for front of house', value: '€180.00' },
+    { label: 'Front-of-house hours', value: '24' },
+  ]}
+  result={{ label: 'Front-of-house rate', value: '€7.50 per hour' }}
+/>
 
 **It suits** operations where the food is a large part of why people tip, and where the kitchen would otherwise be excluded.
 
 **It breaks down** if the fixed percentage is never revisited. A number set when the menu was six dishes rarely still fits a kitchen twice the size.
 
 ## Choosing between them
+
+<ComparisonTable
+  caption="What each method accounts for"
+  columns={[
+    'Method',
+    'Shift length',
+    'Role weighting',
+    'Includes kitchen',
+    'Needs sales data',
+  ]}
+  rows={[
+    ['Equal split', false, false, false, false],
+    ['Hours-weighted', true, false, false, false],
+    ['Points', true, true, true, false],
+    ['Percentage of sales', false, false, false, true],
+    ['Hybrid pool', true, true, true, false],
+  ]}
+  note="“Includes kitchen” means the method has a natural place for back-of-house shares, not that it requires one."
+/>
 
 A short version, for teams that want to stop deliberating and start:
 
@@ -120,12 +249,39 @@ A short version, for teams that want to stop deliberating and start:
 
 ## The rule matters more than the method
 
+<PullQuote>
+  People accept a smaller share far more readily when they can see the arithmetic
+  that produced it.
+</PullQuote>
+
 Whichever method you choose, three things do more for fairness than the choice itself.
 
-**Write it down.** A method that lives only in the head of whoever closes the till is not a rule, it is a habit, and it will drift.
+<ProcessSteps
+  label="Making a split rule stick"
+  steps={[
+    {
+      title: 'Write it down',
+      body: 'A method that lives only in the head of whoever closes the till is not a rule, it is a habit, and habits drift.',
+    },
+    {
+      title: 'Apply it the same way every time',
+      body: 'One exception, made for good reasons on a difficult night, becomes the precedent for the next argument.',
+    },
+    {
+      title: 'Show the working',
+      body: 'A share nobody can check is a share somebody will eventually contest. This is why Tipza shows every step of a split rather than just the final numbers.',
+    },
+  ]}
+/>
 
-**Apply it the same way every time.** One exception, made for good reasons on a difficult night, becomes the precedent for the next argument.
+<WarningBox title="Check the tax treatment before you pool">
+  How tips are collected can change how they are taxed, and the answer differs by
+  country. In Germany, tips handed directly to an employee are treated
+  differently from money the employer collects and redistributes. If you are
+  moving to a pooled model, settle the tax question before the first payout
+  rather than after it.
+</WarningBox>
 
-**Show the working.** People accept a smaller share far more readily when they can see the arithmetic that produced it. This is the whole reason Tipza shows every step of a split rather than just the final numbers — a share nobody can check is a share somebody will eventually contest.
+## Frequently asked questions
 
-One practical note before you change anything: how tips are pooled can affect how they are taxed, and the answer differs by country. In Germany, tips handed directly to an employee are treated differently from money the employer collects and redistributes. If you are moving to a pooled model, read up on the tax treatment before the first payout rather than after it.
+<FaqBlock items={frontmatter.faq} />

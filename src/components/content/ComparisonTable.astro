@@ -1,0 +1,83 @@
+---
+import { slugify } from '~/lib/slug';
+
+/**
+ * A comparison matrix as real table markup with scoped headers, rather than an
+ * exported image. Both a screen reader and an answer engine can read the cells,
+ * which an image forecloses.
+ *
+ * Booleans render as a mark plus visually-hidden text, so "supported" and
+ * "not supported" survive being read aloud or extracted.
+ *
+ * The caption sits outside the scrolling box, as a `<figcaption>` the table is
+ * labelled by. A `<caption>` element would be inside the table and scroll out of
+ * sight on a narrow screen, which is where the caption is needed most.
+ */
+export type Cell = string | number | boolean;
+
+interface Props {
+  caption: string;
+  /** Column headers. The first labels the row-header column. */
+  columns: string[];
+  /** One array per row; the first entry becomes that row's `<th scope="row">`. */
+  rows: Cell[][];
+  /** Accessible text for boolean cells. */
+  yesLabel?: string;
+  noLabel?: string;
+  note?: string;
+}
+
+const { caption, columns, rows, yesLabel = 'Yes', noLabel = 'No', note } = Astro.props;
+
+const mismatched = rows.find((row) => row.length !== columns.length);
+if (mismatched) {
+  throw new Error(
+    `ComparisonTable "${caption}": a row has ${mismatched.length} cells but there are ${columns.length} columns.`
+  );
+}
+
+const captionId = `table-${slugify(caption)}`;
+---
+
+<figure class="comparison-table">
+  <figcaption id={captionId}>{caption}</figcaption>
+
+  <div class="table-scroll" tabindex="0" role="region" aria-labelledby={captionId}>
+    <table aria-labelledby={captionId}>
+      <thead>
+        <tr>
+          {
+            columns.map((column, index) => (
+              <th scope="col" class={index === 0 ? 'row-label' : undefined}>
+                {column}
+              </th>
+            ))
+          }
+        </tr>
+      </thead>
+      <tbody>
+        {
+          rows.map(([label, ...cells]) => (
+            <tr>
+              <th scope="row" class="row-label">
+                {label}
+              </th>
+              {cells.map((cell) =>
+                typeof cell === 'boolean' ? (
+                  <td class={cell ? 'cell-yes' : 'cell-no'}>
+                    <span aria-hidden="true">{cell ? '✓' : '—'}</span>
+                    <span class="sr-only">{cell ? yesLabel : noLabel}</span>
+                  </td>
+                ) : (
+                  <td>{cell}</td>
+                )
+              )}
+            </tr>
+          ))
+        }
+      </tbody>
+    </table>
+  </div>
+
+  {note && <p class="block-note">{note}</p>}
+</figure>

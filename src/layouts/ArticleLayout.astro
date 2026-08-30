@@ -1,10 +1,13 @@
 ---
+import type { MarkdownHeading } from 'astro';
 import type { CollectionEntry } from 'astro:content';
 import BaseLayout from './BaseLayout.astro';
 import Header from '~/components/layout/Header.astro';
 import Footer from '~/components/layout/Footer.astro';
 import Breadcrumbs, { type Crumb } from '~/components/seo/Breadcrumbs.astro';
 import ArticleHeader from '~/components/blog/ArticleHeader.astro';
+import TableOfContents from '~/components/blog/TableOfContents.astro';
+import SourcesList from '~/components/blog/SourcesList.astro';
 import { primaryNav, footerNav } from '~/lib/nav';
 import { localeBase, type Locale } from '~/config/locales';
 import { categoryHref, categoryLabel } from '~/config/taxonomy';
@@ -13,18 +16,25 @@ import { blogIndexHref, type Article } from '~/lib/blog';
 import type { Alternate } from '~/lib/translations';
 import '~/styles/blog.css';
 import '~/styles/article.css';
+import '~/styles/blocks.css';
+
+/** Below this many sections a contents list is longer than the outline it describes. */
+const MIN_TOC_SECTIONS = 4;
 
 interface Props {
   article: Article;
   author: CollectionEntry<'authors'>;
   locale: Locale;
   alternates: Alternate[];
+  headings: MarkdownHeading[];
 }
 
-const { article, author, locale, alternates } = Astro.props;
+const { article, author, locale, alternates, headings } = Astro.props;
 const dict = getDictionary(locale);
 const base = localeBase(locale);
 const { data } = article.entry;
+
+const showToc = headings.filter((heading) => heading.depth === 2).length >= MIN_TOC_SECTIONS;
 
 const crumbs: Crumb[] = [
   { label: dict.blog.home, href: base },
@@ -55,14 +65,33 @@ const crumbs: Crumb[] = [
   />
 
   <main id="main">
-    <div class="article-container">
-      <Breadcrumbs crumbs={crumbs} label={dict.blog.breadcrumbLabel} />
+    <div class={showToc ? 'article-shell article-shell-toc' : 'article-shell'}>
+      <div class="article-main">
+        <Breadcrumbs crumbs={crumbs} label={dict.blog.breadcrumbLabel} />
 
-      <ArticleHeader article={article} author={author} locale={locale} dict={dict} />
+        <ArticleHeader article={article} author={author} locale={locale} dict={dict} />
 
-      <article class="article-body">
-        <slot />
-      </article>
+        {showToc && <TableOfContents headings={headings} label={dict.blog.tocLabel} variant="inline" />}
+
+        <article class="article-body">
+          <slot />
+        </article>
+
+        <SourcesList
+          sources={data.sources}
+          heading={dict.blog.sourcesLabel}
+          accessedLabel={dict.blog.accessedLabel}
+          locale={locale}
+        />
+      </div>
+
+      {
+        showToc && (
+          <div class="article-aside">
+            <TableOfContents headings={headings} label={dict.blog.tocLabel} variant="aside" />
+          </div>
+        )
+      }
     </div>
   </main>
 

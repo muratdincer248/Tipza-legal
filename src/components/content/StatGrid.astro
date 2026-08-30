@@ -1,0 +1,12 @@
+---
+interface Props {
+  /** Optional heading, rendered as a group label rather than a document heading. */
+  label?: string;
+}
+
+const { label } = Astro.props;
+---
+
+<div class="stat-grid" role="group" aria-label={label}>
+  <slot />
+</div>

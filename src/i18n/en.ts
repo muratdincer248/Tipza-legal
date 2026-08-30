@@ -207,6 +207,9 @@ export const en: Dictionary = {
     updatedPrefix: 'Updated',
     minRead: 'min read',
 
+    tocLabel: 'On this page',
+    sourcesLabel: 'Sources',
+    accessedLabel: 'Accessed',
     breadcrumbLabel: 'Breadcrumb',
     home: 'Home',
 

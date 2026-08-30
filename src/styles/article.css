@@ -2,10 +2,46 @@
    The measure is capped in `ch` rather than `px` so the line length stays
    readable at any font size. Editorial blocks are layered on top of this. */
 
-.article-container {
-  max-width: 820px;
+.article-shell {
+  max-width: var(--container);
   margin: 0 auto;
   padding: 30px 20px 72px;
+}
+
+.article-main {
+  max-width: 820px;
+  margin: 0 auto;
+  min-width: 0;
+}
+
+.article-aside {
+  display: none;
+}
+
+/* The sidebar contents list only appears where there is a genuine gutter for it.
+   Below this the same list renders as a <details> above the article instead. */
+@media (min-width: 1200px) {
+  .article-shell-toc {
+    display: grid;
+    grid-template-columns: minmax(0, 820px) 232px;
+    gap: 44px;
+    justify-content: center;
+    align-items: start;
+  }
+
+  .article-shell-toc .article-main {
+    margin: 0;
+  }
+
+  .article-shell-toc .article-aside {
+    display: block;
+    position: sticky;
+    top: 110px;
+  }
+
+  .toc-inline {
+    display: none;
+  }
 }
 
 /* ------------------------------------------------------------------ header */
@@ -105,7 +141,14 @@
   color: var(--text);
 }
 
-.article-body > * {
+/* The measure applies to running text only. Blocks — figures, tables, charts —
+   set their own width, and several are meant to break out of the column. */
+.article-body > p,
+.article-body > ul,
+.article-body > ol,
+.article-body > h2,
+.article-body > h3,
+.article-body > blockquote {
   max-width: 72ch;
 }
 
@@ -171,34 +214,8 @@
   margin: 38px 0;
 }
 
-.article-body blockquote {
-  margin: 24px 0;
-  padding: 2px 0 2px 18px;
-  border-left: 3px solid var(--neutral-30);
-  color: var(--muted);
-  font-size: 18px;
-}
-
-.article-body blockquote p:last-child {
-  margin-bottom: 0;
-}
-
-/* Plain Markdown tables. Rich comparison tables get their own component, but a
-   pipe table an author typed should still look deliberate.
-   `display: block` turns the table itself into the scroll container, so a wide
-   table scrolls on its own instead of forcing the whole page sideways — no
-   wrapper element required, which matters because Markdown does not emit one. */
-.article-body table {
-  display: block;
-  width: max-content;
-  max-width: 100%;
-  overflow-x: auto;
-  border-collapse: collapse;
-  font-size: 15px;
-  text-align: left;
-  margin: 0 0 22px;
-}
-
+/* Shared by plain Markdown tables and ComparisonTable; both are wrapped in a
+   .table-scroll container, whose layout lives in blocks.css. */
 .article-body th,
 .article-body td {
   padding: 10px 14px;
@@ -216,7 +233,8 @@
   border-bottom-color: var(--neutral-30);
 }
 
-.article-body tbody tr:last-child td {
+.article-body tbody tr:last-child td,
+.article-body tbody tr:last-child th {
   border-bottom: none;
 }
 
@@ -236,7 +254,7 @@
 }
 
 @media (max-width: 768px) {
-  .article-container {
+  .article-shell {
     padding: 22px 20px 56px;
   }
 

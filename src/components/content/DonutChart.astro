@@ -1,0 +1,91 @@
+---
+/**
+ * A share-of-total donut. The SVG is `aria-hidden` decoration; the legend beside
+ * it carries every label, value and share as text, so the data is available to a
+ * screen reader, a crawler and a sighted reader from the same markup.
+ */
+interface Slice {
+  label: string;
+  value: number;
+  display?: string;
+}
+
+interface Props {
+  caption: string;
+  slices: Slice[];
+}
+
+const { caption, slices } = Astro.props;
+
+const RADIUS = 45;
+const CIRCUMFERENCE = 2 * Math.PI * RADIUS;
+
+/* Referenced as custom properties so a palette change in tokens.css reaches the
+   charts. Ordered for contrast between neighbouring segments, not by hue. */
+const COLORS = [
+  'var(--green-10)',
+  'var(--brand-50)',
+  'var(--neutral-70)',
+  'var(--brand-10)',
+  'var(--green-20)',
+  'var(--neutral-30)',
+];
+
+const total = slices.reduce((sum, slice) => sum + slice.value, 0);
+
+let consumed = 0;
+const segments = slices.map((slice, index) => {
+  const share = total > 0 ? slice.value / total : 0;
+  const segment = {
+    ...slice,
+    color: COLORS[index % COLORS.length],
+    share,
+    length: share * CIRCUMFERENCE,
+    offset: -consumed * CIRCUMFERENCE,
+  };
+  consumed += share;
+  return segment;
+});
+
+const formatShare = (share: number) => `${Math.round(share * 100)}%`;
+---
+
+<figure class="donut-chart">
+  <figcaption>{caption}</figcaption>
+
+  <div class="donut-chart-body">
+    <svg viewBox="0 0 100 100" class="donut-svg" aria-hidden="true" focusable="false">
+      {
+        segments.map((segment) => (
+          <circle
+            cx="50"
+            cy="50"
+            r={RADIUS}
+            fill="none"
+            stroke={segment.color}
+            stroke-width="10"
+            stroke-dasharray={`${segment.length} ${CIRCUMFERENCE - segment.length}`}
+            stroke-dashoffset={segment.offset}
+          />
+        ))
+      }
+    </svg>
+
+    <dl class="donut-legend">
+      {
+        segments.map((segment) => (
+          <div class="donut-legend-row">
+            <dt>
+              <span class="donut-swatch" style={`background: ${segment.color}`} aria-hidden="true"></span>
+              {segment.label}
+            </dt>
+            <dd>
+              <strong>{segment.display ?? segment.value}</strong>
+              <span class="donut-share">{formatShare(segment.share)}</span>
+            </dd>
+          </div>
+        ))
+      }
+    </dl>
+  </div>
+</figure>

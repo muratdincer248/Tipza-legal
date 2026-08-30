@@ -1,0 +1,41 @@
+---
+/**
+ * Question-and-answer pairs, rendered expanded rather than collapsed. The
+ * landing page's FAQ uses `<details>` because it is a long list people skim;
+ * here the answers are the point, and text that is visible without interaction
+ * is what gets quoted by answer engines and survives printing.
+ *
+ * The block deliberately renders no heading of its own. Articles write the
+ * heading as ordinary Markdown (`## Frequently asked questions`) so it lands in
+ * the table of contents and gets a permalink like every other section — a
+ * heading emitted from inside a component would be missing from both.
+ *
+ * The same `items` feed the FAQPage structured data, so the markup and the
+ * schema are generated from one source and cannot disagree.
+ */
+export interface FaqItem {
+  question: string;
+  /** May contain inline HTML (`<strong>`, `<a>`). */
+  answer: string;
+}
+
+interface Props {
+  items: FaqItem[];
+  /** Level of the question headings; one step below the article's own heading. */
+  questionLevel?: 'h3' | 'h4';
+}
+
+const { items, questionLevel = 'h3' } = Astro.props;
+const Question = questionLevel;
+---
+
+<div class="faq-block">
+  {
+    items.map((item) => (
+      <div class="faq-block-item">
+        <Question class="faq-block-question">{item.question}</Question>
+        <div class="faq-block-answer" set:html={item.answer} />
+      </div>
+    ))
+  }
+</div>

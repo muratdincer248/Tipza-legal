@@ -1,0 +1,19 @@
+---
+/**
+ * A named formula, kept as text rather than an image so it can be read aloud,
+ * translated and copied. The slot holds the expression.
+ */
+interface Props {
+  label?: string;
+  /** What each term means, in prose. */
+  note?: string;
+}
+
+const { label, note } = Astro.props;
+---
+
+<figure class="formula">
+  {label && <figcaption class="formula-label">{label}</figcaption>}
+  <p class="formula-expression"><slot /></p>
+  {note && <p class="formula-note">{note}</p>}
+</figure>

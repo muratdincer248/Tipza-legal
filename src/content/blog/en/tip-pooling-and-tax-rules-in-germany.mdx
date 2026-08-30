@@ -22,6 +22,38 @@ keywords:
   - paragraph 3 nr 51 estg
 relatedArticles:
   - tip-splitting-methods
+faq:
+  - question: Are tips tax-free in Germany?
+    answer: >-
+      Yes, without an upper limit, but only when three conditions hold: the money
+      comes from a third party such as a guest rather than from the employer, it
+      is given voluntarily on the occasion of the work performed, and nobody has
+      a legal claim to it. A payment that fails any one of the three is wage.
+  - question: Does pooling tips make them taxable?
+    answer: >-
+      Pooling on its own does not. Staff can agree to combine what guests gave
+      them and divide it by hours or points, and the money stays a third-party
+      tip. What creates a risk is the employer becoming the source of the
+      entitlement — promising a fixed share in a contract, guaranteeing an
+      amount, or adding money from the business.
+  - question: Is a service charge on the bill a tip?
+    answer: >-
+      No. A Bedienungsgeld or service charge is part of the price the guest owes,
+      so it is neither voluntary nor free of a legal claim. It is revenue for the
+      business, and anything paid out of it to staff is wage, subject to income
+      tax and social security contributions.
+  - question: Do tips count towards social security contributions?
+    answer: >-
+      Tips that qualify as tax-free under § 3 Nr. 51 EStG are generally not
+      Arbeitsentgelt under § 14 SGB IV, so no contributions are due on them. The
+      reverse matters more: if a payment is reclassified as wage, employer and
+      employee contributions follow retroactively alongside the income tax.
+  - question: What should a business document about pooled tips?
+    answer: >-
+      Keep the written distribution rule and the date the team agreed it, a
+      record of what came in per shift, the arithmetic that divided it, and what
+      each person received. Be able to show that the employer adds nothing to the
+      pool and that no contract promises anyone a fixed share.
 sources:
   - id: estg-3-51
     title: 'Einkommensteuergesetz § 3 (Steuerfreie Einnahmen), Nr. 51'
@@ -33,13 +65,47 @@ sources:
     url: https://www.gesetze-im-internet.de/sgb_4/__14.html
 ---
 
+import {
+  Callout,
+  ComparisonTable,
+  FaqBlock,
+  SourceRef,
+  StatCard,
+  StatGrid,
+  Timeline,
+  WarningBox,
+} from '~/components/content';
+
 German tip law is unusually generous and unusually specific. Tips are tax-free without any upper limit — but only when they meet a short list of conditions, and a pooled tip box can fail those conditions without anyone noticing.
 
-This is not legal advice, and the details of any individual arrangement matter. Treat it as the set of questions to take to your tax adviser rather than as an answer.
+<Callout title="What this is, and is not">
+  This is a map of the questions, not legal advice. The details of any individual
+  arrangement decide the answer, and the difference between a tax-free pool and a
+  taxable one can come down to a single sentence in an employment contract. Take
+  the specifics to a *Steuerberater*.
+</Callout>
+
+<StatGrid label="German tip taxation at a glance">
+  <StatCard
+    value="Unlimited"
+    label="Tax-free amount for qualifying tips"
+    source="§ 3 Nr. 51 EStG"
+  />
+  <StatCard
+    value="3 of 3"
+    label="Conditions that must all hold for the exemption to apply"
+    source="§ 3 Nr. 51 EStG"
+  />
+  <StatCard
+    value="€0"
+    label="Social security contributions on tips that qualify as tax-free"
+    source="§ 14 SGB IV"
+  />
+</StatGrid>
 
 ## The exemption, and its three conditions
 
-§ 3 Nr. 51 of the *Einkommensteuergesetz* exempts tips from income tax. The cap that used to apply was removed in 2002, so the exemption is unlimited in amount. What it is not is unconditional. The money has to be:
+§ 3 Nr. 51 of the *Einkommensteuergesetz* exempts tips from income tax<SourceRef sources={frontmatter.sources} id="estg-3-51" />. The cap that used to apply was removed in 2002, so the exemption is unlimited in amount. What it is not is unconditional. The money has to be:
 
 1. **Given by a third party** — the guest, not the employer.
 2. **Given voluntarily**, on the occasion of the work performed.
@@ -47,9 +113,32 @@ This is not legal advice, and the details of any individual arrangement matter. 
 
 All three have to hold. Each one is a place where an otherwise sensible pooling arrangement can go wrong.
 
+<Timeline
+  label="How the German tip exemption reached its current form"
+  events={[
+    {
+      date: 'Until 2001',
+      datetime: '2001',
+      title: 'A capped exemption',
+      body: 'Tips were tax-free only up to an annual ceiling. Anything above it was taxed as wage, which made record-keeping a matter of staying under a number.',
+    },
+    {
+      date: '2002',
+      datetime: '2002',
+      title: 'The cap is removed',
+      body: 'The ceiling was struck out and the exemption became unlimited in amount. The conditions on where the money comes from stayed exactly as they were — which is where the disputes moved to.',
+    },
+    {
+      date: 'Since',
+      title: 'The argument shifts to entitlement',
+      body: 'Case law on Tronc arrangements in regulated settings such as casinos turned on who the claim runs against, not on how much was paid. That is now the question a pooled model has to answer.',
+    },
+  ]}
+/>
+
 ## Where a service charge sits
 
-A *Bedienungsgeld* or service charge added to the bill is not a tip. The guest owes it as part of the price, which fails both the "voluntary" and the "no legal claim" conditions. It is revenue for the business, and what the business then pays out of it is wage — subject to income tax and social security contributions in the ordinary way.
+A *Bedienungsgeld* or service charge added to the bill is not a tip. The guest owes it as part of the price, which fails both the "voluntary" and the "no legal claim" conditions. It is revenue for the business, and what the business then pays out of it is wage — subject to income tax and social security contributions in the ordinary way<SourceRef sources={frontmatter.sources} id="sgb4-14" />.
 
 This catches people out with automatic gratuities on large-party bills. If the amount appears on the invoice as something the guest must pay, it is not a tip, however it is labelled.
 
@@ -63,11 +152,30 @@ The risk is in who controls the pool and what employees can demand.
 - **The employer as the source of a claim.** If an employee can enforce a right to a specific share against the employer — because it is written into an employment contract, a collective agreement or a binding company practice — then what they receive starts to look like wage rather than a voluntary gift from a guest. This is the reasoning behind the treatment of *Tronc* arrangements in regulated settings such as casinos, where distributions to staff have been held to be wages precisely because the entitlement runs against the employer.
 - **The employer topping up the pool.** Money the business adds from its own funds is wage. It does not become a tip by being paid out of the same box.
 
+<ComparisonTable
+  caption="Four payments that all reach staff through the same box"
+  columns={['Payment', 'Comes from a third party', 'Voluntary', 'No legal claim', 'Tax-free']}
+  rows={[
+    ['Cash left on the table', true, true, true, true],
+    ['Guest tips pooled and split by the team', true, true, true, true],
+    ['Service charge printed on the bill', false, false, false, false],
+    ['A share the employment contract guarantees', false, true, false, false],
+  ]}
+  note="The last row is the one that surprises people: the money can still originate with guests and lose the exemption, because the employee's claim runs against the employer."
+/>
+
 The distinction is genuinely subtle: the same pool can be tax-free or taxable depending on how the entitlement is constructed. That is worth an hour of a tax adviser's time before you formalise anything.
 
 ## Social security follows tax, mostly
 
-Under § 14 SGB IV, *Arbeitsentgelt* is what triggers social insurance contributions. Tips that qualify as tax-free under § 3 Nr. 51 EStG are generally not treated as *Arbeitsentgelt*, so they are free of contributions too. The corollary matters more: once a payment is reclassified as wage, it is not only income-taxable — it also carries employer and employee contributions, retroactively.
+Under § 14 SGB IV, *Arbeitsentgelt* is what triggers social insurance contributions<SourceRef sources={frontmatter.sources} id="sgb4-14" />. Tips that qualify as tax-free under § 3 Nr. 51 EStG are generally not treated as *Arbeitsentgelt*, so they are free of contributions too.
+
+<WarningBox title="Reclassification is retroactive">
+  The corollary matters more than the rule. Once a payment is reclassified as
+  wage, it is not only income-taxable — it carries employer and employee
+  contributions, backdated over the period the arrangement ran. The money has
+  usually been paid out and spent long before the question is asked.
+</WarningBox>
 
 ## Who is covered
 
@@ -97,3 +205,7 @@ The second list is the one that prevents arguments, and it happens to be most of
 ## The practical summary
 
 If tips go from guest to staff and the business stays out of it, the exemption is straightforward. The moment the business collects, guarantees, tops up or promises a share, the arrangement needs looking at properly — because the cost of getting it wrong is back taxes and back contributions on money that has already been paid out.
+
+## Frequently asked questions
+
+<FaqBlock items={frontmatter.faq} />

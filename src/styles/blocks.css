@@ -1,0 +1,860 @@
+/* Editorial blocks used inside article bodies.
+   Everything here is text-based on purpose: a reader who wants to copy the
+   numbers out can, and so can a crawler. Illustrations that are genuinely
+   pictures go through Figure instead. */
+
+/* ------------------------------------------------------- heading permalinks */
+
+.article-body h2,
+.article-body h3 {
+  position: relative;
+}
+
+.heading-anchor {
+  margin-left: 8px;
+  color: var(--neutral-30);
+  text-decoration: none;
+  font-weight: 400;
+  opacity: 0;
+  transition: opacity 120ms ease;
+}
+
+.article-body h2:hover .heading-anchor,
+.article-body h3:hover .heading-anchor,
+.heading-anchor:focus-visible {
+  opacity: 1;
+}
+
+.heading-anchor:hover {
+  color: var(--brand-50);
+}
+
+/* -------------------------------------------------------------------- links */
+
+.external-link-mark {
+  font-size: 0.8em;
+  margin-left: 2px;
+  vertical-align: 1px;
+  text-decoration: none;
+  display: inline-block;
+}
+
+/* --------------------------------------------------------- table of contents */
+
+/* Ordered, because the outline follows the document, but unnumbered: articles
+   often number their own sections and "1. 1. The equal split" reads as a bug. */
+.toc ol {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.toc li {
+  margin: 0;
+}
+
+.toc a {
+  display: block;
+  padding: 6px 0;
+  font-size: 14px;
+  line-height: 1.4;
+  color: var(--muted);
+  text-decoration: none;
+}
+
+.toc a:hover {
+  color: var(--text);
+}
+
+.toc-inline {
+  margin: 26px 0 0;
+  padding: 12px 16px;
+  border: 1px solid var(--stroke);
+  border-radius: var(--radius);
+  background: var(--card);
+}
+
+.toc-inline summary {
+  cursor: pointer;
+  font-family: var(--font-display);
+  font-size: 15px;
+  font-weight: 700;
+  list-style: none;
+}
+
+.toc-inline summary::-webkit-details-marker {
+  display: none;
+}
+
+.toc-inline summary::after {
+  content: '+';
+  float: right;
+  color: var(--neutral-70);
+  font-weight: 400;
+}
+
+.toc-inline[open] summary::after {
+  content: '−';
+}
+
+.toc-inline[open] summary {
+  margin-bottom: 6px;
+}
+
+.toc-label {
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--neutral-70);
+  margin: 0 0 6px;
+}
+
+.toc-aside {
+  border-left: 1px solid var(--stroke);
+  padding-left: 16px;
+  max-height: calc(100vh - 150px);
+  overflow-y: auto;
+}
+
+/* ----------------------------------------------------------------- callouts */
+
+.callout {
+  display: flex;
+  gap: 12px;
+  margin: 26px 0;
+  padding: 16px 18px;
+  border-radius: var(--radius);
+  border: 1px solid var(--stroke);
+  background: var(--card);
+  font-size: 16px;
+  line-height: 1.65;
+}
+
+.callout-mark {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  border-radius: 999px;
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--neutral-00);
+  background: var(--neutral-70);
+}
+
+.callout-body {
+  min-width: 0;
+}
+
+.callout-body > :first-child {
+  margin-top: 0;
+}
+
+.callout-body > :last-child {
+  margin-bottom: 0;
+}
+
+.callout-title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 15px;
+  margin: 0 0 4px;
+}
+
+.callout-tip {
+  border-color: rgba(6, 188, 120, 0.28);
+  background: rgba(6, 188, 120, 0.08);
+}
+
+.callout-tip .callout-mark {
+  background: var(--green-20);
+}
+
+.callout-warning {
+  border-color: rgba(255, 180, 0, 0.35);
+  background: rgba(255, 245, 200, 0.6);
+}
+
+.callout-warning .callout-mark {
+  background: #d97706;
+}
+
+/* ------------------------------------------------------------------- tables */
+
+/* Tables fill the reading column where there is room and scroll inside this box
+   where there is not, rather than squeezing every label into four wrapped lines.
+   The edge shading is the classic two-layer trick: the opaque "cover" layers
+   scroll with the content and uncover the shadow layers only while there is
+   more table in that direction. */
+.table-scroll {
+  overflow-x: auto;
+  margin: 26px 0;
+  max-width: 100%;
+  background-image:
+    linear-gradient(to right, var(--neutral-01), rgba(243, 237, 232, 0)),
+    linear-gradient(to left, var(--neutral-01), rgba(243, 237, 232, 0)),
+    linear-gradient(to right, rgba(10, 7, 5, 0.11), rgba(10, 7, 5, 0)),
+    linear-gradient(to left, rgba(10, 7, 5, 0.11), rgba(10, 7, 5, 0));
+  background-position:
+    left center,
+    right center,
+    left center,
+    right center;
+  background-repeat: no-repeat;
+  background-size:
+    26px 100%,
+    26px 100%,
+    14px 100%,
+    14px 100%;
+  background-attachment: local, local, scroll, scroll;
+}
+
+.table-scroll:focus-visible {
+  outline: 2px solid var(--brand-50);
+  outline-offset: 4px;
+}
+
+/* `max-content` widths keep short cells on one line, so a narrow screen scrolls
+   a readable table instead of wrapping every label over four lines. The cell cap
+   is what stops that from running away: a long cell wraps at that width, which
+   is usually enough to bring the whole table back inside the reading column. */
+.table-scroll table {
+  width: max-content;
+  min-width: 100%;
+  border-collapse: collapse;
+  font-size: 15px;
+  text-align: left;
+  margin: 0;
+  display: table;
+}
+
+.table-scroll th,
+.table-scroll td {
+  max-width: 24ch;
+}
+
+.comparison-table {
+  margin: 26px 0;
+}
+
+.comparison-table figcaption {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 15px;
+  color: var(--text);
+  margin-bottom: 8px;
+}
+
+/* The scroller inside a figure gets its spacing from the figure. */
+.comparison-table .table-scroll {
+  margin: 0;
+}
+
+.comparison-table .row-label {
+  font-weight: 700;
+  white-space: normal;
+}
+
+.comparison-table tbody th.row-label {
+  font-family: var(--font-body);
+  font-size: 15px;
+  color: var(--text);
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+.comparison-table td {
+  text-align: center;
+}
+
+.comparison-table td:first-of-type,
+.comparison-table .row-label {
+  text-align: left;
+}
+
+.cell-yes {
+  color: var(--green-20);
+  font-weight: 700;
+}
+
+.cell-no {
+  color: var(--neutral-30);
+}
+
+.block-note {
+  font-size: 13px;
+  line-height: 1.55;
+  color: var(--neutral-70);
+  max-width: 72ch;
+  margin: 10px 0 0;
+}
+
+/* -------------------------------------------------------------- stat cards */
+
+.stat-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 12px;
+  margin: 26px 0;
+}
+
+.stat-card {
+  padding: 16px 18px;
+  border-radius: var(--radius);
+  border: 1px solid var(--stroke);
+  background: var(--card);
+}
+
+.stat-value {
+  font-family: var(--font-display);
+  letter-spacing: -0.03em;
+  font-size: 28px;
+  line-height: 1.05;
+  margin: 0;
+}
+
+.stat-label {
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--muted);
+  margin: 6px 0 0;
+}
+
+.stat-source {
+  font-size: 12px;
+  color: var(--neutral-70);
+  margin: 8px 0 0;
+}
+
+/* -------------------------------------------------- formulas and worked sums */
+
+.formula {
+  margin: 26px 0;
+  padding: 16px 18px;
+  border-radius: var(--radius);
+  border: 1px dashed var(--neutral-30);
+  background: rgba(255, 255, 255, 0.5);
+}
+
+.formula-label {
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--neutral-70);
+  margin: 0 0 8px;
+}
+
+.formula-expression {
+  font-family: var(--font-display);
+  font-size: 18px;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.formula-note {
+  font-size: 14px;
+  color: var(--muted);
+  margin: 10px 0 0;
+}
+
+.calc {
+  margin: 26px 0;
+  padding: 18px;
+  border-radius: var(--radius);
+  border: 1px solid var(--stroke);
+  background: var(--card);
+}
+
+.calc-title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 15px;
+  margin: 0 0 12px;
+}
+
+.calc-steps {
+  margin: 0;
+}
+
+.calc-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 16px;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--stroke);
+  font-size: 15px;
+}
+
+.calc-row dt {
+  color: var(--muted);
+  min-width: 0;
+}
+
+/* Amounts contain no spaces, so they stay whole without `nowrap`; a row of
+   several shares can then wrap at the separators instead of widening the page. */
+.calc-row dd {
+  margin: 0;
+  min-width: 0;
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+}
+
+.calc-result {
+  border-bottom: none;
+  border-top: 2px solid var(--neutral-99);
+  margin-top: 4px;
+  padding-top: 12px;
+}
+
+.calc-result dt {
+  color: var(--text);
+  font-weight: 700;
+}
+
+.calc-result dd {
+  font-family: var(--font-display);
+  font-size: 19px;
+  font-weight: 700;
+}
+
+.calc-note {
+  font-size: 13px;
+  color: var(--neutral-70);
+  margin: 12px 0 0;
+}
+
+/* ---------------------------------------------------------------- faq block */
+
+.faq-block {
+  margin: 22px 0 34px;
+}
+
+.faq-block-item {
+  padding: 16px 0;
+  border-top: 1px solid var(--stroke);
+}
+
+.faq-block-question {
+  font-family: var(--font-display);
+  letter-spacing: -0.01em;
+  font-size: 17px;
+  line-height: 1.35;
+  margin: 0 0 8px;
+}
+
+.faq-block-answer {
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--muted);
+  max-width: 68ch;
+}
+
+.faq-block-answer > :last-child {
+  margin-bottom: 0;
+}
+
+/* ------------------------------------------------------ steps and timelines */
+
+.process-steps {
+  list-style: none;
+  margin: 26px 0;
+  padding: 0;
+  display: grid;
+  gap: 4px;
+}
+
+.process-steps li {
+  display: flex;
+  gap: 14px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--stroke);
+  margin: 0;
+}
+
+.process-steps li:last-child {
+  border-bottom: none;
+}
+
+.process-step-number {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+  border-radius: 999px;
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--neutral-00);
+  background: var(--neutral-99);
+}
+
+.process-step-title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 16px;
+  margin: 3px 0 4px;
+}
+
+.process-step-body {
+  font-size: 15px;
+  line-height: 1.65;
+  color: var(--muted);
+  margin: 0;
+}
+
+.timeline {
+  list-style: none;
+  margin: 26px 0;
+  padding: 0 0 0 22px;
+  border-left: 2px solid var(--neutral-10);
+}
+
+.timeline li {
+  position: relative;
+  padding: 0 0 22px 0;
+  margin: 0;
+}
+
+.timeline li:last-child {
+  padding-bottom: 0;
+}
+
+.timeline li::before {
+  content: '';
+  position: absolute;
+  left: -29px;
+  top: 6px;
+  width: 12px;
+  height: 12px;
+  border-radius: 999px;
+  background: var(--green-10);
+  box-shadow: 0 0 0 4px rgba(6, 188, 120, 0.18);
+}
+
+.timeline-date {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--neutral-70);
+}
+
+.timeline-title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 16px;
+  margin: 4px 0 4px;
+}
+
+.timeline-body {
+  font-size: 15px;
+  line-height: 1.65;
+  color: var(--muted);
+  margin: 0;
+}
+
+/* ------------------------------------------------------------------- charts */
+
+.bar-chart,
+.donut-chart {
+  margin: 26px 0;
+  padding: 18px;
+  border-radius: var(--radius);
+  border: 1px solid var(--stroke);
+  background: var(--card);
+}
+
+.bar-chart figcaption,
+.donut-chart figcaption {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 15px;
+  margin: 0 0 14px;
+}
+
+.bar-chart dl {
+  margin: 0;
+  display: grid;
+  gap: 12px;
+}
+
+.bar-row {
+  display: grid;
+  grid-template-columns: minmax(90px, 26%) 1fr;
+  gap: 12px;
+  align-items: center;
+}
+
+.bar-row dt {
+  font-size: 14px;
+  color: var(--muted);
+}
+
+.bar-row dd {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0;
+  min-width: 0;
+}
+
+.bar-track {
+  flex: 1;
+  height: 10px;
+  min-width: 0;
+  border-radius: 999px;
+  background: var(--neutral-10);
+  overflow: hidden;
+}
+
+.bar-fill {
+  display: block;
+  height: 100%;
+  border-radius: 999px;
+  background: var(--green-10);
+}
+
+.bar-value {
+  font-size: 14px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.bar-unit {
+  font-weight: 400;
+  color: var(--neutral-70);
+}
+
+.donut-chart-body {
+  display: flex;
+  gap: 22px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.donut-svg {
+  width: 150px;
+  height: 150px;
+  flex-shrink: 0;
+  /* Start the first segment at 12 o'clock rather than 3 o'clock. */
+  transform: rotate(-90deg);
+}
+
+.donut-legend {
+  flex: 1;
+  min-width: 200px;
+  margin: 0;
+  display: grid;
+  gap: 8px;
+}
+
+.donut-legend-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 14px;
+  font-size: 14px;
+}
+
+.donut-legend-row dt {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--muted);
+}
+
+.donut-legend-row dd {
+  margin: 0;
+  display: flex;
+  gap: 8px;
+  align-items: baseline;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.donut-share {
+  color: var(--neutral-70);
+}
+
+.donut-swatch {
+  width: 10px;
+  height: 10px;
+  border-radius: 3px;
+  flex-shrink: 0;
+}
+
+/* ------------------------------------------------------- figures and quotes */
+
+.article-figure {
+  margin: 30px 0;
+}
+
+.article-figure img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius);
+  border: 1px solid var(--stroke);
+  background: var(--neutral-05);
+}
+
+.article-figure figcaption {
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--neutral-70);
+  margin-top: 10px;
+}
+
+.figure-source {
+  display: block;
+  color: var(--neutral-30);
+}
+
+/* `wide` and `full` reach past the reading measure using the shell's own
+   padding, so they line up with the container rather than the viewport edge. */
+.article-figure-wide {
+  width: min(960px, calc(100vw - 40px));
+  margin-left: calc(50% - min(480px, calc(50vw - 20px)));
+}
+
+.article-figure-full {
+  width: calc(100vw - 40px);
+  margin-left: calc(50% - (50vw - 20px));
+}
+
+.article-figure-full img,
+.article-figure-full figcaption {
+  border-radius: var(--radius-lg);
+}
+
+.article-quote {
+  margin: 26px 0;
+  padding: 2px 0 2px 18px;
+  border-left: 3px solid var(--neutral-30);
+  color: var(--muted);
+  font-size: 18px;
+}
+
+.article-quote > :last-child {
+  margin-bottom: 0;
+}
+
+.pull-quote {
+  margin: 32px 0;
+  padding: 0;
+  border: none;
+}
+
+.pull-quote p {
+  font-family: var(--font-display);
+  letter-spacing: -0.02em;
+  font-size: 24px;
+  line-height: 1.3;
+  color: var(--text);
+  margin: 0;
+}
+
+.pull-quote-attribution {
+  font-family: var(--font-body) !important;
+  font-size: 14px !important;
+  letter-spacing: 0 !important;
+  color: var(--neutral-70);
+  margin-top: 10px !important;
+}
+
+/* --------------------------------------------------------------- citations */
+
+.sources {
+  margin-top: 44px;
+  padding-top: 22px;
+  border-top: 1px solid var(--stroke);
+}
+
+.sources h2 {
+  font-family: var(--font-display);
+  letter-spacing: -0.02em;
+  font-size: 18px;
+  margin: 0 0 12px;
+}
+
+.sources ol {
+  margin: 0;
+  padding-left: 20px;
+  display: grid;
+  gap: 10px;
+}
+
+.sources li {
+  font-size: 14px;
+  line-height: 1.55;
+  /* The inline SourceRef markers jump here, so clear the sticky header. */
+  scroll-margin-top: 100px;
+}
+
+.sources li:target a {
+  background: rgba(255, 245, 200, 0.9);
+}
+
+.sources a {
+  color: var(--brand-50);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.sources-publisher,
+.sources-accessed {
+  display: block;
+  color: var(--neutral-70);
+}
+
+.source-ref {
+  font-size: 0.72em;
+  line-height: 0;
+}
+
+.source-ref a {
+  text-decoration: none;
+  padding: 0 1px;
+}
+
+.source-ref a:hover {
+  text-decoration: underline;
+}
+
+/* ------------------------------------------------------------- breakpoints */
+
+@media (max-width: 620px) {
+  /* Two columns at this width leaves each label wrapping over four lines,
+     which costs more vertical space than stacking the cards outright. */
+  .stat-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .bar-row {
+    grid-template-columns: 1fr;
+    gap: 4px;
+  }
+
+  .donut-chart-body {
+    justify-content: center;
+  }
+
+  .calc-row {
+    gap: 10px;
+  }
+
+  .pull-quote p {
+    font-size: 20px;
+  }
+}

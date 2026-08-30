@@ -1,0 +1,29 @@
+---
+/**
+ * Base for the aside blocks. `TipBox` and `WarningBox` are thin wrappers so an
+ * author picks intent rather than colour.
+ */
+export type CalloutTone = 'note' | 'tip' | 'warning';
+
+interface Props {
+  tone?: CalloutTone;
+  /** Short label above the body. Omit to render the body alone. */
+  title?: string;
+}
+
+const { tone = 'note', title } = Astro.props;
+
+const marks: Record<CalloutTone, string> = {
+  note: 'i',
+  tip: '★',
+  warning: '!',
+};
+---
+
+<aside class={`callout callout-${tone}`}>
+  <span class="callout-mark" aria-hidden="true">{marks[tone]}</span>
+  <div class="callout-body">
+    {title && <p class="callout-title">{title}</p>}
+    <slot />
+  </div>
+</aside>

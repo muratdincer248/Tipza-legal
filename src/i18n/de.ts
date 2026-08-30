@@ -207,6 +207,9 @@ export const de: Dictionary = {
     updatedPrefix: 'Aktualisiert am',
     minRead: 'Min. Lesezeit',
 
+    tocLabel: 'Auf dieser Seite',
+    sourcesLabel: 'Quellen',
+    accessedLabel: 'Abgerufen am',
     breadcrumbLabel: 'Brotkrumennavigation',
     home: 'Startseite',
 

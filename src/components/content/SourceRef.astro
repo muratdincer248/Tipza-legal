@@ -1,0 +1,36 @@
+---
+/**
+ * An inline citation marker. Takes the article's own `sources` so the number it
+ * prints is the position in the generated Sources list — there is no second
+ * numbering to drift out of step.
+ *
+ * In MDX: `<SourceRef sources={frontmatter.sources} id="estg-3-51" />`
+ */
+interface Source {
+  id: string;
+  title: string;
+  publisher: string;
+}
+
+interface Props {
+  sources: Source[];
+  id: string;
+}
+
+const { sources, id } = Astro.props;
+
+const index = sources.findIndex((source) => source.id === id);
+if (index === -1) {
+  throw new Error(
+    `SourceRef "${id}" is not in this article's sources. Add it to the frontmatter, or fix the id.`
+  );
+}
+
+const source = sources[index]!;
+---
+
+<sup class="source-ref"
+  ><a href={`#source-${id}`} aria-label={`Source ${index + 1}: ${source.title}, ${source.publisher}`}
+    >[{index + 1}]</a
+  ></sup
+>

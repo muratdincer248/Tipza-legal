@@ -1,0 +1,13 @@
+---
+/**
+ * Replaces plain Markdown tables. The wrapper is the scroll container, so a wide
+ * table scrolls inside the measure instead of forcing the whole page sideways.
+ * `tabindex` makes that scroll reachable by keyboard.
+ */
+---
+
+<div class="table-scroll" tabindex="0" role="region">
+  <table>
+    <slot />
+  </table>
+</div>

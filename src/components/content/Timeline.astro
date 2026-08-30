@@ -1,0 +1,35 @@
+---
+/**
+ * Dated events in order. `<time>` carries a machine-readable date when one is
+ * given, so "March 2026" and "2026-03" are both available.
+ */
+interface Event {
+  /** Displayed label, e.g. `2002` or `March 2026`. */
+  date: string;
+  /** ISO value for the `datetime` attribute, when the label is not already one. */
+  datetime?: string;
+  title: string;
+  body?: string;
+}
+
+interface Props {
+  events: Event[];
+  label?: string;
+}
+
+const { events, label } = Astro.props;
+---
+
+<ol class="timeline" aria-label={label}>
+  {
+    events.map((event) => (
+      <li>
+        <time class="timeline-date" datetime={event.datetime ?? undefined}>{event.date}</time>
+        <div class="timeline-text">
+          <p class="timeline-title">{event.title}</p>
+          {event.body && <p class="timeline-body">{event.body}</p>}
+        </div>
+      </li>
+    ))
+  }
+</ol>
