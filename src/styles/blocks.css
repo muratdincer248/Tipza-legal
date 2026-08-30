@@ -832,6 +832,87 @@
   text-decoration: underline;
 }
 
+/* --------------------------------------------------- summaries and answers */
+
+/* Sits above the body rather than inside it, so it reads as a summary of the
+   article instead of its first section. */
+.key-takeaways {
+  margin: 26px 0 0;
+  padding: 18px 22px;
+  border: 1px solid var(--stroke);
+  border-radius: var(--radius);
+  background: var(--card);
+}
+
+.key-takeaways-label,
+.answer-block-label {
+  margin: 0 0 10px;
+  font-family: var(--font-display);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--brand-50);
+}
+
+.key-takeaways ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 8px;
+}
+
+.key-takeaways li {
+  position: relative;
+  margin: 0;
+  padding-left: 22px;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+.key-takeaways li::before {
+  content: '';
+  position: absolute;
+  left: 4px;
+  top: 0.62em;
+  width: 7px;
+  height: 7px;
+  border-radius: 999px;
+  background: var(--brand-30);
+}
+
+/* Deliberately louder than a callout: this is the sentence the page exists to
+   say, and the one a search result or an assistant is most likely to quote. */
+.answer-block {
+  margin: 26px 0;
+  padding: 18px 22px;
+  border-left: 3px solid var(--brand-50);
+  border-radius: 0 var(--radius) var(--radius) 0;
+  background: rgba(114, 5, 255, 0.05);
+}
+
+.answer-block-question {
+  margin: 0 0 6px;
+  font-family: var(--font-display);
+  font-size: 17px;
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+.answer-block-body {
+  font-size: 17px;
+  line-height: 1.65;
+}
+
+.answer-block-body > :first-child {
+  margin-top: 0;
+}
+
+.answer-block-body > :last-child {
+  margin-bottom: 0;
+}
+
 /* ------------------------------------------------------------- breakpoints */
 
 @media (max-width: 620px) {

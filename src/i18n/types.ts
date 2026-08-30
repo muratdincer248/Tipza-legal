@@ -186,6 +186,10 @@ export interface Dictionary {
     supported: string;
     /** Hidden text behind a comparison table's dash. */
     notSupported: string;
+    /** Heads the direct answer near the top of an article. */
+    answerLabel: string;
+    /** Heads the summary bullets above an article. */
+    takeawaysLabel: string;
   };
 
   languageSwitcher: {

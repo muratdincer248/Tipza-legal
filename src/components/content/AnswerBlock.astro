@@ -1,0 +1,40 @@
+---
+import { slugify } from '~/lib/slug';
+import { localeFromPath } from '~/config/locales';
+import { getDictionary } from '~/i18n';
+
+/**
+ * The direct answer, stated once, near the top, in a couple of sentences that
+ * make sense lifted out of the page.
+ *
+ * Search results and assistants both quote a short self-contained passage that
+ * answers the question the page is about. An article that reaches its answer in
+ * the eleventh paragraph, or only ever states it as "as we saw above", gives
+ * them nothing to quote — and gives a reader in a hurry nothing either. This
+ * block is where the article commits to an answer before it earns it; the rest
+ * of the page is the working.
+ *
+ * Keep it under about sixty words and free of references to the surrounding
+ * text, so it reads correctly on its own.
+ */
+interface Props {
+  /** The question, when the heading above does not already ask it. */
+  question?: string;
+  /** Overrides the dictionary label, e.g. "The short version". */
+  label?: string;
+}
+
+const { question, label } = Astro.props;
+
+const dict = getDictionary(localeFromPath(Astro.url.pathname));
+const heading = label ?? dict.blocks.answerLabel;
+const labelId = `answer-${slugify(question ?? heading)}`;
+---
+
+<aside class="answer-block" aria-labelledby={labelId}>
+  <p class="answer-block-label" id={labelId}>{heading}</p>
+  {question && <p class="answer-block-question">{question}</p>}
+  <div class="answer-block-body">
+    <slot />
+  </div>
+</aside>

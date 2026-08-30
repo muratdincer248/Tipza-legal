@@ -46,11 +46,29 @@ The fields that need explaining:
 | `relatedArticles` | `translationKey`s, not slugs, so a relation written once resolves in both languages. Any remaining slots fill with same-category articles, then the newest of anything else. |
 | `showProductCta` | On by default. Set `false` for an article where a pitch would undercut the writing — a compliance explainer, usually. |
 | `keywords` | The queries the article is meant to answer. Not emitted as a meta tag; they exist to keep the brief honest. |
+| `takeaways` | The article in four or five conclusions, shown above the body. See below. |
 | `faq` | Question-and-answer pairs. See below. |
 | `sources` | Citations. See below. |
 
 Reading time and the last-updated line are computed. Do not write them into the
 article.
+
+### `takeaways`
+
+Four or five lines, placed above the article automatically. Each one should state
+a conclusion, not a topic — "split by hours when shifts differ in length", not
+"how to handle different shift lengths". A reader who stops here should still
+have learned something.
+
+```yaml
+takeaways:
+  - >-
+    An equal split is fair only when the shifts are. The moment lengths diverge
+    it becomes the most common cause of tip disputes.
+```
+
+Six is the maximum the schema allows. If the article needs more than that, the
+summary is doing the article's job.
 
 ### `faq`
 
@@ -113,6 +131,7 @@ import { Callout, CalculationExample, FaqBlock } from '~/components/content';
 
 | Block | Use it for |
 | --- | --- |
+| `AnswerBlock` | The direct answer, near the top. See below. |
 | `Callout` | An aside. `tone` of `note`, `tip` or `warning`. |
 | `TipBox` / `WarningBox` | The same thing with the intent named instead of the colour. |
 | `CalculationExample` | A worked sum: `steps` then a `result`. The shape readers screenshot. |
@@ -129,7 +148,25 @@ import { Callout, CalculationExample, FaqBlock } from '~/components/content';
 | `FaqBlock` | Renders the `faq` frontmatter. |
 | `ProductCta` | The invitation to use Tipza. Already at the foot of every article; import it only to place a second one at a natural mid-article moment. |
 
-Three conventions worth following:
+Four conventions worth following:
+
+**Answer the question before you earn it.** Put an `AnswerBlock` after the
+introduction, holding two or three sentences that answer the article's question
+outright:
+
+```mdx
+<AnswerBlock>
+  Divide the pool in proportion to hours worked. The hours are already tracked,
+  anyone can check the arithmetic, and the result matches what people expect when
+  shifts differ in length.
+</AnswerBlock>
+```
+
+Keep it under about sixty words, and write it so it reads correctly with the rest
+of the page removed — no "as we saw above", no "this method". That passage is
+what a search result or an assistant will quote, and it is also what a reader in
+a hurry came for. It should not repeat a `faq` answer verbatim; the FAQ handles
+the adjacent questions, this handles the one in the title.
 
 **Write the FAQ heading in Markdown, not as a prop.** `FaqBlock` renders no
 heading of its own, because a heading emitted from inside a component is missing

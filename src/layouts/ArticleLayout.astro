@@ -7,6 +7,7 @@ import Footer from '~/components/layout/Footer.astro';
 import Breadcrumbs from '~/components/seo/Breadcrumbs.astro';
 import ArticleHeader from '~/components/blog/ArticleHeader.astro';
 import TableOfContents from '~/components/blog/TableOfContents.astro';
+import KeyTakeaways from '~/components/content/KeyTakeaways.astro';
 import SourcesList from '~/components/blog/SourcesList.astro';
 import RelatedArticles from '~/components/blog/RelatedArticles.astro';
 import ProductCta from '~/components/content/ProductCta.astro';
@@ -88,6 +89,11 @@ const jsonLd = articleSchema({ article, author, image: ogImage, crumbs, title })
         <Breadcrumbs crumbs={crumbs} label={dict.blog.breadcrumbLabel} />
 
         <ArticleHeader article={article} author={author} locale={locale} dict={dict} />
+
+        {/* The summary comes before the contents list: what the article concludes
+            is more use to someone deciding whether to read it than where the
+            sections are. */}
+        <KeyTakeaways items={data.takeaways} />
 
         {showToc && <TableOfContents headings={headings} label={dict.blog.tocLabel} variant="inline" />}
 

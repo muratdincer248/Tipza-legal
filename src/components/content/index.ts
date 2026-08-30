@@ -7,6 +7,7 @@
  * Ordinary prose needs no imports at all — headings, links, tables and
  * blockquotes are mapped to styled components when the article is rendered.
  */
+export { default as AnswerBlock } from './AnswerBlock.astro';
 export { default as BarChart } from './BarChart.astro';
 export { default as CalculationExample } from './CalculationExample.astro';
 export { default as Callout } from './Callout.astro';
@@ -16,6 +17,7 @@ export { default as FaqBlock } from './FaqBlock.astro';
 export { default as Figure } from './Figure.astro';
 export { default as Formula } from './Formula.astro';
 export { default as FullWidthFigure } from './FullWidthFigure.astro';
+export { default as KeyTakeaways } from './KeyTakeaways.astro';
 export { default as ProcessSteps } from './ProcessSteps.astro';
 export { default as ProductCta } from './ProductCta.astro';
 export { default as PullQuote } from './PullQuote.astro';

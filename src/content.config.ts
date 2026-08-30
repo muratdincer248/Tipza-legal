@@ -88,6 +88,13 @@ const blog = defineCollection({
       coverImage: image(),
       coverImageAlt: z.string(),
 
+      /**
+       * The article in four or five conclusions, shown above the body. Written
+       * here rather than in the prose because it is a summary of the piece, not
+       * a part of it — see `KeyTakeaways.astro`.
+       */
+      takeaways: z.array(z.string()).max(6).default([]),
+
       featured: z.boolean().default(false),
       /** `translationKey`s, so a relation written once resolves in every locale. */
       relatedArticles: z.array(z.string()).default([]),

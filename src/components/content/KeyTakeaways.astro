@@ -1,0 +1,42 @@
+---
+import { localeFromPath } from '~/config/locales';
+import { getDictionary } from '~/i18n';
+
+/**
+ * The whole article in four or five lines, above the article.
+ *
+ * Written in frontmatter rather than in the body, because a summary is metadata
+ * about the piece: it has to be complete on its own, and keeping it out of the
+ * prose stops it drifting into a first paragraph that repeats the introduction.
+ * `ArticleLayout` places it, so an author only has to write it.
+ *
+ * Each line should state a conclusion, not a topic — "split by hours when shifts
+ * differ in length", not "how to handle different shift lengths". A reader who
+ * stops here should still have learned something.
+ */
+interface Props {
+  /** Complete sentences; inline HTML is allowed for emphasis. */
+  items: string[];
+  label?: string;
+}
+
+const { items, label } = Astro.props;
+
+const dict = getDictionary(localeFromPath(Astro.url.pathname));
+const heading = label ?? dict.blocks.takeawaysLabel;
+---
+
+{
+  items.length > 0 && (
+    <aside class="key-takeaways" aria-labelledby="key-takeaways-label">
+      <p class="key-takeaways-label" id="key-takeaways-label">
+        {heading}
+      </p>
+      <ul>
+        {items.map((item) => (
+          <li set:html={item} />
+        ))}
+      </ul>
+    </aside>
+  )
+}

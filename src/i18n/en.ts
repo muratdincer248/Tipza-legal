@@ -237,6 +237,8 @@ export const en: Dictionary = {
   blocks: {
     supported: 'Yes',
     notSupported: 'No',
+    answerLabel: 'In short',
+    takeawaysLabel: 'Key takeaways',
   },
 
   languageSwitcher: {
