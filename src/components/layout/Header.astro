@@ -18,7 +18,7 @@ interface Props {
 const { homeHref, navItems, locale, alternates, dict } = Astro.props;
 ---
 
-<header>
+<header class="site-header">
   <div class="container">
     <div class="nav">
       <a class="brand" href={homeHref} aria-label="Tipza home">
@@ -120,7 +120,7 @@ const { homeHref, navItems, locale, alternates, dict } = Astro.props;
 
   // Clicking the logo while already on the home page scrolls up instead of
   // triggering a full navigation.
-  const brand = document.querySelector<HTMLAnchorElement>('header .brand');
+  const brand = document.querySelector<HTMLAnchorElement>('.site-header .brand');
   if (brand) {
     brand.addEventListener('click', (e) => {
       if (new URL(brand.href).pathname === window.location.pathname) {

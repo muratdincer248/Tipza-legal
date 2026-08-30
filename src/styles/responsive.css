@@ -122,23 +122,23 @@
 }
 
 @media (max-width: 1024px) {
-  header {
+  .site-header {
     position: sticky;
     top: 0;
   }
-  header .container {
+  .site-header .container {
     position: relative;
   }
-  nav {
+  .site-header nav {
     position: static;
   }
-  nav ul { 
+  .site-header nav ul { 
     display: none;
     list-style: none;
     padding: 0;
     margin: 0;
   }
-  nav ul.open {
+  .site-header nav ul.open {
     display: flex;
     flex-direction: column;
     gap: 0;
@@ -157,13 +157,13 @@
     max-width: calc(100vw - 40px);
     overflow: hidden;
   }
-  nav ul.open li {
+  .site-header nav ul.open li {
     margin: 0;
     width: 100%;
     padding: 0 20px;
     position: relative;
   }
-  nav ul.open li:not(.mobile-store-buttons)::after {
+  .site-header nav ul.open li:not(.mobile-store-buttons)::after {
     content: '';
     position: absolute;
     bottom: 0;
@@ -172,12 +172,12 @@
     height: 1px;
     background: rgba(10,7,5,0.08);
   }
-  nav ul.open li.mobile-store-buttons {
+  .site-header nav ul.open li.mobile-store-buttons {
     border-bottom: none;
     padding: 12px 20px;
     margin-top: 8px;
   }
-  nav ul.open .navlink {
+  .site-header nav ul.open .navlink {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -188,7 +188,7 @@
     background: transparent;
     border: none;
   }
-  nav ul.open .navlink .chevron-icon {
+  .site-header nav ul.open .navlink .chevron-icon {
     display: block;
     width: 16px;
     height: 16px;
@@ -199,7 +199,7 @@
   .bullets { grid-template-columns: 1fr; }
   .cta-row { display: none; }
   .logo { height: 34px; }
-  nav ul.open .mobile-store-buttons {
+  .site-header nav ul.open .mobile-store-buttons {
     display: flex;
     flex-direction: row;
     gap: 8px;
@@ -208,7 +208,7 @@
     list-style: none;
     width: 100%;
   }
-  nav ul.open .mobile-store-buttons .store-btn {
+  .site-header nav ul.open .mobile-store-buttons .store-btn {
     flex: 1;
     justify-content: center;
     height: 56px;
@@ -216,14 +216,14 @@
     gap: 12px;
     width: 100%;
   }
-  nav ul.open .mobile-store-buttons .store-logo {
+  .site-header nav ul.open .mobile-store-buttons .store-logo {
     width: 21px;
     height: 21px;
   }
-  nav ul.open .mobile-store-buttons .store-text-top {
+  .site-header nav ul.open .mobile-store-buttons .store-text-top {
     font-size: 11px;
   }
-  nav ul.open .mobile-store-buttons .store-text-bottom {
+  .site-header nav ul.open .mobile-store-buttons .store-text-bottom {
     font-size: 15px;
   }
 }

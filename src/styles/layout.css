@@ -7,7 +7,9 @@
   padding: 0 20px;
 }
 
-header {
+/* Class-scoped rather than a bare `header` selector: articles have their own
+   <header>, and a sticky, blurred, z-index-50 article header is quite a sight. */
+.site-header {
   position: sticky;
   top: 0;
   z-index: 50;
@@ -39,21 +41,25 @@ header {
   display: block;
 }
 
-nav ul {
+.site-header nav ul {
   display: flex;
-  gap: 18px;
+  gap: 8px;
   list-style: none;
   padding: 0;
   margin: 0;
   align-items: center;
 }
 
+/* Tightened from the original 18px gap / 10px padding to absorb the Blog entry
+   and the language selector. Without `nowrap`, "How it works" breaks across two
+   lines and drags the header taller. */
 .navlink {
   color: rgba(10, 7, 5, 0.82);
   font-weight: 600;
   font-size: 14px;
-  padding: 10px 10px;
+  padding: 10px 8px;
   border-radius: 999px;
+  white-space: nowrap;
 }
 
 .navlink:hover {
@@ -65,7 +71,7 @@ nav ul {
   display: none;
 }
 
-footer {
+.site-footer {
   padding: 26px 0 34px;
   border-top: 1px solid rgba(10,7,5,0.10);
   background: rgba(243, 237, 232, 0.55);
