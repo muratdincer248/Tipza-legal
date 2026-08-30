@@ -60,8 +60,31 @@ const { homeHref, navItems, locale, alternates, dict } = Astro.props;
   .nav-actions {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 8px;
     flex-shrink: 0;
+  }
+
+  /* Desktop header only: match the language selector (42px) instead of the
+     56px store buttons used in the hero and download CTA. That's ~25%
+     smaller. Hero, article, and mobile-menu buttons keep the full size. */
+  .nav-actions :global(.store-btn) {
+    box-sizing: border-box;
+    height: 42px;
+    padding: 0 12px;
+    gap: 8px;
+  }
+
+  .nav-actions :global(.store-logo) {
+    width: 16px;
+    height: 16px;
+  }
+
+  .nav-actions :global(.store-text-top) {
+    font-size: 9px;
+  }
+
+  .nav-actions :global(.store-text-bottom) {
+    font-size: 12px;
   }
 
   /* On narrow screens the store buttons collapse into the menu panel, so the
