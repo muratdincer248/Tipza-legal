@@ -1,0 +1,286 @@
+---
+translationKey: cashless-tipping
+locale: en
+title: 'Cashless tipping: what changes when the cash stops arriving'
+seoTitle: 'Cashless Tipping: Card Tips, Fees and Payouts — Tipza'
+description: 'Card tips make the business a temporary custodian of money that is not its own. The three decisions that has to force, before it matters.'
+excerpt: 'A cash tip is settled before the guest reaches the door. A card tip travels through an acquirer, a bank account and a payroll run first — and every one of those steps is a decision somebody has to make.'
+category: operations
+tags:
+  - card-payments
+  - payouts
+  - point-of-sale
+author: tipza-team
+publishedAt: 2026-04-29
+coverImage: ../../../assets/blog/cashless-tipping/cover.jpg
+coverImageAlt: A guest holds a card to a payment terminal offered by a server at a restaurant table
+status: published
+keywords:
+  - card tips
+  - cashless tipping
+  - credit card tip fees
+  - electronic tips restaurant
+relatedArticles:
+  - written-tip-policy
+  - tip-pooling-tax-germany
+takeaways:
+  - >-
+    A card tip makes the business a custodian of money that is not its own. Every
+    problem with cashless tipping comes back to that one sentence.
+  - >-
+    Payout lag is the change staff feel first. Decide the interval, publish it,
+    and treat it as a service level rather than a convenience.
+  - >-
+    Do not deduct card fees from tips. In the UK it is unlawful, and everywhere
+    else the amount is too small to matter and too visible to forgive.
+  - >-
+    Tips that pass through the business have to be kept out of revenue in the
+    books, or they turn into taxable turnover and a reconciliation problem.
+  - >-
+    Terminal prompts change behaviour more than any policy you write. Choose the
+    default deliberately, because it is a default either way.
+faq:
+  - question: Can a restaurant deduct card fees from tips?
+    answer: >-
+      In the United Kingdom, no — employers must pass on the total amount of
+      qualifying tips to workers without deductions other than those required by
+      tax law, and card processing costs are not an allowed deduction. In most of
+      Europe there is no equivalent prohibition, so it becomes a policy choice.
+      It is still a bad one: the sum recovered is a fraction of a percent of the
+      tip pool, while the message it sends to staff is that the tip is the
+      employer's to trim.
+  - question: How quickly should card tips be paid out?
+    answer: >-
+      As quickly as the settlement cycle and your payroll allow, and above all
+      predictably. Paying out weekly on a fixed day is better received than
+      paying out irregularly and sooner, because the objection to card tips is
+      rarely the delay itself — it is not knowing when the money arrives. Publish
+      the interval in the tip policy and treat it as a commitment.
+  - question: Are card tips still tax-free?
+    answer: >-
+      The payment method does not by itself change the treatment. In Austria the
+      exemption explicitly continues to apply where tips are passed on from card
+      payments, and in Germany the § 3 Nr. 51 conditions are about where the
+      money comes from and whether anyone has a legal claim to it, not about
+      whether it arrived as cash. What can change the answer is the arrangement
+      built around the card tips — an employer who guarantees or tops up a share
+      is a different case from one that simply forwards what guests gave.
+  - question: Do card tips have to appear in the accounts?
+    answer: >-
+      They pass through the business bank account, so they appear somewhere by
+      necessity. The point is that they must not appear as revenue. Book them to
+      a liability account when they arrive and clear it when they are paid out,
+      so the balance at any moment is what is owed to the team. Treated as
+      turnover, they inflate takings and can attract tax that was never due.
+  - question: Does cashless payment reduce tips?
+    answer: >-
+      There is no single answer, and the honest position is that it depends
+      heavily on what the terminal asks. What changes reliably is the shape
+      rather than the total: fewer small roundings, more amounts chosen from a
+      prompt. That makes the terminal configuration a more consequential decision
+      than most operators treat it as.
+sources:
+  - id: uk-tipping-act
+    title: 'Employment (Allocation of Tips) Act 2023'
+    publisher: UK Parliament
+    url: https://www.legislation.gov.uk/ukpga/2023/13/enacted
+  - id: oegk-trinkgeld
+    title: 'Neue Trinkgeldpauschalen ab 01.01.2026'
+    publisher: Österreichische Gesundheitskasse
+    url: https://www.oegk.at/cdscontent/?contentid=10007.908472&portal=oegkdgportal
+  - id: estg-3-51
+    title: 'Einkommensteuergesetz § 3 Nr. 51'
+    publisher: Bundesministerium der Justiz
+    url: https://www.gesetze-im-internet.de/estg/__3.html
+---
+
+import {
+  AnswerBlock,
+  Callout,
+  CalculationExample,
+  ComparisonTable,
+  FaqBlock,
+  ProcessSteps,
+  SourceRef,
+  StatCard,
+  StatGrid,
+  TipBox,
+  WarningBox,
+} from '~/components/content';
+
+A cash tip is finished the moment it is given. It goes from a guest's hand to a pocket or a box, and every question about it — who holds it, when it is paid, whether anyone owes tax — has already been answered by the time the guest reaches the door.
+
+A card tip answers none of those questions. It travels from the terminal to an acquirer, into the business bank account, through the books, and only then to the person the guest meant it for. Each of those steps is a decision, and most restaurants make all of them by accident.
+
+<AnswerBlock>
+  When tips arrive by card, the business becomes a temporary custodian of money
+  that is not its own. Three decisions follow and are best made before they
+  matter: how quickly the money reaches staff, whether card fees are deducted
+  from it, and how it is recorded so it never counts as revenue. Get those three
+  right and the payment method is a detail.
+</AnswerBlock>
+
+## The path the money now takes
+
+<ProcessSteps
+  label="Where a card tip goes before it reaches anyone"
+  steps={[
+    {
+      title: 'The terminal',
+      body: 'The guest chooses an amount, usually from whatever options the device offers. This is the step that changes behaviour, and it is configured rather than natural.',
+    },
+    {
+      title: 'The acquirer',
+      body: 'Tip and bill are captured together and settle together, typically after a delay of one to a few working days. The tip is now inside a payout that also contains revenue.',
+    },
+    {
+      title: 'The business account',
+      body: 'Money that belongs to staff is sitting in an account that belongs to the business. This is the whole of the accounting problem, and the whole of the trust problem.',
+    },
+    {
+      title: 'The books',
+      body: 'It has to be separated back out. If it is booked as turnover it inflates takings and can attract tax nobody owed.',
+    },
+    {
+      title: 'The payout',
+      body: 'In cash from the till, by bank transfer, or through payroll. Whichever it is, it happens on a schedule now, where cash happened immediately.',
+    },
+  ]}
+/>
+
+None of those steps is difficult. What makes cashless tipping feel harder than it is, is that all five used to be a single step, and nobody had to have an opinion about any of them.
+
+## Decision one: how long the lag is
+
+This is the change staff notice, and they notice it in the first week.
+
+<ComparisonTable
+  caption="The same €40 tip under two payment methods"
+  columns={[
+    'How it was given',
+    'Reaches the recipient',
+    'Held by the business',
+    'Visible before payday',
+    'Needs a record',
+  ]}
+  rows={[
+    ['Cash on the table', 'Immediately', false, true, false],
+    ['Added at the terminal', 'On the payout cycle', true, false, true],
+  ]}
+  note="Everything in the second row is a consequence of the first column. The lag is not an administrative detail; it is the thing that changes how the money feels."
+/>
+
+The instinct is to minimise the delay. The better goal is to make it predictable. A fixed weekly payout on a known day is received far better than an unpredictable one that is sometimes faster, because the underlying complaint is almost never the wait — it is not knowing.
+
+<TipBox title="Publish the interval, then treat it as a commitment">
+  Put the payout day in the tip policy alongside the split method. A missed
+  payout does more damage than a slow one: it converts a scheduling question into
+  a suspicion about whether the money is still there.
+</TipBox>
+
+If the payout runs through payroll, say so and say what it looks like on the payslip. A line item nobody warned people about generates more questions than the money is worth.
+
+## Decision two: who absorbs the card fee
+
+Card acceptance costs money, and the tip is part of the transaction, so the tip carries a fraction of that cost. It is a real cost, and it is a genuinely small one.
+
+<CalculationExample
+  title="What a card fee actually removes from a tip"
+  steps={[
+    { label: 'Tips taken by card in a week', value: '€1,400.00' },
+    { label: 'Blended acceptance cost', value: '1.4%' },
+    { label: 'Cost attributable to the tips', value: '€19.60' },
+  ]}
+  result={{ label: 'Per person, across a team of eight', value: '€2.45' }}
+/>
+
+Two and a half euros a week each. That is the amount at stake in a deduction that tells everyone the tip is the employer's to trim before passing on. It is a poor trade even where it is permitted.
+
+In the United Kingdom it is not permitted. The Employment (Allocation of Tips) Act requires employers to ensure the total amount of qualifying tips is allocated to workers, and deductions other than those required or permitted by law — tax, principally — are not allowed. Card processing costs do not qualify<SourceRef sources={frontmatter.sources} id="uk-tipping-act" />.
+
+<StatGrid label="The three numbers worth knowing before you decide">
+  <StatCard
+    value="100%"
+    label="Of qualifying tips that must reach UK workers, before permitted deductions"
+    source="Employment (Allocation of Tips) Act 2023"
+  />
+  <StatCard value="3 years" label="How long UK employers must keep tipping records" source="Employment (Allocation of Tips) Act 2023" />
+  <StatCard
+    value="Unchanged"
+    label="Austrian tax treatment of tips passed on from card payments"
+    source="ÖGK, Trinkgeldpauschalen"
+  />
+</StatGrid>
+
+## Decision three: keeping it out of revenue
+
+Because the money lands in the business account, it has to be actively excluded from turnover rather than passively absent from it.
+
+The mechanics are ordinary bookkeeping: recognise the tip as a liability when it arrives, clear the liability when it is paid out, and never let it touch a revenue account. Done that way, the balance on that account at any moment is exactly what the business owes its team, which is also the number worth reconciling.
+
+Done the other way, two things go wrong at once. Takings look higher than they were, and the money can attract turnover tax that was never due on it — because a tip that is indistinguishable from revenue in your own records is difficult to argue was not revenue.
+
+<WarningBox title="The trail is the point, not the paperwork">
+  Cash tips left no record and needed none, because nobody could later ask what
+  happened to them. Card tips leave a record whether you maintain one or not: the
+  acquirer's settlement reports show what came in. The only question is whether
+  your own records show the same money going back out again, to whom and when.
+</WarningBox>
+
+## The tax treatment usually follows the money, not the method
+
+The payment rail is rarely what decides the tax question. Austria says so directly: the income-tax exemption applies equally where tips are passed on from card payments<SourceRef sources={frontmatter.sources} id="oegk-trinkgeld" />. Germany's conditions in § 3 Nr. 51 EStG are about who the money came from and whether anyone has a legal claim to it, not about the form it arrived in<SourceRef sources={frontmatter.sources} id="estg-3-51" />.
+
+<Callout title="What can change the answer is the arrangement, not the terminal">
+  Going cashless often prompts a rebuild of the whole distribution — a pool where
+  there was none, a guaranteed share, a top-up to keep amounts steady while
+  people adjust. Those are the changes that move the tax position, and they tend
+  to arrive bundled with a technical migration where nobody is thinking about
+  them. Separate the two projects, even if they happen in the same month.
+</Callout>
+
+## The terminal is a policy document
+
+The prompt on the payment device does more to determine what guests give than anything written down anywhere. Percentage buttons, fixed amounts, a keypad, no prompt at all — these produce different behaviour, and one of them is already in place whether it was chosen or not.
+
+Three things are worth deciding deliberately:
+
+- **Percentages or amounts.** Percentages scale with the bill, which cuts both ways: generous on a large table, and conspicuous on one.
+- **Where the anchor sits.** The first option shown carries disproportionate weight. Setting it high looks like free money and reliably produces the opposite over time, as guests notice being asked.
+- **How easy it is to decline.** A skip that is hard to find converts irritation into a lower tip on the next visit, or no next visit. The prompt should feel like an offer.
+
+There is no configuration that makes this neutral, which is the point. Leaving the defaults in place is a choice about what your guests are asked, made by whoever set up the device.
+
+## A short migration checklist
+
+<ProcessSteps
+  label="Before the first shift where most tips arrive by card"
+  steps={[
+    {
+      title: 'Confirm the terminal reports tips separately',
+      body: 'If tip and bill are not distinguishable in the settlement data, everything downstream becomes an estimate. Check this first, because it is the one thing that cannot be fixed afterwards.',
+    },
+    {
+      title: 'Open the liability account',
+      body: 'One account, tips in and tips out, reconciled against the acquirer report. Ten minutes of setup that prevents a year-end conversation.',
+    },
+    {
+      title: 'Fix the payout day and write it down',
+      body: 'In the tip policy, next to the split method, with the date the version was agreed.',
+    },
+    {
+      title: 'Tell the team what changes and what does not',
+      body: 'Specifically: the method of division is unchanged, the money now arrives on a schedule, and no fee is being taken out. All three need saying out loud, because all three will otherwise be assumed the other way.',
+    },
+  ]}
+/>
+
+## What is actually different
+
+Cashless tipping does not change what a tip is or who it belongs to. It changes the fact that the money is now visible — to the acquirer, to the books, to anyone who later asks what happened to it.
+
+That is mostly an improvement. A cash tip that quietly went into the wrong pocket left no trace at all. But visibility only helps if the record is maintained on purpose, and the operators who struggle with the transition are almost always the ones who kept treating a traceable payment like an untraceable one.
+
+## Frequently asked questions
+
+<FaqBlock items={frontmatter.faq} />

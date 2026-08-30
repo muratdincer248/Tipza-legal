@@ -1,0 +1,248 @@
+---
+translationKey: tip-out-percentages
+locale: en
+title: 'Tip-out percentages: how much support roles should actually get'
+seoTitle: 'Tip-Out Percentages: Setting a Fair Support Share — Tipza'
+description: 'A tip-out set as a percentage of sales can exceed the tips on a slow night. Here is how to size a support share from headcount instead.'
+excerpt: 'Most tip-out arguments are really arguments about the base, not the percentage. Taking a cut of sales and taking a cut of tips behave very differently on a slow night — and one of them can go above 100%.'
+category: tip-splitting
+tags:
+  - tip-out
+  - foh-boh
+  - percentages
+author: tipza-team
+publishedAt: 2026-03-18
+coverImage: ../../../assets/blog/tip-out-percentages/cover.jpg
+coverImageAlt: A server carries two plates through a busy dining room while a bartender pours a drink behind the bar
+status: published
+keywords:
+  - tip out percentage
+  - how much to tip out the bar
+  - kitchen share of tips
+  - support staff tip share
+relatedArticles:
+  - tip-splitting-methods
+  - written-tip-policy
+takeaways:
+  - >-
+    The base matters more than the number. A percentage of sales is a fixed cost
+    charged against a variable income, and on a slow night it can exceed the
+    tips it is taken from.
+  - >-
+    A percentage of the tip pool cannot invert. Whatever the night was worth,
+    everyone moves in the same direction and nobody pays to work.
+  - >-
+    You can derive the percentage instead of guessing it: work out what a points
+    split would produce for the support roles, then round.
+  - >-
+    Set the tip-out per role, not as one lump. Bar and runner do different
+    amounts of work for the same table, and one number hides that.
+  - >-
+    Anything above roughly a third of the pool leaving the section that earned it
+    stops being a tip-out and becomes a pool with extra steps.
+faq:
+  - question: What is a normal tip-out percentage?
+    answer: >-
+      There is no standard figure, because the honest answer depends on how many
+      support staff a shift carries and how much of the service they do. A team
+      with one runner to four servers needs a much smaller tip-out than a team
+      with a full bar and a busser on every section. Rather than copying a number
+      from another restaurant, work out what a points split would give the
+      support roles on a typical shift and use that as the percentage.
+  - question: Should a tip-out be a percentage of sales or a percentage of tips?
+    answer: >-
+      A percentage of tips, in almost every case. A tip-out based on sales is a
+      fixed obligation charged against an income that varies, so on a night with
+      poor tipping it can consume most or all of what a server earned. A
+      percentage of the pool moves with the pool, which means a bad night is bad
+      for everyone in the same proportion rather than catastrophic for one role.
+  - question: How much of the tip pool should the kitchen get?
+    answer: >-
+      Between a fifth and a third is where most teams that share with the kitchen
+      end up, but the defensible way to choose is to weight kitchen hours in a
+      points split and see what falls out. Whatever the number, tie it to a
+      review trigger — a menu change or a change in kitchen headcount — because a
+      share set for a six-dish menu rarely still fits a year later.
+  - question: Can a tip-out ever be more than the tips someone received?
+    answer: >-
+      Only if the tip-out is calculated on sales rather than on tips, and it is
+      the clearest sign that the base is wrong. If a server can finish a shift
+      owing money to the pool, the arrangement is no longer distributing a tip;
+      it is charging a fee for working a section.
+sources:
+  - id: uk-tipping-code
+    title: 'Code of practice on fair and transparent distribution of tips'
+    publisher: Department for Business and Trade
+    url: https://www.gov.uk/government/publications/distributing-tips-fairly-statutory-code-of-practice/code-of-practice-on-fair-and-transparent-distribution-of-tips-html-version
+  - id: estg-3-51
+    title: 'Einkommensteuergesetz § 3 Nr. 51'
+    publisher: Bundesministerium der Justiz
+    url: https://www.gesetze-im-internet.de/estg/__3.html
+---
+
+import {
+  AnswerBlock,
+  BarChart,
+  CalculationExample,
+  ComparisonTable,
+  FaqBlock,
+  Formula,
+  SourceRef,
+  TipBox,
+  WarningBox,
+} from '~/components/content';
+
+Ask three restaurants what they tip out to the bar and you will get three numbers, all delivered with total confidence. Ask where the number came from and the answers thin out considerably: it was inherited from a previous manager, or copied from the place down the road, or picked because it sounded about right.
+
+That is survivable. What is not survivable is the part nobody checks — whether the tip-out is a share of sales or a share of tips. Those two look almost identical in a policy document and behave completely differently on a slow Tuesday.
+
+<AnswerBlock>
+  Take the tip-out as a percentage of the tip pool rather than of sales, and set
+  the percentage per role rather than as one lump. To size it, work out what a
+  points split would give the support roles on a typical shift and round to the
+  nearest whole percent. Sales-based tip-outs are the ones that break, because
+  they charge a fixed cost against an income that varies.
+</AnswerBlock>
+
+## The base is the decision
+
+A tip-out is a transfer from the people the guest handed money to, towards the people who made the service possible but were never at the table. Runners, bartenders, hosts, kitchen. The mechanism has two parts, and only one of them gets argued about.
+
+The **percentage** is what teams debate. The **base** — the thing the percentage is taken from — is what determines whether the arrangement holds up when trade is poor.
+
+<ComparisonTable
+  caption="Two bases that look interchangeable in a policy and are not"
+  columns={[
+    'Base',
+    'Moves with the tips',
+    'Can exceed the tips',
+    'Needs point-of-sale data',
+    'Survives a slow night',
+  ]}
+  rows={[
+    ['Percentage of the tip pool', true, false, false, true],
+    ['Percentage of sales', false, true, true, false],
+  ]}
+  note="A sales-based tip-out is a fixed obligation levied against a variable income. Everything below follows from that one sentence."
+/>
+
+## What a sales-based tip-out does on a bad night
+
+Take a server who closes €1,800 of sales and owes 3% of it to the support pool. That is €54, and on a good night it is unremarkable.
+
+<CalculationExample
+  title="3% of sales on a good night"
+  steps={[
+    { label: 'Sales closed', value: '€1,800.00' },
+    { label: 'Tips received', value: '€190.00' },
+    { label: 'Tip-out owed (3% of sales)', value: '−€54.00' },
+  ]}
+  result={{ label: 'Server keeps (72% of the tips)', value: '€136.00' }}
+/>
+
+Now the same section on a night when a large table pays by card and rounds to the nearest euro, and a second one leaves nothing at all. The sales barely move. The tips collapse.
+
+<CalculationExample
+  title="The same 3% of sales on a bad night"
+  steps={[
+    { label: 'Sales closed', value: '€1,700.00' },
+    { label: 'Tips received', value: '€62.00' },
+    { label: 'Tip-out owed (3% of sales)', value: '−€51.00' },
+  ]}
+  result={{ label: 'Server keeps (18% of the tips)', value: '€11.00' }}
+/>
+
+The percentage did not change. The share of the server's actual earnings went from 28% to 82%. Push the sales a little higher and the tips a little lower — a large party that tips nothing is enough — and the tip-out goes above 100%, at which point the server is paying out of pocket for having worked the busiest section.
+
+<WarningBox title="If someone can owe money at the end of a shift, the base is wrong">
+  This is the failure mode worth designing against, because it does not announce
+  itself. A sales-based tip-out works perfectly for months and then produces one
+  absurd result on the night trade is worst, which is the night people can least
+  afford it. A percentage of the pool cannot do this: the pool is the numerator
+  and the denominator, so the share is bounded by definition.
+</WarningBox>
+
+A percentage of the tip pool has none of this behaviour. If the pool halves, every share halves. Nobody is happy, but nobody is being charged a fee to have shown up.
+
+## Deriving the percentage instead of inheriting it
+
+Once the base is the pool, the percentage becomes an arithmetic question rather than a matter of taste. A tip-out is a shortcut for a points split, so the way to size it is to run the points split you would have run and read the answer off.
+
+Take a typical evening: three servers on eight hours, one runner on six, one bartender on six.
+
+<Formula
+  label="Role share of the pool"
+  note="Weight each role's hours by its point value, then divide that role's points by the total. The result is the percentage a tip-out would have to be to match a points split."
+>
+  role share = role points ÷ total points
+</Formula>
+
+<CalculationExample
+  title="What a points split gives the support roles"
+  steps={[
+    { label: 'Servers, 3 × 8 hours × 1.0', value: '24.0 points' },
+    { label: 'Bartender, 6 hours × 1.0', value: '6.0 points' },
+    { label: 'Runner, 6 hours × 0.7', value: '4.2 points' },
+    { label: 'Total points', value: '34.2' },
+    { label: 'Bartender share (6.0 ÷ 34.2)', value: '17.5%' },
+    { label: 'Runner share (4.2 ÷ 34.2)', value: '12.3%' },
+  ]}
+  result={{ label: 'Tip-out that reproduces the split', value: '18% bar · 12% runner' }}
+/>
+
+Round to whole percentages and you have a policy: eighteen to the bar, twelve to the runner, the remainder split between the servers by hours. It is defensible in a way an inherited number never is, because you can show anyone the shift it was derived from.
+
+<BarChart
+  caption="A €400 pool distributed by the derived percentages"
+  bars={[
+    { label: 'Servers (70%)', value: 280, display: '€280.00' },
+    { label: 'Bar (18%)', value: 72, display: '€72.00' },
+    { label: 'Runner (12%)', value: 48, display: '€48.00' },
+  ]}
+/>
+
+<TipBox title="Derive it from a normal shift, not your best one">
+  Use a typical Friday, not the Saturday everyone remembers. The percentage is
+  going to be applied to every shift including the quiet ones, so it should
+  describe the staffing you usually run rather than the staffing you run at
+  capacity.
+</TipBox>
+
+## One number per role, not one number total
+
+"We tip out 25%" is a policy that hides a decision. The bar and the runner did different amounts of work for the same table, and lumping them together means the split between them gets settled informally — which is to say, by whoever is more assertive.
+
+Setting a number per role costs nothing extra, since the derivation already produces one. It also makes the review tractable. When you hire a second runner, only the runner line needs revisiting.
+
+The statutory code of practice that accompanies the UK tipping legislation lists the factors an employer should weigh when deciding how tips are shared: the type of role, hours worked during the period the tips were paid, individual and team performance, seniority, customer intentions and length of service<SourceRef sources={frontmatter.sources} id="uk-tipping-code" />. It is not binding outside the UK, and it prescribes no percentages at all. What it is useful for is as a checklist of the things a defensible share is allowed to depend on — a per-role number can point at several of them, while a single lump can point at none.
+
+## The kitchen is a different question
+
+Sharing with the kitchen is the one case where the derivation gets awkward, because a kitchen point value is not really a measure of anything. Nobody can say whether an hour of plating is 0.5 or 0.7 of an hour of service, and the argument for a specific figure is always circular.
+
+What helps is deciding the principle before the number:
+
+- If the food is a large part of why guests tip, the kitchen has a claim on the pool and the number should be big enough to be felt — a token 5% reads as an insult rather than a share.
+- If the kitchen is already paid a premium precisely because it does not receive tips, adding a share on top is a wage decision dressed up as a tip policy, and it belongs in a wage conversation.
+
+Teams that do share tend to land between a fifth and a third of the pool. Whichever end you pick, tie it to a review trigger rather than a date: a menu change, or a change in kitchen headcount. A share set when the kitchen was two people rarely still fits when it is five.
+
+<WarningBox title="Check how the tax treatment reacts before you route money through the business">
+  The percentages are an internal fairness question, but the plumbing that
+  implements them is not always neutral. In Germany, the exemption in § 3 Nr. 51
+  EStG depends on the money coming from a guest and carrying no legal
+  claim<SourceRef sources={frontmatter.sources} id="estg-3-51" /> — so a tip-out
+  the employer guarantees looks different from one the team agreed among
+  themselves, even at an identical percentage. Settle the mechanism with an
+  adviser before the first payout, not after.
+</WarningBox>
+
+## Where the ceiling sits
+
+There is no legal cap on a tip-out, but there is a practical one. Once more than roughly a third of the pool is leaving the section that earned it, the arrangement has stopped being a tip-out. It is a pooled split with extra steps, and it will keep generating friction precisely because it is described as something else.
+
+That is not an argument against pooling. It is an argument for calling it what it is: if two-fifths of the money is going to support roles, run a pool and split it by points, where every share is visible and nobody has to think of themselves as paying somebody else. The arithmetic can be identical. The way it reads to the people it applies to is not.
+
+## Frequently asked questions
+
+<FaqBlock items={frontmatter.faq} />
