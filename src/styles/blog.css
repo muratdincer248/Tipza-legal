@@ -504,3 +504,83 @@ a.tag-category[aria-current='page']:hover {
     white-space: nowrap;
   }
 }
+
+/* Phone reading sizes. The card scale was set for a desktop reading distance,
+   which leaves excerpts and meta lines at 12–14px on the screen where most of
+   the traffic reads them. Everything here goes up ~2px, card titles included, so
+   the ratios inside a card hold instead of the excerpt creeping up on the title.
+   Chrome that is width-bound rather than read at length — pills, buttons,
+   breadcrumbs — gains 1px so it keeps its line count. Desktop is untouched. */
+@media (max-width: 768px) {
+  .blog-intro > .container > p {
+    font-size: 20px;
+  }
+
+  .blog-topics h2 {
+    font-size: 20px;
+  }
+
+  .tag-category {
+    font-size: 13px;
+  }
+
+  .blog-empty p {
+    font-size: 18px;
+  }
+
+  .article-card-body h2,
+  .article-card-body h3 {
+    font-size: 19px;
+  }
+
+  .article-card-category {
+    font-size: 14px;
+  }
+
+  .card-link .article-card-excerpt,
+  .card-link .featured-article-excerpt {
+    font-size: 16px;
+  }
+
+  .card-link .featured-article-excerpt {
+    font-size: 17px;
+  }
+
+  .card-link .article-card-meta {
+    font-size: 14px;
+  }
+
+  .featured-article-body h2 {
+    font-size: 24px;
+  }
+
+  .related-articles h2 {
+    font-size: 20px;
+  }
+
+  .article-feedback-question {
+    font-size: 17px;
+  }
+
+  .article-feedback-prompt,
+  .article-feedback-thanks {
+    font-size: 16px;
+  }
+
+  .article-feedback .btn,
+  .article-feedback-skip {
+    font-size: 15px;
+  }
+
+  .product-cta-heading {
+    font-size: 20px;
+  }
+
+  .product-cta-body {
+    font-size: 16px;
+  }
+
+  .breadcrumbs ol {
+    font-size: 14px;
+  }
+}

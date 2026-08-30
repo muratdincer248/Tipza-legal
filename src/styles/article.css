@@ -253,16 +253,45 @@
   background: rgba(10, 7, 5, 0.06);
 }
 
+/* Prose grows on a phone rather than shrinking: 16px over a narrow measure is
+   the size readers complain about. The section headings move with it by the same
+   2px so the h2 / h3 / body steps stay as wide as they are on desktop. */
 @media (max-width: 768px) {
   .article-shell {
     padding: 22px 20px 56px;
   }
 
-  .article-body {
+  .article-lead {
+    font-size: 20px;
+  }
+
+  .article-byline-name {
     font-size: 16px;
   }
 
+  .article-byline-meta {
+    font-size: 15px;
+  }
+
+  .article-body {
+    font-size: 18px;
+  }
+
   .article-body h2 {
-    font-size: 22px;
+    font-size: 24px;
+  }
+
+  .article-body h3 {
+    font-size: 21px;
+  }
+
+  /* Header cells stay a notch behind the caption bump: they are `nowrap`, so
+     every pixel here widens the table inside its scroller. */
+  .article-body th {
+    font-size: 14px;
+  }
+
+  .article-body caption {
+    font-size: 15px;
   }
 }

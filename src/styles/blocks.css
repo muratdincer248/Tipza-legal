@@ -984,6 +984,143 @@
 
 /* ------------------------------------------------------------- breakpoints */
 
+/* Matches the phone prose bump in article.css: the blocks sit in the same
+   column as the body copy, so their captions, labels and notes step up with it.
+   Uppercase eyebrows gain 1px rather than 2 — caps already read a size larger —
+   and so do data labels inside charts and tables, which are placed by width. */
+@media (max-width: 768px) {
+  .toc a {
+    font-size: 16px;
+  }
+
+  .toc-inline summary {
+    font-size: 16px;
+  }
+
+  .toc-label {
+    font-size: 14px;
+  }
+
+  .callout {
+    font-size: 17px;
+  }
+
+  .callout-title {
+    font-size: 16px;
+  }
+
+  .table-scroll table {
+    font-size: 16px;
+  }
+
+  .comparison-table figcaption,
+  .comparison-table tbody th.row-label {
+    font-size: 16px;
+  }
+
+  .block-note {
+    font-size: 15px;
+  }
+
+  .stat-label {
+    font-size: 16px;
+  }
+
+  .stat-source {
+    font-size: 14px;
+  }
+
+  .formula-label {
+    font-size: 14px;
+  }
+
+  .formula-note {
+    font-size: 16px;
+  }
+
+  .calc-title,
+  .calc-row {
+    font-size: 16px;
+  }
+
+  .calc-note {
+    font-size: 15px;
+  }
+
+  .faq-block-question {
+    font-size: 18px;
+  }
+
+  .faq-block-answer {
+    font-size: 17px;
+  }
+
+  .process-step-title {
+    font-size: 17px;
+  }
+
+  .process-step-body {
+    font-size: 16px;
+  }
+
+  .timeline-date {
+    font-size: 14px;
+  }
+
+  .timeline-title {
+    font-size: 17px;
+  }
+
+  .timeline-body {
+    font-size: 16px;
+  }
+
+  .bar-chart figcaption,
+  .donut-chart figcaption {
+    font-size: 16px;
+  }
+
+  .bar-row dt,
+  .bar-value,
+  .donut-legend-row {
+    font-size: 15px;
+  }
+
+  .article-figure figcaption {
+    font-size: 15px;
+  }
+
+  .article-quote {
+    font-size: 20px;
+  }
+
+  .pull-quote-attribution {
+    font-size: 16px !important;
+  }
+
+  .sources h2 {
+    font-size: 20px;
+  }
+
+  .sources li {
+    font-size: 16px;
+  }
+
+  .key-takeaways-label,
+  .answer-block-label {
+    font-size: 13px;
+  }
+
+  .key-takeaways li {
+    font-size: 17px;
+  }
+
+  .answer-block-question,
+  .answer-block-body {
+    font-size: 18px;
+  }
+}
+
 @media (max-width: 620px) {
   /* Two columns at this width leaves each label wrapping over four lines,
      which costs more vertical space than stacking the cards outright. */
