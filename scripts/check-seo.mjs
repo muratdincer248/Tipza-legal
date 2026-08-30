@@ -75,11 +75,20 @@ const problems = [];
 const fail = (file, message) => problems.push(`${path.relative(DIST, file)}: ${message}`);
 
 const pages = [];
+const internalLinks = new Map();
 
 for await (const file of htmlFiles(DIST)) {
   const html = await readFile(file, 'utf8');
   const url = urlFor(file);
   const noindex = /noindex/i.test(content(meta(html, 'name', 'robots')[0]) ?? '');
+
+  /* Collected before the noindex bail-out, because a dead link is dead whether
+     or not the page it sits on is indexed. */
+  for (const [, href] of html.matchAll(/\bhref="(\/[^"]*)"/g)) {
+    const target = href.replace(/[#?].*$/, '');
+    if (!target || target.startsWith('/_astro/')) continue;
+    internalLinks.set(target, internalLinks.get(target) ?? file);
+  }
 
   const titles = html.match(/<title>([\s\S]*?)<\/title>/g) ?? [];
   if (titles.length !== 1) fail(file, `expected exactly one <title>, found ${titles.length}`);
@@ -162,6 +171,17 @@ for (const page of pages) {
       fail(page.file, `hreflang="${hreflang}" points at ${href}, which does not link back`);
     }
   }
+}
+
+/* Every internal link has to land on something in the build. The failure this
+   catches is a locale rollout: the footer links to `/<locale>/privacy/` for
+   every language, so a new locale that has no legal documents yet ships three
+   404s per page and nothing else notices. */
+for (const [href, from] of internalLinks) {
+  const target = href.endsWith('/')
+    ? path.join(DIST, href, 'index.html')
+    : path.join(DIST, href);
+  if (!(await exists(target))) fail(from, `links to ${href}, which the build does not contain`);
 }
 
 /* The sitemap is generated from these same pages, so a mismatch means one of the
