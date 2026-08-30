@@ -128,14 +128,20 @@ a.tag-category:hover {
   margin: 0;
 }
 
-.article-card-body p {
+/* Card paragraph rules are scoped through .card-link so they outrank
+   `.section p`, which sets a reading measure and zeroes margins for prose in a
+   marketing section. Without the extra class the meta line loses its
+   `margin-top: auto` and stops sitting at the foot of the card. */
+.card-link .article-card-body p,
+.card-link .featured-article-excerpt {
   font-size: 14px;
   line-height: 1.6;
   color: var(--muted);
+  max-width: 46ch;
   margin: 0;
 }
 
-.article-card-meta {
+.card-link .article-card-meta {
   display: flex;
   flex-wrap: wrap;
   gap: 6px;
@@ -171,12 +177,101 @@ a.tag-category:hover {
   margin: 0;
 }
 
-.featured-article-excerpt {
+.card-link .featured-article-excerpt {
   font-size: 15px;
+}
+
+/* ------------------------------------------------------- landing page teaser */
+
+/* Scoped through .blog-teaser to outrank `.section p`, which zeroes the margins
+   of every paragraph in a marketing section. */
+.blog-teaser .blog-teaser-lead {
+  font-size: 16px;
   line-height: 1.65;
   color: var(--muted);
+  text-align: center;
+  max-width: 62ch;
+  margin: 0 auto 30px;
+}
+
+/* `auto-fit`, unlike the further-reading grid: this row is centred under a
+   centred heading, so two cards sharing the width reads better than two cards
+   and a hole where the third would go. */
+.blog-teaser-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 18px;
+}
+
+.blog-teaser .blog-teaser-cta {
+  text-align: center;
+  max-width: none;
+  margin: 30px 0 0;
+}
+
+/* ---------------------------------------------------------- further reading */
+
+.related-articles {
+  margin-top: 44px;
+  padding-top: 26px;
+  border-top: 1px solid var(--stroke);
+}
+
+.related-articles h2 {
+  font-family: var(--font-display);
+  letter-spacing: -0.02em;
+  font-size: 18px;
+  margin: 0 0 16px;
+}
+
+/* `auto-fill`, not `auto-fit`: the empty tracks stay, so one related article is
+   the same size as three rather than stretching across the whole column. */
+.related-articles-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 16px;
+}
+
+/* ------------------------------------------------------------ in-article cta */
+
+.product-cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  align-items: center;
+  justify-content: space-between;
+  margin: 40px 0 0;
+  padding: 22px 24px;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--stroke);
+  background: var(--card);
+}
+
+.product-cta-text {
+  flex: 1 1 260px;
+  min-width: 0;
+}
+
+.product-cta-heading {
+  font-family: var(--font-display);
+  letter-spacing: -0.02em;
+  font-size: 19px;
+  line-height: 1.25;
+  margin: 0 0 6px;
+}
+
+.product-cta-body {
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--muted);
   margin: 0;
-  max-width: 46ch;
+  max-width: 52ch;
+}
+
+.product-cta-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
 }
 
 /* ------------------------------------------------------------- breadcrumbs */

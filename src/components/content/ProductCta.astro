@@ -1,0 +1,33 @@
+---
+import StoreButtons from '~/components/layout/StoreButtons.astro';
+import { localeFromPath } from '~/config/locales';
+import { getDictionary } from '~/i18n';
+
+/**
+ * The in-article invitation to use Tipza. Placed automatically at the foot of
+ * every article unless `showProductCta: false`, and importable into MDX for the
+ * rare case where the natural moment is mid-article.
+ *
+ * Copy comes from the dictionary rather than the article, so how the product is
+ * described can change in one place instead of in every published file. `heading`
+ * and `body` override it where an article earns a more specific pitch.
+ */
+interface Props {
+  heading?: string;
+  body?: string;
+}
+
+const { heading, body } = Astro.props;
+
+const dict = getDictionary(localeFromPath(Astro.url.pathname));
+---
+
+<aside class="product-cta">
+  <div class="product-cta-text">
+    <p class="product-cta-heading">{heading ?? dict.blog.productCta.heading}</p>
+    <p class="product-cta-body">{body ?? dict.blog.productCta.body}</p>
+  </div>
+  <div class="product-cta-buttons">
+    <StoreButtons />
+  </div>
+</aside>

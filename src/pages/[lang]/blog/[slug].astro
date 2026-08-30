@@ -7,7 +7,7 @@ import H3 from '~/components/content/H3.astro';
 import DataTable from '~/components/content/DataTable.astro';
 import Quote from '~/components/content/Quote.astro';
 import SmartLink from '~/components/content/SmartLink.astro';
-import { allArticles, articleAlternates, type Article } from '~/lib/blog';
+import { allArticles, articleAlternates, relatedArticles, type Article } from '~/lib/blog';
 import type { Alternate } from '~/lib/translations';
 
 export const getStaticPaths: GetStaticPaths = async () => {
@@ -15,16 +15,21 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
   return all.map((article) => ({
     params: { lang: article.locale, slug: article.slug },
-    props: { article, alternates: articleAlternates(all, article.translationKey) },
+    props: {
+      article,
+      alternates: articleAlternates(all, article.translationKey),
+      related: relatedArticles(article, all),
+    },
   }));
 };
 
 interface Props {
   article: Article;
   alternates: Alternate[];
+  related: Article[];
 }
 
-const { article, alternates } = Astro.props as Props;
+const { article, alternates, related } = Astro.props as Props;
 
 const author = await getEntry(article.entry.data.author);
 if (!author) {
@@ -55,6 +60,7 @@ const components = {
   locale={article.locale}
   alternates={alternates}
   headings={headings}
+  related={related}
 >
   <Content components={components} />
 </ArticleLayout>

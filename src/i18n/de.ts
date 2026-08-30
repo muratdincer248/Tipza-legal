@@ -213,6 +213,20 @@ export const de: Dictionary = {
     breadcrumbLabel: 'Brotkrumennavigation',
     home: 'Startseite',
 
+    relatedLabel: 'Weiterlesen',
+
+    teaser: {
+      heading: 'Aus dem Tipza Blog',
+      lead: 'Anleitungen zum fairen Aufteilen von Trinkgeld – welche Methoden Teams nutzen, welche Regeln gelten und Rechenbeispiele zum Übernehmen.',
+      cta: 'Zum Blog',
+    },
+
+    productCta: {
+      heading: 'Die Methode in die Praxis bringen',
+      body: 'Tipza wendet die gewählte Regel an, zeigt jeden Rechenschritt und gibt dem Team eine Übersicht, die es nachprüfen kann.',
+      cta: 'Tipza holen',
+    },
+
     pagination: {
       label: 'Seitennavigation',
       previous: 'Neuere Artikel',

@@ -41,7 +41,8 @@ The fields that need explaining:
 | `category` | One of the keys in `src/config/taxonomy.ts`. Each has its own localized label and slug. |
 | `status` | `draft` keeps a file out of every listing, sitemap and build. Set `published` when it is ready. |
 | `featured` | Promotes the article to the large card at the top of the blog index. |
-| `relatedArticles` | `translationKey`s, not slugs, so a relation written once resolves in both languages. |
+| `relatedArticles` | `translationKey`s, not slugs, so a relation written once resolves in both languages. Any remaining slots fill with same-category articles, then the newest of anything else. |
+| `showProductCta` | On by default. Set `false` for an article where a pitch would undercut the writing — a compliance explainer, usually. |
 | `keywords` | The queries the article is meant to answer. Not emitted as a meta tag; they exist to keep the brief honest. |
 | `faq` | Question-and-answer pairs. See below. |
 | `sources` | Citations. See below. |
@@ -124,6 +125,7 @@ import { Callout, CalculationExample, FaqBlock } from '~/components/content';
 | `Quote` | An actual quotation from a source. |
 | `SourceRef` | An inline citation marker. |
 | `FaqBlock` | Renders the `faq` frontmatter. |
+| `ProductCta` | The invitation to use Tipza. Already at the foot of every article; import it only to place a second one at a natural mid-article moment. |
 
 Three conventions worth following:
 
@@ -155,6 +157,19 @@ Text the blocks generate themselves — the hidden "Yes" and "No" behind a
 comparison table's ticks, for instance — comes from `src/i18n/<locale>.ts` under
 `blocks`, resolved from the article's own URL. There is nothing to pass and
 nothing to forget.
+
+## What the article gets for free
+
+The layout adds these around the body, so an article should not write them:
+
+- breadcrumbs, the byline, the publication date and the reading time;
+- a table of contents, once the article has four or more `##` sections;
+- the numbered Sources section, from `sources`;
+- the Tipza call to action, unless `showProductCta: false`;
+- three further-reading cards.
+
+The newest three articles in a language also appear on that language's landing
+page automatically. Nothing needs registering.
 
 ## Before opening a pull request
 

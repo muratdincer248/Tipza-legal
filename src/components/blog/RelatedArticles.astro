@@ -1,0 +1,32 @@
+---
+import ArticleCard from './ArticleCard.astro';
+import type { Article } from '~/lib/blog';
+import type { Locale } from '~/config/locales';
+import type { Dictionary } from '~/i18n/types';
+
+/**
+ * Further reading at the foot of an article. The selection is made in
+ * `relatedArticles()` — editor's picks first, then same-category, then newest —
+ * so this component only has to lay the result out.
+ */
+interface Props {
+  articles: Article[];
+  locale: Locale;
+  dict: Dictionary;
+}
+
+const { articles, locale, dict } = Astro.props;
+---
+
+{
+  articles.length > 0 && (
+    <section class="related-articles">
+      <h2>{dict.blog.relatedLabel}</h2>
+      <div class="related-articles-grid">
+        {articles.map((article) => (
+          <ArticleCard article={article} locale={locale} dict={dict} />
+        ))}
+      </div>
+    </section>
+  )
+}

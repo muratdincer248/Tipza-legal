@@ -17,6 +17,7 @@ export { default as Figure } from './Figure.astro';
 export { default as Formula } from './Formula.astro';
 export { default as FullWidthFigure } from './FullWidthFigure.astro';
 export { default as ProcessSteps } from './ProcessSteps.astro';
+export { default as ProductCta } from './ProductCta.astro';
 export { default as PullQuote } from './PullQuote.astro';
 export { default as Quote } from './Quote.astro';
 export { default as SourceRef } from './SourceRef.astro';

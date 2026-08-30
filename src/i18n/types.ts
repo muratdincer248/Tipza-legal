@@ -147,6 +147,27 @@ export interface Dictionary {
     breadcrumbLabel: string;
     home: string;
 
+    /** Heading above the further-reading cards at the foot of an article. */
+    relatedLabel: string;
+
+    /** The landing page's blog section. */
+    teaser: {
+      heading: string;
+      lead: string;
+      /** Link from the teaser through to the blog index. */
+      cta: string;
+    };
+
+    /**
+     * In-article CTA. Kept here rather than per article so a change to how the
+     * product is described does not mean editing every published file.
+     */
+    productCta: {
+      heading: string;
+      body: string;
+      cta: string;
+    };
+
     pagination: {
       label: string;
       previous: string;

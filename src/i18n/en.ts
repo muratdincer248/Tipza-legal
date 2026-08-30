@@ -213,6 +213,20 @@ export const en: Dictionary = {
     breadcrumbLabel: 'Breadcrumb',
     home: 'Home',
 
+    relatedLabel: 'Keep reading',
+
+    teaser: {
+      heading: 'From the Tipza Blog',
+      lead: 'Guides on splitting tips fairly — the methods teams use, the rules that apply, and worked examples you can copy.',
+      cta: 'Read the blog',
+    },
+
+    productCta: {
+      heading: 'Put the method into practice',
+      body: 'Tipza applies the split rule you choose, shows every step of the arithmetic, and gives your team a breakdown they can check.',
+      cta: 'Get Tipza',
+    },
+
     pagination: {
       label: 'Pagination',
       previous: 'Newer articles',

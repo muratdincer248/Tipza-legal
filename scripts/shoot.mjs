@@ -22,6 +22,24 @@ if (flags.includes('--open-lang')) {
   await page.waitForTimeout(300);
 }
 
+/* Lazy images below the fold never load in a capture of a page nobody scrolled,
+   so a full-page shot shows empty cover slots that are fine in a browser. Making
+   them eager and waiting for them is more reliable than scrolling and hoping. */
+if (flags.includes('--full')) {
+  await page.evaluate(async () => {
+    const images = [...document.querySelectorAll('img[loading="lazy"]')];
+    for (const image of images) image.loading = 'eager';
+    const settled = (image) =>
+      new Promise((resolve) => {
+        image.addEventListener('load', resolve, { once: true });
+        image.addEventListener('error', resolve, { once: true });
+        setTimeout(resolve, 4000);
+      });
+
+    await Promise.all(images.filter((image) => !image.complete).map(settled));
+  });
+}
+
 await page.waitForTimeout(500);
 await page.screenshot({ path: file, fullPage: flags.includes('--full') });
 await browser.close();

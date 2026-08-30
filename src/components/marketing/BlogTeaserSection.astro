@@ -1,0 +1,42 @@
+---
+import ArticleCard from '~/components/blog/ArticleCard.astro';
+import { blogIndexHref, type Article } from '~/lib/blog';
+import type { Locale } from '~/config/locales';
+import type { Dictionary } from '~/i18n/types';
+
+/**
+ * The blog's entry point on the landing page. Rendered only when the locale has
+ * articles: a heading over an empty grid would advertise a section that is not
+ * there yet, and the German blog will trail the English one for a while.
+ */
+interface Props {
+  articles: Article[];
+  locale: Locale;
+  dict: Dictionary;
+}
+
+const { articles, locale, dict } = Astro.props;
+---
+
+{
+  articles.length > 0 && (
+    <section class="section blog-teaser" id="blog">
+      <div class="container">
+        <h2 class="centered-title">{dict.blog.teaser.heading}</h2>
+        <p class="blog-teaser-lead">{dict.blog.teaser.lead}</p>
+
+        <div class="blog-teaser-grid">
+          {articles.map((article) => (
+            <ArticleCard article={article} locale={locale} dict={dict} />
+          ))}
+        </div>
+
+        <p class="blog-teaser-cta">
+          <a class="btn btn-secondary" href={blogIndexHref(locale)}>
+            {dict.blog.teaser.cta}
+          </a>
+        </p>
+      </div>
+    </section>
+  )
+}
