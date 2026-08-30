@@ -9,6 +9,9 @@
   --green-20: #02925c;
   --green-10: #06bc78;
 
+  /* action.color.tertiary.enabled */
+  --action-color-tertiary-enabled: #ff5b29;
+
   --neutral-00: #ffffff;
   --neutral-01: #f3ede8;
   --neutral-05: #eee5dd;
