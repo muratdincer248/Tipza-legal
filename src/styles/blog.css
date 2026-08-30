@@ -136,7 +136,7 @@ a.tag-category:hover {
 .card-link .featured-article-excerpt {
   font-size: 14px;
   line-height: 1.6;
-  color: var(--muted);
+  color: var(--text);
   max-width: 46ch;
   margin: 0;
 }
