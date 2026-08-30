@@ -12,6 +12,16 @@
     transform: scale(1.18);
     transform-origin: center;
   }
+  /* The scale paints the image 9% wider than its column on each side, and that
+     bleed counts as scrollable overflow. Between 924px and 1160px the right
+     side of it lands outside the viewport: wide enough that the text column has
+     hit its 520px cap and handed the surplus to the image, too narrow for the
+     centring margins to absorb the overhang. The section is where the bleed is
+     meant to stop, so clip it there. `clip` rather than `hidden` so the axis
+     stays scrollable-free without turning the hero into a scroll container. */
+  .hero {
+    overflow-x: clip;
+  }
 }
 
 @media (min-width: 921px) {
