@@ -156,7 +156,7 @@ a.tag-category:hover {
   margin-top: auto;
   font-size: 12px;
   line-height: 1.4;
-  color: var(--neutral-30);
+  color: var(--text-color-secondary);
 }
 
 .featured-article {

@@ -113,7 +113,7 @@
 }
 
 .article-byline-role {
-  color: var(--neutral-70);
+  color: var(--text-color-secondary);
 }
 
 .article-byline-role::before {
@@ -128,7 +128,7 @@
   gap: 6px;
   align-items: center;
   font-size: 13px;
-  color: var(--neutral-70);
+  color: var(--text-color-secondary);
   margin: 4px 0 0;
 }
 

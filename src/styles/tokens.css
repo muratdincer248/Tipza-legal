@@ -23,7 +23,9 @@
   --neutral-99: #0a0705;
 
   --text: var(--neutral-99);
-  --muted: rgba(10, 7, 5, 0.72);
+  /* text.color.secondary */
+  --text-color-secondary: #8f6647;
+  --muted: var(--text-color-secondary);
   --text-color-inverse-disabled: #C19D81;
 
   --card: rgba(255, 255, 255, 0.74);
