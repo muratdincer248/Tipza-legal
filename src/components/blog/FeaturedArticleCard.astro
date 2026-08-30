@@ -27,7 +27,6 @@ const { data } = article.entry;
     loading="eager"
   />
   <div class="card featured-article-body">
-    <p class="eyebrow">{dict.blog.featuredLabel}</p>
     <CategoryPill category={article.category} locale={locale} link={false} />
     <h2>{data.title}</h2>
     <p class="featured-article-excerpt">{data.excerpt}</p>
