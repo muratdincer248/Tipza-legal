@@ -8,17 +8,26 @@ import ProSection from '~/components/marketing/ProSection.astro';
 import FaqSection from '~/components/marketing/FaqSection.astro';
 import DownloadCta from '~/components/marketing/DownloadCta.astro';
 import ContactSection from '~/components/marketing/ContactSection.astro';
+import { LOCALES, localeBase, type Locale } from '~/config/locales';
 import { getDictionary } from '~/i18n';
+import { symmetricAlternates } from '~/lib/translations';
 
-const dict = getDictionary('en');
-const base = '/';
+export function getStaticPaths() {
+  return LOCALES.map((lang) => ({ params: { lang } }));
+}
+
+const locale = Astro.params.lang as Locale;
+const dict = getDictionary(locale);
+const base = localeBase(locale);
 ---
 
 <MarketingLayout
-  dict={dict}
-  base={base}
+  locale={locale}
+  path=""
+  alternates={symmetricAlternates('')}
   title={dict.meta.homeTitle}
   description={dict.meta.homeDescription}
+  ogDescription={dict.meta.homeOgDescription}
   preloadImages={['/assets/images/website-hero-image.png']}
 >
   <Hero copy={dict.hero} />

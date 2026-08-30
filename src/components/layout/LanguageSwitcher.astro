@@ -1,0 +1,182 @@
+---
+import { localeMeta, type Locale } from '~/config/locales';
+import type { Alternate } from '~/lib/translations';
+import type { Dictionary } from '~/i18n/types';
+
+interface Props {
+  locale: Locale;
+  alternates: Alternate[];
+  copy: Dictionary['languageSwitcher'];
+}
+
+const { locale, alternates, copy } = Astro.props;
+const current = localeMeta[locale];
+---
+
+<details class="lang-switcher" data-lang-switcher>
+  <summary aria-label={copy.label}>
+    <span class="lang-switcher-code">{current.short}</span>
+    <svg
+      class="lang-switcher-caret"
+      viewBox="0 0 12 8"
+      width="10"
+      height="7"
+      aria-hidden="true"
+      focusable="false"
+    >
+      <path d="M1 1.5 6 6.5l5-5" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"></path>
+    </svg>
+  </summary>
+
+  <ul class="lang-switcher-menu">
+    {
+      alternates.map((alternate) => {
+        const meta = localeMeta[alternate.locale];
+        const isCurrent = alternate.locale === locale;
+        return (
+          <li>
+            <a
+              href={alternate.href}
+              lang={meta.htmlLang}
+              hreflang={meta.hreflang}
+              data-locale={alternate.locale}
+              aria-current={isCurrent ? 'true' : undefined}
+            >
+              <span class="lang-switcher-label">{meta.label}</span>
+              {isCurrent && <span class="lang-switcher-note">{copy.currentSuffix}</span>}
+              {!isCurrent && !alternate.translated && (
+                <span class="lang-switcher-note">{copy.notTranslated}</span>
+              )}
+            </a>
+          </li>
+        );
+      })
+    }
+  </ul>
+</details>
+
+<style>
+  .lang-switcher {
+    position: relative;
+    flex-shrink: 0;
+  }
+
+  .lang-switcher summary {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 10px 12px;
+    border-radius: 999px;
+    border: 1px solid rgba(10, 7, 5, 0.12);
+    background: rgba(255, 255, 255, 0.65);
+    color: rgba(10, 7, 5, 0.82);
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 1;
+    cursor: pointer;
+    list-style: none;
+    transition: background-color 120ms ease;
+  }
+
+  .lang-switcher summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .lang-switcher summary:hover {
+    background: rgba(255, 255, 255, 0.9);
+  }
+
+  .lang-switcher summary:focus-visible {
+    outline: 2px solid var(--brand-30);
+    outline-offset: 2px;
+  }
+
+  .lang-switcher-caret {
+    transition: transform 160ms ease;
+  }
+
+  .lang-switcher[open] .lang-switcher-caret {
+    transform: rotate(180deg);
+  }
+
+  .lang-switcher-menu {
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 0;
+    z-index: 120;
+    min-width: 200px;
+    margin: 0;
+    padding: 6px;
+    list-style: none;
+    background: var(--neutral-00);
+    border: 1px solid var(--stroke);
+    border-radius: 14px;
+    box-shadow: 0 14px 34px rgba(10, 7, 5, 0.16);
+  }
+
+  .lang-switcher-menu a {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    padding: 10px 12px;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 600;
+    color: rgba(10, 7, 5, 0.86);
+    text-decoration: none;
+  }
+
+  .lang-switcher-menu a:hover {
+    background: rgba(10, 7, 5, 0.05);
+    text-decoration: none;
+  }
+
+  .lang-switcher-menu a:focus-visible {
+    outline: 2px solid var(--brand-30);
+    outline-offset: -2px;
+  }
+
+  .lang-switcher-menu a[aria-current='true'] {
+    background: rgba(255, 245, 200, 0.75);
+  }
+
+  .lang-switcher-note {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--muted);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .lang-switcher-caret {
+      transition: none;
+    }
+  }
+</style>
+
+<script>
+  // The control works without JS as a plain disclosure; this only adds
+  // dismissal behaviour and remembers the choice for future visits.
+  document.querySelectorAll<HTMLDetailsElement>('[data-lang-switcher]').forEach((el) => {
+    document.addEventListener('click', (e) => {
+      if (el.open && !el.contains(e.target as Node)) el.open = false;
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && el.open) {
+        el.open = false;
+        el.querySelector('summary')?.focus();
+      }
+    });
+
+    el.querySelectorAll<HTMLAnchorElement>('a[data-locale]').forEach((link) => {
+      link.addEventListener('click', () => {
+        try {
+          localStorage.setItem('tipza.locale', link.dataset.locale ?? '');
+        } catch {
+          // Private browsing or storage disabled: preference is simply not kept.
+        }
+      });
+    });
+  });
+</script>

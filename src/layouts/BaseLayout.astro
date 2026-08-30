@@ -1,27 +1,26 @@
 ---
+import BaseHead, { type Props as SeoProps } from '~/components/seo/BaseHead.astro';
+import { localeMeta } from '~/config/locales';
 import '~/styles/tokens.css';
 import '~/styles/base.css';
 import '~/styles/layout.css';
 import '~/styles/components.css';
 import '~/styles/responsive.css';
 
-interface Props {
-  title: string;
-  description?: string;
-  /** Absolute or root-relative images to preload for LCP. */
+interface Props extends SeoProps {
+  /** Root-relative images to preload for LCP. */
   preloadImages?: string[];
-  bodyClass?: string;
 }
 
-const { title, description, preloadImages = [], bodyClass } = Astro.props;
+const { preloadImages = [], ...seo } = Astro.props;
+const meta = localeMeta[seo.locale];
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang={meta.htmlLang}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    {description && <meta name="description" content={description} />}
     <meta name="theme-color" content="#7205ff" />
     <meta name="apple-itunes-app" content="app-id=6756809306" />
 
@@ -30,7 +29,7 @@ const { title, description, preloadImages = [], bodyClass } = Astro.props;
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 
-    <title>{title}</title>
+    <BaseHead {...seo} />
 
     {preloadImages.map((href) => <link rel="preload" href={href} as="image" />)}
 
@@ -45,7 +44,7 @@ const { title, description, preloadImages = [], bodyClass } = Astro.props;
     <slot name="head" />
   </head>
 
-  <body class={bodyClass}>
+  <body>
     <slot />
   </body>
 </html>

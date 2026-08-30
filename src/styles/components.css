@@ -570,7 +570,7 @@ h1 {
   gap: 10px;
 }
 
-details {
+.faq details {
   border: 1px solid var(--stroke);
   background: rgba(255,255,255,0.62);
   border-radius: var(--radius);
@@ -578,7 +578,7 @@ details {
   overflow: hidden;
 }
 
-summary {
+.faq summary {
   cursor: pointer;
   font-family: var(--font-display);
   font-weight: 700;
@@ -595,24 +595,24 @@ summary {
   transition: background-color 0.15s ease;
 }
 
-summary:active {
+.faq summary:active {
   background-color: rgba(209, 183, 163, 0.16);
 }
 
-summary:focus-visible {
+.faq summary:focus-visible {
   outline: 2px solid rgba(209, 183, 163, 0.4);
   outline-offset: 2px;
 }
 
-summary::-webkit-details-marker {
+.faq summary::-webkit-details-marker {
   display: none;
 }
 
-summary::marker {
+.faq summary::marker {
   display: none;
 }
 
-summary > span:last-child {
+.faq summary > span:last-child {
   position: relative;
   width: 20px;
   height: 20px;
@@ -637,20 +637,20 @@ summary > span:last-child {
   display: none;
 }
 
-details[open] .faq-icon-plus {
+.faq details[open] .faq-icon-plus {
   opacity: 0;
   pointer-events: none;
 }
 
-details:not([open]) .faq-icon-plus {
+.faq details:not([open]) .faq-icon-plus {
   opacity: 1;
 }
 
-details[open] .faq-icon-minus {
+.faq details[open] .faq-icon-minus {
   opacity: 1;
 }
 
-details:not([open]) .faq-icon-minus {
+.faq details:not([open]) .faq-icon-minus {
   opacity: 0;
   pointer-events: none;
 }
@@ -665,12 +665,12 @@ details:not([open]) .faq-icon-minus {
               padding-top 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-details[open] .faq-content {
+.faq details[open] .faq-content {
   opacity: 1;
   padding-top: 12px;
 }
 
-details p {
+.faq details p {
   margin: 0;
   margin-bottom: 0;
 }

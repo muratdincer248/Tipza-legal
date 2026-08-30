@@ -1,2 +1,14 @@
-# Cloudflare Pages redirects. Locale-prefixed routes land in Phase 1; until then
-# this file only carries the legacy paths that must never 404.
+# Cloudflare Pages redirects. These are real 301s and are always followed, even
+# when a static asset exists at the same path.
+
+# The site root now lives under a locale prefix.
+/                     /en/                    301
+
+# Legacy unprefixed pages. These URLs are referenced by the App Store and
+# Google Play listings, so they must keep resolving indefinitely.
+/privacy/             /en/privacy/            301
+/terms/               /en/terms/              301
+/account-deletion/    /en/account-deletion/   301
+/privacy              /en/privacy/            301
+/terms                /en/terms/              301
+/account-deletion     /en/account-deletion/   301

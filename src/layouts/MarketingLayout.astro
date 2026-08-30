@@ -3,26 +3,40 @@ import BaseLayout from './BaseLayout.astro';
 import Header from '~/components/layout/Header.astro';
 import Footer from '~/components/layout/Footer.astro';
 import { primaryNav, footerNav } from '~/lib/nav';
-import type { Dictionary } from '~/i18n/types';
+import { localeBase, type Locale } from '~/config/locales';
+import { getDictionary } from '~/i18n';
+import type { Alternate } from '~/lib/translations';
 
 interface Props {
-  dict: Dictionary;
-  /** Locale base path, e.g. `/` or `/en/`. */
-  base: string;
+  locale: Locale;
+  /** Locale-relative path, used for the canonical URL. */
+  path: string;
+  alternates: Alternate[];
   title: string;
   description?: string;
+  ogDescription?: string;
+  ogImage?: string;
+  noindex?: boolean;
   preloadImages?: string[];
 }
 
-const { dict, base, title, description, preloadImages } = Astro.props;
+const { locale, ...seo } = Astro.props;
+const dict = getDictionary(locale);
+const base = localeBase(locale);
 ---
 
-<BaseLayout title={title} description={description} preloadImages={preloadImages}>
+<BaseLayout locale={locale} {...seo}>
   <slot name="head" slot="head" />
 
   <a class="skip-link" href="#main">{dict.nav.skipToContent}</a>
 
-  <Header homeHref={base} navItems={primaryNav(dict, base)} />
+  <Header
+    homeHref={base}
+    navItems={primaryNav(dict, base)}
+    locale={locale}
+    alternates={seo.alternates}
+    dict={dict}
+  />
 
   <main id="main">
     <slot />

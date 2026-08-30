@@ -103,6 +103,15 @@ export interface Dictionary {
     accountDeletion: string;
   };
 
+  languageSwitcher: {
+    /** Accessible label for the selector control. */
+    label: string;
+    /** Suffix announced for the language that is already active. */
+    currentSuffix: string;
+    /** Hint shown for a language this page has no translation in. */
+    notTranslated: string;
+  };
+
   legal: {
     lastUpdatedLabel: string;
   };

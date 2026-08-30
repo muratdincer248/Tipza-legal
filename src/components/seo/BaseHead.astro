@@ -1,0 +1,81 @@
+---
+import { site } from '~/config/site';
+import { localeMeta, localePath, type Locale } from '~/config/locales';
+import { hreflangAlternates, xDefaultAlternate, type Alternate } from '~/lib/translations';
+
+export interface Props {
+  title: string;
+  description?: string;
+  locale: Locale;
+  /** Locale-relative path of this page, e.g. '' or 'blog/how-to-split-tips/'. */
+  path: string;
+  alternates: Alternate[];
+  ogType?: 'website' | 'article';
+  ogImage?: string;
+  ogDescription?: string;
+  noindex?: boolean;
+  publishedTime?: string;
+  modifiedTime?: string;
+}
+
+const {
+  title,
+  description,
+  locale,
+  path,
+  alternates,
+  ogType = 'website',
+  ogImage = site.defaultOgImage,
+  ogDescription,
+  noindex = false,
+  publishedTime,
+  modifiedTime,
+} = Astro.props;
+
+const canonical = new URL(localePath(locale, path), site.url).href;
+const ogImageUrl = new URL(ogImage, site.url).href;
+const translated = hreflangAlternates(alternates);
+const xDefault = xDefaultAlternate(alternates);
+const meta = localeMeta[locale];
+---
+
+<title>{title}</title>
+{description && <meta name="description" content={description} />}
+{noindex && <meta name="robots" content="noindex, follow" />}
+
+<link rel="canonical" href={canonical} />
+
+{
+  translated.map((alternate) => (
+    <link
+      rel="alternate"
+      hreflang={localeMeta[alternate.locale].hreflang}
+      href={new URL(alternate.href, site.url).href}
+    />
+  ))
+}
+{xDefault && <link rel="alternate" hreflang="x-default" href={new URL(xDefault.href, site.url).href} />}
+
+<link rel="sitemap" type="application/xml" href="/sitemap-index.xml" />
+
+<meta property="og:site_name" content={site.name} />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={ogDescription ?? description} />
+<meta property="og:type" content={ogType} />
+<meta property="og:url" content={canonical} />
+<meta property="og:image" content={ogImageUrl} />
+<meta property="og:locale" content={meta.ogLocale} />
+{
+  translated
+    .filter((alternate) => alternate.locale !== locale)
+    .map((alternate) => (
+      <meta property="og:locale:alternate" content={localeMeta[alternate.locale].ogLocale} />
+    ))
+}
+{publishedTime && <meta property="article:published_time" content={publishedTime} />}
+{modifiedTime && <meta property="article:modified_time" content={modifiedTime} />}
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={ogDescription ?? description} />
+<meta name="twitter:image" content={ogImageUrl} />

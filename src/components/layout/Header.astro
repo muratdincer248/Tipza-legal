@@ -1,18 +1,21 @@
 ---
 import StoreButtons from './StoreButtons.astro';
-
-interface NavItem {
-  href: string;
-  label: string;
-}
+import LanguageSwitcher from './LanguageSwitcher.astro';
+import type { Locale } from '~/config/locales';
+import type { Alternate } from '~/lib/translations';
+import type { Dictionary } from '~/i18n/types';
+import type { NavLink } from '~/lib/nav';
 
 interface Props {
   /** Where the logo links to. */
   homeHref: string;
-  navItems: NavItem[];
+  navItems: NavLink[];
+  locale: Locale;
+  alternates: Alternate[];
+  dict: Dictionary;
 }
 
-const { homeHref, navItems } = Astro.props;
+const { homeHref, navItems, locale, alternates, dict } = Astro.props;
 ---
 
 <header>
@@ -24,7 +27,7 @@ const { homeHref, navItems } = Astro.props;
 
       <nav aria-label="Primary navigation" style="position: relative">
         <button class="hamburger" type="button" id="menuBtn" aria-expanded="false" aria-controls="menu">
-          Menu
+          {dict.nav.menu}
         </button>
         <ul id="menu">
           {
@@ -43,12 +46,42 @@ const { homeHref, navItems } = Astro.props;
         </ul>
       </nav>
 
-      <div class="cta-row">
-        <StoreButtons eager />
+      <div class="nav-actions">
+        <LanguageSwitcher locale={locale} alternates={alternates} copy={dict.languageSwitcher} />
+        <div class="cta-row">
+          <StoreButtons eager />
+        </div>
       </div>
     </div>
   </div>
 </header>
+
+<style>
+  .nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-shrink: 0;
+  }
+
+  /* On narrow screens the store buttons collapse into the menu panel, so the
+     language selector sits between the logo and the menu button instead of
+     being buried inside the panel. */
+  @media (max-width: 1024px) {
+    .nav-actions {
+      order: 2;
+      margin-left: auto;
+    }
+
+    .nav-actions .cta-row {
+      display: none;
+    }
+
+    nav {
+      order: 3;
+    }
+  }
+</style>
 
 <script>
   const btn = document.getElementById('menuBtn');

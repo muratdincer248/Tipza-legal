@@ -183,6 +183,12 @@ export const en: Dictionary = {
     accountDeletion: 'Account deletion',
   },
 
+  languageSwitcher: {
+    label: 'Change language',
+    currentSuffix: 'current language',
+    notTranslated: 'not available in this language',
+  },
+
   legal: {
     lastUpdatedLabel: 'Last updated',
   },

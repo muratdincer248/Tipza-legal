@@ -1,19 +1,28 @@
 ---
 import MarketingLayout from '~/layouts/MarketingLayout.astro';
+import { DEFAULT_LOCALE, localeBase } from '~/config/locales';
 import { getDictionary } from '~/i18n';
+import { symmetricAlternates } from '~/lib/translations';
 
-const dict = getDictionary('en');
-const base = '/';
+// Cloudflare Pages serves /404.html for any unmatched path, so this page cannot
+// know the visitor's locale. It renders in the default locale and the language
+// selector links to each locale's home page.
+const locale = DEFAULT_LOCALE;
+const dict = getDictionary(locale);
 ---
 
-<MarketingLayout dict={dict} base={base} title={dict.notFound.title}>
-  <meta name="robots" content="noindex" slot="head" />
-
+<MarketingLayout
+  locale={locale}
+  path=""
+  alternates={symmetricAlternates('')}
+  title={dict.notFound.title}
+  noindex
+>
   <section class="section">
     <div class="container" style="text-align: center; padding: 64px 20px 96px;">
       <h1>{dict.notFound.heading}</h1>
       <p style="margin: 0 auto 28px;">{dict.notFound.body}</p>
-      <a class="btn btn-secondary" href={base}>{dict.notFound.cta}</a>
+      <a class="btn btn-secondary" href={localeBase(locale)}>{dict.notFound.cta}</a>
     </div>
   </section>
 </MarketingLayout>

@@ -1,11 +1,11 @@
 import { en } from './en';
+import { de } from './de';
+import { DEFAULT_LOCALE, type Locale } from '~/config/locales';
 import type { Dictionary } from './types';
 
-export const dictionaries = { en } satisfies Record<string, Dictionary>;
+export const dictionaries: Record<Locale, Dictionary> = { en, de };
 
-export type LocaleKey = keyof typeof dictionaries;
-
-export const getDictionary = (locale: string): Dictionary =>
-  dictionaries[locale as LocaleKey] ?? dictionaries.en;
+export const getDictionary = (locale: Locale): Dictionary =>
+  dictionaries[locale] ?? dictionaries[DEFAULT_LOCALE];
 
 export type { Dictionary };

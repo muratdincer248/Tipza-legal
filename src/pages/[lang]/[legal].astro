@@ -1,0 +1,48 @@
+---
+import { getCollection, render } from 'astro:content';
+import LegalLayout from '~/layouts/LegalLayout.astro';
+import { isLocale, type Locale } from '~/config/locales';
+import { asymmetricAlternates } from '~/lib/translations';
+
+export async function getStaticPaths() {
+  const entries = await getCollection('legal');
+
+  // Which locales actually have each document, so a not-yet-translated legal
+  // page is never advertised via hreflang.
+  const localesBySlug = new Map<string, Locale[]>();
+  for (const entry of entries) {
+    const [lang, slug] = entry.id.split('/');
+    if (!lang || !slug || !isLocale(lang)) continue;
+    localesBySlug.set(slug, [...(localesBySlug.get(slug) ?? []), lang]);
+  }
+
+  return entries.flatMap((entry) => {
+    const [lang, slug] = entry.id.split('/');
+    if (!lang || !slug || !isLocale(lang)) return [];
+
+    const paths = Object.fromEntries(
+      (localesBySlug.get(slug) ?? []).map((available) => [available, `${slug}/`])
+    );
+
+    return [{ params: { lang, legal: slug }, props: { entry, paths } }];
+  });
+}
+
+const { entry, paths } = Astro.props;
+const { Content } = await render(entry);
+
+const locale = Astro.params.lang as Locale;
+const slug = Astro.params.legal!;
+---
+
+<LegalLayout
+  locale={locale}
+  path={`${slug}/`}
+  alternates={asymmetricAlternates(paths, '')}
+  title={entry.data.title}
+  heading={entry.data.heading}
+  description={entry.data.description}
+  lastUpdated={entry.data.lastUpdated}
+>
+  <Content />
+</LegalLayout>

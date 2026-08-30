@@ -1,61 +1,67 @@
-// Screenshots the ported build against the pre-Astro original at several
-// viewports and reports per-viewport pixel differences. Migration aid only.
+// Compares the built site against a reference server at several viewports and
+// reports the differing pixel count plus the rows the differences fall in.
+// Migration aid: run two static servers (8081 = build, 8082 = reference).
+//
+//   npm i --no-save playwright pngjs   # kept out of package.json so Cloudflare
+//                                      # builds do not download browsers
+//   node scripts/visual-diff.mjs /en/ /
+//
 import { chromium } from 'playwright';
-import { mkdirSync, writeFileSync, readFileSync } from 'node:fs';
 import { PNG } from 'pngjs';
+import { mkdirSync, writeFileSync } from 'node:fs';
 
-const VIEWPORTS = [
-  { name: 'mobile', width: 390, height: 900 },
-  { name: 'tablet', width: 768, height: 1000 },
-  { name: 'laptop', width: 1024, height: 1000 },
-  { name: 'desktop', width: 1440, height: 1000 },
-];
-
-const PAGES = process.argv[2] ? [process.argv[2]] : ['/'];
+const [newPath = '/', oldPath = newPath] = process.argv.slice(2);
+const VIEWPORTS = [390, 768, 1024, 1440];
 
 mkdirSync('/tmp/visual', { recursive: true });
-
 const browser = await chromium.launch();
 
-const shoot = async (base, path, vp, file) => {
-  const page = await browser.newPage({ viewport: { width: vp.width, height: vp.height } });
-  await page.goto(`${base}${path}`, { waitUntil: 'load' });
-  // Let fonts settle so text metrics match between runs.
+const shoot = async (url, width) => {
+  const page = await browser.newPage({ viewport: { width, height: 1000 } });
+  await page.goto(url, { waitUntil: 'load' });
   await page.evaluate(() => document.fonts.ready);
   await page.waitForTimeout(600);
-  await page.screenshot({ path: file, fullPage: true });
+  const buffer = await page.screenshot({ fullPage: true });
   await page.close();
+  return { png: PNG.sync.read(buffer), buffer };
 };
 
-const compare = (a, b) => {
-  const pa = PNG.sync.read(readFileSync(a));
-  const pb = PNG.sync.read(readFileSync(b));
-  if (pa.width !== pb.width || pa.height !== pb.height) {
-    return { sizeMismatch: `${pa.width}x${pa.height} vs ${pb.width}x${pb.height}` };
+for (const width of VIEWPORTS) {
+  const a = await shoot(`http://localhost:8081${newPath}`, width);
+  const b = await shoot(`http://localhost:8082${oldPath}`, width);
+
+  if (a.png.width !== b.png.width || a.png.height !== b.png.height) {
+    console.log(
+      `${width}px: size mismatch ${a.png.width}x${a.png.height} vs ${b.png.width}x${b.png.height}`
+    );
+    writeFileSync(`/tmp/visual/diff-new-${width}.png`, a.buffer);
+    writeFileSync(`/tmp/visual/diff-old-${width}.png`, b.buffer);
+    continue;
   }
+
   let diff = 0;
-  for (let i = 0; i < pa.data.length; i += 4) {
-    if (
-      Math.abs(pa.data[i] - pb.data[i]) > 8 ||
-      Math.abs(pa.data[i + 1] - pb.data[i + 1]) > 8 ||
-      Math.abs(pa.data[i + 2] - pb.data[i + 2]) > 8
-    )
-      diff++;
+  let minY = Infinity;
+  let maxY = -1;
+  for (let y = 0; y < a.png.height; y++) {
+    for (let x = 0; x < a.png.width; x++) {
+      const i = (y * a.png.width + x) * 4;
+      const changed =
+        Math.abs(a.png.data[i] - b.png.data[i]) > 8 ||
+        Math.abs(a.png.data[i + 1] - b.png.data[i + 1]) > 8 ||
+        Math.abs(a.png.data[i + 2] - b.png.data[i + 2]) > 8;
+      if (changed) {
+        diff++;
+        if (y < minY) minY = y;
+        if (y > maxY) maxY = y;
+      }
+    }
   }
-  const total = pa.width * pa.height;
-  return { diff, total, pct: ((diff / total) * 100).toFixed(3) };
-};
 
-for (const path of PAGES) {
-  for (const vp of VIEWPORTS) {
-    const tag = `${path.replace(/\W+/g, '_')}-${vp.name}`;
-    const fileNew = `/tmp/visual/new-${tag}.png`;
-    const fileOld = `/tmp/visual/old-${tag}.png`;
-    await shoot('http://localhost:8081', path, vp, fileNew);
-    await shoot('http://localhost:8082', path, vp, fileOld);
-    const result = compare(fileNew, fileOld);
-    console.log(`${path} ${vp.name.padEnd(8)}`, JSON.stringify(result));
-  }
+  const total = a.png.width * a.png.height;
+  const rows = diff ? `${minY}-${maxY}` : 'none';
+  console.log(
+    `${width}px: ${diff} px (${((diff / total) * 100).toFixed(3)}%) differing rows ${rows}, page height ${a.png.height}`
+  );
 }
 
 await browser.close();

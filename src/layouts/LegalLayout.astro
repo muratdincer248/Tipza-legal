@@ -3,30 +3,39 @@ import BaseLayout from './BaseLayout.astro';
 import Header from '~/components/layout/Header.astro';
 import Footer from '~/components/layout/Footer.astro';
 import { primaryNav, footerNav } from '~/lib/nav';
-import type { Dictionary } from '~/i18n/types';
+import { localeBase, type Locale } from '~/config/locales';
+import { getDictionary } from '~/i18n';
+import type { Alternate } from '~/lib/translations';
 import '~/styles/legal.css';
 
 interface Props {
-  dict: Dictionary;
-  base: string;
+  locale: Locale;
+  path: string;
+  alternates: Alternate[];
   title: string;
   heading: string;
   description?: string;
   lastUpdated?: string;
 }
 
-const { dict, base, title, heading, description, lastUpdated } = Astro.props;
+const { locale, heading, lastUpdated, ...seo } = Astro.props;
+const dict = getDictionary(locale);
+const base = localeBase(locale);
 ---
 
-<BaseLayout title={title} description={description}>
-  <slot name="head" slot="head" />
-
+<BaseLayout locale={locale} {...seo}>
   <a class="skip-link" href="#main">{dict.nav.skipToContent}</a>
 
-  <Header homeHref={base} navItems={primaryNav(dict, base)} />
+  <Header
+    homeHref={base}
+    navItems={primaryNav(dict, base)}
+    locale={locale}
+    alternates={seo.alternates}
+    dict={dict}
+  />
 
   <main id="main">
-    <div class="container legal-container">
+    <div class="legal-container">
       <h1>{heading}</h1>
       {lastUpdated && <p class="muted">{dict.legal.lastUpdatedLabel}: {lastUpdated}</p>}
       <div class="legal-body">
