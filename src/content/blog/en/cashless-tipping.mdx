@@ -156,18 +156,12 @@ This is the change staff notice, and they notice it in the first week.
 
 <ComparisonTable
   caption="The same €40 tip under two payment methods"
-  columns={[
-    'How it was given',
-    'Reaches the recipient',
-    'Held by the business',
-    'Visible before payday',
-    'Needs a record',
-  ]}
+  columns={['Tip route', 'Reaches staff', 'Held by the business', 'Needs a record']}
   rows={[
-    ['Cash on the table', 'Immediately', false, true, false],
-    ['Added at the terminal', 'On the payout cycle', true, false, true],
+    ['Cash on the table', 'Immediately', false, false],
+    ['Added at the terminal', 'On the payout cycle', true, true],
   ]}
-  note="Everything in the second row is a consequence of the first column. The lag is not an administrative detail; it is the thing that changes how the money feels."
+  note="Everything in the second row follows from the delay in the second column. The lag is not an administrative detail; it is the thing that changes how the money feels."
 />
 
 The instinct is to minimise the delay. The better goal is to make it predictable. A fixed weekly payout on a known day is received far better than an unpredictable one that is sometimes faster, because the underlying complaint is almost never the wait — it is not knowing.

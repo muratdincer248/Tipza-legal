@@ -136,7 +136,7 @@ import { Callout, CalculationExample, FaqBlock } from '~/components/content';
 | `TipBox` / `WarningBox` | The same thing with the intent named instead of the colour. |
 | `CalculationExample` | A worked sum: `steps` then a `result`. The shape readers screenshot. |
 | `Formula` | A named formula as text, with a `note` explaining the terms. |
-| `ComparisonTable` | A matrix. `columns` plus `rows`; booleans render as a tick or a dash with hidden text. |
+| `ComparisonTable` | A matrix. `columns` plus `rows`; booleans render as a tick or a dash with hidden text. Keep the headers terse — see below. |
 | `StatGrid` + `StatCard` | Two to four headline numbers. Every card takes a `source`. |
 | `BarChart` / `DonutChart` | Comparing magnitudes or shares. Text-based, not images. |
 | `ProcessSteps` | An ordered procedure with a title and body per step. |
@@ -186,6 +186,16 @@ assertion.
 can be read by a screen reader, translated, and quoted by an answer engine. An
 exported chart cannot be read by any of them.
 
+**Keep comparison headers to two or three words.** Column headers do not wrap, so
+each one sets its column's width directly. "Needs point-of-sale data" is a
+sentence's worth of pixels, and four of them push the table wider than the
+article column — at which point it scrolls sideways and a reader on a laptop
+silently loses the last column. Four or five terse headers fit; three verbose
+ones do not. Anything that will not compress belongs in the `note` underneath.
+
+A column whose value is the same in every row is also worth deleting. It reads
+as information and carries none, and it is usually a sentence in disguise.
+
 ### Charts and tables in translation
 
 The blocks take data, not markup, so a translation swaps the labels and leaves
@@ -224,8 +234,13 @@ wrong at one and right at the other:
 npx http-server dist -p 8081 --silent
 node scripts/shoot.mjs /en/blog/<slug>/ 1440 desktop --full
 node scripts/shoot.mjs /en/blog/<slug>/ 390 mobile --full
-node scripts/overflow.mjs /en/blog/<slug>/ 390   # nothing should be listed
+node scripts/overflow.mjs /en/blog/<slug>/ 390    # `offenders` should be empty
+node scripts/overflow.mjs /en/blog/<slug>/ 1440   # `scrollers` should be empty too
 ```
+
+At 390px a `scrollers` entry is fine — a wide table is meant to scroll inside its
+box on a phone. At 1440px it means a table is wider than the article column, and
+that is the check that catches an overlong comparison header.
 
 `scripts/shoot.mjs` needs Playwright, which is deliberately not a dependency:
 `npm i --no-save playwright && npx playwright install chromium`.
