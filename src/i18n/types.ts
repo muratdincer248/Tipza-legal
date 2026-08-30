@@ -159,8 +159,9 @@ export interface Dictionary {
     };
 
     /**
-     * In-article CTA. Kept here rather than per article so a change to how the
-     * product is described does not mean editing every published file.
+     * In-article CTA heading and fallback body. An article can override `body`
+     * via `productCtaBody` so the pitch matches the piece; the heading stays
+     * shared so the card is recognisable from one article to the next.
      */
     productCta: {
       heading: string;

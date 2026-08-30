@@ -1,0 +1,169 @@
+---
+translationKey: hours-weighted-split
+locale: en
+title: 'How to split tips by hours worked'
+seoTitle: 'How to Split Tips by Hours Worked — Tipza'
+description: 'Split a tip pool by hours worked: the per-hour formula, a worked example, and when an hours-weighted split is fairer than dividing equally.'
+excerpt: 'When shifts are different lengths, an equal split is the argument waiting to happen. Splitting by hours is the default for a reason: the hours are already tracked, and the shares always add back up.'
+category: tip-splitting
+tags:
+  - hourly
+  - methods
+  - pooling
+author: tipza-team
+publishedAt: 2026-06-11
+coverImage: ../../../assets/blog/hours-weighted-split/cover.jpg
+coverImageAlt: Three colleagues beside a clock and a pizza cut into unequal slices
+status: published
+keywords:
+  - how to split tips by hours
+  - hourly tip split
+  - split tips based on hours
+  - tip pool hours worked
+relatedArticles:
+  - tip-splitting-methods
+  - end-of-shift-tip-split
+productCtaBody: >-
+  Enter each person's hours and Tipza works out the rate and the shares — every step visible.
+takeaways:
+  - >-
+    An hours-weighted split is a per-hour rate times each person's hours. The
+    shares always add back up to the pool.
+  - >-
+    It is the fair default the moment shift lengths diverge. An equal split
+    across a three-hour and a nine-hour shift is the usual source of a dispute.
+  - >-
+    Hours only price time, not role. If a runner and a section lead should not
+    earn the same hourly rate, layer points on top.
+  - >-
+    Write down which hours count — clocked, scheduled, or after breaks — before
+    the first split, not during the argument.
+faq:
+  - question: How do you split tips by hours worked?
+    answer: >-
+      Add up the tip pool and the hours everyone worked. Divide the pool by the
+      total hours to get a per-hour rate, then multiply that rate by each
+      person's hours. The shares add back up to the pool, which is what makes
+      the method easy to check.
+  - question: Is splitting tips by hours fairer than splitting equally?
+    answer: >-
+      Yes, whenever shifts are different lengths. An equal split treats a
+      three-hour and a nine-hour shift as the same job. Hours-weighted splitting
+      does not. Equal shares still make sense for a short team where everyone
+      works the same window.
+  - question: Do unpaid breaks count as hours in a tip split?
+    answer: >-
+      Only if you decide they do, and write that down. Most teams count clocked
+      hours on the floor and exclude unpaid breaks. What matters is that the
+      same definition is used for everyone, every shift.
+  - question: What if two people worked the same hours in different roles?
+    answer: >-
+      An hours-only split will pay them the same, which is correct if the roles
+      are interchangeable and wrong if they are not. In that case, weight the
+      hours with points per role rather than abandoning hours altogether.
+sources:
+  - id: uk-tipping-code
+    title: 'Code of practice on fair and transparent distribution of tips'
+    publisher: Department for Business and Trade
+    url: https://www.gov.uk/government/publications/distributing-tips-fairly-statutory-code-of-practice/code-of-practice-on-fair-and-transparent-distribution-of-tips-html-version
+---
+
+import {
+  AnswerBlock,
+  CalculationExample,
+  FaqBlock,
+  Figure,
+  Formula,
+  ProcessSteps,
+  SourceRef,
+  TipBox,
+} from '~/components/content';
+import hoursInline from '../../../assets/blog/hours-weighted-split/inline.jpg';
+
+An equal split is fair only when the shifts are. The moment one person works three hours and another works nine, dividing the pool by headcount is no longer a method — it is a dispute with extra arithmetic.
+
+Splitting in proportion to hours worked is the usual way out. The hours are already on the rota. Anyone can check the sum. The UK's statutory code of practice lists hours worked during the period the tips were paid as a factor a fair allocation may rest on<SourceRef sources={frontmatter.sources} id="uk-tipping-code" />.
+
+<AnswerBlock>
+  Divide the pool by the total hours worked to get a per-hour rate, then
+  multiply that rate by each person's hours. The shares always add back up,
+  which is why the method survives being checked at the end of a shift.
+</AnswerBlock>
+
+## Why hours beat an equal split
+
+Equal shares price presence: you were here, you get a cut. That is a reasonable rule for four people who all worked 18:00 to 23:00. It is not a reasonable rule for a lunch that ran long for two people and a dinner that started late for one.
+
+Hours-weighted splitting prices time instead. A nine-hour shift takes three times the share of a three-hour shift, from the same pool, with no separate negotiation.
+
+<Figure
+  src={hoursInline}
+  alt="Three colleagues holding pizza slices of different sizes, each with a clock showing a different length of time"
+  caption="The slice matches the shift. That is the whole method."
+/>
+
+## The formula
+
+<Formula
+  label="Per-hour rate"
+  note="Multiply the rate by each person's hours. If the hours were entered correctly, the shares add back up to the pool — that identity is the check."
+>
+  rate = total tips ÷ total hours worked
+</Formula>
+
+Two definitions have to be agreed once, in writing:
+
+- **Which hours count.** Clocked hours on the floor is the usual choice. Unpaid breaks, pre-shift prep and a manager who is not in the pool need a yes or a no, not a vibe.
+- **Which tips sit in the pool.** Cash, card, a service charge you have decided to share — list them. A split cannot be checked if the inputs drift.
+
+## A worked example
+
+Four people, one pool, shift lengths that do not match.
+
+<CalculationExample
+  title="Hours-weighted split across 24 hours"
+  steps={[
+    { label: 'Tips collected', value: '€240.00' },
+    { label: 'Hours (4 + 8 + 6 + 6)', value: '24' },
+    { label: 'Per-hour rate', value: '€10.00' },
+  ]}
+  result={{ label: 'Shares', value: '€40 · €80 · €60 · €60' }}
+/>
+
+The person who worked eight hours takes twice the person who worked four. Nobody has to argue about whether that is fair: it is the rule, applied.
+
+<TipBox title="Show the rate, not only the shares">
+  A list of final amounts invites the question "why". A rate of €10 an hour
+  answers it before it is asked. If the team can see the hours and the rate,
+  the rest is multiplication.
+</TipBox>
+
+## When hours are not enough
+
+Hours treat every hour as equal. That is the point, and also the limit.
+
+If a runner and a section lead should not earn the same hourly rate from the pool, do not abandon hours — weight them. A points system is hours with a multiplier: role points times hours, then divide the pool by total points. The hours are still the thing being counted; the points are a judgement about the role, written down once.
+
+Hours also fail if the hours themselves are wrong. A split run on scheduled hours rather than clocked ones will look precise and still be unfair to whoever stayed late. Count what was actually worked.
+
+<ProcessSteps
+  label="Running an hours-weighted split"
+  steps={[
+    {
+      title: 'Agree which hours count',
+      body: 'Clocked time on the floor, with a written rule for breaks and for anyone who is not in the pool.',
+    },
+    {
+      title: 'Total the pool and the hours',
+      body: 'Both numbers need a source. A till reading and a rota printout beat a remembered figure.',
+    },
+    {
+      title: 'Show the rate and the shares',
+      body: 'The rate is the explanation. The shares are the result. Publish both before anyone is paid.',
+    },
+  ]}
+/>
+
+## Frequently asked questions
+
+<FaqBlock items={frontmatter.faq} />
