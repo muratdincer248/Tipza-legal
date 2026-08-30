@@ -513,9 +513,18 @@
   gap: 4px;
 }
 
+/* Undo prose list/paragraph spacing — these are structured steps, not body copy. */
+.article-body .process-steps {
+  padding-left: 0;
+}
+
+.article-body .process-steps li {
+  margin-bottom: 0;
+}
+
 .process-steps li {
   display: flex;
-  gap: 14px;
+  gap: 12px;
   padding: 14px 0;
   border-bottom: 1px solid var(--stroke);
   margin: 0;
@@ -543,13 +552,21 @@
   font-family: var(--font-display);
   font-weight: 700;
   font-size: 16px;
-  margin: 3px 0 4px;
+  margin: 0 0 2px;
+}
+
+.article-body .process-step-title {
+  margin: 0 0 2px;
 }
 
 .process-step-body {
   font-size: 15px;
   line-height: 1.65;
   color: var(--muted);
+  margin: 0;
+}
+
+.article-body .process-step-body {
   margin: 0;
 }
 
