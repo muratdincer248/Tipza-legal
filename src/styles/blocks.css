@@ -11,22 +11,61 @@
 }
 
 .heading-anchor {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
   margin-left: 8px;
-  color: var(--neutral-30);
+  vertical-align: middle;
+  color: var(--brand-50);
   text-decoration: none;
   font-weight: 400;
+  cursor: pointer;
   opacity: 0;
   transition: opacity 120ms ease;
 }
 
+.heading-anchor-icon {
+  display: block;
+  width: 0.72em;
+  height: 0.72em;
+  flex-shrink: 0;
+}
+
+.heading-anchor-copied {
+  position: absolute;
+  left: calc(100% + 8px);
+  top: 50%;
+  transform: translateY(-50%);
+  white-space: nowrap;
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1;
+  color: var(--neutral-00);
+  background: var(--neutral-99);
+  border-radius: 999px;
+  padding: 5px 8px;
+  pointer-events: none;
+  opacity: 0;
+}
+
 .article-body h2:hover .heading-anchor,
 .article-body h3:hover .heading-anchor,
-.heading-anchor:focus-visible {
+.heading-anchor:focus-visible,
+.heading-anchor.is-copied {
   opacity: 1;
 }
 
-.heading-anchor:hover {
+/* Beat `.article-body a` / `a:hover`, which otherwise paint a purple underline
+   on the permalink. The icon is the affordance; it does not need a stroke. */
+.article-body a.heading-anchor,
+.article-body a.heading-anchor:hover {
   color: var(--brand-50);
+  text-decoration: none;
+}
+
+.heading-anchor.is-copied .heading-anchor-copied {
+  opacity: 1;
 }
 
 /* -------------------------------------------------------------------- links */
@@ -406,6 +445,10 @@
   text-align: right;
 }
 
+.calc-row:has(+ .calc-result) {
+  border-bottom: none;
+}
+
 .calc-result {
   border-bottom: none;
   border-top: 2px solid var(--neutral-99);
@@ -470,9 +513,18 @@
   gap: 4px;
 }
 
+/* Undo prose list/paragraph spacing — these are structured steps, not body copy. */
+.article-body .process-steps {
+  padding-left: 0;
+}
+
+.article-body .process-steps li {
+  margin-bottom: 0;
+}
+
 .process-steps li {
   display: flex;
-  gap: 14px;
+  gap: 12px;
   padding: 14px 0;
   border-bottom: 1px solid var(--stroke);
   margin: 0;
@@ -500,13 +552,21 @@
   font-family: var(--font-display);
   font-weight: 700;
   font-size: 16px;
-  margin: 3px 0 4px;
+  margin: 0 0 2px;
+}
+
+.article-body .process-step-title {
+  margin: 0 0 2px;
 }
 
 .process-step-body {
   font-size: 15px;
   line-height: 1.65;
   color: var(--muted);
+  margin: 0;
+}
+
+.article-body .process-step-body {
   margin: 0;
 }
 

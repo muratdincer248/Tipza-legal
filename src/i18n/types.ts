@@ -210,6 +210,10 @@ export interface Dictionary {
     answerLabel: string;
     /** Heads the summary bullets above an article. */
     takeawaysLabel: string;
+    /** Accessible label on a heading's copy-link control. */
+    copyLinkLabel: string;
+    /** Confirmation after the section URL is copied. */
+    linkCopied: string;
   };
 
   languageSwitcher: {

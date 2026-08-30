@@ -65,7 +65,7 @@
 }
 
 a.tag-category {
-  transition: background 120ms ease, color 120ms ease;
+  transition: background 120ms ease, color 120ms ease, border-color 120ms ease;
 }
 
 a.tag-category:hover {
@@ -78,6 +78,13 @@ a.tag-category:hover {
   color: var(--neutral-00);
   background: var(--neutral-99);
   border-color: var(--neutral-99);
+}
+
+a.tag-category[aria-current='page']:hover {
+  color: var(--neutral-00);
+  background: var(--neutral-90);
+  border-color: var(--neutral-90);
+  text-decoration: none;
 }
 
 .blog-list {
