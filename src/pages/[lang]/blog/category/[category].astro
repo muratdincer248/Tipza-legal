@@ -1,0 +1,130 @@
+---
+import type { GetStaticPaths } from 'astro';
+import MarketingLayout from '~/layouts/MarketingLayout.astro';
+import ArticleCard from '~/components/blog/ArticleCard.astro';
+import Breadcrumbs, { type Crumb } from '~/components/seo/Breadcrumbs.astro';
+import { LOCALES, localeBase, type Locale } from '~/config/locales';
+import {
+  CATEGORIES,
+  categoryCopy,
+  categoryHref,
+  categoryLabel,
+  categoryRelativePath,
+  categorySlug,
+  type Category,
+} from '~/config/taxonomy';
+import { getDictionary } from '~/i18n';
+import { allArticles, articlesInCategory, blogIndexHref, BLOG_INDEX_PATH } from '~/lib/blog';
+import type { Article } from '~/lib/blog';
+import { asymmetricAlternates } from '~/lib/translations';
+import '~/styles/blog.css';
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  const all = await allArticles();
+
+  /**
+   * A category only gets a page in a locale that has articles in it — an empty
+   * category page is a thin page competing with the listing it came from.
+   */
+  const localesWith = (category: Category): Locale[] =>
+    LOCALES.filter((locale) =>
+      all.some((article) => article.locale === locale && article.category === category)
+    );
+
+  return CATEGORIES.flatMap((category) =>
+    localesWith(category).map((locale) => {
+      const inLocale = all.filter((article) => article.locale === locale);
+      return {
+        params: { lang: locale, category: categorySlug(category, locale) },
+        props: {
+          locale,
+          category,
+          articles: articlesInCategory(inLocale, category),
+          translatedLocales: localesWith(category),
+          localeCategories: CATEGORIES.filter((other) =>
+            inLocale.some((article) => article.category === other)
+          ),
+        },
+      };
+    })
+  );
+};
+
+interface Props {
+  locale: Locale;
+  category: Category;
+  articles: Article[];
+  translatedLocales: Locale[];
+  /** Categories with at least one article in this locale, so no link 404s. */
+  localeCategories: Category[];
+}
+
+const { locale, category, articles, translatedLocales, localeCategories } = Astro.props as Props;
+const dict = getDictionary(locale);
+const copy = categoryCopy[category][locale];
+
+const alternates = asymmetricAlternates(
+  Object.fromEntries(
+    translatedLocales.map((other) => [other, categoryRelativePath(category, other)])
+  ),
+  BLOG_INDEX_PATH
+);
+
+const crumbs: Crumb[] = [
+  { label: dict.blog.home, href: localeBase(locale) },
+  { label: dict.blog.heading, href: blogIndexHref(locale) },
+  { label: copy.label },
+];
+---
+
+<MarketingLayout
+  locale={locale}
+  path={categoryRelativePath(category, locale)}
+  alternates={alternates}
+  title={`${copy.heading} — ${dict.blog.meta.categoryTitleSuffix}`}
+  description={copy.description}
+>
+  <section class="section blog-intro">
+    <div class="container">
+      <Breadcrumbs crumbs={crumbs} label={dict.blog.breadcrumbLabel} />
+      <h1>{copy.heading}</h1>
+      <p>{copy.description}</p>
+    </div>
+  </section>
+
+  <section class="section blog-topics">
+    <div class="container">
+      <h2>{dict.blog.topicsLabel}</h2>
+      <ul class="blog-topic-list">
+        <li>
+          <a class="tag tag-category" href={blogIndexHref(locale)}>{dict.blog.allTopics}</a>
+        </li>
+        {
+          localeCategories.map((other) => (
+            <li>
+              <a
+                class="tag tag-category"
+                href={categoryHref(other, locale)}
+                aria-current={other === category ? 'page' : undefined}
+              >
+                {categoryLabel(other, locale)}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <section class="section blog-list" aria-label={dict.blog.articlesLabel}>
+    <div class="container">
+      <div class="grid-3">
+        {
+          articles.map((article) => (
+            <ArticleCard article={article} locale={locale} dict={dict} headingLevel="h2" />
+          ))
+        }
+      </div>
+    </div>
+  </section>
+</MarketingLayout>

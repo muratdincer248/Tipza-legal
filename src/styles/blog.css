@@ -1,0 +1,239 @@
+/* Blog listings, cards and breadcrumbs.
+   Built on the marketing primitives (.section, .container, .card-link, .card,
+   .tag, .grid-3) so the blog reads as part of the same site rather than a
+   bolted-on subsystem. Article pages add article.css on top. */
+
+/* ---------------------------------------------------------------- listings */
+
+.blog-intro {
+  padding-top: 34px;
+  padding-bottom: 8px;
+}
+
+.blog-intro h1 {
+  margin-top: 0;
+}
+
+.blog-intro > .container > p {
+  font-size: 18px;
+  line-height: 1.65;
+  color: var(--muted);
+  max-width: 66ch;
+  margin: 0;
+}
+
+.blog-featured {
+  padding-top: 26px;
+  padding-bottom: 10px;
+}
+
+.blog-topics {
+  padding-top: 26px;
+  padding-bottom: 6px;
+}
+
+.blog-topics h2 {
+  font-family: var(--font-display);
+  letter-spacing: -0.02em;
+  font-size: 18px;
+  margin: 0 0 12px;
+}
+
+.blog-topic-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.tag-category {
+  color: var(--neutral-70);
+  background: rgba(255, 255, 255, 0.72);
+  border: 1px solid var(--stroke);
+  padding: 6px 12px;
+  text-decoration: none;
+}
+
+a.tag-category {
+  transition: background 120ms ease, color 120ms ease;
+}
+
+a.tag-category:hover {
+  color: var(--text);
+  background: var(--neutral-00);
+  text-decoration: none;
+}
+
+.tag-category[aria-current='page'] {
+  color: var(--neutral-00);
+  background: var(--neutral-99);
+  border-color: var(--neutral-99);
+}
+
+.blog-list {
+  padding-top: 10px;
+}
+
+.blog-list .grid-3 {
+  margin-top: 18px;
+}
+
+.blog-empty p {
+  color: var(--muted);
+  font-size: 17px;
+}
+
+.blog-pagination .container {
+  display: flex;
+  gap: 12px;
+  justify-content: space-between;
+}
+
+/* ------------------------------------------------------------------- cards */
+
+/* Covers sit flush with the card edges, so padding lives on the body rather
+   than on .card-link. */
+.article-card {
+  display: flex;
+  flex-direction: column;
+}
+
+.article-card-cover,
+.featured-article-cover {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  background: var(--neutral-05);
+}
+
+.article-card-body,
+.featured-article-body {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  flex: 1;
+}
+
+.article-card-body h2,
+.article-card-body h3 {
+  font-family: var(--font-display);
+  letter-spacing: -0.02em;
+  font-size: 17px;
+  line-height: 1.25;
+  margin: 0;
+}
+
+.article-card-body p {
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--muted);
+  margin: 0;
+}
+
+.article-card-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  align-items: center;
+  margin-top: auto;
+  font-size: 13px;
+  color: var(--neutral-70);
+}
+
+.featured-article {
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  align-items: stretch;
+}
+
+.featured-article-cover {
+  height: 100%;
+  aspect-ratio: auto;
+  min-height: 260px;
+}
+
+.featured-article-body {
+  gap: 10px;
+  padding: 26px;
+  justify-content: center;
+}
+
+.featured-article-body h2 {
+  font-family: var(--font-display);
+  letter-spacing: -0.03em;
+  font-size: 26px;
+  line-height: 1.15;
+  margin: 0;
+}
+
+.featured-article-excerpt {
+  font-size: 15px;
+  line-height: 1.65;
+  color: var(--muted);
+  margin: 0;
+  max-width: 46ch;
+}
+
+/* ------------------------------------------------------------- breadcrumbs */
+
+.breadcrumbs ol {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 13px;
+  color: var(--neutral-70);
+}
+
+.breadcrumbs li + li::before {
+  content: '/';
+  margin-right: 6px;
+  color: var(--neutral-30);
+}
+
+.breadcrumbs a {
+  color: var(--neutral-70);
+  text-decoration: none;
+}
+
+.breadcrumbs a:hover {
+  color: var(--text);
+  text-decoration: underline;
+}
+
+.breadcrumbs [aria-current='page'] {
+  color: var(--text);
+  font-weight: 600;
+}
+
+/* ------------------------------------------------------------- breakpoints */
+
+@media (max-width: 920px) {
+  .featured-article {
+    grid-template-columns: 1fr;
+  }
+
+  .featured-article-cover {
+    aspect-ratio: 16 / 9;
+    min-height: 0;
+  }
+
+  .featured-article-body {
+    padding: 20px;
+  }
+
+  .featured-article-body h2 {
+    font-size: 22px;
+  }
+
+  .blog-pagination .container {
+    flex-direction: column;
+  }
+}

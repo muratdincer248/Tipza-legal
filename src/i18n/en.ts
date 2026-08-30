@@ -183,6 +183,40 @@ export const en: Dictionary = {
     accountDeletion: 'Account deletion',
   },
 
+  blog: {
+    meta: {
+      indexTitle: 'Tip splitting guides and resources — Tipza Blog',
+      indexDescription:
+        'Practical guides on splitting tips fairly: split methods, worked examples, German and European rules, and how to run it all without arguments.',
+      categoryTitleSuffix: 'Tipza Blog',
+      pageSuffix: 'page',
+    },
+
+    heading: 'Tipza Blog',
+    lead: 'Practical writing about splitting tips fairly — the methods teams actually use, the rules that apply in Germany and across Europe, and the habits that keep a shift handover short.',
+    empty: 'The first articles are on their way. In the meantime, English articles are available.',
+
+    featuredLabel: 'Featured',
+    topicsLabel: 'Browse by topic',
+    allTopics: 'All topics',
+    allArticles: 'All articles',
+    articlesLabel: 'Articles',
+
+    byPrefix: 'By',
+    publishedPrefix: 'Published',
+    updatedPrefix: 'Updated',
+    minRead: 'min read',
+
+    breadcrumbLabel: 'Breadcrumb',
+    home: 'Home',
+
+    pagination: {
+      label: 'Pagination',
+      previous: 'Newer articles',
+      next: 'Older articles',
+    },
+  },
+
   languageSwitcher: {
     label: 'Change language',
     currentSuffix: 'current language',

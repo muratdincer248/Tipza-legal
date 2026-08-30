@@ -1,0 +1,32 @@
+---
+import { categoryHref, categoryLabel, type Category } from '~/config/taxonomy';
+import type { Locale } from '~/config/locales';
+
+interface Props {
+  category: Category;
+  locale: Locale;
+  /**
+   * Cards are themselves a single link, and an anchor inside an anchor is
+   * invalid, so those pass `link={false}` to get a plain label.
+   */
+  link?: boolean;
+  current?: boolean;
+}
+
+const { category, locale, link = true, current = false } = Astro.props;
+const label = categoryLabel(category, locale);
+---
+
+{
+  link ? (
+    <a
+      class="tag tag-category"
+      href={categoryHref(category, locale)}
+      aria-current={current ? 'page' : undefined}
+    >
+      {label}
+    </a>
+  ) : (
+    <span class="tag tag-category">{label}</span>
+  )
+}

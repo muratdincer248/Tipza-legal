@@ -1,0 +1,36 @@
+---
+import type { GetStaticPaths } from 'astro';
+import { getEntry, render } from 'astro:content';
+import ArticleLayout from '~/layouts/ArticleLayout.astro';
+import { allArticles, articleAlternates, type Article } from '~/lib/blog';
+import type { Alternate } from '~/lib/translations';
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  const all = await allArticles();
+
+  return all.map((article) => ({
+    params: { lang: article.locale, slug: article.slug },
+    props: { article, alternates: articleAlternates(all, article.translationKey) },
+  }));
+};
+
+interface Props {
+  article: Article;
+  alternates: Alternate[];
+}
+
+const { article, alternates } = Astro.props as Props;
+
+const author = await getEntry(article.entry.data.author);
+if (!author) {
+  throw new Error(
+    `Article "${article.entry.id}" references unknown author "${article.entry.data.author.id}".`
+  );
+}
+
+const { Content } = await render(article.entry);
+---
+
+<ArticleLayout article={article} author={author} locale={article.locale} alternates={alternates}>
+  <Content />
+</ArticleLayout>

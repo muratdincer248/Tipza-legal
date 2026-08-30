@@ -1,0 +1,44 @@
+---
+import { Image } from 'astro:assets';
+import type { CollectionEntry } from 'astro:content';
+import AuthorByline from './AuthorByline.astro';
+import type { Article } from '~/lib/blog';
+import type { Locale } from '~/config/locales';
+import type { Dictionary } from '~/i18n/types';
+import { coverWidths } from '~/lib/images';
+
+interface Props {
+  article: Article;
+  author: CollectionEntry<'authors'>;
+  locale: Locale;
+  dict: Dictionary;
+}
+
+const { article, author, locale, dict } = Astro.props;
+const { data } = article.entry;
+---
+
+<!-- No category pill here: the breadcrumb directly above already names and
+  links the category, and two of them stacked reads like a mistake. -->
+<header class="article-header">
+  <h1>{data.title}</h1>
+  <p class="article-lead">{data.excerpt}</p>
+
+  <AuthorByline
+    author={author}
+    locale={locale}
+    dict={dict}
+    publishedAt={article.publishedAt}
+    updatedAt={article.updatedAt}
+    readingTime={article.readingTime}
+  />
+
+  <Image
+    class="article-cover"
+    src={data.coverImage}
+    alt={data.coverImageAlt}
+    widths={coverWidths(data.coverImage, [720, 1080, 1600])}
+    sizes="(max-width: 860px) 100vw, 820px"
+    loading="eager"
+  />
+</header>

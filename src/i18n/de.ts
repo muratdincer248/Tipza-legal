@@ -183,6 +183,40 @@ export const de: Dictionary = {
     accountDeletion: 'Konto löschen',
   },
 
+  blog: {
+    meta: {
+      indexTitle: 'Trinkgeld aufteilen: Ratgeber und Praxiswissen — Tipza Blog',
+      indexDescription:
+        'Praxisnahe Beiträge zum faireren Aufteilen von Trinkgeld: Methoden, Rechenbeispiele, die Regeln in Deutschland und Europa – und wie es ohne Diskussionen läuft.',
+      categoryTitleSuffix: 'Tipza Blog',
+      pageSuffix: 'Seite',
+    },
+
+    heading: 'Tipza Blog',
+    lead: 'Praxisnahe Beiträge zum Aufteilen von Trinkgeld – die Methoden, die Teams wirklich nutzen, die Regeln in Deutschland und Europa und die Routinen, die eine Schichtübergabe kurz halten.',
+    empty: 'Die ersten Beiträge entstehen gerade. Bis dahin findest du englische Artikel.',
+
+    featuredLabel: 'Empfohlen',
+    topicsLabel: 'Nach Thema stöbern',
+    allTopics: 'Alle Themen',
+    allArticles: 'Alle Artikel',
+    articlesLabel: 'Artikel',
+
+    byPrefix: 'Von',
+    publishedPrefix: 'Veröffentlicht am',
+    updatedPrefix: 'Aktualisiert am',
+    minRead: 'Min. Lesezeit',
+
+    breadcrumbLabel: 'Brotkrumennavigation',
+    home: 'Startseite',
+
+    pagination: {
+      label: 'Seitennavigation',
+      previous: 'Neuere Artikel',
+      next: 'Ältere Artikel',
+    },
+  },
+
   languageSwitcher: {
     label: 'Sprache wechseln',
     currentSuffix: 'aktuelle Sprache',

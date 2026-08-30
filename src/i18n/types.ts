@@ -103,6 +103,51 @@ export interface Dictionary {
     accountDeletion: string;
   };
 
+  blog: {
+    meta: {
+      indexTitle: string;
+      indexDescription: string;
+      /** `<title>` for a category page; the category name is appended. */
+      categoryTitleSuffix: string;
+      /** `<title>` for pages 2+ of a listing, appended after the heading. */
+      pageSuffix: string;
+    };
+
+    heading: string;
+    lead: string;
+    /** Empty-state copy for a locale with no published articles yet. */
+    empty: string;
+
+    /** Label on the lead article's card. */
+    featuredLabel: string;
+    /** Heading above the category filter row. */
+    topicsLabel: string;
+    /** Filter pill that clears the category filter. */
+    allTopics: string;
+    /** Link back from a category page to the full listing. */
+    allArticles: string;
+    /** Accessible label for the article grid. */
+    articlesLabel: string;
+
+    /** Byline prefix, e.g. `By Tipza Team`. */
+    byPrefix: string;
+    /** Prefix before the publication date, e.g. `Published 5 March 2026`. */
+    publishedPrefix: string;
+    /** Prefix before the revision date. */
+    updatedPrefix: string;
+    /** Unit appended to the reading-time number, e.g. `6 min read`. */
+    minRead: string;
+
+    breadcrumbLabel: string;
+    home: string;
+
+    pagination: {
+      label: string;
+      previous: string;
+      next: string;
+    };
+  };
+
   languageSwitcher: {
     /** Accessible label for the selector control. */
     label: string;

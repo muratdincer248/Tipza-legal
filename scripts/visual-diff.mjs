@@ -40,28 +40,41 @@ for (const width of VIEWPORTS) {
   }
 
   let diff = 0;
-  let minY = Infinity;
-  let maxY = -1;
+  const rowCounts = new Map();
   for (let y = 0; y < a.png.height; y++) {
+    let inRow = 0;
     for (let x = 0; x < a.png.width; x++) {
       const i = (y * a.png.width + x) * 4;
       const changed =
         Math.abs(a.png.data[i] - b.png.data[i]) > 8 ||
         Math.abs(a.png.data[i + 1] - b.png.data[i + 1]) > 8 ||
         Math.abs(a.png.data[i + 2] - b.png.data[i + 2]) > 8;
-      if (changed) {
-        diff++;
-        if (y < minY) minY = y;
-        if (y > maxY) maxY = y;
-      }
+      if (changed) inRow++;
+    }
+    if (inRow) rowCounts.set(y, inRow);
+    diff += inRow;
+  }
+
+  /* Contiguous bands of differing rows, so two small intentional edits read
+     differently from one page-wide layout shift. */
+  const bands = [];
+  for (const y of [...rowCounts.keys()].sort((p, q) => p - q)) {
+    const last = bands.at(-1);
+    if (last && y - last.end <= 8) {
+      last.end = y;
+      last.px += rowCounts.get(y);
+    } else {
+      bands.push({ start: y, end: y, px: rowCounts.get(y) });
     }
   }
 
   const total = a.png.width * a.png.height;
-  const rows = diff ? `${minY}-${maxY}` : 'none';
   console.log(
-    `${width}px: ${diff} px (${((diff / total) * 100).toFixed(3)}%) differing rows ${rows}, page height ${a.png.height}`
+    `${width}px: ${diff} px (${((diff / total) * 100).toFixed(3)}%) of ${a.png.height} rows`
   );
+  for (const band of bands) {
+    console.log(`    rows ${band.start}-${band.end}: ${band.px} px`);
+  }
 }
 
 await browser.close();

@@ -1,0 +1,170 @@
+---
+import type { GetStaticPaths, Page } from 'astro';
+import MarketingLayout from '~/layouts/MarketingLayout.astro';
+import ArticleCard from '~/components/blog/ArticleCard.astro';
+import FeaturedArticleCard from '~/components/blog/FeaturedArticleCard.astro';
+import { LOCALES, type Locale } from '~/config/locales';
+import { CATEGORIES, categoryHref, categoryLabel, type Category } from '~/config/taxonomy';
+import { getDictionary } from '~/i18n';
+import {
+  allArticles,
+  leadArticle,
+  listingPath,
+  BLOG_INDEX_PATH,
+  BLOG_PAGE_SIZE,
+  type Article,
+} from '~/lib/blog';
+import { asymmetricAlternates } from '~/lib/translations';
+import '~/styles/blog.css';
+
+export const getStaticPaths: GetStaticPaths = async ({ paginate }) => {
+  const all = await allArticles();
+
+  /**
+   * Locales publish at different rates, so `/de/blog/3/` may not exist when
+   * `/en/blog/3/` does. Page counts let each page advertise only the alternates
+   * that were actually built.
+   */
+  const pageCounts = Object.fromEntries(
+    LOCALES.map((locale) => {
+      const count = all.filter((article) => article.locale === locale).length;
+      const paginated = Math.max(0, count - 1);
+      return [locale, Math.max(1, Math.ceil(paginated / BLOG_PAGE_SIZE))];
+    })
+  ) as Record<Locale, number>;
+
+  return LOCALES.flatMap((locale) => {
+    const articles = all.filter((article) => article.locale === locale);
+    const lead = leadArticle(articles);
+    const rest = articles.filter((article) => article !== lead);
+
+    const categories = CATEGORIES.filter((category) =>
+      articles.some((article) => article.category === category)
+    );
+
+    return paginate(rest, {
+      params: { lang: locale },
+      props: { locale, lead, categories, pageCounts },
+      pageSize: BLOG_PAGE_SIZE,
+    });
+  });
+};
+
+interface Props {
+  locale: Locale;
+  lead?: Article;
+  categories: Category[];
+  pageCounts: Record<Locale, number>;
+  page: Page<Article>;
+}
+
+const { locale, lead, categories, pageCounts, page } = Astro.props as Props;
+const dict = getDictionary(locale);
+const isFirstPage = page.currentPage === 1;
+
+const alternates = asymmetricAlternates(
+  Object.fromEntries(
+    LOCALES.filter((other) => pageCounts[other] >= page.currentPage).map((other) => [
+      other,
+      listingPath(page.currentPage),
+    ])
+  ),
+  BLOG_INDEX_PATH
+);
+
+const title = isFirstPage
+  ? dict.blog.meta.indexTitle
+  : `${dict.blog.heading} – ${dict.blog.meta.pageSuffix} ${page.currentPage} — ${dict.blog.meta.categoryTitleSuffix}`;
+---
+
+<MarketingLayout
+  locale={locale}
+  path={listingPath(page.currentPage)}
+  alternates={alternates}
+  title={title}
+  description={dict.blog.meta.indexDescription}
+>
+  <section class="section blog-intro">
+    <div class="container">
+      <h1>{dict.blog.heading}</h1>
+      <p>{dict.blog.lead}</p>
+    </div>
+  </section>
+
+  {
+    isFirstPage && lead && (
+      <section class="section blog-featured">
+        <div class="container">
+          <FeaturedArticleCard article={lead} locale={locale} dict={dict} />
+        </div>
+      </section>
+    )
+  }
+
+  {
+    categories.length > 1 && (
+      <section class="section blog-topics">
+        <div class="container">
+          <h2>{dict.blog.topicsLabel}</h2>
+          <ul class="blog-topic-list">
+            <li>
+              <span class="tag tag-category" aria-current="page">
+                {dict.blog.allTopics}
+              </span>
+            </li>
+            {categories.map((category) => (
+              <li>
+                <a class="tag tag-category" href={categoryHref(category, locale)}>
+                  {categoryLabel(category, locale)}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+    )
+  }
+
+  {
+    page.data.length > 0 && (
+      <section class="section blog-list" aria-label={dict.blog.articlesLabel}>
+        <div class="container">
+          <div class="grid-3">
+            {page.data.map((article) => (
+              <ArticleCard article={article} locale={locale} dict={dict} headingLevel="h2" />
+            ))}
+          </div>
+        </div>
+      </section>
+    )
+  }
+
+  {
+    !lead && (
+      <section class="section blog-empty">
+        <div class="container">
+          <p>{dict.blog.empty}</p>
+        </div>
+      </section>
+    )
+  }
+
+  {
+    page.lastPage > 1 && (
+      <nav class="section blog-pagination" aria-label={dict.blog.pagination.label}>
+        <div class="container">
+          {page.url.prev && (
+            <a class="btn btn-secondary" href={page.url.prev} rel="prev">
+              {dict.blog.pagination.previous}
+            </a>
+          )}
+          {page.url.next && (
+            <a class="btn btn-secondary" href={page.url.next} rel="next">
+              {dict.blog.pagination.next}
+            </a>
+          )}
+        </div>
+      </nav>
+    )
+  }
+</MarketingLayout>

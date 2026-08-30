@@ -14,6 +14,7 @@ export const primaryNav = (dict: Dictionary, base: string): NavLink[] => [
   { href: `${base}#how`, label: dict.nav.how },
   { href: `${base}#benefits`, label: dict.nav.benefits },
   { href: `${base}#pro`, label: dict.nav.pro },
+  { href: `${base}blog/`, label: dict.nav.blog },
   { href: `${base}#faq`, label: dict.nav.faq },
   { href: `${base}#contact`, label: dict.nav.contact },
 ];
@@ -22,6 +23,7 @@ export const footerNav = (dict: Dictionary, base: string): NavLink[] => [
   { href: `${base}#purpose`, label: dict.nav.purpose },
   { href: `${base}#how`, label: dict.nav.how },
   { href: `${base}#pro`, label: dict.nav.pro },
+  { href: `${base}blog/`, label: dict.nav.blog },
   { href: `${base}#faq`, label: dict.nav.faq },
   { href: `${base}privacy/`, label: dict.footer.privacy },
   { href: `${base}terms/`, label: dict.footer.terms },
