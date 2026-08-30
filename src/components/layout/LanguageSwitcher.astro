@@ -45,7 +45,6 @@ const current = localeMeta[locale];
               data-track-label={`${locale}:${alternate.locale}`}
             >
               <span class="lang-switcher-label">{meta.label}</span>
-              {isCurrent && <span class="lang-switcher-note">{copy.currentSuffix}</span>}
               {!isCurrent && !alternate.translated && (
                 <span class="lang-switcher-note">{copy.notTranslated}</span>
               )}
@@ -67,13 +66,15 @@ const current = localeMeta[locale];
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    padding: 10px 12px;
-    border-radius: 999px;
+    box-sizing: border-box;
+    min-height: 42px;
+    padding: 0 14px;
+    border-radius: 12px;
     border: 1px solid rgba(10, 7, 5, 0.12);
     background: rgba(255, 255, 255, 0.65);
     color: rgba(10, 7, 5, 0.82);
     font-family: var(--font-body);
-    font-weight: 700;
+    font-weight: 800;
     font-size: 14px;
     line-height: 1;
     cursor: pointer;
@@ -140,7 +141,7 @@ const current = localeMeta[locale];
   }
 
   .lang-switcher-menu a[aria-current='true'] {
-    background: rgba(255, 245, 200, 0.75);
+    background: var(--neutral-05);
   }
 
   .lang-switcher-note {
