@@ -43,7 +43,7 @@ const Heading = headingLevel;
   <div class="card article-card-body">
     <CategoryPill category={article.category} locale={locale} link={false} />
     <Heading>{data.title}</Heading>
-    <p>{data.excerpt}</p>
+    <p class="article-card-excerpt">{data.excerpt}</p>
     <p class="article-card-meta">
       <time datetime={isoDate(article.publishedAt)}>{formatDate(article.publishedAt, locale)}</time>
       <span aria-hidden="true">·</span>

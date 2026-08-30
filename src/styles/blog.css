@@ -128,11 +128,10 @@ a.tag-category:hover {
   margin: 0;
 }
 
-/* Card paragraph rules are scoped through .card-link so they outrank
-   `.section p`, which sets a reading measure and zeroes margins for prose in a
-   marketing section. Without the extra class the meta line loses its
-   `margin-top: auto` and stops sitting at the foot of the card. */
-.card-link .article-card-body p,
+/* Excerpt and meta are separate classes on purpose: a shared `.article-card-body
+   p` rule is more specific than `.article-card-meta` and would paint the date
+   the same colour as the description. `.card-link` still outranks `.section p`. */
+.card-link .article-card-excerpt,
 .card-link .featured-article-excerpt {
   font-size: 14px;
   line-height: 1.6;
