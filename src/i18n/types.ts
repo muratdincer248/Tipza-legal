@@ -154,6 +154,19 @@ export interface Dictionary {
     };
   };
 
+  /**
+   * Text emitted by editorial blocks inside article bodies. Blocks are imported
+   * into MDX and cannot be handed a locale as a prop, so they read it back from
+   * the URL and look it up here — otherwise every German article would have to
+   * remember to pass "Ja" and "Nein" by hand.
+   */
+  blocks: {
+    /** Hidden text behind a comparison table's tick. */
+    supported: string;
+    /** Hidden text behind a comparison table's dash. */
+    notSupported: string;
+  };
+
   languageSwitcher: {
     /** Accessible label for the selector control. */
     label: string;

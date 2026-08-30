@@ -1,5 +1,7 @@
 ---
 import { slugify } from '~/lib/slug';
+import { localeFromPath } from '~/config/locales';
+import { getDictionary } from '~/i18n';
 
 /**
  * A comparison matrix as real table markup with scoped headers, rather than an
@@ -21,13 +23,20 @@ interface Props {
   columns: string[];
   /** One array per row; the first entry becomes that row's `<th scope="row">`. */
   rows: Cell[][];
-  /** Accessible text for boolean cells. */
+  /**
+   * Accessible text for boolean cells. Defaults to the article's language, so
+   * only a table whose axis is not really yes/no needs to set these.
+   */
   yesLabel?: string;
   noLabel?: string;
   note?: string;
 }
 
-const { caption, columns, rows, yesLabel = 'Yes', noLabel = 'No', note } = Astro.props;
+const { caption, columns, rows, yesLabel, noLabel, note } = Astro.props;
+
+const dict = getDictionary(localeFromPath(Astro.url.pathname));
+const yes = yesLabel ?? dict.blocks.supported;
+const no = noLabel ?? dict.blocks.notSupported;
 
 const mismatched = rows.find((row) => row.length !== columns.length);
 if (mismatched) {
@@ -66,7 +75,7 @@ const captionId = `table-${slugify(caption)}`;
                 typeof cell === 'boolean' ? (
                   <td class={cell ? 'cell-yes' : 'cell-no'}>
                     <span aria-hidden="true">{cell ? '✓' : '—'}</span>
-                    <span class="sr-only">{cell ? yesLabel : noLabel}</span>
+                    <span class="sr-only">{cell ? yes : no}</span>
                   </td>
                 ) : (
                   <td>{cell}</td>

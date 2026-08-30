@@ -35,3 +35,13 @@ export const localeBase = (locale: Locale): string => `/${locale}/`;
 /** Builds a locale-prefixed path from a locale-relative one. */
 export const localePath = (locale: Locale, path = ''): string =>
   `${localeBase(locale)}${path.replace(/^\/+/, '')}`;
+
+/**
+ * Reads the locale back out of a path. Pages are handed their locale as a prop;
+ * this is for components too deep to thread it through — an editorial block
+ * imported inside an article body, for instance.
+ */
+export const localeFromPath = (pathname: string): Locale => {
+  const segment = pathname.split('/').filter(Boolean)[0] ?? '';
+  return isLocale(segment) ? segment : DEFAULT_LOCALE;
+};

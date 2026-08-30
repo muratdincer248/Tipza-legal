@@ -1,12 +1,15 @@
 ---
 /**
  * Replaces plain Markdown tables. The wrapper is the scroll container, so a wide
- * table scrolls inside the measure instead of forcing the whole page sideways.
- * `tabindex` makes that scroll reachable by keyboard.
+ * table scrolls inside the measure instead of forcing the whole page sideways,
+ * and `tabindex` makes that scroll reachable by keyboard.
+ *
+ * No `role="region"`: a Markdown table has no caption to name it, and an unnamed
+ * region is worse than none. `ComparisonTable` has a caption and does use one.
  */
 ---
 
-<div class="table-scroll" tabindex="0" role="region">
+<div class="table-scroll" tabindex="0">
   <table>
     <slot />
   </table>

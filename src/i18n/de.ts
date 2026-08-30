@@ -220,6 +220,11 @@ export const de: Dictionary = {
     },
   },
 
+  blocks: {
+    supported: 'Ja',
+    notSupported: 'Nein',
+  },
+
   languageSwitcher: {
     label: 'Sprache wechseln',
     currentSuffix: 'aktuelle Sprache',
