@@ -1,5 +1,6 @@
 ---
 import BaseHead, { type Props as SeoProps } from '~/components/seo/BaseHead.astro';
+import Analytics from '~/components/analytics/Analytics.astro';
 import { localeMeta } from '~/config/locales';
 import '~/styles/tokens.css';
 import '~/styles/base.css';
@@ -46,5 +47,6 @@ const meta = localeMeta[seo.locale];
 
   <body>
     <slot />
+    <Analytics />
   </body>
 </html>

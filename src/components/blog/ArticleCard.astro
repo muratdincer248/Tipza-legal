@@ -6,6 +6,7 @@ import type { Locale } from '~/config/locales';
 import type { Dictionary } from '~/i18n/types';
 import { formatDate, isoDate } from '~/lib/formatDate';
 import { coverWidths } from '~/lib/images';
+import type { TrackedEvent } from '~/lib/track';
 
 interface Props {
   article: Article;
@@ -13,14 +14,24 @@ interface Props {
   dict: Dictionary;
   /** Set to keep the document outline correct wherever the card is placed. */
   headingLevel?: 'h2' | 'h3';
+  /**
+   * Reports a click as this event. The card cannot know whether it is a search
+   * result, a teaser or further reading, so whoever places it says.
+   */
+  trackAs?: TrackedEvent;
 }
 
-const { article, locale, dict, headingLevel = 'h3' } = Astro.props;
+const { article, locale, dict, headingLevel = 'h3', trackAs } = Astro.props;
 const { data } = article.entry;
 const Heading = headingLevel;
 ---
 
-<a class="card-link article-card" href={article.href}>
+<a
+  class="card-link article-card"
+  href={article.href}
+  data-track={trackAs}
+  data-track-label={trackAs && article.translationKey}
+>
   <Image
     class="article-card-cover"
     src={data.coverImage}

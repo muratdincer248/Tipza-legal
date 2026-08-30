@@ -41,7 +41,7 @@ const { homeHref, navItems, locale, alternates, dict } = Astro.props;
             ))
           }
           <li class="mobile-store-buttons">
-            <StoreButtons eager />
+            <StoreButtons eager placement="header" />
           </li>
         </ul>
       </nav>
@@ -49,7 +49,7 @@ const { homeHref, navItems, locale, alternates, dict } = Astro.props;
       <div class="nav-actions">
         <LanguageSwitcher locale={locale} alternates={alternates} copy={dict.languageSwitcher} />
         <div class="cta-row">
-          <StoreButtons eager />
+          <StoreButtons eager placement="header" />
         </div>
       </div>
     </div>

@@ -1,0 +1,19 @@
+{
+  // Standalone rather than extending the root config: the Workers runtime
+  // redefines Request, Response and friends, and those definitions would be
+  // wrong for the browser code in src/. Functions import by relative path, so
+  // none of the root's path aliases are needed here.
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "lib": ["ES2022"],
+    "types": ["@cloudflare/workers-types"],
+    "strict": true,
+    "noUncheckedIndexedAccess": true,
+    "verbatimModuleSyntax": true,
+    "skipLibCheck": true,
+    "noEmit": true
+  },
+  "include": ["**/*.ts", "../src/config/locales.ts", "../src/lib/events.ts", "../src/lib/feedback.ts"]
+}

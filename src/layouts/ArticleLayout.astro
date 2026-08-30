@@ -9,6 +9,7 @@ import ArticleHeader from '~/components/blog/ArticleHeader.astro';
 import TableOfContents from '~/components/blog/TableOfContents.astro';
 import KeyTakeaways from '~/components/content/KeyTakeaways.astro';
 import SourcesList from '~/components/blog/SourcesList.astro';
+import ArticleFeedback from '~/components/blog/ArticleFeedback.astro';
 import RelatedArticles from '~/components/blog/RelatedArticles.astro';
 import ProductCta from '~/components/content/ProductCta.astro';
 import { primaryNav, footerNav } from '~/lib/nav';
@@ -101,16 +102,22 @@ const jsonLd = articleSchema({ article, author, image: ogImage, crumbs, title })
           <slot />
         </article>
 
-        <SourcesList
-          sources={data.sources}
-          heading={dict.blog.sourcesLabel}
-          accessedLabel={dict.blog.accessedLabel}
-          locale={locale}
-        />
+        {/* Everything after the argument itself. `data-article-end` doubles as
+            the marker that says a reader got this far — see `lib/track.ts`. */}
+        <footer class="article-footer" data-article-end>
+          <SourcesList
+            sources={data.sources}
+            heading={dict.blog.sourcesLabel}
+            accessedLabel={dict.blog.accessedLabel}
+            locale={locale}
+          />
 
-        {data.showProductCta && <ProductCta />}
+          <ArticleFeedback dict={dict} />
 
-        <RelatedArticles articles={related} locale={locale} dict={dict} />
+          {data.showProductCta && <ProductCta />}
+
+          <RelatedArticles articles={related} locale={locale} dict={dict} />
+        </footer>
       </div>
 
       {

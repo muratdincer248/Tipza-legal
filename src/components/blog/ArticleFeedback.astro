@@ -1,0 +1,120 @@
+---
+import { FEEDBACK_REASONS } from '~/lib/feedback';
+import type { Dictionary } from '~/i18n/types';
+
+/**
+ * "Was this article helpful?" at the foot of an article.
+ *
+ * Two clicks at most, and the second is only asked of the people who said no —
+ * which is where the useful information is. Everything renders server-side and
+ * the buttons are real buttons, so the block is complete before any script runs
+ * and simply stays inert if the script never arrives.
+ *
+ * Nothing is stored client-side except the fact that this article was rated,
+ * which is what stops the widget asking again on the next visit.
+ */
+interface Props {
+  dict: Dictionary;
+}
+
+const { dict } = Astro.props;
+const copy = dict.blog.feedback;
+---
+
+<aside class="article-feedback" data-feedback aria-labelledby="feedback-question">
+  <p class="article-feedback-question" id="feedback-question">{copy.question}</p>
+
+  <div class="article-feedback-actions" data-feedback-step="vote">
+    <button type="button" class="btn btn-secondary" data-feedback-vote="yes">{copy.yes}</button>
+    <button type="button" class="btn btn-secondary" data-feedback-vote="no">{copy.no}</button>
+  </div>
+
+  <div class="article-feedback-follow-up" data-feedback-step="reason" hidden>
+    <p class="article-feedback-prompt">{copy.followUp}</p>
+    <div class="article-feedback-actions">
+      {
+        FEEDBACK_REASONS.map((reason) => (
+          <button type="button" class="btn btn-secondary" data-feedback-reason={reason}>
+            {copy.reasons[reason]}
+          </button>
+        ))
+      }
+      <button type="button" class="article-feedback-skip" data-feedback-reason="">
+        {copy.skip}
+      </button>
+    </div>
+  </div>
+
+  <p class="article-feedback-thanks" data-feedback-step="thanks" role="status" hidden>
+    {copy.thanks}
+  </p>
+</aside>
+
+<script>
+  import { feedbackStorageKey, type FeedbackReason } from '~/lib/feedback';
+  import { track } from '~/lib/track';
+
+  const widget = document.querySelector<HTMLElement>('[data-feedback]');
+
+  if (widget) {
+    const show = (name: string) => {
+      for (const element of widget.querySelectorAll<HTMLElement>('[data-feedback-step]')) {
+        element.hidden = element.dataset.feedbackStep !== name;
+      }
+    };
+
+    const path = location.pathname;
+    const key = feedbackStorageKey(path);
+
+    /* Storage can throw in a locked-down browser, and a rating widget is not
+       worth an exception; an unavailable store just means asking again. */
+    const remembered = (): boolean => {
+      try {
+        return localStorage.getItem(key) !== null;
+      } catch {
+        return false;
+      }
+    };
+    const remember = () => {
+      try {
+        localStorage.setItem(key, '1');
+      } catch {
+        /* Nothing to fall back to, and nothing that needs one. */
+      }
+    };
+
+    const send = (helpful: boolean, reason?: FeedbackReason) => {
+      const body = JSON.stringify({ path, helpful, reason });
+      /* Same reasoning as `track`: this can be the last thing a reader does on
+         the page, and a beacon survives the navigation that follows. */
+      navigator.sendBeacon('/api/feedback', new Blob([body], { type: 'application/json' }));
+    };
+
+    if (remembered()) {
+      show('thanks');
+    } else {
+      for (const button of widget.querySelectorAll<HTMLElement>('[data-feedback-vote]')) {
+        button.addEventListener('click', () => {
+          const helpful = button.dataset.feedbackVote === 'yes';
+          send(helpful);
+          remember();
+          track('article_feedback', { label: helpful ? 'yes' : 'no' });
+          show(helpful ? 'thanks' : 'reason');
+        });
+      }
+
+      for (const button of widget.querySelectorAll<HTMLElement>('[data-feedback-reason]')) {
+        button.addEventListener('click', () => {
+          const reason = button.dataset.feedbackReason as FeedbackReason | '';
+          if (reason) {
+            send(false, reason);
+            track('article_feedback', { label: reason });
+          }
+          /* `role="status"` announces the acknowledgement, so nothing needs to
+             move focus away from where the reader left it. */
+          show('thanks');
+        });
+      }
+    }
+  }
+</script>

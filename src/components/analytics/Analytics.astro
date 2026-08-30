@@ -1,0 +1,33 @@
+---
+/**
+ * Page-view measurement and the listeners behind `lib/track.ts`.
+ *
+ * Cloudflare Web Analytics is used rather than a hosted tag: it sets no cookie,
+ * builds no cross-site profile and stores no identifier, which is why this site
+ * needs no consent banner. The beacon only appears when a token is configured,
+ * so `astro dev` and preview builds stay silent instead of polluting production
+ * numbers with our own page loads.
+ *
+ * Set `PUBLIC_CF_BEACON_TOKEN` in the Cloudflare Pages project (Web Analytics ›
+ * Manage site › the token in the snippet).
+ */
+const beaconToken = import.meta.env.PUBLIC_CF_BEACON_TOKEN;
+---
+
+{
+  beaconToken && (
+    <script
+      is:inline
+      defer
+      src="https://static.cloudflareinsights.com/beacon.min.js"
+      data-cf-beacon={JSON.stringify({ token: beaconToken })}
+    />
+  )
+}
+
+<script>
+  import { installClickTracking, installReadTracking } from '~/lib/track';
+
+  installClickTracking();
+  installReadTracking();
+</script>

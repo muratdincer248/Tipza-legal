@@ -5,13 +5,25 @@
  */
 interface Props {
   eager?: boolean;
+  /**
+   * Where on the page this pair sits. Reported with the click, because the
+   * question worth answering is which surface actually sends people to the
+   * store, not how many clicks there were in total.
+   */
+  placement: 'header' | 'hero' | 'download-cta' | 'article-cta';
 }
 
-const { eager = false } = Astro.props;
+const { eager = false, placement } = Astro.props;
 const loading = eager ? 'eager' : 'lazy';
 ---
 
-<a class="store-btn store-btn-google" href="#download" aria-label="Get it on Google Play">
+<a
+  class="store-btn store-btn-google"
+  href="#download"
+  aria-label="Get it on Google Play"
+  data-track="store_button_click"
+  data-track-label={`${placement}:google`}
+>
   <img src="/assets/images/google-play-icon.svg" alt="" class="store-logo" loading={loading} />
   <span class="store-text">
     <span class="store-text-top">Get it on</span>
@@ -24,6 +36,8 @@ const loading = eager ? 'eager' : 'lazy';
   target="_blank"
   rel="noopener noreferrer"
   aria-label="Download on the App Store"
+  data-track="store_button_click"
+  data-track-label={`${placement}:apple`}
 >
   <svg class="store-logo" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path

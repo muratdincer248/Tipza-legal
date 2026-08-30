@@ -232,6 +232,21 @@ export const en: Dictionary = {
       previous: 'Newer articles',
       next: 'Older articles',
     },
+
+    feedback: {
+      question: 'Was this article helpful?',
+      yes: 'Yes',
+      no: 'No',
+      followUp: 'What was missing?',
+      reasons: {
+        'not-what-i-searched': 'Not what I searched for',
+        'too-general': 'Too general',
+        'something-wrong': 'Something looks wrong',
+        'hard-to-follow': 'Hard to follow',
+      },
+      skip: 'Skip',
+      thanks: 'Thanks — noted.',
+    },
   },
 
   blocks: {

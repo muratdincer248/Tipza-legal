@@ -33,7 +33,13 @@ const { sources, heading, accessedLabel, locale } = Astro.props;
       <ol>
         {sources.map((source) => (
           <li id={`source-${source.id}`}>
-            <a href={source.url} target="_blank" rel="noopener">
+            <a
+              href={source.url}
+              target="_blank"
+              rel="noopener"
+              data-track="source_click"
+              data-track-label={source.id}
+            >
               {source.title}
             </a>
             <span class="sources-publisher">{source.publisher}</span>

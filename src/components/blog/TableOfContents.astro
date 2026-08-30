@@ -28,7 +28,9 @@ const sections = headings.filter((heading) => heading.depth === 2);
       <ol>
         {sections.map((section) => (
           <li>
-            <a href={`#${section.slug}`}>{section.text}</a>
+            <a href={`#${section.slug}`} data-track="toc_click" data-track-label={section.slug}>
+              {section.text}
+            </a>
           </li>
         ))}
       </ol>
@@ -39,7 +41,9 @@ const sections = headings.filter((heading) => heading.depth === 2);
       <ol>
         {sections.map((section) => (
           <li>
-            <a href={`#${section.slug}`}>{section.text}</a>
+            <a href={`#${section.slug}`} data-track="toc_click" data-track-label={section.slug}>
+              {section.text}
+            </a>
           </li>
         ))}
       </ol>

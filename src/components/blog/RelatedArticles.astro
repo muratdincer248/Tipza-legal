@@ -24,7 +24,12 @@ const { articles, locale, dict } = Astro.props;
       <h2>{dict.blog.relatedLabel}</h2>
       <div class="related-articles-grid">
         {articles.map((article) => (
-          <ArticleCard article={article} locale={locale} dict={dict} />
+          <ArticleCard
+            article={article}
+            locale={locale}
+            dict={dict}
+            trackAs="related_article_click"
+          />
         ))}
       </div>
     </section>

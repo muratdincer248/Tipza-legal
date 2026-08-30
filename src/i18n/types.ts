@@ -173,6 +173,26 @@ export interface Dictionary {
       previous: string;
       next: string;
     };
+
+    /**
+     * The rating widget at the foot of an article. `reasons` keys match
+     * `FEEDBACK_REASONS` in `src/lib/feedback.ts`.
+     */
+    feedback: {
+      question: string;
+      yes: string;
+      no: string;
+      /** Asked only after a negative rating. */
+      followUp: string;
+      reasons: {
+        'not-what-i-searched': string;
+        'too-general': string;
+        'something-wrong': string;
+        'hard-to-follow': string;
+      };
+      skip: string;
+      thanks: string;
+    };
   };
 
   /**

@@ -41,6 +41,8 @@ const current = localeMeta[locale];
               hreflang={meta.hreflang}
               data-locale={alternate.locale}
               aria-current={isCurrent ? 'true' : undefined}
+              data-track={isCurrent ? undefined : 'language_switch'}
+              data-track-label={`${locale}:${alternate.locale}`}
             >
               <span class="lang-switcher-label">{meta.label}</span>
               {isCurrent && <span class="lang-switcher-note">{copy.currentSuffix}</span>}

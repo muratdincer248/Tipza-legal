@@ -234,6 +234,75 @@ a.tag-category:hover {
 
 /* ------------------------------------------------------------ in-article cta */
 
+/* ------------------------------------------------------------ article feedback */
+
+.article-feedback {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 16px;
+  margin-top: 40px;
+  padding-top: 22px;
+  border-top: 1px solid var(--stroke);
+}
+
+/* The steps set `display`, which outranks the user-agent rule behind `hidden`.
+   Without this the follow-up question is visible before it is asked. */
+.article-feedback [hidden] {
+  display: none;
+}
+
+.article-feedback-question {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.article-feedback-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+/* The follow-up replaces the buttons in place, so the block does not jump when
+   the second question appears. */
+.article-feedback-follow-up {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 16px;
+}
+
+.article-feedback-prompt {
+  margin: 0;
+  font-size: 15px;
+  color: var(--muted);
+}
+
+.article-feedback .btn {
+  padding: 8px 16px;
+  font-size: 14px;
+}
+
+.article-feedback-skip {
+  padding: 8px 4px;
+  border: 0;
+  background: none;
+  font-family: var(--font-body);
+  font-size: 14px;
+  color: var(--muted);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+}
+
+.article-feedback-thanks {
+  margin: 0;
+  font-size: 15px;
+  color: var(--muted);
+}
+
 .product-cta {
   display: flex;
   flex-wrap: wrap;
