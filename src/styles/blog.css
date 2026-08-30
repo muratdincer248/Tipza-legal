@@ -393,6 +393,7 @@ a.tag-category:hover {
 .breadcrumbs ol {
   display: flex;
   flex-wrap: wrap;
+  align-items: center;
   gap: 6px;
   margin: 0;
   padding: 0;
@@ -401,9 +402,21 @@ a.tag-category:hover {
   color: var(--neutral-70);
 }
 
+.breadcrumbs li {
+  display: flex;
+  align-items: center;
+  min-width: 0;
+}
+
+.breadcrumbs li:not(:last-child) {
+  flex: 0 0 auto;
+  white-space: nowrap;
+}
+
 .breadcrumbs li + li::before {
   content: '/';
   margin-right: 6px;
+  flex-shrink: 0;
   color: var(--neutral-30);
 }
 
@@ -455,5 +468,24 @@ a.tag-category:hover {
     grid-row: 4;
     justify-self: start;
     margin-top: 24px;
+  }
+
+  /* One row: earlier crumbs stay whole, the current page label ellipsizes. */
+  .breadcrumbs ol {
+    flex-wrap: nowrap;
+    overflow: hidden;
+  }
+
+  .breadcrumbs li:last-child {
+    flex: 1 1 0;
+    overflow: hidden;
+  }
+
+  .breadcrumbs li:last-child a,
+  .breadcrumbs li:last-child [aria-current='page'] {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 }
