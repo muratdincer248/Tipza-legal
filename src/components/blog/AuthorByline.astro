@@ -27,7 +27,9 @@ const initials = name
 <div class="article-byline">
   {
     avatar ? (
-      <Image class="article-byline-avatar" src={avatar} alt="" width={44} height={44} />
+      <span class="article-byline-avatar">
+        <Image src={avatar} alt="" width={88} height={88} />
+      </span>
     ) : (
       <span class="article-byline-avatar article-byline-monogram" aria-hidden="true">
         {initials}

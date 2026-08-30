@@ -86,11 +86,21 @@
 }
 
 .article-byline-avatar {
+  display: block;
   width: 44px;
   height: 44px;
   flex-shrink: 0;
   border-radius: 999px;
+  overflow: hidden;
+  background: var(--green-20);
+}
+
+.article-byline-avatar img {
+  display: block;
+  width: 100%;
+  height: 100%;
   object-fit: cover;
+  object-position: center;
 }
 
 .article-byline-monogram {

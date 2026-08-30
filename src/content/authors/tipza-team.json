@@ -10,5 +10,6 @@
     "en": "The team building Tipza. We spend our days on tip splitting: the methods teams use, the rules they have to follow, and the arguments that start when a split is hard to explain.",
     "de": "Das Team hinter Tipza. Wir beschäftigen uns täglich mit dem Aufteilen von Trinkgeld: mit den Methoden, die Teams nutzen, den Regeln, die gelten, und den Diskussionen, die entstehen, wenn eine Aufteilung schwer zu erklären ist."
   },
-  "sameAs": ["https://apps.apple.com/app/id6756809306"]
+  "sameAs": ["https://apps.apple.com/app/id6756809306"],
+  "avatar": "./tipza-team.png"
 }
