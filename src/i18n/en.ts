@@ -217,7 +217,7 @@ export const en: Dictionary = {
 
     teaser: {
       heading: 'From the Tipza Blog',
-      lead: 'Guides on splitting tips fairly — the methods teams use, the rules that apply, and worked examples you can copy.',
+      lead: 'Practical guides on fair tip splits, covering the methods teams use, the rules that apply, and examples you can copy.',
       cta: 'Read the blog',
     },
 

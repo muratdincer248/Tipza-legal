@@ -22,7 +22,7 @@ const { articles, locale, dict } = Astro.props;
   articles.length > 0 && (
     <section class="section blog-teaser" id="blog">
       <div class="container">
-        <h2 class="centered-title">{dict.blog.teaser.heading}</h2>
+        <h2>{dict.blog.teaser.heading}</h2>
         <p class="blog-teaser-lead">{dict.blog.teaser.lead}</p>
 
         <div class="blog-teaser-grid">

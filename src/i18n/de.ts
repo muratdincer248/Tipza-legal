@@ -217,7 +217,7 @@ export const de: Dictionary = {
 
     teaser: {
       heading: 'Aus dem Tipza Blog',
-      lead: 'Anleitungen zum fairen Aufteilen von Trinkgeld – welche Methoden Teams nutzen, welche Regeln gelten und Rechenbeispiele zum Übernehmen.',
+      lead: 'Praxisnahe Anleitungen zum fairen Aufteilen von Trinkgeld: welche Methoden Teams nutzen, welche Regeln gelten und Rechenbeispiele zum Übernehmen.',
       cta: 'Zum Blog',
     },
 

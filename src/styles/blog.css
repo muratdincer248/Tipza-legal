@@ -141,14 +141,22 @@ a.tag-category:hover {
   margin: 0;
 }
 
+.article-card-category {
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 1.3;
+  color: var(--green-20);
+}
+
 .card-link .article-card-meta {
   display: flex;
   flex-wrap: wrap;
   gap: 6px;
   align-items: center;
   margin-top: auto;
-  font-size: 13px;
-  color: var(--neutral-70);
+  font-size: 12px;
+  line-height: 1.4;
+  color: var(--text-color-inverse-disabled);
 }
 
 .featured-article {
@@ -189,14 +197,12 @@ a.tag-category:hover {
   font-size: 16px;
   line-height: 1.65;
   color: var(--muted);
-  text-align: center;
   max-width: 62ch;
-  margin: 0 auto 30px;
+  margin: 0 0 30px;
 }
 
-/* `auto-fit`, unlike the further-reading grid: this row is centred under a
-   centred heading, so two cards sharing the width reads better than two cards
-   and a hole where the third would go. */
+/* `auto-fit` so two cards share the row on medium widths instead of leaving a
+   hole where the third would go. */
 .blog-teaser-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -204,7 +210,6 @@ a.tag-category:hover {
 }
 
 .blog-teaser .blog-teaser-cta {
-  text-align: center;
   max-width: none;
   margin: 30px 0 0;
 }
