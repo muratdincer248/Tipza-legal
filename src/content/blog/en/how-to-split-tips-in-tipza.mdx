@@ -1,0 +1,149 @@
+---
+translationKey: first-split-in-tipza
+locale: en
+title: 'Your first tip split in Tipza'
+seoTitle: 'How to Split Tips in Tipza: Your First Split — Tipza'
+description: 'Add the team, enter the total, pick equal, hours or points, and share the breakdown. A short walkthrough of the first split in Tipza.'
+excerpt: 'Tipza is built around one loop: the people, the total, the method, the breakdown. The first split is just that loop done once, slowly enough that the second one takes two minutes.'
+category: guides
+tags:
+  - tipza
+  - getting-started
+  - methods
+author: tipza-team
+publishedAt: 2026-08-13
+coverImage: ../../../assets/blog/first-split-in-tipza/cover.jpg
+coverImageAlt: A phone showing a Tipza split history screen with a flying pizza slice on a green background
+status: published
+keywords:
+  - tipza app
+  - how to split tips in tipza
+  - tip splitting calculator
+  - tip splitting app
+relatedArticles:
+  - hours-weighted-split
+  - tip-splitting-methods
+productCtaBody: >-
+  Add tonight's total, pick the method, and send the breakdown to the team.
+takeaways:
+  - >-
+    Add the people first, with the hours or points the method needs. A split
+    is only as good as the roster it runs on.
+  - >-
+    Enter the pool as one total. Tipza applies equal, hours, points or custom
+    weights — it does not decide which of those is fair.
+  - >-
+    Check the working on the screen: the hours, the rate, the shares. Then
+    share the same breakdown with everyone in the pool.
+  - >-
+    Save the split against a date or a range. The next shift is faster if last
+    night is still there to copy.
+faq:
+  - question: How do you split tips in Tipza?
+    answer: >-
+      Add the people on the shift, enter the total to split, choose equal,
+      hours, points or custom weights, then share the breakdown. Tipza applies
+      the method and shows the arithmetic; it does not collect, hold or pay
+      out the money.
+  - question: Which split method should I pick in Tipza?
+    answer: >-
+      Equal when everyone worked the same window, hours when shift lengths
+      differ, points when roles should not earn the same hourly rate from the
+      pool, and custom weights when the team already has a number per person.
+      Match the method to the rule you have written, not to the mood of the
+      night.
+  - question: Can the team see how the split was calculated?
+    answer: >-
+      Yes. After you calculate a split you can share the breakdown so everyone
+      sees the same numbers — hours, points and shares included. A share
+      nobody can check is the one that gets queried the next morning.
+  - question: Does Tipza pay the tips out?
+    answer: >-
+      No. Tipza is a calculator and a record. Payouts happen the way your
+      workplace already pays people. What the app adds is a breakdown that
+      matches the rule, stored against the date you ran it.
+sources:
+  - id: uk-tipping-code
+    title: 'Code of practice on fair and transparent distribution of tips'
+    publisher: Department for Business and Trade
+    url: https://www.gov.uk/government/publications/distributing-tips-fairly-statutory-code-of-practice/code-of-practice-on-fair-and-transparent-distribution-of-tips-html-version
+---
+
+import {
+  AnswerBlock,
+  FaqBlock,
+  Figure,
+  ProcessSteps,
+  SourceRef,
+  TipBox,
+} from '~/components/content';
+import teamInline from '../../../assets/blog/first-split-in-tipza/inline.jpg';
+
+The first split in Tipza is not a setup wizard. It is the same loop you will run tomorrow, done once with the roster in front of you: who is in, what the pool is, which rule applies, who received what.
+
+Fairness still comes from the rule, not from the app. A code of practice can list the factors a fair allocation may rest on — role, hours, performance — but it will not pick them for you<SourceRef sources={frontmatter.sources} id="uk-tipping-code" />. Tipza applies the choice you make and keeps the working.
+
+<AnswerBlock>
+  Add the people, enter the total, pick equal, hours, points or custom
+  weights, then share the breakdown. Tipza shows every step of the arithmetic.
+  It does not collect the money or decide which method is fair.
+</AnswerBlock>
+
+## Add the people first
+
+A split with the wrong roster is a precise wrong answer. Before the total, add everyone who should be in tonight's pool — name, role, and, if you use points, the weighting for that role.
+
+<Figure
+  src={teamInline}
+  alt="A phone showing a Tipza team list with three member cards and a button to add someone"
+  caption="The roster is the input. Points live on the person, so the next split does not reopen the negotiation."
+/>
+
+Hours are entered per split, because they change every night. Points belong on the person, because they should not. If the runner is 0.7 tonight they should be 0.7 on Saturday unless you have actually changed the scheme.
+
+## Enter the pool, pick the method
+
+One total. Cash counted, card tips from the terminal, plus anything else the policy says is shared. Tipza does not know what you left in the tin.
+
+Then pick the method that matches the written rule:
+
+- **Equal** — same window, same share.
+- **Hours** — a per-hour rate, then each person's hours.
+- **Points** — role weight times hours.
+- **Custom weights** — the numbers you already agreed, applied as entered.
+
+Switching methods because tonight was busy is how a rule becomes a mood. The app will do whichever you tap. That is not a reason to tap a different one.
+
+<ProcessSteps
+  label="Running the first split"
+  steps={[
+    {
+      title: 'Confirm the roster',
+      body: 'Everyone the rule includes, nobody it does not. A person who left early stays in, with fewer hours.',
+    },
+    {
+      title: 'Enter the total and the method',
+      body: 'One pool, the method on the policy page. Attach a date or a range so the next shift can find it.',
+    },
+    {
+      title: 'Read the working, then share it',
+      body: 'Hours, points, rate, shares. Send the same breakdown to the team. Leftover cents can wait in the split until next time.',
+    },
+  ]}
+/>
+
+<TipBox title="The leftover is a line, not a rounding error">
+  Pools do not divide into clean coins. Tipza can hold a remainder until the
+  next split rather than quietly handing it to whoever closed. Show it. A
+  named leftover is smaller than the argument it prevents.
+</TipBox>
+
+## Share the same numbers
+
+A split nobody else has seen is not finished. Share the breakdown so the people in the pool can see the hours and the shares, not only their own amount. The closer should not be the only person who could reconstruct the night.
+
+Tipza does not pay anyone. It records what you entered and what the method produced. Payouts stay on whatever rails the workplace already uses — cash, transfer, the next payroll run. The app's job is that those rails carry a number everyone has already seen.
+
+## Frequently asked questions
+
+<FaqBlock items={frontmatter.faq} />

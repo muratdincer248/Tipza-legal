@@ -99,6 +99,11 @@ const blog = defineCollection({
       /** `translationKey`s, so a relation written once resolves in every locale. */
       relatedArticles: z.array(z.string()).default([]),
       showProductCta: z.boolean().default(true),
+      /**
+       * Overrides the shared CTA body so the pitch matches this article.
+       * The heading stays the dictionary line ("Put the method into practice").
+       */
+      productCtaBody: z.string().max(280).optional(),
       status: z.enum(['draft', 'published']).default('draft'),
       keywords: z.array(z.string()).default([]),
 

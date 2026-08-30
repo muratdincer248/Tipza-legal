@@ -45,6 +45,7 @@ The fields that need explaining:
 | `featured` | Promotes the article to the large card at the top of the blog index. |
 | `relatedArticles` | `translationKey`s, not slugs, so a relation written once resolves in both languages. Any remaining slots fill with same-category articles, then the newest of anything else. |
 | `showProductCta` | On by default. Set `false` for an article where a pitch would undercut the writing — a compliance explainer, usually. |
+| `productCtaBody` | Optional override for the closing "Put the method into practice" card. Keep it as short as the dictionary default, and make it about this article's method rather than a generic pitch. |
 | `keywords` | The queries the article is meant to answer. Not emitted as a meta tag; they exist to keep the brief honest. |
 | `takeaways` | The article in four or five conclusions, shown above the body. See below. |
 | `faq` | Question-and-answer pairs. See below. |
