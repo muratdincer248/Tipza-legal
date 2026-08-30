@@ -25,7 +25,14 @@ const { articles, locale, dict } = Astro.props;
         <h2 class="blog-teaser-title">{dict.blog.teaser.heading}</h2>
         <a class="blog-teaser-link" href={blogIndexHref(locale)}>
           {dict.blog.teaser.cta}
-          <span class="blog-teaser-link-mark" aria-hidden="true">↗</span>
+          <img
+            src="/assets/images/Launch.svg"
+            alt=""
+            class="blog-teaser-link-icon"
+            width="16"
+            height="16"
+            loading="lazy"
+          />
         </a>
         <p class="blog-teaser-lead">{dict.blog.teaser.lead}</p>
 

@@ -156,7 +156,7 @@ a.tag-category:hover {
   margin-top: auto;
   font-size: 12px;
   line-height: 1.4;
-  color: var(--text-color-inverse-disabled);
+  color: var(--neutral-30);
 }
 
 .featured-article {
@@ -223,9 +223,9 @@ a.tag-category:hover {
   text-decoration: underline;
 }
 
-.blog-teaser-link-mark {
-  font-size: 0.95em;
-  line-height: 1;
+.blog-teaser-link-icon {
+  display: block;
+  flex-shrink: 0;
 }
 
 /* Scoped through .blog-teaser to outrank `.section p`, which zeroes the margins
