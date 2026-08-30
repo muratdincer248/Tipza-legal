@@ -445,6 +445,10 @@
   text-align: right;
 }
 
+.calc-row:has(+ .calc-result) {
+  border-bottom: none;
+}
+
 .calc-result {
   border-bottom: none;
   border-top: 2px solid var(--neutral-99);
