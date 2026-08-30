@@ -125,7 +125,7 @@ const listed = isFirstPage && lead ? [lead, ...page.data] : page.data;
             </li>
             {categories.map((category) => (
               <li>
-                <a class="tag tag-category" href={categoryHref(category, locale)}>
+                <a class="tag tag-category" href={categoryHref(category, locale)} data-astro-prefetch>
                   {categoryLabel(category, locale)}
                 </a>
               </li>
