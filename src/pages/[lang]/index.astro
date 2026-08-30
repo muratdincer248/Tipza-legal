@@ -12,6 +12,7 @@ import ContactSection from '~/components/marketing/ContactSection.astro';
 import { LOCALES, localeBase, type Locale } from '~/config/locales';
 import { getDictionary } from '~/i18n';
 import { articlesIn } from '~/lib/blog';
+import { homeSchema } from '~/lib/schema';
 import { symmetricAlternates } from '~/lib/translations';
 import '~/styles/blog.css';
 
@@ -35,6 +36,12 @@ const teaserArticles = (await articlesIn(locale)).slice(0, 3);
   description={dict.meta.homeDescription}
   ogDescription={dict.meta.homeOgDescription}
   preloadImages={['/assets/images/website-hero-image.png']}
+  jsonLd={homeSchema({
+    locale,
+    title: dict.meta.homeTitle,
+    description: dict.meta.homeDescription,
+    faq: dict.faq.items,
+  })}
 >
   <Hero copy={dict.hero} />
   <PurposeSection copy={dict.purpose} />

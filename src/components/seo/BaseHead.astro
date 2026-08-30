@@ -2,6 +2,8 @@
 import { site } from '~/config/site';
 import { localeMeta, localePath, type Locale } from '~/config/locales';
 import { hreflangAlternates, xDefaultAlternate, type Alternate } from '~/lib/translations';
+import { defaultOgImage, type OgImage } from '~/lib/ogImage';
+import { serializeSchema, type Node } from '~/lib/schema';
 
 export interface Props {
   title: string;
@@ -11,11 +13,13 @@ export interface Props {
   path: string;
   alternates: Alternate[];
   ogType?: 'website' | 'article';
-  ogImage?: string;
+  ogImage?: OgImage;
   ogDescription?: string;
   noindex?: boolean;
   publishedTime?: string;
   modifiedTime?: string;
+  /** One `@graph` for the page, built by `lib/schema.ts`. */
+  jsonLd?: Node;
 }
 
 const {
@@ -25,15 +29,16 @@ const {
   path,
   alternates,
   ogType = 'website',
-  ogImage = site.defaultOgImage,
+  ogImage = defaultOgImage,
   ogDescription,
   noindex = false,
   publishedTime,
   modifiedTime,
+  jsonLd,
 } = Astro.props;
 
 const canonical = new URL(localePath(locale, path), site.url).href;
-const ogImageUrl = new URL(ogImage, site.url).href;
+const ogImageUrl = new URL(ogImage.url, site.url).href;
 const translated = hreflangAlternates(alternates);
 const xDefault = xDefaultAlternate(alternates);
 const meta = localeMeta[locale];
@@ -43,18 +48,26 @@ const meta = localeMeta[locale];
 {description && <meta name="description" content={description} />}
 {noindex && <meta name="robots" content="noindex, follow" />}
 
-<link rel="canonical" href={canonical} />
-
+{/* A page asking not to be indexed has no business naming a canonical or
+    advertising translations: both are instructions about how to index it, and
+    stating them alongside `noindex` is a contradiction a crawler has to guess at. */}
 {
-  translated.map((alternate) => (
-    <link
-      rel="alternate"
-      hreflang={localeMeta[alternate.locale].hreflang}
-      href={new URL(alternate.href, site.url).href}
-    />
-  ))
+  !noindex && (
+    <Fragment>
+      <link rel="canonical" href={canonical} />
+      {translated.map((alternate) => (
+        <link
+          rel="alternate"
+          hreflang={localeMeta[alternate.locale].hreflang}
+          href={new URL(alternate.href, site.url).href}
+        />
+      ))}
+      {xDefault && (
+        <link rel="alternate" hreflang="x-default" href={new URL(xDefault.href, site.url).href} />
+      )}
+    </Fragment>
+  )
 }
-{xDefault && <link rel="alternate" hreflang="x-default" href={new URL(xDefault.href, site.url).href} />}
 
 <link rel="sitemap" type="application/xml" href="/sitemap-index.xml" />
 
@@ -64,6 +77,9 @@ const meta = localeMeta[locale];
 <meta property="og:type" content={ogType} />
 <meta property="og:url" content={canonical} />
 <meta property="og:image" content={ogImageUrl} />
+<meta property="og:image:width" content={String(ogImage.width)} />
+<meta property="og:image:height" content={String(ogImage.height)} />
+{ogImage.alt && <meta property="og:image:alt" content={ogImage.alt} />}
 <meta property="og:locale" content={meta.ogLocale} />
 {
   translated
@@ -79,3 +95,6 @@ const meta = localeMeta[locale];
 <meta name="twitter:title" content={title} />
 <meta name="twitter:description" content={ogDescription ?? description} />
 <meta name="twitter:image" content={ogImageUrl} />
+{ogImage.alt && <meta name="twitter:image:alt" content={ogImage.alt} />}
+
+{jsonLd && <script type="application/ld+json" is:inline set:html={serializeSchema(jsonLd)} />}

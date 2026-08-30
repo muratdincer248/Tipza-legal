@@ -2,7 +2,7 @@
 import type { GetStaticPaths } from 'astro';
 import MarketingLayout from '~/layouts/MarketingLayout.astro';
 import ArticleCard from '~/components/blog/ArticleCard.astro';
-import Breadcrumbs, { type Crumb } from '~/components/seo/Breadcrumbs.astro';
+import Breadcrumbs from '~/components/seo/Breadcrumbs.astro';
 import { LOCALES, localeBase, type Locale } from '~/config/locales';
 import {
   CATEGORIES,
@@ -16,6 +16,8 @@ import {
 import { getDictionary } from '~/i18n';
 import { allArticles, articlesInCategory, blogIndexHref, BLOG_INDEX_PATH } from '~/lib/blog';
 import type { Article } from '~/lib/blog';
+import type { Crumb } from '~/lib/crumbs';
+import { listingSchema } from '~/lib/schema';
 import { asymmetricAlternates } from '~/lib/translations';
 import '~/styles/blog.css';
 
@@ -75,14 +77,25 @@ const crumbs: Crumb[] = [
   { label: dict.blog.heading, href: blogIndexHref(locale) },
   { label: copy.label },
 ];
+
+const path = categoryRelativePath(category, locale);
+const title = `${copy.heading} — ${dict.blog.meta.categoryTitleSuffix}`;
 ---
 
 <MarketingLayout
   locale={locale}
-  path={categoryRelativePath(category, locale)}
+  path={path}
   alternates={alternates}
-  title={`${copy.heading} — ${dict.blog.meta.categoryTitleSuffix}`}
+  title={title}
   description={copy.description}
+  jsonLd={listingSchema({
+    locale,
+    path,
+    title,
+    description: copy.description,
+    crumbs,
+    articles,
+  })}
 >
   <section class="section blog-intro">
     <div class="container">

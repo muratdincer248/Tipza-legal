@@ -7,7 +7,7 @@ export const en: Dictionary = {
   meta: {
     homeTitle: 'Tipza — Fair Tip Splits Made Simple',
     homeDescription:
-      'Tipza helps teams split tips fairly and transparently. Add the bill and tip, choose a split method (equal, hours, points, or custom weights), and share the final breakdown.',
+      'Tipza helps teams split tips fairly and transparently. Add the total, choose equal, hours, points or custom weights, and share the breakdown.',
     homeOgDescription:
       'Tipza helps teams split tips fairly and transparently. Choose equal, hours, points, or custom weights and share the breakdown.',
   },

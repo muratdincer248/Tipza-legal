@@ -20,7 +20,9 @@ const toProse = (body: string): string =>
     .replace(/\[([^\]]*)\]\([^)]*\)/g, '$1')
     .replace(/[#>*_~|-]/g, ' ');
 
-export const readingTime = (body: string): number => {
-  const words = toProse(body).split(/\s+/).filter(Boolean).length;
-  return Math.max(1, Math.round(words / WORDS_PER_MINUTE));
-};
+/** Prose words. Shared so `wordCount` and `timeRequired` cannot disagree. */
+export const wordCount = (body: string): number =>
+  toProse(body).split(/\s+/).filter(Boolean).length;
+
+export const readingTime = (body: string): number =>
+  Math.max(1, Math.round(wordCount(body) / WORDS_PER_MINUTE));

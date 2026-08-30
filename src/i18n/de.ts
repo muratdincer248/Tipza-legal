@@ -7,7 +7,7 @@ export const de: Dictionary = {
   meta: {
     homeTitle: 'Tipza — Trinkgeld einfach und fair aufteilen',
     homeDescription:
-      'Tipza hilft Teams, Trinkgeld fair und transparent aufzuteilen. Betrag und Trinkgeld eingeben, eine Methode wählen (gleichmäßig, nach Stunden, nach Punkten oder mit eigener Gewichtung) und die fertige Übersicht teilen.',
+      'Tipza hilft Teams, Trinkgeld fair und transparent aufzuteilen: Betrag eingeben, Methode wählen – gleichmäßig, nach Stunden, Punkten oder Gewichtung.',
     homeOgDescription:
       'Tipza hilft Teams, Trinkgeld fair und transparent aufzuteilen. Wähle gleichmäßig, nach Stunden, nach Punkten oder eigene Gewichtungen und teile die Übersicht.',
   },

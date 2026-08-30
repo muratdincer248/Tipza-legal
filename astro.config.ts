@@ -1,11 +1,7 @@
 import { defineConfig } from 'astro/config';
 import mdx from '@astrojs/mdx';
-import sitemap from '@astrojs/sitemap';
-import { LOCALES, DEFAULT_LOCALE, localeMeta } from './src/config/locales';
-
-const sitemapLocales = Object.fromEntries(
-  LOCALES.map((locale) => [locale, localeMeta[locale].hreflang])
-);
+import sitemap from './src/integrations/sitemap';
+import { LOCALES, DEFAULT_LOCALE } from './src/config/locales';
 
 export default defineConfig({
   site: 'https://tipza.app',
@@ -26,11 +22,5 @@ export default defineConfig({
     '/': `/${DEFAULT_LOCALE}/`,
   },
 
-  integrations: [
-    mdx(),
-    sitemap({
-      i18n: { defaultLocale: DEFAULT_LOCALE, locales: sitemapLocales },
-      filter: (page) => !page.includes('/404'),
-    }),
-  ],
+  integrations: [mdx(), sitemap()],
 });

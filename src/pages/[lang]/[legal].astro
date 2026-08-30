@@ -2,6 +2,7 @@
 import { getCollection, render } from 'astro:content';
 import LegalLayout from '~/layouts/LegalLayout.astro';
 import { isLocale, type Locale } from '~/config/locales';
+import { pageSchema } from '~/lib/schema';
 import { asymmetricAlternates } from '~/lib/translations';
 
 export async function getStaticPaths() {
@@ -43,6 +44,12 @@ const slug = Astro.params.legal!;
   heading={entry.data.heading}
   description={entry.data.description}
   lastUpdated={entry.data.lastUpdated}
+  jsonLd={pageSchema({
+    locale,
+    path: `${slug}/`,
+    title: entry.data.title,
+    description: entry.data.description,
+  })}
 >
   <Content />
 </LegalLayout>

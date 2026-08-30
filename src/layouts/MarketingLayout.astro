@@ -6,6 +6,8 @@ import { primaryNav, footerNav } from '~/lib/nav';
 import { localeBase, type Locale } from '~/config/locales';
 import { getDictionary } from '~/i18n';
 import type { Alternate } from '~/lib/translations';
+import type { OgImage } from '~/lib/ogImage';
+import type { Node } from '~/lib/schema';
 
 interface Props {
   locale: Locale;
@@ -15,9 +17,10 @@ interface Props {
   title: string;
   description?: string;
   ogDescription?: string;
-  ogImage?: string;
+  ogImage?: OgImage;
   noindex?: boolean;
   preloadImages?: string[];
+  jsonLd?: Node;
 }
 
 const { locale, ...seo } = Astro.props;

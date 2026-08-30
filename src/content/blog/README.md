@@ -21,9 +21,11 @@ actually search in that language rather than a transliteration of the English
 one. Give both files the same `translationKey` and the language switcher, the
 `hreflang` tags and the canonical URLs all follow.
 
-Cover images live in `src/assets/blog/<translationKey>/cover.png` and are shared
+Cover images live in `src/assets/blog/<translationKey>/cover.jpg` and are shared
 between translations. `scripts/make-cover.mjs` crops a source photo to the 16:9
-the layout expects.
+the layout expects; give it a source at least 1536px wide, which is twice the
+widest the cover is displayed at and wide enough for the social preview derived
+from it.
 
 ## Frontmatter
 

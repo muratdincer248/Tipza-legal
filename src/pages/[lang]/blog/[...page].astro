@@ -14,6 +14,7 @@ import {
   BLOG_PAGE_SIZE,
   type Article,
 } from '~/lib/blog';
+import { listingSchema } from '~/lib/schema';
 import { asymmetricAlternates } from '~/lib/translations';
 import '~/styles/blog.css';
 
@@ -75,6 +76,9 @@ const alternates = asymmetricAlternates(
 const title = isFirstPage
   ? dict.blog.meta.indexTitle
   : `${dict.blog.heading} – ${dict.blog.meta.pageSuffix} ${page.currentPage} — ${dict.blog.meta.categoryTitleSuffix}`;
+
+/** The list a crawler sees is the list the page shows, lead article included. */
+const listed = isFirstPage && lead ? [lead, ...page.data] : page.data;
 ---
 
 <MarketingLayout
@@ -83,6 +87,13 @@ const title = isFirstPage
   alternates={alternates}
   title={title}
   description={dict.blog.meta.indexDescription}
+  jsonLd={listingSchema({
+    locale,
+    path: listingPath(page.currentPage),
+    title,
+    description: dict.blog.meta.indexDescription,
+    articles: listed,
+  })}
 >
   <section class="section blog-intro">
     <div class="container">

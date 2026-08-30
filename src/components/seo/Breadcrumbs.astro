@@ -1,9 +1,5 @@
 ---
-export interface Crumb {
-  label: string;
-  /** Omitted on the final crumb, which is the current page. */
-  href?: string;
-}
+import type { Crumb } from '~/lib/crumbs';
 
 interface Props {
   crumbs: Crumb[];

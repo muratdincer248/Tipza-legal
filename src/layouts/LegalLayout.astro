@@ -6,6 +6,7 @@ import { primaryNav, footerNav } from '~/lib/nav';
 import { localeBase, type Locale } from '~/config/locales';
 import { getDictionary } from '~/i18n';
 import type { Alternate } from '~/lib/translations';
+import type { Node } from '~/lib/schema';
 import '~/styles/legal.css';
 
 interface Props {
@@ -16,6 +17,7 @@ interface Props {
   heading: string;
   description?: string;
   lastUpdated?: string;
+  jsonLd?: Node;
 }
 
 const { locale, heading, lastUpdated, ...seo } = Astro.props;

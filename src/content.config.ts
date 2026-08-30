@@ -23,7 +23,8 @@ const legal = defineCollection({
   schema: z.object({
     title: z.string(),
     heading: z.string(),
-    description: z.string().optional(),
+    /** Meta description; the cap is roughly what search engines will show. */
+    description: z.string().max(160),
     lastUpdated: z.string(),
   }),
 });
@@ -38,6 +39,12 @@ const authors = defineCollection({
   schema: ({ image }) =>
     z.object({
       type: z.enum(['Person', 'Organization']).default('Person'),
+      /**
+       * True when the byline is Tipza itself. Structured data then credits the
+       * site's own Organization rather than minting a second, identical company
+       * beside it — one entity saying it wrote the article, not two.
+       */
+      isPublisher: z.boolean().default(false),
       name: z.string(),
       role: localized,
       bio: localized,
