@@ -21,8 +21,12 @@ const { articles, locale, dict } = Astro.props;
 {
   articles.length > 0 && (
     <section class="section blog-teaser" id="blog">
-      <div class="container">
-        <h2>{dict.blog.teaser.heading}</h2>
+      <div class="container blog-teaser-layout">
+        <h2 class="blog-teaser-title">{dict.blog.teaser.heading}</h2>
+        <a class="blog-teaser-link" href={blogIndexHref(locale)}>
+          {dict.blog.teaser.cta}
+          <span class="blog-teaser-link-mark" aria-hidden="true">↗</span>
+        </a>
         <p class="blog-teaser-lead">{dict.blog.teaser.lead}</p>
 
         <div class="blog-teaser-grid">
@@ -30,12 +34,6 @@ const { articles, locale, dict } = Astro.props;
             <ArticleCard article={article} locale={locale} dict={dict} />
           ))}
         </div>
-
-        <p class="blog-teaser-cta">
-          <a class="btn btn-secondary" href={blogIndexHref(locale)}>
-            {dict.blog.teaser.cta}
-          </a>
-        </p>
       </div>
     </section>
   )

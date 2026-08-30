@@ -191,27 +191,63 @@ a.tag-category:hover {
 
 /* ------------------------------------------------------- landing page teaser */
 
+.blog-teaser-layout {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  column-gap: 24px;
+  align-items: center;
+}
+
+.blog-teaser-title {
+  grid-column: 1;
+  grid-row: 1;
+  margin: 0;
+}
+
+.blog-teaser-link {
+  grid-column: 2;
+  grid-row: 1;
+  justify-self: end;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 1.2;
+  color: #ff9500;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.blog-teaser-link:hover {
+  text-decoration: underline;
+}
+
+.blog-teaser-link-mark {
+  font-size: 0.95em;
+  line-height: 1;
+}
+
 /* Scoped through .blog-teaser to outrank `.section p`, which zeroes the margins
    of every paragraph in a marketing section. */
 .blog-teaser .blog-teaser-lead {
+  grid-column: 1 / -1;
+  grid-row: 2;
   font-size: 16px;
   line-height: 1.65;
   color: var(--muted);
   max-width: 62ch;
-  margin: 0 0 30px;
+  margin: 10px 0 30px;
 }
 
 /* `auto-fit` so two cards share the row on medium widths instead of leaving a
    hole where the third would go. */
 .blog-teaser-grid {
+  grid-column: 1 / -1;
+  grid-row: 3;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: 18px;
-}
-
-.blog-teaser .blog-teaser-cta {
-  max-width: none;
-  margin: 30px 0 0;
 }
 
 /* ---------------------------------------------------------- further reading */
@@ -404,5 +440,16 @@ a.tag-category:hover {
 
   .blog-pagination .container {
     flex-direction: column;
+  }
+
+  .blog-teaser-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .blog-teaser-link {
+    grid-column: 1;
+    grid-row: 4;
+    justify-self: start;
+    margin-top: 24px;
   }
 }
