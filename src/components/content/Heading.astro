@@ -1,8 +1,12 @@
 ---
+import { localeFromPath } from '~/config/locales';
+import { getDictionary } from '~/i18n';
+
 /**
  * Replaces `##` / `###` in article MDX. Astro already gives every heading a
- * slug id; this adds a permalink that only appears on hover or keyboard focus,
- * so readers can cite a section without the page looking like a wiki.
+ * slug id; this adds a link icon that only appears on hover or keyboard focus.
+ * Clicking copies the section URL rather than jumping, so a reader can share
+ * a heading without the page looking like a wiki.
  */
 interface Props {
   level: 2 | 3;
@@ -11,15 +15,90 @@ interface Props {
 
 const { level, id } = Astro.props;
 const Tag = `h${level}` as 'h2' | 'h3';
+const copy = getDictionary(localeFromPath(Astro.url.pathname)).blocks;
 ---
 
 <Tag id={id}>
   <slot />
   {
     id && (
-      <a class="heading-anchor" href={`#${id}`} aria-label="Link to this section">
-        <span aria-hidden="true">#</span>
+      <a
+        class="heading-anchor"
+        href={`#${id}`}
+        aria-label={copy.copyLinkLabel}
+        data-heading-anchor
+        data-copied-label={copy.linkCopied}
+      >
+        <svg
+          class="heading-anchor-icon"
+          viewBox="0 0 24 24"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          aria-hidden="true"
+          focusable="false"
+        >
+          <path
+            d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"></path>
+          <path
+            d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"></path>
+        </svg>
+        <span class="heading-anchor-copied" aria-hidden="true">{copy.linkCopied}</span>
       </a>
     )
   }
 </Tag>
+
+<script>
+  const writeClipboard = async (text: string): Promise<boolean> => {
+    try {
+      await navigator.clipboard.writeText(text);
+      return true;
+    } catch {
+      try {
+        const input = document.createElement('textarea');
+        input.value = text;
+        input.setAttribute('readonly', '');
+        input.style.position = 'fixed';
+        input.style.top = '-9999px';
+        document.body.appendChild(input);
+        input.select();
+        const ok = document.execCommand('copy');
+        input.remove();
+        return ok;
+      } catch {
+        return false;
+      }
+    }
+  };
+
+  document.querySelectorAll<HTMLAnchorElement>('[data-heading-anchor]').forEach((anchor) => {
+    anchor.addEventListener('click', async (event) => {
+      event.preventDefault();
+      const url = new URL(anchor.getAttribute('href') ?? '', location.href).href;
+      const copied = await writeClipboard(url);
+      if (!copied) {
+        location.hash = anchor.hash;
+        return;
+      }
+
+      history.replaceState(null, '', anchor.hash);
+      const original = anchor.getAttribute('aria-label');
+      const copiedLabel = anchor.dataset.copiedLabel ?? 'Copied';
+      anchor.classList.add('is-copied');
+      anchor.setAttribute('aria-label', copiedLabel);
+
+      window.setTimeout(() => {
+        anchor.classList.remove('is-copied');
+        if (original) anchor.setAttribute('aria-label', original);
+      }, 2000);
+    });
+  });
+</script>

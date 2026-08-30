@@ -253,6 +253,8 @@ export const en: Dictionary = {
     notSupported: 'No',
     answerLabel: 'In short',
     takeawaysLabel: 'Key takeaways',
+    copyLinkLabel: 'Copy link to this section',
+    linkCopied: 'Copied',
   },
 
   languageSwitcher: {

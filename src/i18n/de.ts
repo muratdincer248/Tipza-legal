@@ -254,6 +254,8 @@ export const de: Dictionary = {
     notSupported: 'Nein',
     answerLabel: 'Kurz gesagt',
     takeawaysLabel: 'Das Wichtigste in Kürze',
+    copyLinkLabel: 'Link zu diesem Abschnitt kopieren',
+    linkCopied: 'Kopiert',
   },
 
   languageSwitcher: {

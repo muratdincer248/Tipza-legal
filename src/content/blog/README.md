@@ -111,8 +111,9 @@ Ordinary Markdown needs no imports. Headings, links, tables and blockquotes are
 mapped to the styled components when the article renders, so a plain article is a
 plain file:
 
-- `##` and `###` become headings with a hover permalink. `##` sections also
-  populate the table of contents, which appears once an article has four or more.
+- `##` and `###` become headings with a hover link icon that copies the section
+  URL. `##` sections also populate the table of contents, which appears once an
+  article has four or more.
 - `[text](url)` marks external links and opens them in a new tab.
 - Pipe tables get a scroll container, so a wide table scrolls inside the column
   instead of pushing the page sideways.
@@ -170,7 +171,7 @@ the adjacent questions, this handles the one in the title.
 
 **Write the FAQ heading in Markdown, not as a prop.** `FaqBlock` renders no
 heading of its own, because a heading emitted from inside a component is missing
-from the table of contents and has no permalink:
+from the table of contents and has no copy-link control:
 
 ```mdx
 ## Frequently asked questions
