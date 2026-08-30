@@ -131,8 +131,6 @@ export interface Dictionary {
 
     /** Byline prefix, e.g. `By Tipza Team`. */
     byPrefix: string;
-    /** Prefix before the publication date, e.g. `Published 5 March 2026`. */
-    publishedPrefix: string;
     /** Prefix before the revision date. */
     updatedPrefix: string;
     /** Unit appended to the reading-time number, e.g. `6 min read`. */

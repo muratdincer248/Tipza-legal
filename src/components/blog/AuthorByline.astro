@@ -15,7 +15,7 @@ interface Props {
 }
 
 const { author, locale, dict, publishedAt, updatedAt, readingTime } = Astro.props;
-const { name, role, avatar } = author.data;
+const { name, avatar } = author.data;
 
 const initials = name
   .split(/\s+/)
@@ -40,12 +40,9 @@ const initials = name
   <div class="article-byline-text">
     <p class="article-byline-name">
       {dict.blog.byPrefix} <strong>{name}</strong>
-      <span class="article-byline-role">{role[locale]}</span>
     </p>
     <p class="article-byline-meta">
-      <time datetime={isoDate(publishedAt)}>
-        {dict.blog.publishedPrefix} {formatDate(publishedAt, locale)}
-      </time>
+      <time datetime={isoDate(publishedAt)}>{formatDate(publishedAt, locale)}</time>
       {
         updatedAt && (
           <>

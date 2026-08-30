@@ -122,16 +122,6 @@
   margin: 0;
 }
 
-.article-byline-role {
-  color: var(--text-color-secondary);
-}
-
-.article-byline-role::before {
-  content: '·';
-  margin: 0 6px;
-  color: var(--neutral-30);
-}
-
 .article-byline-meta {
   display: flex;
   flex-wrap: wrap;

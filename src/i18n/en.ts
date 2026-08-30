@@ -203,7 +203,6 @@ export const en: Dictionary = {
     articlesLabel: 'Articles',
 
     byPrefix: 'By',
-    publishedPrefix: 'Published',
     updatedPrefix: 'Updated',
     minRead: 'min read',
 
