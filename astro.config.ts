@@ -2,6 +2,7 @@ import { defineConfig } from 'astro/config';
 import mdx from '@astrojs/mdx';
 import sitemap from './src/integrations/sitemap';
 import { LOCALES, DEFAULT_LOCALE } from './src/config/locales';
+import { site } from './src/config/site';
 
 export default defineConfig({
   site: 'https://tipza.app',
@@ -28,6 +29,8 @@ export default defineConfig({
   // Astro emits here is only a fallback for previews and other hosts.
   redirects: {
     '/': `/${DEFAULT_LOCALE}/`,
+    '/ios': `https://apps.apple.com/app/id${site.appleAppId}`,
+    '/ios/': `https://apps.apple.com/app/id${site.appleAppId}`,
   },
 
   integrations: [mdx(), sitemap()],

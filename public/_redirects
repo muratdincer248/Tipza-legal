@@ -4,6 +4,10 @@
 # The site root now lives under a locale prefix.
 /                     /en/                    301
 
+# Short App Store link for marketing, QR codes, and social bios.
+/ios                  https://apps.apple.com/app/id6756809306    301
+/ios/                 https://apps.apple.com/app/id6756809306    301
+
 # Legacy unprefixed pages. These URLs are referenced by the App Store and
 # Google Play listings, so they must keep resolving indefinitely.
 /privacy/             /en/privacy/            301
