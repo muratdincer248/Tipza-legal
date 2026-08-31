@@ -24,7 +24,13 @@ const sections = headings.filter((heading) => heading.depth === 2);
 {
   variant === 'inline' ? (
     <details class="toc toc-inline">
-      <summary>{label}</summary>
+      <summary>
+        <span>{label}</span>
+        <span class="toc-icon-wrap">
+          <img src="/assets/images/Plus.svg" alt="" class="toc-icon toc-icon-plus" loading="eager" />
+          <img src="/assets/images/Minus.svg" alt="" class="toc-icon toc-icon-minus" loading="eager" />
+        </span>
+      </summary>
       <ol>
         {sections.map((section) => (
           <li>

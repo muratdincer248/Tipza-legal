@@ -116,27 +116,50 @@
   background: var(--card);
 }
 
+/* Same accordion look as the home page FAQ: flex summary with the shared
+   black Plus/Minus icons instead of a text glyph. */
 .toc-inline summary {
   cursor: pointer;
   font-family: var(--font-display);
   font-size: 15px;
   font-weight: 700;
   list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
 }
 
 .toc-inline summary::-webkit-details-marker {
   display: none;
 }
 
-.toc-inline summary::after {
-  content: '+';
-  float: right;
-  color: var(--neutral-70);
-  font-weight: 400;
+.toc-icon-wrap {
+  position: relative;
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
 }
 
-.toc-inline[open] summary::after {
-  content: '−';
+.toc-icon {
+  width: 20px;
+  height: 20px;
+  min-width: 20px;
+  min-height: 20px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  transition: opacity 0.2s ease;
+}
+
+.toc-inline[open] .toc-icon-plus {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.toc-inline:not([open]) .toc-icon-minus {
+  opacity: 0;
+  pointer-events: none;
 }
 
 .toc-inline[open] summary {
