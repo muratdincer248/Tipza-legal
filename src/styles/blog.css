@@ -42,6 +42,10 @@
 /* On a category page this row follows the articles rather than introducing
    them, so it needs a rule above it to read as a footer instead of a heading
    for the grid it sits under. */
+.blog-topics-more {
+  padding-bottom: 32px;
+}
+
 .blog-topics-more .container {
   padding-top: 26px;
   border-top: 1px solid var(--stroke);
