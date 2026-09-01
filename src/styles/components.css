@@ -874,17 +874,8 @@ h1 {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 10px;
+  gap: 8px;
   max-width: 280px;
-}
-
-.download-qr-headline {
-  margin: 0;
-  font-family: var(--font-display);
-  font-size: 16px;
-  font-weight: 700;
-  letter-spacing: -0.02em;
-  color: var(--text);
 }
 
 .download-qr-frame {
@@ -910,20 +901,8 @@ h1 {
   color: var(--text);
 }
 
-.download-qr-supporting {
-  margin: 0;
-  font-size: 13px;
-  line-height: 1.5;
-  color: var(--muted);
-}
-
-.download-qr-block--inverted .download-qr-headline,
 .download-qr-block--inverted .download-qr-scan {
   color: var(--neutral-00);
-}
-
-.download-qr-block--inverted .download-qr-supporting {
-  color: rgba(255, 255, 255, 0.82);
 }
 
 .app-download-secondary-stores {
@@ -1024,7 +1003,7 @@ h1 {
 
   .app-download-desktop {
     display: flex;
-    margin-top: 24px;
+    margin-top: 12px;
   }
 
   .cta-card .app-download-desktop {

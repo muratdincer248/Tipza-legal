@@ -4,9 +4,6 @@ import { site } from '~/config/site';
 interface Props {
   /** Analytics label for where this QR block appears. */
   placement: string;
-  headline: string;
-  supporting: string;
-  /** Shown below the headline on desktop. */
   scanLabel: string;
   /** Optional extra class on the root element. */
   class?: string;
@@ -14,22 +11,15 @@ interface Props {
   inverted?: boolean;
 }
 
-const {
-  placement,
-  headline,
-  supporting,
-  scanLabel,
-  class: className = '',
-  inverted = false,
-} = Astro.props;
+const { placement, scanLabel, class: className = '', inverted = false } = Astro.props;
+const labelId = `download-qr-${placement}`;
 ---
 
 <div
   class:list={['download-qr-block', className, { 'download-qr-block--inverted': inverted }]}
   data-qr-download={placement}
-  aria-labelledby={`download-qr-${placement}`}
+  aria-labelledby={labelId}
 >
-  <p class="download-qr-headline" id={`download-qr-${placement}`}>{headline}</p>
   <div class="download-qr-frame">
     <img
       src="/assets/images/download-qr.svg"
@@ -41,6 +31,5 @@ const {
       decoding="async"
     />
   </div>
-  <p class="download-qr-scan">{scanLabel}</p>
-  <p class="download-qr-supporting">{supporting}</p>
+  <p class="download-qr-scan" id={labelId}>{scanLabel}</p>
 </div>
