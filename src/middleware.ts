@@ -21,6 +21,10 @@ const hasLocalePrefix = (pathname: string): boolean => {
 export const onRequest = defineMiddleware((context, next) => {
   const { pathname } = context.url;
 
+  if (pathname === '/download') {
+    return context.redirect('/download/', 301);
+  }
+
   if (isUnlocalized(pathname)) return next();
 
   if (pathname === '/' || pathname === '') {
