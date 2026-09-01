@@ -1,6 +1,7 @@
 ---
 import BaseHead, { type Props as SeoProps } from '~/components/seo/BaseHead.astro';
 import Analytics from '~/components/analytics/Analytics.astro';
+import PlatformDetect from '~/components/layout/PlatformDetect.astro';
 import { localeMeta } from '~/config/locales';
 import '~/styles/tokens.css';
 import '~/styles/base.css';
@@ -31,6 +32,8 @@ const meta = localeMeta[seo.locale];
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 
     <BaseHead {...seo} />
+
+    <PlatformDetect />
 
     {preloadImages.map((href) => <link rel="preload" href={href} as="image" />)}
 

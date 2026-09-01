@@ -86,6 +86,22 @@ export interface Dictionary {
     body: string;
   };
 
+  /** Shared copy for QR + store download blocks. */
+  appDownload: {
+    qrHeadline: string;
+    qrScanLabel: string;
+    qrSupporting: string;
+    storeBadgesLabel: string;
+  };
+
+  /** Utility /download landing page (English-first; not locale-prefixed). */
+  downloadPage: {
+    title: string;
+    heading: string;
+    body: string;
+    homeCta: string;
+  };
+
   contact: {
     heading: string;
     lead: string;

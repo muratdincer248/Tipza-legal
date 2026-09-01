@@ -1,0 +1,49 @@
+---
+import StoreButtons from './StoreButtons.astro';
+import DownloadQRCode from './DownloadQRCode.astro';
+import type { Dictionary } from '~/i18n/types';
+
+interface Props {
+  copy: Dictionary['appDownload'];
+  /**
+   * Where on the page this block sits. Reported with analytics events.
+   */
+  placement: 'header' | 'hero' | 'download-cta' | 'article-cta' | 'download-page';
+  eager?: boolean;
+  /** When true, store badges stay visible under the QR on desktop. */
+  showSecondaryStores?: boolean;
+  /** Inverted QR styling for dark/green sections. */
+  inverted?: boolean;
+}
+
+const {
+  copy,
+  placement,
+  eager = false,
+  showSecondaryStores = true,
+  inverted = false,
+} = Astro.props;
+---
+
+<div class="app-download-cta" data-app-download={placement}>
+  <div class="app-download-mobile">
+    <StoreButtons eager={eager} placement={placement} mode="mobile" />
+  </div>
+
+  <div class="app-download-desktop">
+    <DownloadQRCode
+      placement={placement}
+      headline={copy.qrHeadline}
+      scanLabel={copy.qrScanLabel}
+      supporting={copy.qrSupporting}
+      inverted={inverted}
+    />
+    {
+      showSecondaryStores && (
+        <div class="app-download-secondary-stores" aria-label={copy.storeBadgesLabel}>
+          <StoreButtons eager={eager} placement={placement} mode="secondary" />
+        </div>
+      )
+    }
+  </div>
+</div>

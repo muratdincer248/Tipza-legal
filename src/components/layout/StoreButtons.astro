@@ -1,8 +1,11 @@
 ---
 /**
- * The Apple/Google Play button pair. Google Play is still a placeholder anchor
- * because Tipza is not listed there yet.
+ * App Store / Google Play badges. URLs come from `site.ts`. On mobile, a small
+ * platform script hides the irrelevant badge; on desktop secondary mode the
+ * badges sit below the QR as trust signals.
  */
+import { storeLinks } from '~/config/site';
+
 interface Props {
   eager?: boolean;
   /**
@@ -10,19 +13,25 @@ interface Props {
    * question worth answering is which surface actually sends people to the
    * store, not how many clicks there were in total.
    */
-  placement: 'header' | 'hero' | 'download-cta' | 'article-cta';
+  placement: 'header' | 'hero' | 'download-cta' | 'article-cta' | 'download-page';
+  /** mobile: primary CTA on phones/tablets; secondary: compact badges under QR. */
+  mode?: 'mobile' | 'secondary' | 'all';
 }
 
-const { eager = false, placement } = Astro.props;
+const { eager = false, placement, mode = 'all' } = Astro.props;
 const loading = eager ? 'eager' : 'lazy';
+const googleIsExternal = !storeLinks.google.startsWith('#');
 ---
 
 <a
-  class="store-btn store-btn-google"
-  href="#download"
+  class:list={['store-btn', 'store-btn-google', `store-btn--${mode}`]}
+  href={storeLinks.google}
+  target={googleIsExternal ? '_blank' : undefined}
+  rel={googleIsExternal ? 'noopener noreferrer' : undefined}
   aria-label="Get it on Google Play"
-  data-track="store_button_click"
+  data-track="play_store_click"
   data-track-label={`${placement}:google`}
+  data-store="google"
 >
   <img src="/assets/images/google-play-icon.svg" alt="" class="store-logo" loading={loading} />
   <span class="store-text">
@@ -31,13 +40,14 @@ const loading = eager ? 'eager' : 'lazy';
   </span>
 </a>
 <a
-  class="store-btn store-btn-apple"
-  href="https://apps.apple.com/us/app/tipza-tip-split-made-easy/id6756809306"
+  class:list={['store-btn', 'store-btn-apple', `store-btn--${mode}`]}
+  href={storeLinks.apple}
   target="_blank"
   rel="noopener noreferrer"
   aria-label="Download on the App Store"
-  data-track="store_button_click"
+  data-track="app_store_click"
   data-track-label={`${placement}:apple`}
+  data-store="apple"
 >
   <svg class="store-logo" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path

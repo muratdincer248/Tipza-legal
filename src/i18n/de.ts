@@ -162,6 +162,20 @@ export const de: Dictionary = {
     body: 'Lade Tipza herunter und mache die Trinkgeldaufteilung für dein Team einfach, fair und stressfrei.',
   },
 
+  appDownload: {
+    qrHeadline: 'Tipza auf dein Handy holen',
+    qrScanLabel: 'Scannen, um Tipza zu laden',
+    qrSupporting: 'Verfügbar für iOS und Android',
+    storeBadgesLabel: 'Oder direkt im App Store laden',
+  },
+
+  downloadPage: {
+    title: 'Tipza herunterladen',
+    heading: 'Tipza herunterladen',
+    body: 'Scanne den Code mit der Handy-Kamera, um Tipza zu laden, oder wähle deinen App Store.',
+    homeCta: 'Zurück zu tipza.app',
+  },
+
   contact: {
     heading: 'Kontakt',
     lead: 'Wende dich an unser Support-Team oder lies unsere Datenschutzerklärung und Nutzungsbedingungen.',
