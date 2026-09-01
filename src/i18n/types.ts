@@ -88,9 +88,7 @@ export interface Dictionary {
 
   /** Shared copy for QR + store download blocks. */
   appDownload: {
-    qrHeadline: string;
     qrScanLabel: string;
-    qrSupporting: string;
     storeBadgesLabel: string;
   };
 

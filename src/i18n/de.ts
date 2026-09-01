@@ -163,9 +163,7 @@ export const de: Dictionary = {
   },
 
   appDownload: {
-    qrHeadline: 'Tipza auf dein Handy holen',
     qrScanLabel: 'Scannen, um Tipza zu laden',
-    qrSupporting: 'Verfügbar für iOS und Android',
     storeBadgesLabel: 'Oder direkt im App Store laden',
   },
 

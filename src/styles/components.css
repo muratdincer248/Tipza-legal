@@ -874,17 +874,8 @@ h1 {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 10px;
+  gap: 8px;
   max-width: 280px;
-}
-
-.download-qr-headline {
-  margin: 0;
-  font-family: var(--font-display);
-  font-size: 16px;
-  font-weight: 700;
-  letter-spacing: -0.02em;
-  color: var(--text);
 }
 
 .download-qr-frame {
@@ -910,20 +901,8 @@ h1 {
   color: var(--text);
 }
 
-.download-qr-supporting {
-  margin: 0;
-  font-size: 13px;
-  line-height: 1.5;
-  color: var(--muted);
-}
-
-.download-qr-block--inverted .download-qr-headline,
 .download-qr-block--inverted .download-qr-scan {
   color: var(--neutral-00);
-}
-
-.download-qr-block--inverted .download-qr-supporting {
-  color: rgba(255, 255, 255, 0.82);
 }
 
 .app-download-secondary-stores {
@@ -965,12 +944,25 @@ h1 {
   justify-content: center;
 }
 
-.product-cta .app-download-mobile {
-  margin-top: 0;
+/* Homepage QR: smaller code, space below the scan label. */
+.hero .download-qr-image,
+.cta-section .download-qr-image {
+  width: 101px;
+  height: 101px;
 }
 
-.product-cta .app-download-desktop {
-  align-items: flex-start;
+.hero .download-qr-frame,
+.cta-section .download-qr-frame {
+  padding: 7px;
+}
+
+.hero .download-qr-scan,
+.cta-section .download-qr-scan {
+  margin-bottom: 24px;
+}
+
+.product-cta .app-download-mobile {
+  margin-top: 0;
 }
 
 .download-page-inner {
@@ -982,6 +974,10 @@ h1 {
 
 .download-page-inner h1 {
   margin-bottom: 12px;
+  font-family: var(--font-display);
+  font-size: 30px;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
 }
 
 .download-page-lead {
@@ -999,6 +995,7 @@ h1 {
 .download-page-inner .app-download-mobile,
 .download-page-inner .app-download-desktop {
   align-items: center;
+  gap: 8px;
 }
 
 .download-page-inner .download-qr-block {
@@ -1006,15 +1003,40 @@ h1 {
   margin: 0 auto;
 }
 
-.download-page-home {
-  margin: 28px 0 0;
-  font-size: 14px;
+.download-page-inner .app-download-secondary-stores {
+  margin-top: 0;
 }
 
-.download-page-home a {
-  color: var(--muted);
+.download-page-inner .download-page-home {
+  margin: 24px 0 0;
+  position: relative;
+  z-index: 1;
+}
+
+.download-page-home-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--action-color-tertiary-enabled);
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 1.2;
+  text-decoration: none;
+}
+
+.download-page-home-link:hover {
   text-decoration: underline;
   text-underline-offset: 3px;
+}
+
+.download-page-home-icon {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  background-color: var(--action-color-tertiary-enabled);
+  -webkit-mask: url(/assets/images/Chevron-right.svg) no-repeat center / contain;
+  mask: url(/assets/images/Chevron-right.svg) no-repeat center / contain;
+  transform: rotate(180deg);
 }
 
 @media (min-width: 1025px) {
@@ -1024,7 +1046,7 @@ h1 {
 
   .app-download-desktop {
     display: flex;
-    margin-top: 24px;
+    margin-top: 12px;
   }
 
   .cta-card .app-download-desktop {

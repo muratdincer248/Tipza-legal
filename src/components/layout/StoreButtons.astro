@@ -14,8 +14,8 @@ interface Props {
    * store, not how many clicks there were in total.
    */
   placement: 'header' | 'hero' | 'download-cta' | 'article-cta' | 'download-page';
-  /** mobile: primary CTA on phones/tablets; secondary: compact badges under QR. */
-  mode?: 'mobile' | 'secondary' | 'all';
+  /** mobile: primary CTA on phones/tablets; secondary: compact badges under QR; inline: article row. */
+  mode?: 'mobile' | 'secondary' | 'inline' | 'all';
 }
 
 const { eager = false, placement, mode = 'all' } = Astro.props;

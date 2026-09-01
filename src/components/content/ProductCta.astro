@@ -28,6 +28,6 @@ const dict = getDictionary(localeFromPath(Astro.url.pathname));
     <p class="product-cta-body">{body ?? dict.blog.productCta.body}</p>
   </div>
   <div class="product-cta-buttons">
-    <AppDownloadCTA copy={dict.appDownload} placement="article-cta" />
+    <AppDownloadCTA copy={dict.appDownload} placement="article-cta" layout="inline" />
   </div>
 </aside>

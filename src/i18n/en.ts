@@ -163,9 +163,7 @@ export const en: Dictionary = {
   },
 
   appDownload: {
-    qrHeadline: 'Get Tipza on your phone',
     qrScanLabel: 'Scan to get Tipza',
-    qrSupporting: 'Available on iOS and Android',
     storeBadgesLabel: 'Or download from your app store',
   },
 

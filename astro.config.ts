@@ -22,7 +22,7 @@ export default defineConfig({
   i18n: {
     defaultLocale: DEFAULT_LOCALE,
     locales: [...LOCALES],
-    routing: { prefixDefaultLocale: true },
+    routing: 'manual',
   },
 
   // Cloudflare Pages turns this into a real 301 via public/_redirects; the page
