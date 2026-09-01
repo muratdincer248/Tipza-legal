@@ -961,6 +961,10 @@ h1 {
 
 .download-page-inner h1 {
   margin-bottom: 12px;
+  font-family: var(--font-display);
+  font-size: 30px;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
 }
 
 .download-page-lead {
@@ -978,6 +982,7 @@ h1 {
 .download-page-inner .app-download-mobile,
 .download-page-inner .app-download-desktop {
   align-items: center;
+  gap: 8px;
 }
 
 .download-page-inner .download-qr-block {
@@ -985,13 +990,22 @@ h1 {
   margin: 0 auto;
 }
 
+.download-page-inner .app-download-secondary-stores {
+  margin-top: 0;
+}
+
 .download-page-home {
-  margin: 28px 0 0;
+  margin: 52px 0 0;
   font-size: 14px;
 }
 
 .download-page-home a {
-  color: var(--muted);
+  color: var(--action-color-tertiary-enabled);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.download-page-home a:hover {
   text-decoration: underline;
   text-underline-offset: 3px;
 }
