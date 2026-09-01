@@ -405,6 +405,56 @@ a.tag-category[aria-current='page']:hover {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
+  align-items: center;
+}
+
+/* Article CTA desktop: enlarged store badges with a compact QR on the right. */
+.product-cta .app-download-desktop--inline {
+  flex-direction: row;
+  align-items: center;
+  gap: 12px;
+  margin-top: 0;
+}
+
+.product-cta .app-download-desktop--inline .download-qr-block {
+  gap: 0;
+  max-width: none;
+}
+
+.product-cta .app-download-desktop--inline .download-qr-frame {
+  box-sizing: border-box;
+  width: 58px;
+  height: 58px;
+  padding: 4px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.product-cta .app-download-desktop--inline .download-qr-image {
+  width: 50px;
+  height: 50px;
+}
+
+.product-cta .store-btn--inline {
+  box-sizing: border-box;
+  height: 58px;
+  padding: 0 14px;
+  gap: 10px;
+}
+
+.product-cta .store-btn--inline .store-logo {
+  width: 18px;
+  height: 18px;
+}
+
+.product-cta .store-btn--inline .store-text-top {
+  font-size: 10px;
+}
+
+.product-cta .store-btn--inline .store-text-bottom {
+  font-size: 13px;
 }
 
 /* ------------------------------------------------------------- breadcrumbs */

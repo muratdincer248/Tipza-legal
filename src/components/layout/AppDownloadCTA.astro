@@ -14,6 +14,8 @@ interface Props {
   showSecondaryStores?: boolean;
   /** Inverted QR styling for dark/green sections. */
   inverted?: boolean;
+  /** Compact row: store buttons with a small QR on the right (article CTA). */
+  layout?: 'default' | 'inline';
 }
 
 const {
@@ -22,6 +24,7 @@ const {
   eager = false,
   showSecondaryStores = true,
   inverted = false,
+  layout = 'default',
 } = Astro.props;
 ---
 
@@ -30,17 +33,31 @@ const {
     <StoreButtons eager={eager} placement={placement} mode="mobile" />
   </div>
 
-  <div class="app-download-desktop">
-    <DownloadQRCode
-      placement={placement}
-      scanLabel={copy.qrScanLabel}
-      inverted={inverted}
-    />
+  <div class:list={['app-download-desktop', { 'app-download-desktop--inline': layout === 'inline' }]}>
     {
-      showSecondaryStores && (
-        <div class="app-download-secondary-stores" aria-label={copy.storeBadgesLabel}>
-          <StoreButtons eager={eager} placement={placement} mode="secondary" />
-        </div>
+      layout === 'inline' ? (
+        <>
+          <StoreButtons eager={eager} placement={placement} mode="inline" />
+          <DownloadQRCode
+            placement={placement}
+            scanLabel={copy.qrScanLabel}
+            inverted={inverted}
+            showScanLabel={false}
+          />
+        </>
+      ) : (
+        <>
+          <DownloadQRCode
+            placement={placement}
+            scanLabel={copy.qrScanLabel}
+            inverted={inverted}
+          />
+          {showSecondaryStores && (
+            <div class="app-download-secondary-stores" aria-label={copy.storeBadgesLabel}>
+              <StoreButtons eager={eager} placement={placement} mode="secondary" />
+            </div>
+          )}
+        </>
       )
     }
   </div>

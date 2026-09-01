@@ -9,16 +9,25 @@ interface Props {
   class?: string;
   /** Inverted colors for dark/green backgrounds. */
   inverted?: boolean;
+  /** Hide the visible scan label (accessibility text stays on the block). */
+  showScanLabel?: boolean;
 }
 
-const { placement, scanLabel, class: className = '', inverted = false } = Astro.props;
+const {
+  placement,
+  scanLabel,
+  class: className = '',
+  inverted = false,
+  showScanLabel = true,
+} = Astro.props;
 const labelId = `download-qr-${placement}`;
 ---
 
 <div
   class:list={['download-qr-block', className, { 'download-qr-block--inverted': inverted }]}
   data-qr-download={placement}
-  aria-labelledby={labelId}
+  aria-label={showScanLabel ? undefined : scanLabel}
+  aria-labelledby={showScanLabel ? labelId : undefined}
 >
   <div class="download-qr-frame">
     <img
@@ -31,5 +40,5 @@ const labelId = `download-qr-${placement}`;
       decoding="async"
     />
   </div>
-  <p class="download-qr-scan" id={labelId}>{scanLabel}</p>
+  {showScanLabel && <p class="download-qr-scan" id={labelId}>{scanLabel}</p>}
 </div>
