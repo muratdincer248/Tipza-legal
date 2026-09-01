@@ -944,6 +944,23 @@ h1 {
   justify-content: center;
 }
 
+/* Homepage QR: smaller code, space below the scan label. */
+.hero .download-qr-image,
+.cta-section .download-qr-image {
+  width: 126px;
+  height: 126px;
+}
+
+.hero .download-qr-frame,
+.cta-section .download-qr-frame {
+  padding: 8px;
+}
+
+.hero .download-qr-scan,
+.cta-section .download-qr-scan {
+  margin-bottom: 16px;
+}
+
 .product-cta .app-download-mobile {
   margin-top: 0;
 }
