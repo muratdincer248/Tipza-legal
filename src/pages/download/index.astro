@@ -1,7 +1,7 @@
 ---
 import BaseLayout from '~/layouts/BaseLayout.astro';
 import AppDownloadCTA from '~/components/layout/AppDownloadCTA.astro';
-import { DEFAULT_LOCALE } from '~/config/locales';
+import { DEFAULT_LOCALE, localeBase } from '~/config/locales';
 import { storeLinks } from '~/config/site';
 import { getDictionary } from '~/i18n';
 import { platformDetectScript } from '~/lib/platform';
@@ -46,9 +46,12 @@ const dict = getDictionary(DEFAULT_LOCALE);
       <h1>{dict.downloadPage.heading}</h1>
       <p class="download-page-lead">{dict.downloadPage.body}</p>
       <AppDownloadCTA copy={dict.appDownload} placement="download-page" eager inverted={false} />
-      <p class="download-page-home">
-        <a href={`/${DEFAULT_LOCALE}/`}>{dict.downloadPage.homeCta}</a>
-      </p>
+      <div class="download-page-home">
+        <a class="download-page-home-link" href={localeBase(DEFAULT_LOCALE)}>
+          <span class="download-page-home-icon" aria-hidden="true"></span>
+          {dict.downloadPage.homeCta}
+        </a>
+      </div>
     </div>
   </section>
 </BaseLayout>
