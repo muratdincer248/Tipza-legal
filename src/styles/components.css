@@ -1009,6 +1009,8 @@ h1 {
 
 .download-page-inner .download-page-home {
   margin: 24px 0 0;
+  position: relative;
+  z-index: 1;
 }
 
 .download-page-home-link {
