@@ -947,18 +947,18 @@ h1 {
 /* Homepage QR: smaller code, space below the scan label. */
 .hero .download-qr-image,
 .cta-section .download-qr-image {
-  width: 126px;
-  height: 126px;
+  width: 101px;
+  height: 101px;
 }
 
 .hero .download-qr-frame,
 .cta-section .download-qr-frame {
-  padding: 8px;
+  padding: 7px;
 }
 
 .hero .download-qr-scan,
 .cta-section .download-qr-scan {
-  margin-bottom: 16px;
+  margin-bottom: 24px;
 }
 
 .product-cta .app-download-mobile {
