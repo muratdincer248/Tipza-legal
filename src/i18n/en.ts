@@ -162,6 +162,20 @@ export const en: Dictionary = {
     body: 'Download Tipza and make tip splitting simple, fair, and stress-free for your team.',
   },
 
+  appDownload: {
+    qrHeadline: 'Get Tipza on your phone',
+    qrScanLabel: 'Scan to get Tipza',
+    qrSupporting: 'Available on iOS and Android',
+    storeBadgesLabel: 'Or download from your app store',
+  },
+
+  downloadPage: {
+    title: 'Download Tipza',
+    heading: 'Download Tipza',
+    body: 'Scan the code with your phone camera to get Tipza, or choose your app store below.',
+    homeCta: 'Back to tipza.app',
+  },
+
   contact: {
     heading: 'Contact',
     lead: 'Get in touch with our support team, or review our privacy policy and terms of service.',

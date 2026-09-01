@@ -1,0 +1,63 @@
+---
+import BaseLayout from '~/layouts/BaseLayout.astro';
+import AppDownloadCTA from '~/components/layout/AppDownloadCTA.astro';
+import { DEFAULT_LOCALE } from '~/config/locales';
+import { storeLinks } from '~/config/site';
+import { getDictionary } from '~/i18n';
+import { platformDetectScript } from '~/lib/platform';
+
+const dict = getDictionary(DEFAULT_LOCALE);
+---
+
+<BaseLayout
+  locale={DEFAULT_LOCALE}
+  path="download/"
+  alternates={[]}
+  title={dict.downloadPage.title}
+  description={dict.downloadPage.body}
+  noindex
+>
+  <script slot="head" is:inline set:html={platformDetectScript} />
+  <script
+    slot="head"
+    is:inline
+    define:vars={{
+      appStoreUrl: storeLinks.apple,
+      googlePlayUrl: storeLinks.google,
+    }}
+  >
+    (function () {
+      try {
+        var ua = navigator.userAgent || '';
+        var tp = navigator.maxTouchPoints || 0;
+        var l = ua.toLowerCase();
+        var p = 'desktop';
+        if (/android/.test(l)) p = 'android';
+        else if (/iphone|ipod|ipad/.test(l)) p = 'ios';
+        else if (/macintosh/.test(l) && (tp > 1 || /mobile/.test(l))) p = 'ios';
+        var url = p === 'ios' ? appStoreUrl : p === 'android' ? googlePlayUrl : '';
+        if (url && url.charAt(0) !== '#') window.location.replace(url);
+      } catch (e) {}
+    })();
+  </script>
+
+  <section class="section download-page">
+    <div class="container download-page-inner">
+      <h1>{dict.downloadPage.heading}</h1>
+      <p class="download-page-lead">{dict.downloadPage.body}</p>
+      <AppDownloadCTA copy={dict.appDownload} placement="download-page" eager inverted={false} />
+      <p class="download-page-home">
+        <a href={`/${DEFAULT_LOCALE}/`}>{dict.downloadPage.homeCta}</a>
+      </p>
+    </div>
+  </section>
+</BaseLayout>
+
+<script>
+  import { track } from '~/lib/track';
+
+  // Desktop visitors who land here (instead of being redirected) saw the QR page.
+  if (document.documentElement.dataset.platform === 'desktop') {
+    track('qr_download_view', { label: 'download-page:landing' });
+  }
+</script>

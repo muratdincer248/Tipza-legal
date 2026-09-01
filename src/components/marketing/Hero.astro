@@ -1,12 +1,13 @@
 ---
-import StoreButtons from '../layout/StoreButtons.astro';
+import AppDownloadCTA from '../layout/AppDownloadCTA.astro';
 import type { Dictionary } from '~/i18n/types';
 
 interface Props {
   copy: Dictionary['hero'];
+  appDownload: Dictionary['appDownload'];
 }
 
-const { copy } = Astro.props;
+const { copy, appDownload } = Astro.props;
 ---
 
 <section class="hero" id="top">
@@ -17,8 +18,8 @@ const { copy } = Astro.props;
 
         <p class="lead">{copy.lead}</p>
 
-        <div class="bullets" id="download" style="display: flex; gap: 12px; margin-top: 24px;">
-          <StoreButtons eager placement="hero" />
+        <div class="bullets" id="download">
+          <AppDownloadCTA copy={appDownload} placement="hero" eager />
         </div>
       </div>
 

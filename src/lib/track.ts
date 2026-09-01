@@ -102,3 +102,23 @@ export function installReadTracking(): void {
 
   observer.observe(end);
 }
+
+/** Fires once when a desktop QR download block scrolls into view. */
+export function installQrViewTracking(): void {
+  const blocks = document.querySelectorAll<HTMLElement>('[data-qr-download]');
+  if (!blocks.length) return;
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      for (const entry of entries) {
+        if (!entry.isIntersecting) continue;
+        const el = entry.target as HTMLElement;
+        observer.unobserve(el);
+        track('qr_download_view', { label: el.dataset.qrDownload });
+      }
+    },
+    { rootMargin: '0px 0px -10% 0px', threshold: 0.4 }
+  );
+
+  blocks.forEach((block) => observer.observe(block));
+}

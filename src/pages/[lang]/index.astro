@@ -43,14 +43,14 @@ const teaserArticles = (await articlesIn(locale)).slice(0, 3);
     faq: dict.faq.items,
   })}
 >
-  <Hero copy={dict.hero} />
+  <Hero copy={dict.hero} appDownload={dict.appDownload} />
   <PurposeSection copy={dict.purpose} />
   <HowItWorks copy={dict.how} />
   <Benefits copy={dict.benefits} />
   <ProSection copy={dict.pro} />
   <FaqSection copy={dict.faq} />
   <BlogTeaserSection articles={teaserArticles} locale={locale} dict={dict} />
-  <DownloadCta copy={dict.downloadCta} />
+  <DownloadCta copy={dict.downloadCta} appDownload={dict.appDownload} />
   <ContactSection
     copy={dict.contact}
     privacyHref={`${base}privacy/`}

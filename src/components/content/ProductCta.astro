@@ -1,5 +1,5 @@
 ---
-import StoreButtons from '~/components/layout/StoreButtons.astro';
+import AppDownloadCTA from '~/components/layout/AppDownloadCTA.astro';
 import { localeFromPath } from '~/config/locales';
 import { getDictionary } from '~/i18n';
 
@@ -28,6 +28,6 @@ const dict = getDictionary(localeFromPath(Astro.url.pathname));
     <p class="product-cta-body">{body ?? dict.blog.productCta.body}</p>
   </div>
   <div class="product-cta-buttons">
-    <StoreButtons placement="article-cta" />
+    <AppDownloadCTA copy={dict.appDownload} placement="article-cta" />
   </div>
 </aside>

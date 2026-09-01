@@ -26,8 +26,9 @@ const beaconToken = import.meta.env.PUBLIC_CF_BEACON_TOKEN;
 }
 
 <script>
-  import { installClickTracking, installReadTracking } from '~/lib/track';
+  import { installClickTracking, installReadTracking, installQrViewTracking } from '~/lib/track';
 
   installClickTracking();
   installReadTracking();
+  installQrViewTracking();
 </script>
