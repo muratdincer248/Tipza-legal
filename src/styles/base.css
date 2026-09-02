@@ -3,7 +3,10 @@
 
 * { box-sizing: border-box; }
 
-html { scroll-behavior: smooth; }
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: var(--header-offset);
+}
 
 body {
   margin: 0;
