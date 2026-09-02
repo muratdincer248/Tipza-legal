@@ -300,16 +300,6 @@ h1 {
   padding-bottom: 92px;
 }
 
-/* Scroll offset for anchor links to account for sticky header */
-#purpose,
-#how,
-#benefits,
-#pro,
-#faq,
-#contact {
-  scroll-margin-top: 90px;
-}
-
 .section h2 {
   font-family: var(--font-display);
   letter-spacing: -0.03em;
@@ -765,8 +755,14 @@ h1 {
   display: flex;
   gap: 12px;
   justify-content: center;
+  align-items: center;
   flex-wrap: wrap;
   margin-top: 24px;
+}
+
+.cta-card .app-download-mobile {
+  justify-content: center;
+  align-items: center;
 }
 
 .section.pro-section {
@@ -944,20 +940,71 @@ h1 {
   justify-content: center;
 }
 
-/* Homepage QR: smaller code, space below the scan label. */
-.hero .download-qr-image,
-.cta-section .download-qr-image {
+/* Homepage CTA: store badges and QR in one row, matched height. */
+.cta-card .app-download-desktop--inline {
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 0;
+}
+
+.cta-card .app-download-desktop--inline .download-qr-block {
+  gap: 0;
+  max-width: none;
+  flex-shrink: 0;
+}
+
+.cta-card .app-download-desktop--inline .download-qr-frame {
+  box-sizing: border-box;
+  width: 72px;
+  height: 72px;
+  padding: 6px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: none;
+  background: #fff;
+}
+
+.cta-card .app-download-desktop--inline .download-qr-image {
+  width: 58px;
+  height: 58px;
+}
+
+.cta-card .store-btn--inline {
+  box-sizing: border-box;
+  height: 72px;
+  padding: 0 18px;
+  gap: 12px;
+}
+
+.cta-card .store-btn--inline .store-logo {
+  width: 24px;
+  height: 24px;
+}
+
+.cta-card .store-btn--inline .store-text-top {
+  font-size: 12px;
+}
+
+.cta-card .store-btn--inline .store-text-bottom {
+  font-size: 16px;
+}
+
+/* Homepage hero QR: smaller code, space below the scan label. */
+.hero .download-qr-image {
   width: 101px;
   height: 101px;
 }
 
-.hero .download-qr-frame,
-.cta-section .download-qr-frame {
+.hero .download-qr-frame {
   padding: 7px;
 }
 
-.hero .download-qr-scan,
-.cta-section .download-qr-scan {
+.hero .download-qr-scan {
   margin-bottom: 24px;
 }
 

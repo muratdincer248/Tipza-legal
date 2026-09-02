@@ -110,6 +110,44 @@ const { homeHref, navItems, locale, alternates, dict } = Astro.props;
   const btn = document.getElementById('menuBtn');
   const menu = document.getElementById('menu');
 
+  const hashId = (hash: string) => decodeURIComponent(hash.replace(/^#/, ''));
+
+  const scrollToHash = (smooth = false) => {
+    const id = hashId(location.hash);
+    if (!id) return;
+    const el = document.getElementById(id);
+    if (!el) return;
+    if (smooth) {
+      el.scrollIntoView({ block: 'start', behavior: 'smooth' });
+      return;
+    }
+    const html = document.documentElement;
+    html.style.scrollBehavior = 'auto';
+    el.scrollIntoView({ block: 'start', behavior: 'auto' });
+    html.style.scrollBehavior = '';
+  };
+
+  // Cross-page hash links (blog → /#faq) often keep the hash in the URL but
+  // never move — prefetch, scroll restoration, and smooth-scroll from the top
+  // of a long mobile page all cancel the native jump. Land instantly instead.
+  if (location.hash) {
+    history.scrollRestoration = 'manual';
+    const jump = () => scrollToHash(false);
+    jump();
+    requestAnimationFrame(jump);
+    window.addEventListener('pageshow', jump);
+    window.addEventListener(
+      'load',
+      () => {
+        jump();
+        requestAnimationFrame(jump);
+      },
+      { once: true }
+    );
+  }
+
+  window.addEventListener('hashchange', () => scrollToHash(false));
+
   if (btn && menu) {
     btn.addEventListener('click', (e) => {
       e.stopPropagation();
@@ -123,8 +161,26 @@ const { homeHref, navItems, locale, alternates, dict } = Astro.props;
     };
 
     menu.addEventListener('click', (e) => {
-      const target = e.target as HTMLElement | null;
-      if (target?.closest('a')) close();
+      const link = (e.target as HTMLElement | null)?.closest('a');
+      if (!(link instanceof HTMLAnchorElement)) return;
+
+      const url = new URL(link.href, location.href);
+      const sameDocument =
+        url.pathname === location.pathname && url.search === location.search;
+
+      if (sameDocument && url.hash) {
+        e.preventDefault();
+        close();
+        if (url.hash !== location.hash) {
+          history.pushState(null, '', url.hash);
+        }
+        requestAnimationFrame(() => scrollToHash(false));
+        return;
+      }
+
+      // Hiding the overlay in this tick (display:none) can cancel the click's
+      // default navigation on mobile. Close after the browser has queued it.
+      window.setTimeout(close, 0);
     });
 
     document.addEventListener('click', (e) => {

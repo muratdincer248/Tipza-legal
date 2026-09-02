@@ -135,6 +135,9 @@
 }
 
 @media (max-width: 1024px) {
+  :root {
+    --header-offset: 80px;
+  }
   .site-header {
     position: sticky;
     top: 0;

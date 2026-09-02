@@ -890,8 +890,6 @@
 .sources li {
   font-size: 14px;
   line-height: 1.55;
-  /* The inline SourceRef markers jump here, so clear the sticky header. */
-  scroll-margin-top: 100px;
 }
 
 .sources li:target a {
