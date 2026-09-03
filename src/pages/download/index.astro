@@ -42,15 +42,29 @@ const dict = getDictionary(DEFAULT_LOCALE);
   </script>
 
   <section class="section download-page">
-    <div class="container download-page-inner">
-      <h1>{dict.downloadPage.heading}</h1>
-      <p class="download-page-lead">{dict.downloadPage.body}</p>
-      <AppDownloadCTA copy={dict.appDownload} placement="download-page" eager inverted={false} />
-      <div class="download-page-home">
-        <a class="download-page-home-link" href={localeBase(DEFAULT_LOCALE)}>
-          <span class="download-page-home-icon" aria-hidden="true"></span>
-          {dict.downloadPage.homeCta}
-        </a>
+    <div class="container download-page-grid">
+      <div class="download-page-inner">
+        <div class="download-page-header">
+          <img
+            src="/assets/images/Tipza_Logo.svg"
+            alt="Tipza"
+            class="download-page-logo"
+            width="64"
+            height="64"
+            loading="eager"
+          />
+          <h1>{dict.downloadPage.heading}</h1>
+          <p class="download-page-lead">{dict.downloadPage.body}</p>
+        </div>
+        <div class="download-page-center">
+          <AppDownloadCTA copy={dict.appDownload} placement="download-page" eager inverted={false} />
+        </div>
+        <div class="download-page-home">
+          <a class="download-page-home-link" href={localeBase(DEFAULT_LOCALE)}>
+            <span class="download-page-home-icon" aria-hidden="true"></span>
+            {dict.downloadPage.homeCta}
+          </a>
+        </div>
       </div>
     </div>
   </section>
