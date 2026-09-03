@@ -19,7 +19,7 @@ const { copy, appDownload } = Astro.props;
         <p class="lead">{copy.lead}</p>
 
         <div class="bullets" id="download">
-          <AppDownloadCTA copy={appDownload} placement="hero" eager />
+          <AppDownloadCTA copy={appDownload} placement="hero" eager layout="inline" />
         </div>
       </div>
 

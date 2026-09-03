@@ -994,18 +994,57 @@ h1 {
   font-size: 16px;
 }
 
-/* Homepage hero QR: smaller code, space below the scan label. */
-.hero .download-qr-image {
-  width: 101px;
-  height: 101px;
+/* Homepage hero: store buttons with matching QR on the right. */
+.hero .app-download-desktop--inline {
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
+  gap: 10px;
+  margin-top: 8px;
 }
 
-.hero .download-qr-frame {
-  padding: 7px;
+.hero .app-download-desktop--inline .download-qr-block {
+  gap: 0;
+  max-width: none;
+  flex-shrink: 0;
 }
 
-.hero .download-qr-scan {
-  margin-bottom: 24px;
+.hero .app-download-desktop--inline .download-qr-frame {
+  box-sizing: border-box;
+  width: 68px;
+  height: 68px;
+  padding: 6px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: none;
+  background: #fff;
+}
+
+.hero .app-download-desktop--inline .download-qr-image {
+  width: 56px;
+  height: 56px;
+}
+
+.hero .store-btn--inline {
+  box-sizing: border-box;
+  height: 68px;
+  padding: 0 18px;
+  gap: 12px;
+}
+
+.hero .store-btn--inline .store-logo {
+  width: 24px;
+  height: 24px;
+}
+
+.hero .store-btn--inline .store-text-top {
+  font-size: 12px;
+}
+
+.hero .store-btn--inline .store-text-bottom {
+  font-size: 16px;
 }
 
 .product-cta .app-download-mobile {
