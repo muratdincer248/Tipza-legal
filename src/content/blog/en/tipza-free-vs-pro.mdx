@@ -4,7 +4,7 @@ locale: en
 title: 'Tipza Free vs Pro: when to upgrade your tip split'
 seoTitle: 'Tipza Free vs Pro: When to Upgrade Your Tip Split — Tipza'
 description: 'What the free tier does, where it stops, and what Pro adds beyond team size: trends, shift comparisons, and the numbers that help you manage better.'
-excerpt: 'Tipza Free runs four split methods for up to five people and keeps the receipts. Tipza Pro removes the headcount cap and adds the charts that turn a pile of past splits into something you can actually learn from.'
+excerpt: 'Tipza Free splits tips for up to three people and stores every result so you can look back. Tipza Pro lifts that cap and turns the same history into charts you can actually learn from.'
 category: guides
 tags:
   - tipza
@@ -12,10 +12,10 @@ tags:
   - insights
   - getting-started
 author: tipza-team
-publishedAt: 2026-09-01
+publishedAt: 2026-09-05
 coverImage: ../../../assets/blog/free-vs-pro-insights/cover.jpg
-coverImageAlt: A phone showing Tipza insights charts next to a coffee cup and a napkin with scribbled tip math
-status: draft
+coverImageAlt: An illustrated hospitality team under the Tipza Pro logo — servers, a bartender, and a chef
+status: published
 keywords:
   - tipza free vs pro
   - tip splitting app features
@@ -30,11 +30,11 @@ productCtaBody: >-
   Try the free split tonight. When the charts start calling, Pro is one tap away.
 takeaways:
   - >-
-    Tipza Free runs equal, hours, points and custom-weight splits for up to five
+    Tipza Free runs equal, hours, points and custom-weight splits for up to three
     people, with shareable breakdowns and saved history. Most small teams never
     need more.
   - >-
-    The moment a roster crosses five or a manager asks "how did last month
+    The moment a roster crosses three or a manager asks "how did last month
     compare?", the free tier has done its job and the question belongs to Pro.
   - >-
     Pro is not a bigger calculator. It is a dashboard: tip volume trends,
@@ -47,7 +47,7 @@ faq:
   - question: What can I do with Tipza Free?
     answer: >-
       Run equal, hours-weighted, points-based or custom-weight splits for up to
-      five team members per split. Every split is saved with a date, and the
+      three team members per split. Every split is saved with a date, and the
       breakdown can be shared so the whole team sees the same numbers. Free
       covers the core job: fair arithmetic, transparent results, stored history.
   - question: What does Tipza Pro add?
@@ -59,7 +59,7 @@ faq:
       performance.
   - question: When should I upgrade to Pro?
     answer: >-
-      Two reliable triggers: the team has grown past five people, or you find
+      Two reliable triggers: the team has grown past three people, or you find
       yourself scrolling through old splits trying to answer a question the
       split screen was not built to answer — how this month compares to last,
       which shift type earns the most, or whether the new rota helped.
@@ -82,36 +82,38 @@ import {
   Callout,
   ComparisonTable,
   FaqBlock,
+  Figure,
   ProcessSteps,
   TipBox,
   WarningBox,
 } from '~/components/content';
+import teamDistributionInline from '../../../assets/blog/free-vs-pro-insights/inline.jpg';
 
-It is 11:45 on a Tuesday. The floor is mopped, the chairs are up, the till is counted, and now four people are standing around a phone calculator arguing about 0.3 of an hour. One of them has already opened three apps to cross-check a number that should have taken less time than turning off the espresso machine.
+It is 11:45pm on a Tuesday. The floor is mopped, the chairs are up, the till is counted, and now four people are hunched over an Excel sheet, a pocket calculator, and a notepad of hours in biro, arguing about 0.3 of an hour. Someone is adding the column a second time by hand. The split should have taken less time than turning off the espresso machine.
 
 That scene is what Tipza was built to replace. Not the argument — arguments about fairness are healthy — but the part where the argument is about arithmetic instead of principle.
 
 <AnswerBlock>
   Tipza Free splits tips four ways — equal, hours, points, custom — for up to
-  five people, with a shareable breakdown and saved history. Pro removes the
+  three people, with a shareable breakdown and saved history. Pro removes the
   headcount limit and adds an Insights dashboard: trends over time,
   tips-per-hour benchmarks, shift-type comparisons and team distribution views.
-  Upgrade when you outgrow five people or start wanting answers your split
+  Upgrade when you outgrow three people or start wanting answers your split
   history can see but you cannot.
 </AnswerBlock>
 
 ## What Tipza Free actually does
 
-Free is not a demo. It is the full calculator with a roster cap, and for a four-person café or a neighbourhood bistro it may be all you ever need.
+Free is not a demo. It is the full calculator with a roster cap, and for a three-person café or a neighbourhood bistro it may be all you ever need.
 
 Here is what you get at zero cost:
 
 - **Four split methods.** Equal, hours-weighted, points-based and custom weights. The same four methods that Pro uses, with the same arithmetic.
-- **Up to five people per split.** Enough for a small bar, a coffee counter, or a restaurant with a tight crew.
+- **Up to three people per split.** Enough for a small bar, a coffee counter, or a restaurant with a tight crew.
 - **Shareable breakdowns.** After every split, share the result so everyone sees the hours, the rate, and their share — not just the final number.
 - **Saved split history.** Every split is stored with a date. Tomorrow you can copy last night's roster instead of rebuilding it.
 
-The typical Tuesday at a four-person coffee bar looks like this: close the register, open Tipza, tap the total, confirm the crew (still there from yesterday), hit equal, share, done. Sixty seconds, and nobody pulled out a napkin.
+The typical Tuesday at a three-person coffee bar looks like this: close the register, open Tipza, tap the total, confirm the crew (still there from yesterday), hit equal, share, done. Sixty seconds, and nobody pulled out a napkin.
 
 <TipBox title="The roster carries over">
   People and their point values persist between splits. If your team is stable
@@ -123,7 +125,7 @@ The typical Tuesday at a four-person coffee bar looks like this: close the regis
 
 Two things happen that make a team outgrow the free tier, and neither of them is a failure of the tool. They are a success of the team.
 
-**The roster crosses five.** You have hired a runner, or the kitchen is joining the pool, or Saturday needs eight people and five slots is suddenly not a formatting issue — it is a ceiling. Pro removes it. No limit on team members, no workaround with two separate splits that you mentally reconcile on a bus home.
+**The roster crosses three.** You have hired a runner, or the kitchen is joining the pool, or Saturday needs eight people and three slots is suddenly not a formatting issue — it is a ceiling. Pro removes it. No limit on team members, no workaround with two separate splits that you mentally reconcile on a bus home.
 
 **The questions change.** Free answers "who gets what tonight?" — and that is worth answering well. But at some point a manager, an owner, or a curious shift lead starts asking different questions:
 
@@ -138,17 +140,18 @@ Those questions live in the split history. The data is there. But scrolling thro
 Pro is not a bigger calculator. The split screen is identical. What changes is everything around it — the layer that reads your history and turns it into something you can learn from.
 
 <ComparisonTable
+  caption="What Free and Pro include"
   columns={['Feature', 'Free', 'Pro']}
   rows={[
-    { cells: ['Split methods (equal, hours, points, custom)', true, true] },
-    { cells: ['Shareable breakdowns', true, true] },
-    { cells: ['Saved split history', true, true] },
-    { cells: ['Team members per split', 'Up to 5', 'Unlimited'] },
-    { cells: ['Tip volume trends', false, true] },
-    { cells: ['Tips-per-hour benchmark', false, true] },
-    { cells: ['Shift-type comparison', false, true] },
-    { cells: ['Team distribution view', false, true] },
-    { cells: ['Priority support', false, true] },
+    ['Split methods (equal, hours, points, custom)', true, true],
+    ['Shareable breakdowns', true, true],
+    ['Saved split history', true, true],
+    ['Team members per split', 'Up to 3', 'Unlimited'],
+    ['Tip volume trends', false, true],
+    ['Tips-per-hour benchmark', false, true],
+    ['Shift-type comparison', false, true],
+    ['Team distribution view', false, true],
+    ['Priority support', false, true],
   ]}
   note="Both tiers use the same calculation engine. Pro adds the analytics layer and removes the roster cap."
 />
@@ -166,6 +169,12 @@ Total tips divided by total hours, tracked over time. This is the number that st
 If you tag splits with a shift type — morning, evening, weekend, event — Pro breaks the numbers down by tag. The question "is brunch actually worth opening for?" stops being a feeling and starts being a chart.
 
 This is also the data that makes scheduling conversations easier. When a team member says Sundays are always slow, you can either agree or show them the graph. Both are better than guessing.
+
+<Figure
+  src={teamDistributionInline}
+  alt="Five hospitality teammates around a monthly tip total donut chart, each with their euro share"
+  caption="Team distribution shows who received what share over a period — not a ranking, a check that the method is doing what the team agreed."
+/>
 
 ### Team distribution view
 
@@ -205,9 +214,9 @@ Transparent analytics fix the information half. They do not resolve genuine disa
 
 ## Start Free, upgrade when the questions change
 
-The honest advice: start with Free. Run splits, build the habit, get the team used to seeing the same numbers. If five people and a clear breakdown is all you need, you have it — permanently and at no cost.
+The honest advice: start with Free. Run splits, build the habit, get the team used to seeing the same numbers. If three people and a clear breakdown is all you need, you have it — permanently and at no cost.
 
-When the roster outgrows five, or when you catch yourself wishing you could see last quarter at a glance, Pro is a tap away inside the app. Your entire split history comes with you. Nothing resets, nothing re-enters. The calculator stays the same; the dashboard appears.
+When the roster outgrows three, or when you catch yourself wishing you could see last quarter at a glance, Pro is a tap away inside the app. Your entire split history comes with you. Nothing resets, nothing re-enters. The calculator stays the same; the dashboard appears.
 
 <WarningBox title="Pro does not fix a bad rule">
   If the underlying split method is wrong — equal shares on unequal shifts,
