@@ -49,7 +49,7 @@ const organization = (): Node => ({
   },
   image: ref(LOGO_ID),
   email: site.supportEmail,
-  sameAs: [site.appStoreUrl],
+  sameAs: [site.appStoreUrl, site.googlePlayUrl],
 });
 
 const website = (locale: Locale): Node => ({
@@ -66,8 +66,9 @@ const mobileApplication = (locale: Locale, description: string): Node => ({
   '@id': `${site.url}/#app`,
   name: site.name,
   url: site.appStoreUrl,
+  sameAs: [site.googlePlayUrl],
   applicationCategory: 'BusinessApplication',
-  operatingSystem: 'iOS',
+  operatingSystem: 'iOS, Android',
   description,
   publisher: ref(ORGANIZATION_ID),
   inLanguage: localeMeta[locale].htmlLang,
