@@ -92,16 +92,34 @@
   gap: 16px;
 }
 
-.peerpush-badge {
+.footer-badges {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+.peerpush-badge,
+.producthunt-badge {
   display: inline-block;
   line-height: 0;
+  flex-shrink: 0;
+}
+
+.peerpush-badge img,
+.producthunt-badge img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+.producthunt-badge img {
+  width: 250px;
 }
 
 .peerpush-badge img {
-  display: block;
   width: 230px;
-  max-width: 100%;
-  height: auto;
 }
 
 .fine {
