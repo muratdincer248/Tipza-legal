@@ -131,6 +131,7 @@
   }
   .steps { grid-template-columns: 1fr; }
   .footer-grid { grid-template-columns: 1fr; }
+  .footer-aside { align-items: flex-start; }
   .footer-links { justify-content: flex-start; }
 }
 
