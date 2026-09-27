@@ -33,6 +33,7 @@ const year = new Date().getFullYear();
             href="https://www.producthunt.com/products/tipza?embed=true&utm_source=badge-featured&utm_medium=badge&utm_campaign=badge-tipza"
             target="_blank"
             rel="noopener noreferrer"
+            hidden
           >
             <img
               src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=1262503&theme=light&t=1790513952142"
@@ -57,6 +58,16 @@ const year = new Date().getFullYear();
             />
           </a>
         </div>
+        <script is:inline>
+          (function () {
+            // Product Hunt opens the launch day at 12:01am Pacific.
+            // Wednesday, 30 September 2026.
+            var launch = Date.parse('2026-09-30T00:01:00-07:00');
+            if (Date.now() < launch) return;
+            var badge = document.querySelector('.producthunt-badge');
+            if (badge) badge.hidden = false;
+          })();
+        </script>
       </div>
     </div>
   </div>
