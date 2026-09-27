@@ -27,20 +27,47 @@ const year = new Date().getFullYear();
         <div class="footer-links" aria-label="Footer links">
           {links.map((link) => <a href={link.href}>{link.label}</a>)}
         </div>
-        <a
-          class="peerpush-badge"
-          href="https://peerpush.com/p/tipza"
-          target="_blank"
-          rel="noopener"
-        >
-          <img
-            src="https://peerpush.com/p/tipza/badge.png"
-            alt="Tipza on PeerPush"
-            width="230"
-            height="65"
-            loading="lazy"
-          />
-        </a>
+        <div class="footer-badges">
+          <a
+            class="producthunt-badge"
+            href="https://www.producthunt.com/products/tipza?embed=true&utm_source=badge-featured&utm_medium=badge&utm_campaign=badge-tipza"
+            target="_blank"
+            rel="noopener noreferrer"
+            hidden
+          >
+            <img
+              src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=1262503&theme=light&t=1790513952142"
+              alt="Tipza - Fair and transparent tip splits for teams | Product Hunt"
+              width="250"
+              height="54"
+              loading="lazy"
+            />
+          </a>
+          <a
+            class="peerpush-badge"
+            href="https://peerpush.com/p/tipza"
+            target="_blank"
+            rel="noopener"
+          >
+            <img
+              src="https://peerpush.com/p/tipza/badge.png"
+              alt="Tipza on PeerPush"
+              width="230"
+              height="65"
+              loading="lazy"
+            />
+          </a>
+        </div>
+        <script is:inline>
+          (function () {
+            // Product Hunt opens the launch day at 12:01am Pacific.
+            // Wednesday, 30 September 2026.
+            var launch = Date.parse('2026-09-30T00:01:00-07:00');
+            if (Date.now() < launch) return;
+            var badge = document.querySelector('.producthunt-badge');
+            if (badge) badge.hidden = false;
+          })();
+        </script>
       </div>
     </div>
   </div>
