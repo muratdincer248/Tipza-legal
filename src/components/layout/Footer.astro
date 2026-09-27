@@ -23,8 +23,24 @@ const year = new Date().getFullYear();
         <p class="fine">© {year} {fineprint}</p>
       </div>
 
-      <div class="footer-links" aria-label="Footer links">
-        {links.map((link) => <a href={link.href}>{link.label}</a>)}
+      <div class="footer-aside">
+        <div class="footer-links" aria-label="Footer links">
+          {links.map((link) => <a href={link.href}>{link.label}</a>)}
+        </div>
+        <a
+          class="peerpush-badge"
+          href="https://peerpush.com/p/tipza"
+          target="_blank"
+          rel="noopener"
+        >
+          <img
+            src="https://peerpush.com/p/tipza/badge.png"
+            alt="Tipza on PeerPush"
+            width="230"
+            height="65"
+            loading="lazy"
+          />
+        </a>
       </div>
     </div>
   </div>
